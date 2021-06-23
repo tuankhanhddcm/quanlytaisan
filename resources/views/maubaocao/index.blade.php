@@ -1,6 +1,6 @@
 @extends('home')
 @section('maubaocao')
-    <div class="col-sm-12" style="min-height: 770px; background-color: white;">
+    <div class="col-sm-12" style="min-height: 810px; background-color: white;">
         <div class="main_ward">
             <div class="main-name">
                 <h3 class="main-text">Mẫu Báo Cáo</h3>

@@ -29,7 +29,7 @@ class TaisanController extends Controller
     {
         $ts = $this->taisan->select();
         $loai = $this->loaitaisan->select();
-        return view('layout.list_taisan',[
+        return view('taisan.index',[
                     'taisan'=>$ts,
                     'loaits' =>$loai
         ]);
@@ -44,7 +44,7 @@ class TaisanController extends Controller
     {
        
         $loai = $this->loaitaisan->select();
-        return view('layout.insert_taisan',['loaits' =>$loai]);
+        return view('taisan.insert_taisan',['loaits' =>$loai]);
     }
 
     /**
@@ -55,7 +55,7 @@ class TaisanController extends Controller
      */
     public function store(StoreTaisan $request)
     {
-        $row = count($this->taisan->select());
+        $row = $this->taisan->select()->total();
         $max_id = $this->taisan->max_id('ma_ts','TS');
         if ($max_id !== null) {
             $id = (int)(str_replace('TS','', $max_id->ma_ts)) + 1;
@@ -78,8 +78,7 @@ class TaisanController extends Controller
         $date = date("Y-m-d H:i:s", time());
         $insert = $this->taisan->insert($ma_ts,$request->taisan,$request->soluong,$request->loaits,$request->mota,$date);
         if($insert){
-            return redirect('/taisan/create')
-            ->with('message', 'Sản phẩm được tạo thành công với ID: ' . $ma_ts);
+            return redirect('/taisan/create');
         }
         
     }
@@ -94,7 +93,7 @@ class TaisanController extends Controller
     {
         $taisan = $this->taisan->show_ts($id);
         $loai = $this->loaitaisan->select();
-        return view('layout.Themtaisan',['taisan'=>$taisan,'loaits'=>$loai]);
+        return view('taisan.update_taisan',['taisan'=>$taisan,'loaits'=>$loai]);
     }
 
     /**
@@ -131,28 +130,15 @@ class TaisanController extends Controller
         //
     }
 
-    public function search_ts(){
-        if(isset($_POST['text']) && isset($_POST['seleted'])){
-            $text=$_POST['text'];
-            $seleted =$_POST['seleted'];
-            $kq = $this->taisan->search_taisan($text,$seleted);
-            $output = '';
-            $i=1;
-            foreach($kq as $val){
-                
-                $output .='
-                <tr>
-                    <td>'.$i.'</td>
-                    <td><a href="/taisan/'.$val->ma_ts.'" >'.$val->ma_ts.'</a></td>
-                    <td>'.$val->ten_ts.'</td>
-                    <td>'.$val->soluong.'</td>
-                    <td>'.$val->ten_loai.'</td>
-                    <td></td>
-                </tr>
-                ';
-                $i+=1;
+    public function search_ts(Request $request){
+        if($request->ajax()){
+            $text=$request->text;
+            $seleted =$request->seleted;
+            $taisan = $this->taisan->select();
+            if($text !='' || $seleted !=''){
+                $taisan = $this->taisan->search_taisan($text,$seleted);
             }
-            echo $output;
+            return view('taisan.list_taisan',compact('taisan'));
         }
     }
 }

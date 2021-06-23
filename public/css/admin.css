@@ -212,9 +212,9 @@ button.btn {
    min-height: 10px;
    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .body-table td {
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    line-height: 40px;
 }
 
 

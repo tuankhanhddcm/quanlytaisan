@@ -20,7 +20,7 @@ Route::get('/', function () {
 })->middleware('login');
 // tài sản
 Route::resource('/taisan','TaisanController');
-Route::post('/search','TaisanController@search_ts');
+Route::post('/taisan/search','TaisanController@search_ts');
 
 // Mẫu báo cáo
 Route::get('/maubaocao','MaubaocaoController@index');

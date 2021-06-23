@@ -314,17 +314,16 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('taisan')
-        @yield('loaits')
         @yield('insert_ts')
         @yield('maubaocao')
-        @yield('view')
+        @yield('view_baocao')
         @yield('nhanvien')
         @yield('phongban') 
         @yield('nhacungcap') 
-        @yield('loaitaisan') 
-        @yield('chitiettaisan') 
+        @yield('loaitaisan')
         @yield('thongtintaisan')
         @yield('trangchu')
+        @yield('chitiettaisan')
     </div>
     <!-- /.content-wrapper -->
     @include('modal.modal_insert')

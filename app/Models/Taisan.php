@@ -15,7 +15,7 @@ class Taisan extends Model
     public $table ="taisan";
     
     public function select(){
-        $taisan = DB::table($this->table)->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai')->get();
+        $taisan = DB::table($this->table)->select('taisan.*','loaitaisan.ten_loai')->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai')->paginate(8);
         return $taisan;
     }
 
@@ -38,7 +38,7 @@ class Taisan extends Model
     }
 
     public function search_taisan( $text,$selected){
-        $kq = DB::table($this->table)->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai');
+        $kq = DB::table($this->table)->select('taisan.*','loaitaisan.ten_loai')->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai');
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
                     $res->where('ten_ts','like','%'.$text.'%')
@@ -48,7 +48,7 @@ class Taisan extends Model
         if($selected !=''){
             $kq = $kq->where('loaitaisan.ma_loai',$selected);
         }
-        $kq =$kq->get();
+        $kq =$kq->paginate(8);
         return $kq;
     }
 

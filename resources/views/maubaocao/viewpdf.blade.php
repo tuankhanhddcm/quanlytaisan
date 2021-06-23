@@ -1,5 +1,5 @@
 @extends('home')
-@section('view')
+@section('view_baocao')
     
     <iframe src="{{URL::asset('PDF/'.$name.'.pdf')}}" frameborder="0" width="100%" height="650px"allowfullscreen></iframe>
     <div style="display: flex; justify-content: flex-end ">

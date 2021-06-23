@@ -5,8 +5,9 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     $('.select').click(function(){
-        search_ts();
+        search_ts(1);
     });
 
     // phân trang
@@ -14,6 +15,7 @@ $(document).ready(function(){
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         search_baocao(page);
+        search_ts(page);
     });
 
 });
@@ -23,7 +25,7 @@ function search_ts(page){
     var seleted = $('#loaits option:selected').val();
     $.ajax({
         
-        url:'/taisan?page='+page,
+        url:'/taisan/search?page='+page,
         method:"post",
         data:{
             text:text,
