@@ -1,0 +1,143 @@
+:root{
+  --white-color: #fff ;
+  --black-color: #000;
+  --text-color: #333;
+}
+
+*{
+  box-sizing: inherit;
+}
+
+
+
+
+body,html{
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  
+}
+body {
+  background-color: #f3f3f3;
+}
+
+button{
+  outline: none;
+  
+}
+
+.btn_cus {
+  min-width: 124px;
+  height: 34px;
+  border: none;
+  border-radius: 2px;
+  font-weight: 500;
+  padding: 0 12px;
+  cursor: pointer;
+  color: var(--text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  line-height: 2rem;
+  background-color: white;
+}
+
+.btn_cus.btn--size-s {
+  height: 32px;
+  font-size: 1rem;
+  padding: 0 10px;
+}
+
+.btn_cus.btn--primary {
+  color: white;
+  background-color: #f54d10;
+}
+
+.btn_cus.btn--primary:hover {
+  background-color: #f8642e;
+} 
+
+
+
+a:hover{
+  text-decoration: none;
+}
+.grid{
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.grid__full-width{
+  width:100%;
+}
+
+.grid__row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-sm-2 {
+  padding: 0;
+}
+
+.col-2-4 {
+  width: 25%;
+}
+.col-2-5{
+  width: 20%;
+}
+
+/* main */
+
+.main {
+  margin-top: 125px;
+  background-color: white;
+}
+
+.url-heading {
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: white;
+  box-shadow: -1px 0px 2px 0px;
+}
+
+.url-list {
+  display: flex;
+  margin: 0;
+  padding: 0 15px;
+  list-style: none;
+
+}
+
+.url-item {
+  display: flex;
+  align-items: center;
+}
+
+.url-link {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.url-link:hover {
+  color: #f30;
+}
+
+.url-item span {
+  display: flex;
+}
+
+.right-icon {
+  font-size: 1.8rem;
+  
+}
+
+.url-name {
+  color: #f30;
+  font-size: 1.4rem;
+  font-weight: 500;
+
+}
+
