@@ -66,6 +66,8 @@ function check(id) {
             break;
         case 'file_temp': text = 'chọn file';
             break;
+        case 'file_pdf': text = 'chọn file';
+            break;
         case 'name': text ='nhập tên đăng nhập';
             break;
         case 'pass': text ='nhập mật khẩu';
@@ -129,7 +131,8 @@ function readURL(input, id_img,loaifile='') {
 
 function check_insertFile(){
     check('.mota_lb');
-    if(check('.title_lb') =='true' && check('#file_temp')=='true' && check('.mota_lb')=='true')
+    check('#file_pdf')
+    if(check('.title_lb') =='true' && check('#file_temp')=='true' &&check('#file_pdf')=='true' && check('.mota_lb')=='true')
         return true;
     return false;
 }
