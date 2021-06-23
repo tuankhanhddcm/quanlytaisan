@@ -31,19 +31,38 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="" class="form-label">Chọn file:</label>
+                                    <label for="" class="form-label">Chọn file word:</label>
                                     <div class="form-wrap">
                                         <div style="display: flex;">
-                                            <label class="btn_upload"><input type="file" hidden name="file_temp" id="file_temp" onchange="readURL(this,'#file_temp')" accept=".docx,.doc" style="display: none" >Chọn file</label>
-                                            <span class="text_name_file"></span>
+                                            <label class="btn_upload"><input type="file" hidden name="file_temp" id="file_temp" onchange="readURL(this,'#file_temp','word')" accept=".docx,.doc" style="display: none" >Chọn file</label>
+                                            <div style="width: 400px">
+                                                <span class="text_name_file"></span>
+                                            </div>
                                         </div>
-                                        <div style="display: flex;">
+                                        <div style="display: flex;padding-bottom: 20px">
                                             <i class='bx bxs-error-circle file_temp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                            <span class="error_file_temp error"></span>
+                                           
+                                                <span class="error_file_temp error"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" style="">
+                                <div class="form-group" style="margin-top: 50px" >
+                                    <label for="" class="form-label">Chọn file pdf:</label>
+                                    <div class="form-wrap">
+                                        <div style="display: flex;">
+                                            <label class="btn_upload"><input type="file" hidden name="file_pdf" id="file_pdf" onchange="readURL(this,'#file_pdf','pdf')" accept=".pdf" style="display: none" >Chọn file</label>
+                                            <div style="width: 400px">
+                                                <span class="text_name_pdf"></span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div style="display: flex; padding-bottom: 20px">
+                                            <i class='bx bxs-error-circle file_pdf_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                            <span class="error_file_pdf error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-top: 50px">
                                     <label for="" class="form-label mota_lb">Nội dung:</label>
                                     <div class="form-wrap" style="background-color: #ffff;position: relative;padding-bottom: 170px">
                                         <textarea class='mota' name="noidung" onkeyup="check('.mota_lb')" style="display: block; font-size: 14px;padding: 10px;" name=""  cols="60" rows="8"></textarea>

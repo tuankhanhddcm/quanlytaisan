@@ -5,21 +5,25 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    search_ts();
-    search_baocao();
     $('.select').click(function(){
         search_ts();
     });
 
+    // phân trang
+    $(document).on('click','.pagination a', function(event){
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        search_baocao(page);
+    });
 
 });
 
-function search_ts(){
+function search_ts(page){
     var text=$('#search').val();
     var seleted = $('#loaits option:selected').val();
     $.ajax({
         
-        url:'/search',
+        url:'/taisan?page='+page,
         method:"post",
         data:{
             text:text,
@@ -82,25 +86,40 @@ function check(id) {
 }
 
 // kiểm tra file
-function readURL(input, id_img) {
+function readURL(input, id_img,loaifile='') {
     var file = input.files;
     var id = id_img.slice(1);
-    var match = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"];  
+    var match = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document",'application/pdf','application/msword'];  
     if (file.length > 0 && file != "") {
         var files = $(id_img).prop('files')[0];
         var type = files.type;
-        $('.text_name_file').text(files.name);
-        if (type == match[0] || type == match[1] ) {
-            $('.'+id+"_icon").css('display','none');
-            $(".error_" + id).text('');
-        } else {
-            $(".error_" + id).text('Không phải file word');
-            $('.'+id+"_icon").css('display','block');
+        if(loaifile =='pdf'){
+            $('.text_name_pdf').text(files.name);
+            if (type == match[1]) {
+                $('.'+id+"_icon").css('display','none');
+                $(".error_" + id).text('');
+            } else{
+                $(".error_" + id).text('File không hợp lệ');
+                $('.'+id+"_icon").css('display','block');
+            }
+        }else{
+            $('.text_name_file').text(files.name);
+            if (type == match[0] || type == match[2] ) {
+                $('.'+id+"_icon").css('display','none');
+                $(".error_" + id).text('');
+            } else{
+                $(".error_" + id).text('File không hợp lệ');
+                $('.'+id+"_icon").css('display','block');
+            }
         }
     } else {
+        if(loaifile =='pdf'){
+            $('.text_name_pdf').text('');
+        }else{
+            $('.text_name_file').text('');
+        }
         $(".error_" + id).text('Vui lòng chọn file');
         $(".error_" + id).css("display", 'block');
-        $('.text_name_file').text('');
         $('.'+id+"_icon").css('display','block');
     }
 
@@ -113,10 +132,11 @@ function check_insertFile(){
     return false;
 }
 
-function search_baocao(){
+// tìm kiếm báo cáo
+function search_baocao(page){
     var text = $("#search_baocao").val();
     $.ajax({
-        url:'/maubaocao/search',
+        url:'/maubaocao/search?page='+page,
         method: 'post',
         data:{text:text},
         success: function(data){

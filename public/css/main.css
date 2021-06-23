@@ -139,7 +139,8 @@ button.btn_download{
   background-color: #47d864;
 }
 
-.text_name_file {
+.text_name_file,
+.text_name_pdf {
   font-size: 18px;
   font-weight: 400;
   color: #333;
