@@ -5,7 +5,7 @@
         <div class="main-name">
             <h3 class="main-text">Chi tiết tài sản</h3>
             <div >
-                <button class="btn_cus btn-addsp" ><i class='bx bx-plus' style="font-weight: 600; "></i>Thêm chi tiết</button>
+                <button class="btn_cus btn-addsp" onclick="location.href='/chitiettaisan/create'" ><i class='bx bx-plus' style="font-weight: 600; "></i>Thêm chi tiết</button>
                 <button class="btn_cus btn-addsp" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button>
                 <button class="btn_cus btn-addsp" style="background-color:#FF3300;"><i class='bx bx-import' style="font-weight: 600;"></i>Nhập dữ liệu</button>
                 <button class="btn_cus btn-addsp" style="background-color:#999999"><i class='bx bx-cog' style="font-weight: 600;"></i>Quản lý</button>
@@ -16,17 +16,17 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-5">
-                        <input type="text" value="" class="search_input" id='search' placeholder="Nhập mã sản phẩm hoặc tên sản phẩm">
+                        <input type="text" value="" class="search_input" id='search' placeholder="Nhập mã tài sản hoặc tên tài sản">
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-loaisp form-control" id="loaisp" data-dropup-auto="false" title="Danh mục" data-size='5' data-live-search="true">
-                            <option value="" selected>--Chọn Danh mục--</option>
+                            <option value="" selected>--Chọn loại tài sản--</option>
                            
                         </select>
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-nsx  form-control" id="nsx" data-dropup-auto="false" title="Nhà sản xuất" data-size='5' data-live-search="true">
-                            <option value="" selected>--Chọn Nhà sản xuất--</option>
+                            <option value="" selected>--Chọn nhà cung cấp--</option>
                             
                         </select>
                     </div>
@@ -78,4 +78,5 @@
         </div>
     </div>
 </div>
+
 @endsection

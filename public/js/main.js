@@ -214,3 +214,21 @@ function search_loai(page){
         }
     });
 }
+
+
+// thêm phòng
+
+function insert_phong(){
+    var ten_phong = $('.ten_phong').val();
+    var mo_ta = $('.mo_ta').val();
+    if(check('.ten_phong_lb') =='true'){
+        $.ajax({
+            url:'/phongban',
+            method: 'post',
+            data:{ten_phong:ten_phong,mo_ta:mo_ta},
+            success:function(data){
+                console.log(data)
+            }
+        })
+    }
+}

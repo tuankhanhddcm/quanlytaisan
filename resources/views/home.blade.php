@@ -21,10 +21,11 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ URL::asset('css/OverlayScrollbars.min.css') }}">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{ URL::asset('css/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/base.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.css') }}" type="text/css">
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css" rel="stylesheet" type='text/css'>
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -323,14 +324,19 @@
         @yield('thongtintaisan')
         @yield('trangchu')
         @yield('chitiettaisan')
+        @yield('insert_chitiet')
     </div>
     <!-- /.content-wrapper -->
-    @include('modal.modal_insert')
+    {{-- @include('modal.modal_insert') --}}
+    
   </div>
   <!-- ./wrapper -->
 
   <!-- jQuery -->
   <script src="{{ URL::asset('js/jquery-3.6.0.min.js')}}"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script> --}}
+  <script src="{{ URL::asset('js/bootstrap-datetimepicker.js')}}"></script>
+  <script src="{{ URL::asset('js/bootstrap-datetimepicker.fr.js')}}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ URL::asset('js/jquery-ui.min.js')}}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -360,6 +366,7 @@
       target.parent().parent().parent().addClass('menu-is-opening menu-open')
       var target2 = $('li a[href="/' + path + '"]');
       target2.addClass('active');
+
     });
   </script>
 </body>

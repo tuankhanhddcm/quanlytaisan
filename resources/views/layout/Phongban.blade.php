@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody id="list_product">
-                            {{-- @foreach ($phongban as $key => $item)
+                            @foreach ($phongban as $key => $item)
                                 <tr>
                                     <td style="border: 1px solid rgba(0,0,0,.1)">{{$key+1}}</td>
                                     <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ma_phong}}</td>
@@ -41,7 +41,7 @@
                                         <button style="width:40px; height:40px; margin-left: 15%" class="btn btn-denger"><i class='bx bxs-x-square' style="font-size: 20px; color:white;"></i></button>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -75,6 +75,7 @@ class TaisanController extends Controller
         } else if ($id < 1000000) {
             $ma_ts = 'TS' . ($id);
         }
+        
         $insert = $this->taisan->insert($ma_ts,$request->tents,$request->loaits,$request->mota);
         if($insert){
             return redirect('/taisan');

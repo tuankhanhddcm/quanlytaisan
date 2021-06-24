@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Phongban;
 use Illuminate\Http\Request;
 
 class ChitiettaisanController extends Controller
@@ -11,14 +12,18 @@ class ChitiettaisanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $phongban;
+
     public function __construct()
     {
         $this->middleware('login');
+        $this->phongban = new Phongban;
     }
     
     public function index()
     {
-        return view('chitiettaisan.Chitiettaisan');
+        $phongban = $this->phongban->select();
+        return view('chitiettaisan.Chitiettaisan',compact('phongban'));
     }
 
     /**
@@ -28,7 +33,8 @@ class ChitiettaisanController extends Controller
      */
     public function create()
     {
-        //
+        $phongban = $this->phongban->select();
+        return view('chitiettaisan.insert',compact('phongban'));
     }
 
     /**
