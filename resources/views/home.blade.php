@@ -314,7 +314,6 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('taisan')
-        @yield('insert_ts')
         @yield('maubaocao')
         @yield('view_baocao')
         @yield('nhanvien')

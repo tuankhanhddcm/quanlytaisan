@@ -18,7 +18,7 @@ class ChitiettaisanController extends Controller
     
     public function index()
     {
-        return view('layout.Chitiettaisan');
+        return view('chitiettaisan.Chitiettaisan');
     }
 
     /**

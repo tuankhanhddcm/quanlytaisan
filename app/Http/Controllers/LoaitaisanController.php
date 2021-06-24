@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loaitaisan;
 use Illuminate\Http\Request;
+
+use function Ramsey\Uuid\v1;
 
 class LoaitaisanController extends Controller
 {
@@ -11,13 +14,17 @@ class LoaitaisanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $loaitaisan;
+
     public function __construct()
     {
         $this->middleware('login');
+        $this->loaitaisan = new Loaitaisan;
     }
     public function index()
     {
-        return view('layout.Loaitaisan');
+        $loai = $this->loaitaisan->select();
+        return view('loaitaisan.index',compact('loai'));
     }
 
     /**
@@ -38,7 +45,29 @@ class LoaitaisanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $row = $this->loaitaisan->select()->total();
+        $max_id = $this->loaitaisan->max_id('ma_loai','LTS');
+        if ($max_id !== null) {
+            $id = (int)(str_replace('LTS','', $max_id->ma_loai)) + 1;
+        } else {
+            $id = $row + 1;
+        }
+        if ($id < 10) {
+            $ma_loai = 'LTS00000' . ($id);
+        } else if ($id < 100) {
+            $ma_loai = 'LTS0000' . ($id);
+        } else if ($id < 1000) {
+            $ma_loai = 'LTS000' . ($id);
+        } else if ($id < 10000) {
+            $ma_loai = 'LTS00' . ($id);
+        } else if ($id < 100000) {
+            $ma_loai = 'LTS0' . ($id);
+        } else if ($id < 1000000) {
+            $ma_loai = 'LTS' . ($id);
+        }
+        $date = date("Y-m-d H:i:s", time());
+        $this->loaitaisan->insert($ma_loai,$request->ten_loai,$request->mota_loai,$date);
+        return redirect('loaits');
     }
 
     /**
@@ -84,5 +113,12 @@ class LoaitaisanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search_loai(Request $request){
+        if($request->ajax()){
+            $loai = $this->loaitaisan->search($request->text);
+            return view('loaitaisan.list_loai',compact('loai'));
+        }
     }
 }

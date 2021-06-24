@@ -141,3 +141,12 @@ a:hover{
 
 }
 
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 600px;
+    margin: 1.75rem auto;
+  } 
+}
+.dropdown-menu{
+  max-width: 382px;
+}

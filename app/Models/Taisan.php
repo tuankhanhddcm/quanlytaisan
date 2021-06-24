@@ -26,12 +26,12 @@ class Taisan extends Model
         return $kq;
     }
 
-    public function insert($ma_ts,$ten_ts,$soluong,$ma_loai,$date){
+    public function insert($ma_ts,$ten_ts,$ma_loai,$mota){
         $table=DB::table($this->table)->insert([
             'ma_ts' =>$ma_ts,
             'ten_ts' =>$ten_ts,
-            'soluong' =>$soluong,
             'ma_loai' =>$ma_loai,
+            'mota' =>$mota
             
         ]);
         return $table;
@@ -41,8 +41,8 @@ class Taisan extends Model
         $kq = DB::table($this->table)->select('taisan.*','loaitaisan.ten_loai')->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai');
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
-                    $res->where('ten_ts','like','%'.$text.'%')
-                        ->orwhere('ma_ts','like','%'.$text.'%');
+                    $res->where('taisan.ten_ts','like','%'.$text.'%')
+                        ->orwhere('taisan.ma_ts','like','%'.$text.'%');
             });
         }
         if($selected !=''){

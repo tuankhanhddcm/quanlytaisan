@@ -53,7 +53,7 @@ class TaisanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTaisan $request)
+    public function store(Request $request)
     {
         $row = $this->taisan->select()->total();
         $max_id = $this->taisan->max_id('ma_ts','TS');
@@ -75,10 +75,9 @@ class TaisanController extends Controller
         } else if ($id < 1000000) {
             $ma_ts = 'TS' . ($id);
         }
-        $date = date("Y-m-d H:i:s", time());
-        $insert = $this->taisan->insert($ma_ts,$request->taisan,$request->soluong,$request->loaits,$request->mota,$date);
+        $insert = $this->taisan->insert($ma_ts,$request->tents,$request->loaits,$request->mota);
         if($insert){
-            return redirect('/taisan/create');
+            return redirect('/taisan');
         }
         
     }

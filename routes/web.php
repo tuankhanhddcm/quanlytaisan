@@ -43,6 +43,7 @@ Route::resource('/nhacungcap','NhacungcapController');
 
 // Loại tài sản
 Route::resource('/loaits','LoaitaisanController');
+Route::post('/loaits/search','LoaitaisanController@search_loai');
 
 //  user
 Route::resource('/user','UserController');

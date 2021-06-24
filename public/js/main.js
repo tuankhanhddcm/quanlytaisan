@@ -6,9 +6,14 @@ $(document).ready(function(){
         }
     });
 
-    $('.select').click(function(){
+    $('.select-loaits').click(function(){
         search_ts(1);
     });
+
+    $('.loaits-select').click(function(){
+        check('#loaits');
+    })
+
 
     // phân trang
     $(document).on('click','.pagination a', function(event){
@@ -16,13 +21,14 @@ $(document).ready(function(){
         var page = $(this).attr('href').split('page=')[1];
         search_baocao(page);
         search_ts(page);
+        search_loai(page)
     });
 
 });
 
 function search_ts(page){
     var text=$('#search').val();
-    var seleted = $('#loaits option:selected').val();
+    var seleted = $('#loai_taisan option:selected').val();
     $.ajax({
         
         url:'/taisan/search?page='+page,
@@ -72,10 +78,11 @@ function check(id) {
             break;
         case 'pass': text ='nhập mật khẩu';
             break;
+        case 'loaits': text ='chọn loại tài sản';
+            break;
 
     }
-
-    if ($(lop).val() == "") {
+    if ($(lop).val() == "" ) {
         $(lop).addClass('error_input');
         $("." + dk + "_icon").css("display", "block");
         $(".error_" + dk).text("Vui lòng  " + text);
@@ -192,4 +199,18 @@ function checklogin(){
         check('.pass');
     }
     return kq;
+}
+
+//tìm kiếm loại
+
+function search_loai(page){
+    var text = $('#search_loai').val();
+    $.ajax({
+        url:'/loaits/search?page='+page,
+        method: "post",
+        data:{text:text},
+        success: function(data){
+            $('#list_loai').html(data);
+        }
+    });
 }

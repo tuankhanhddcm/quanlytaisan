@@ -26,7 +26,6 @@ class StoreTaisan extends FormRequest
         return [
             'taisan' => 'required|max:255',
             'loaits' => 'required',
-            'soluong' =>'required'
         ];
     }
 
@@ -34,7 +33,6 @@ class StoreTaisan extends FormRequest
     {
         return [
             'taisan.required' =>"Vui lòng nhập tên tài sản",
-            'soluong.required' => "vui lòng nhập số lượng"
         ];
     }
 }
