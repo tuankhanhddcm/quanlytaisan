@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nhacungcap;
 use Illuminate\Http\Request;
 
 class NhacungcapController extends Controller
@@ -11,13 +12,17 @@ class NhacungcapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $nhacungcap;
+
     public function __construct()
     {
         $this->middleware('login');
+        $this->nhacungcap = new Nhacungcap;
     }
     public function index()
     {
-        return view('layout.Nhacungcap');
+        $ncc = $this->nhacungcap->select();        
+        return view('layout.Nhacungcap',compact('ncc'));
     }
 
     /**
@@ -38,7 +43,31 @@ class NhacungcapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $row = $this->nhacungcap->select()->total();
+        $max_id = $this->nhacungcap->max_id('ma_ncc','NCC');
+        if ($max_id !== null) {
+            $id = (int)(str_replace('NCC','', $max_id->ma_ncc)) + 1;
+        } else {
+            $id = $row + 1;
+        }
+        if ($id < 10) {
+            $ma_ncc = 'NCC00000' . ($id);
+        } else if ($id < 100) {
+            $ma_ncc = 'NCC0000' . ($id);
+        } else if ($id < 1000) {
+            $ma_ncc = 'NCC000' . ($id);
+        } else if ($id < 10000) {
+            $ma_ncc = 'NCC00' . ($id);
+        } else if ($id < 100000) {
+            $ma_ncc = 'NCC0' . ($id);
+        } else if ($id < 1000000) {
+            $ma_ncc = 'NCC' . ($id);
+        }
+        $date = date("Y-m-d H:i:s", time());
+        $this->nhacungcap->insert($ma_ncc,$request->ten_ncc,$request->sdt_ncc,$request->email_ncc,$request->diachi_ncc,$date);
+        if(!$request->ajax()){
+            return redirect('/nhacungcap');
+        }
     }
 
     /**

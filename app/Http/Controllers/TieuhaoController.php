@@ -1,30 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Loaitaisan;
+use Illuminate\Support\Facades\DB;
+use App\Models\Tieuhao;
 use Illuminate\Http\Request;
-
-use function Ramsey\Uuid\v1;
-
-class LoaitaisanController extends Controller
+class TieuhaoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $loaitaisan;
-
+    public $th;
+    public $tieuhao;
     public function __construct()
     {
-        $this->middleware('login');
-        $this->loaitaisan = new Loaitaisan;
+        $this->th = new Tieuhao;
+        $this->tieuhao = new Tieuhao;
     }
+
     public function index()
     {
-        $loai = $this->loaitaisan->select();
-        return view('loaitaisan.index',compact('loai'));
+        $th = $this->th->selectth();
+        return view('tieuhao.Tieuhao',['tieuhao' => $th]);
     }
 
     /**
@@ -45,17 +43,16 @@ class LoaitaisanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->loaitaisan->insert($request->ten_loai);
-        return redirect('loaits');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tieuhao  $tieuhao
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tieuhao)
     {
         //
     }
@@ -63,41 +60,40 @@ class LoaitaisanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tieuhao  $tieuhao
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $data = DB::table('tieuhaotaisan')->where('ma_tieuhao','=',$id)->first();
+        return view('layout.suatieuhao', ['data' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Tieuhao  $tieuhao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $result=$this->tieuhao->updateth($id,$request->muc_tieuhao,$request->thoigian_sd);
+        
+        if($result){
+            echo '<meta http-equiv="refresh" content="0; url=/tieuhao">';
+        }
+       
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tieuhao  $tieuhao
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-    }
-
-    public function search_loai(Request $request){
-        if($request->ajax()){
-            $loai = $this->loaitaisan->search($request->text);
-            return view('loaitaisan.list_loai',compact('loai'));
-        }
     }
 }

@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="/loaits" method="POST" onsubmit="if(check('.loaits_lb')=='true')return true; return false;">
+            <form action="/loaits" method="POST" onsubmit="if(check('.loaits_lb'))return true; return false;">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="" class="form-label loaits_lb">Tên loại:</label>
@@ -22,19 +22,7 @@
                             <span class="error_loaits error"></span>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" style="margin-top: 50px">
-                    <label for="" class="form-label mota_loai_lb">Mô tả (nếu có):</label>
-                    <div class="form-wrap" style="background-color: #ffff;position: relative;padding-bottom: 170px">
-                        <textarea class='mota mota_loai' name="mota"  style="display: block; font-size: 14px;padding: 10px;" name=""  cols="40" rows="8"></textarea>
-                        <div style="display: flex;">
-                            <i class='bx bxs-error-circle mota_loai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                            <span class="error_mota_loai error"></span>
-                        </div>
-                    </div>
-                </div>
-                
-           
+                </div>       
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn_cus btn_luu" >Lưu</button>

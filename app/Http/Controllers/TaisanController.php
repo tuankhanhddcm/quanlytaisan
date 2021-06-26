@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaisan;
+use App\Models\Chitiettaisan;
 use App\Models\Loaitaisan;
+use App\Models\LoaiTSCD;
+use App\Models\Nhacungcap;
+use App\Models\Phongban;
 use App\Models\Taisan;
-
+use App\Models\Tieuhao;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 class TaisanController extends Controller
@@ -18,17 +24,27 @@ class TaisanController extends Controller
   
     public $loaitaisan ;
     public $taisan;
+    protected $nhacungcap;
+    protected $phongban;
+    protected $chitiettaisan;
+    protected $tieuhao;
+    protected $loaiTSCD;
     public function __construct()
     {
         $this->loaitaisan= new Loaitaisan;
         $this->taisan = new Taisan;
+        $this->nhacungcap= new Nhacungcap;
+        $this->phongban = new Phongban;
+        $this->chitiettaisan = new Chitiettaisan;
+        $this->tieuhao = new Tieuhao;
+        $this->loaiTSCD = new LoaiTSCD;
         $this->middleware('login');
     }
     
     public function index()
     {
         $ts = $this->taisan->select();
-        $loai = $this->loaitaisan->select();
+        $loai = $this->loaiTSCD->select();
         return view('taisan.index',[
                     'taisan'=>$ts,
                     'loaits' =>$loai
@@ -43,8 +59,14 @@ class TaisanController extends Controller
     public function create()
     {
        
-        $loai = $this->loaitaisan->select();
-        return view('taisan.insert_taisan',['loaits' =>$loai]);
+        $loai = $this->loaiTSCD->select();
+        $phongban = $this->phongban->select();
+        $nhacungcap = $this->nhacungcap->select();
+        return view('taisan.insert',[
+            'loaits' =>$loai,
+            'nhacungcap'=>$nhacungcap,
+            'phongban'=> $phongban
+        ]);
     }
 
     /**
@@ -75,10 +97,41 @@ class TaisanController extends Controller
         } else if ($id < 1000000) {
             $ma_ts = 'TS' . ($id);
         }
-        
-        $insert = $this->taisan->insert($ma_ts,$request->tents,$request->loaits,$request->mota);
-        if($insert){
-            return redirect('/taisan');
+        $ngay_mua=Carbon::parse($request->ngay_mua);
+        $ngay_tang = Carbon::parse($request->ngay_tang);
+        $ngay_sd = Carbon::parse($request->ngaysd);
+        $kq =$this->taisan->insert($ma_ts,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
+        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang,$request->phongban);
+        if($kq){
+            if($request->sl !=''){
+                for($i=0;$i<$request->sl;$i++){
+                    $row = $this->chitiettaisan->select()->total();
+                    $max_id = $this->chitiettaisan->max_id('ma_chitiet','CTS');
+                    if ($max_id !== null) {
+                        $id = (int)(str_replace('CTS','', $max_id->ma_chitiet)) + 1;
+                    } else {
+                        $id = $row + 1;
+                    }
+                    if ($id < 10) {
+                        $ma_chitiet = 'CTS00000' . ($id);
+                    } else if ($id < 100) {
+                        $ma_chitiet = 'CTS0000' . ($id);
+                    } else if ($id < 1000) {
+                        $ma_chitiet = 'CTS000' . ($id);
+                    } else if ($id < 10000) {
+                        $ma_chitiet = 'CTS00' . ($id);
+                    } else if ($id < 100000) {
+                        $ma_chitiet = 'CTS0' . ($id);
+                    } else if ($id < 1000000) {
+                        $ma_chitiet = 'CTS' . ($id);
+                    }
+                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.$i);
+                }
+                if($kq){
+                    return redirect('/taisan');
+                }
+            }
+            
         }
         
     }

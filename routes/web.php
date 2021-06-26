@@ -44,6 +44,9 @@ Route::resource('/nhacungcap','NhacungcapController');
 // Loại tài sản
 Route::resource('/loaits','LoaitaisanController');
 Route::post('/loaits/search','LoaitaisanController@search_loai');
+// Loại tài sản cố định
+Route::resource('/loaiTSCD','LoaiTSCDController');
+// Route::post('/loaiTSCD/search','LoaiTSCDController@search_loai');
 
 //  user
 Route::resource('/user','UserController');
@@ -51,3 +54,6 @@ Route::get('/login','UserController@login')->name('login');
 Route::post('/login','UserController@postlogin');
 Route::get('/logout','UserController@logout_user');
 Route::post('/check','UserController@checklogin');
+
+// tiêu hao
+Route::resource('/tieuhao','TieuhaoController');

@@ -4,7 +4,7 @@
     <div class="main_ward">
         <div class="main-name">
             <h3 class="main-text">Danh sách tài sản</h3>
-            <button type="button" data-toggle="modal" data-target="#insert_ts" class="btn_cus btn-addsp"><i class='bx bx-plus' style="font-weight: 600; "></i>
+            <button type="button" onclick="location.href='{{url('/taisan/create')}}'" class="btn_cus btn-addsp"><i class='bx bx-plus' style="font-weight: 600; "></i>
                 Thêm tài sản
               </button>
         </div>

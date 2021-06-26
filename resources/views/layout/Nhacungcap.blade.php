@@ -25,17 +25,19 @@
                             <th style="border-left: 1px solid rgba(0,0,0,.1); width:5%;">STT</th>
                             <th style="width: 15%;">Mã nhà cung cấp</th>
                             <th style="width: 15%;">Tên nhà cung cấp</th>
+                            <th style="width: 15%;">Số điện thoại</th>
                             <th style="width: 25%;">Email</th>
                             <th style="width: 25%;">Địa Chỉ</th>
                             <th style="width: 15%">Hoạt động</th>
                         </tr>
                     </thead>
                     <tbody id="list_product">
-                        {{-- @foreach ($nhacungcap as $key => $item)
-                            <tr>
+                        @foreach ($ncc as $key => $item)
+                            <tr class="body-table">
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$key+1}}</td>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ma_ncc}}</td>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ten_ncc}}</td>
+                                <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->sdt}}</td>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->email}}</td>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->diachi}}</td>
                                 <td >
@@ -43,7 +45,7 @@
                                     <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="modal fade" id="themncc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,51 +57,68 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <div class="modal-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Tên nhà cung cấp:</label>
+                        <form action="/nhacungcap" method="post" onsubmit=" return check_insert_ncc()">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="form-group" style="margin-top: 10px">
+                                    <label for="" class="form-label ten_ncc_lb">Tên nhà cung cấp:</label>
                                     <div class="form-wrap">
                                         <div class="form_input">
-                                            <input type="text" class="form-input sl" name="ten_nv" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào tên nhà cung cấp">
+                                            <input type="text" class="form-input ten_ncc" name="ten_ncc" onkeyup="check('.ten_ncc_lb')" value="" placeholder="Nhập tên nhà cung cấp">
                                         </div>
+                                        
                                         <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
+                                            <i class='bx bxs-error-circle ten_ncc_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                            <span class="error_ten_ncc error"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Email:</label>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="" class="form-label sdt_ncc_lb">Số điện thoại:</label>
                                     <div class="form-wrap">
                                         <div class="form_input">
-                                            <input type="text" class="form-input sl" name="email" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào Email">
+                                            <input type="text" class="form-input sdt_ncc" name="sdt_ncc" onkeyup="check('.sdt_ncc_lb')" value="" placeholder="Nhập số điện thoại">
                                         </div>
+                                        
                                         <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
+                                            <i class='bx bxs-error-circle sdt_ncc_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                            <span class="error_sdt_ncc error"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Địa chỉ:</label>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="" class="form-label email_ncc_lb">Email:</label>
                                     <div class="form-wrap">
                                         <div class="form_input">
-                                            <input type="text" class="form-input sl" name="diachi" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào địa chỉ">
+                                            <input type="text" class="form-input email_ncc" name="email_ncc" onkeyup="check('.email_ncc_lb')" value="" placeholder="Nhập email">
                                         </div>
+                                        
                                         <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
+                                            <i class='bx bxs-error-circle email_ncc_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                            <span class="error_email_ncc error"></span>
                                         </div>
                                     </div>
-                                </div>
-                                
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Thêm Nhà cung cấp</button>
-                        </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="" class="form-label diachi_ncc_lb">Địa chỉ:</label>
+                                    <div class="form-wrap">
+                                        <div class="form_input">
+                                            <input type="text" class="form-input diachi_ncc" name="diachi_ncc" onkeyup="check('.diachi_ncc_lb')" value="" placeholder="Nhập địa chỉ">
+                                        </div>
+                                        
+                                        <div style="display: flex;">
+                                            <i class='bx bxs-error-circle diachi_ncc_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                            <span class="error_diachi_ncc error"></span>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn_cus btn_luu " onclick="">Lưu</button>
+                                <button type="button" class="btn_cus btn-close"  style="margin-bottom: 5px; font-size: 16px;font-weight: 400" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </form>
+                       
                       </div>
                     </div>
                   </div>

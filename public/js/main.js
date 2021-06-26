@@ -13,7 +13,17 @@ $(document).ready(function(){
     $('.loaits-select').click(function(){
         check('#loaits');
     })
+    $('.select-ncc').click(function(){
+        check('#ncc');
+    });
+    $('.select-phongban').click(function(){
+        check('#phongban');
+    });
 
+    // check số
+    $('.soluong').inputFilter(function (value) {
+        return /^\d*$/.test(value);
+    });
 
     // phân trang
     $(document).on('click','.pagination a', function(event){
@@ -24,6 +34,12 @@ $(document).ready(function(){
         search_loai(page)
     });
 
+    // chỉnh calendar
+    $(".date").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true, 
+        changeYear: true 
+    });
 });
 
 function search_ts(page){
@@ -80,19 +96,24 @@ function check(id) {
             break;
         case 'loaits': text ='chọn loại tài sản';
             break;
-
+        case 'phongban': text ='chọn phòng ban';
+            break;
+        case 'chucvu': text ='chọn chức vụ';
+            break;
+        case 'ncc': text ='chọn nhà cung cấp';
+            break;
     }
     if ($(lop).val() == "" ) {
         $(lop).addClass('error_input');
         $("." + dk + "_icon").css("display", "block");
         $(".error_" + dk).text("Vui lòng  " + text);
         $(".error_" + dk).css("display", "block");
-        return "false";
+        return false;
     } else {
         $(lop).removeClass('error_input');
         $("." + dk + "_icon").css("display", "none");
         $(".error_" + dk).css("display", "none");
-        return "true";
+        return true;
     }
 }
 
@@ -139,7 +160,7 @@ function readURL(input, id_img,loaifile='') {
 function check_insertFile(){
     check('.mota_lb');
     check('#file_pdf')
-    if(check('.title_lb') =='true' && check('#file_temp')=='true' &&check('#file_pdf')=='true' && check('.mota_lb')=='true')
+    if(check('.title_lb') && check('#file_temp') &&check('#file_pdf') && check('.mota_lb'))
         return true;
     return false;
 }
@@ -161,7 +182,7 @@ function checklogin(){
     var name = $('#name').val();
     var pass = $('.pass').val();
     var kq = false;
-    if(check('#name')=='true' &&check('.pass')=='true'){
+    if(check('#name') &&check('.pass')){
         ;
         $.ajax({
             url:'/check',
@@ -221,14 +242,102 @@ function search_loai(page){
 function insert_phong(){
     var ten_phong = $('.ten_phong').val();
     var mo_ta = $('.mo_ta').val();
-    if(check('.ten_phong_lb') =='true'){
+    if(check('.ten_phong_lb') ){
         $.ajax({
             url:'/phongban',
             method: 'post',
             data:{ten_phong:ten_phong,mo_ta:mo_ta},
             success:function(data){
-                console.log(data)
+                location.reload();
             }
         })
     }
 }
+
+function check_insert_ncc(){
+    check('.sdt_ncc_lb');
+    check('.email_ncc_lb');
+    check('.diachi_ncc_lb');
+    if(check('.ten_ncc_lb')  && check('.sdt_ncc_lb') && check('.email_ncc_lb') &&check('.diachi_ncc_lb')){
+        return true;
+    }
+    return false;
+}
+
+function insert_ncc(){
+    var ten_ncc = $('.ten_ncc').val();
+    var sdt_ncc = $('.sdt_ncc').val();
+    var email_ncc = $('.email_ncc').val();
+    var diachi_ncc = $('.diachi_ncc').val();
+    if( check_insert_ncc()){
+        $.ajax({
+            url:'/nhacungcap',
+            method: 'post',
+            data:{
+                ten_ncc:ten_ncc,
+                sdt_ncc:sdt_ncc,
+                email_ncc:email_ncc,
+                diachi_ncc:diachi_ncc
+            },
+            success:function(data){
+                location.reload();
+            }
+        })
+    }
+}
+
+
+
+function check_insert_taisan(){
+    check('.tents_lb');
+    check('#loaits');
+    check('.sl_lb');
+    check('#phongban');
+    check('.so_hieu_lb');
+    check('.nsx_lb');
+    check('#ncc');
+    check('.nuoc_sx_lb');
+    check('.ngaymua_lb');
+    check('.ngaytang_lb');
+    check('.ngaysd_lb');
+    check('.ngia_lb');
+    check('.bd_HM_lb');
+    check('.tile_HM_lb');
+    check('.tgSD_lb');
+    if(check('.tents_lb') && check('#loaits') && check('.sl_lb') &&check('#phongban') 
+        && check('.so_hieu_lb') &&check('.nsx_lb') &&check('#ncc') &&check('.nuoc_sx_lb')
+        && check('.ngaymua_lb') && check('.ngaytang_lb') && check('.ngaysd_lb') && check('.ngia_lb')
+        && check('.bd_HM_lb') && check('.tile_HM_lb') && check('.tgSD_lb')
+        ){
+            return true;
+    }
+    return false;
+}
+
+function check_insert_nv(){
+    check('.email_nv_lb');
+    check('.diachi_nv_lb');
+    check('#phongban');
+    check('#chucvu');
+    if(check('.ten_nv_lb') && check('.email_nv_lb') && check('.diachi_nv_lb') && check('#phongban') && check('#chucvu')){
+        return true;
+    }
+    return false;
+}
+
+(function ($) {
+    $.fn.inputFilter = function (inputFilter) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
+    };
+}(jQuery));

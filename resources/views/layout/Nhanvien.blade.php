@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody id="list_product">
-                        {{-- @foreach ($nhanvien as $key => $item)
+                        @foreach ($nhanvien as $key => $item)
                             <tr>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$key+1}}</td>
                                 <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ma_nv}}</td>
@@ -47,7 +47,7 @@
                                     <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="modal fade" id="themnhanvien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,87 +59,103 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <div class="modal-body">
-                            <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Tên nhân viên:</label>
-                                    <div class="form-wrap">
-                                        <div class="form_input">
-                                            <input type="text" class="form-input sl" name="ten_nv" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào tên nhân viên">
-                                        </div>
-                                        <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Email:</label>
-                                    <div class="form-wrap">
-                                        <div class="form_input">
-                                            <input type="text" class="form-input sl" name="email" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào email">
-                                        </div>
-                                        <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label sl_lb">Địa chỉ:</label>
-                                    <div class="form-wrap">
-                                        <div class="form_input">
-                                            <input type="text" class="form-input sl" name="diachi" onkeyup="check('.sl_lb')" value="" style="text-align: right;" placeholder="Nhập vào địa chỉ">
-                                        </div>
-                                        <div style="display: flex;">
-                                            <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_sl error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label">Phòng ban:</label>
-                                    <div class="form-wrap">
-                                        <div class="form_input">
-                                            <div class="select_wrap form_input--items" style="width: 100%;">
-                                                <select class=" select select-loaisp form-control" id="loaisp" name ="ma_phong" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                                    <option value="">--Chọn Phong--</option>
-                                                        <option value="">1</option>
-                                                </select>
-                                                
+                        <form action="/nhanvien" method="post" onsubmit=" return check_insert_nv()">
+                            @csrf
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="" class="form-label ten_nv_lb">Tên nhân viên:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <input type="text" class="form-input ten_nv" name="ten_nv" onkeyup="check('.ten_nv_lb')" value=""  placeholder="Nhập vào tên nhân viên">
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle ten_nv_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_ten_nv error"></span>
                                             </div>
                                         </div>
-                                        <div style="display: flex;">
-                                            <i class='bx bxs-error-circle loaisp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_loaisp error"></span>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-label">Chức vụ:</label>
-                                    <div class="form-wrap">
-                                        <div class="form_input">
-                                            <div class="select_wrap form_input--items" style="width: 100%;">
-                                                <select class=" select select-loaisp form-control" id="loaisp" name ="ma_cv" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                                    <option value="">--Chọn chức vụ--</option>
-                                                        <option value="">1</option>
-                                                </select>
-                                                
+                                    <div class="form-group">
+                                        <label for="" class="form-label email_nv_lb">Email:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <input type="text" class="form-input email_nv" name="email" onkeyup="check('.email_nv_lb')" value=""  placeholder="Nhập vào email">
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle email_nv_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_email_nv error"></span>
                                             </div>
                                         </div>
-                                        <div style="display: flex;">
-                                            <i class='bx bxs-error-circle loaisp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                            <span class="error_loaisp error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label sdt_nv_lb">Số điện thoại:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <input type="text" class="form-input sdt_nv" name="sdt" onkeyup="check('.sdt_nv_lb')" value=""  placeholder="Nhập vào số điện thoại">
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle sdt_nv_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_sdt_nv error"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Thêm nhân viên</button>
-                        </div>
-
+                                    <div class="form-group">
+                                        <label for="" class="form-label diachi_nv_lb">Địa chỉ:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <input type="text" class="form-input diachi_nv" name="diachi" onkeyup="check('.diachi_nv_lb')" value=""  placeholder="Nhập vào địa chỉ">
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle diachi_nv_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_diachi_nv error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Phòng ban:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <div class="select_wrap form_input--items" style="width: 100%;">
+                                                    <select class=" select select-phongban form-control" id="phongban" name ="ma_phong" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                                        <option value="">--Chọn phòng ban--</option>
+                                                        @foreach ($phongban as $item)
+                                                            <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle phongban_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_phongban error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Chức vụ:</label>
+                                        <div class="form-wrap">
+                                            <div class="form_input">
+                                                <div class="select_wrap form_input--items" style="width: 100%;">
+                                                    <select class=" select select-chucvu form-control" id="chucvu" name ="ma_chucvu" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                                        <option value="">--Chọn chức vụ--</option>
+                                                        @foreach ($chucvu as $item)
+                                                            <option value="{{$item->ma_chucvu}}">{{$item->ten_chucvu}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div style="display: flex;">
+                                                <i class='bx bxs-error-circle chucvu_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                <span class="error_chucvu error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn_cus btn_luu " onclick="">Lưu</button>
+                                <button type="button" class="btn_cus btn-close"  style="margin-bottom: 5px; font-size: 16px;font-weight: 400" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </form>
                       </div>
                     </div>
                   </div>

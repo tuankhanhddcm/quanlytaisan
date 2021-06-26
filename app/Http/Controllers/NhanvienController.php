@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chucvu;
+use App\Models\Nhanvien;
+use App\Models\Phongban;
 use Illuminate\Http\Request;
 
 class NhanvienController extends Controller
@@ -11,14 +14,22 @@ class NhanvienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    protected $phongban;
+    protected $chucvu;
+    protected $nhanvien;
     public function __construct()
     {
         $this->middleware('login');
+        $this->phongban = new Phongban;
+        $this->chucvu = new Chucvu;
+        $this->nhanvien = new Nhanvien;
     }
     public function index()
     {
-        return view('layout.Nhanvien');
+        $phongban = $this->phongban->select();
+        $chucvu = $this->chucvu->select();   
+        $nhanvien = $this->nhanvien->select(); 
+        return view('layout.Nhanvien',compact('phongban','chucvu','nhanvien'));
     }
 
     /**
@@ -39,7 +50,31 @@ class NhanvienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $row = $this->nhanvien->select()->total();
+        $max_id = $this->nhanvien->max_id('ma_nv','NV');
+        if ($max_id !== null) {
+            $id = (int)(str_replace('NV','', $max_id->ma_nv)) + 1;
+        } else {
+            $id = $row + 1;
+        }
+        if ($id < 10) {
+            $ma_nv = 'NV00000' . ($id);
+        } else if ($id < 100) {
+            $ma_nv = 'NV0000' . ($id);
+        } else if ($id < 1000) {
+            $ma_nv = 'NV000' . ($id);
+        } else if ($id < 10000) {
+            $ma_nv = 'NV00' . ($id);
+        } else if ($id < 100000) {
+            $ma_nv = 'NV0' . ($id);
+        } else if ($id < 1000000) {
+            $ma_nv = 'NV' . ($id);
+        }
+        $date = date("Y-m-d H:i:s", time());
+        $kq =$this->nhanvien->insert($ma_nv,$request->ten_nv,$request->sdt,$request->email,$request->diachi,$date,$request->ma_phong,$request->ma_chucvu);
+        if($kq){
+            return redirect('/nhanvien');
+        }
     }
 
     /**

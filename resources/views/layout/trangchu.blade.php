@@ -20,17 +20,7 @@
                     <span class="tenmenu">Tài Sản</span>
             </a>
         </div>
-        <div class="col-sm-4">
-            <a href="/chitiettaisan" class="nav-link ">
-                <p>
-                    <div class="image">
-                        <img src="{{ URL::asset('img/danhmuc.jpg') }}" class="img-circle elevation-2" alt="Chi tiết tài sản" style="width:200px !important; height:200px !important">
-                    </div>
-                    <br>
-                    <span class="tenmenu">Danh mục</span>
-                </p>
-            </a>
-        </div>
+        
         <div class="col-sm-4">
             <a href="/hopdong" class="nav-link ">
                 <p>
@@ -42,8 +32,6 @@
                 </p>
             </a>
         </div>
-    </div>
-    <div class="col-sm-12 row" >
         <div class="col-sm-4">
             <a href="/baocao" class="nav-link ">
                     <div class="image">
@@ -53,6 +41,9 @@
                     <span class="tenmenu">Báo Cáo</span>
             </a>
         </div>
+    </div>
+    <div class="col-sm-12 row" >
+        
         <div class="col-sm-4">
             <a href="/maubaocao" class="nav-link ">
                 <p>
@@ -71,7 +62,7 @@
                         <img src="{{ URL::asset('img/download.png') }}" style="background-image: #fffff" class="img-circle elevation-2" alt="Thống kê" style="width:200px !important; height:200px !important">
                     </div>
                     <br>
-                    <span class="tenmenu">Đăng Xuất</span>
+                    <span class="tenmenu">Thống kê</span>
                 </p>
             </a>
         </div>

@@ -123,9 +123,8 @@ class UserController extends Controller
                 if(Hash::check($_POST['pass'],$user->password)){
                     $kq2= 'true';
                 }
+            }
         }
-        }
-        
         echo json_encode([$kq,$kq2]);
     }
 }

@@ -21,13 +21,17 @@
                     <div class="select_wrap">
                         <select class=" select select-loaisp form-control" id="loaisp" data-dropup-auto="false" title="Danh mục" data-size='5' data-live-search="true">
                             <option value="" selected>--Chọn loại tài sản--</option>
-                           
+                            @foreach ($taisan as $item)
+                                <option value="{{$item->ma_ts}}">{{$item->ten_ts}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-nsx  form-control" id="nsx" data-dropup-auto="false" title="Nhà sản xuất" data-size='5' data-live-search="true">
                             <option value="" selected>--Chọn nhà cung cấp--</option>
-                            
+                            @foreach ($nhacungcap as $item)
+                                <option value="{{$item->ma_ncc}}">{{$item->ten_ncc}}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -38,40 +42,38 @@
                     <thead class="heading-table">
                         <tr>
                             <th style="border-left: 1px solid rgba(0,0,0,.1); width:10px;">STT</th>
-                            <th style="width: 80px;">Mã tài sản</th>
-                            <th style="width: 120px;">Tên tài sản</th>
-                            <th style="width: 80px;">Loại tài sản</th>
-                            <th style="width: 70px;">Số serial</th>
-                            <th style="width: 80px;">Nguyên giá</th>
-                            <th style="width: 80px;">Tiêu hao</th>
-                            <th style="width: 80px;">Nhà cung cấp</th>
-                            <th style="width: 80px;">Ngày mua</th>
-                            <th style="width: 80px;">Nơi mua</th>
-                            <th style="width: 80px;">Nơi Sản Xuất</th>
-                            <th style="width: 80px;">Trạng thái</th>
-                            <th style="width: 80px;">Người sử dụng</th>
-                            <th style="width: 80px;border-right: none;">Đơn vị quản lý</th>
+                            <th >Mã tài sản</th>
+                            <th >Tên tài sản</th>
+                            <th >Loại tài sản</th>
+                            <th >Số serial</th>
+                            <th >Nguyên giá</th>
+                            <th>Số lượng</th>
+                            <th>Tiêu hao</th>
+                            <th >Nhà cung cấp</th>
+                            <th >Ngày mua</th>
+                            <th >Năm sản xuất</th>
+                            <th >Nước Sản Xuất</th>
+                            <th style="width: 80px;border-right: none;">Phòng ban</th>
                         </tr>
                     </thead>
                     <tbody id="list_product">
-                        {{-- @foreach ($chitiet as $key => $item)
-                            <tr>
+                        @foreach ($chitiettaisan as $key => $item)
+                            <tr class="body-table">
                                 <td>{{$key+1}}</td>
-                                <td>{{$item->ma_ts}}</td>
+                                <td>{{$item->id_chitiet}}</td>
+                                <td>{{$item->ten_chitiet}}</td>
                                 <td>{{$item->ten_ts}}</td>
-                                <td>{{$item->ma_loai}}</td>
                                 <td>{{$item->so_serial}}</td>
-                                <td>{{$item->nguyen_gia}}</td>
+                                <td>{{$item->nguyen_gia.'đ'}}</td>
+                                <td>{{$item->soluong}}</td>
                                 <td>{{$item->muc_tieuhao}}</td>
                                 <td>{{$item->ten_ncc}}</td>
                                 <td>{{$item->ngay_mua}}</td>
-                                <td>{{$item->noi_mua}}</td>
-                                <td>{{$item->noi_san_xuat}}</td>
-                                <td>{{$item->trang_thai}}</td>
-                                <td>{{$item->ten_nv}}</td>
-                                <td>{{$item->ten_phong}}</td>
+                                <td>{{$item->nam_san_xuat}}</td>
+                                <td>{{$item->nuoc_san_xuat}}</td>
+                                <td style="width: 150px">{{$item->ten_phong}}</td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

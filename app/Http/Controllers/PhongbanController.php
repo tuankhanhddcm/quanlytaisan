@@ -44,24 +44,24 @@ class PhongbanController extends Controller
     public function store(Request $request)
     {
         $row = $this->phongban->select()->total();
-        $max_id = $this->phongban->max_id('ma_phong','TS');
+        $max_id = $this->phongban->max_id('ma_phong','PB');
         if ($max_id !== null) {
-            $id = (int)(str_replace('TS','', $max_id->ma_phong)) + 1;
+            $id = (int)(str_replace('PB','', $max_id->ma_phong)) + 1;
         } else {
             $id = $row + 1;
         }
         if ($id < 10) {
-            $ma_phong = 'TS00000' . ($id);
+            $ma_phong = 'PB00000' . ($id);
         } else if ($id < 100) {
-            $ma_phong = 'TS0000' . ($id);
+            $ma_phong = 'PB0000' . ($id);
         } else if ($id < 1000) {
-            $ma_phong = 'TS000' . ($id);
+            $ma_phong = 'PB000' . ($id);
         } else if ($id < 10000) {
-            $ma_phong = 'TS00' . ($id);
+            $ma_phong = 'PB00' . ($id);
         } else if ($id < 100000) {
-            $ma_phong = 'TS0' . ($id);
+            $ma_phong = 'PB0' . ($id);
         } else if ($id < 1000000) {
-            $ma_phong = 'TS' . ($id);
+            $ma_phong = 'PB' . ($id);
         }
         $date = date("Y-m-d H:i:s", time());
         $data=$this->phongban->insert($ma_phong,$request->ten_phong,$request->mo_ta,$date);
