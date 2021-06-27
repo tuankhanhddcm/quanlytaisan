@@ -32,11 +32,14 @@ class Chitiettaisan extends Model
         return $kq;
     }
 
-    public function insert($ma_chitet,$ma_ts,$ten_chitiet){
+    public function insert($ma_chitet,$ma_ts,$ten_chitiet,$so_serial='',$trangthai='',$ma_nv=''){
         $kq = DB::table($this->table)->insert([
             'ma_chitiet'=>$ma_chitet,
             'ma_ts'=>$ma_ts,
-            'ten_chitiet' =>$ten_chitiet
+            'ten_chitiet' =>$ten_chitiet,
+            'so_serial' =>$so_serial,
+            'trangthai'=>$trangthai,
+            'ma_nv'=>$ma_nv
         ]);
         return $kq;
     }

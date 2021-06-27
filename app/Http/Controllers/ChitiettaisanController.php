@@ -61,9 +61,9 @@ class ChitiettaisanController extends Controller
     public function store(Request $request)
     {
         $row = $this->chitiettaisan->select()->total();
-        $max_id = $this->chitiettaisan->max_id('id_chitiet','CTS');
+        $max_id = $this->chitiettaisan->max_id('ma_chitiet','CTS');
         if ($max_id !== null) {
-            $id = (int)(str_replace('CTS','', $max_id->id_chitiet)) + 1;
+            $id = (int)(str_replace('CTS','', $max_id->ma_chitiet)) + 1;
         } else {
             $id = $row + 1;
         }
@@ -80,10 +80,11 @@ class ChitiettaisanController extends Controller
         } else if ($id < 1000000) {
             $id_chitiet = 'CTS' . ($id);
         }
-        $date = date("Y-m-d H:i:s", time());
-        $kq =$this->chitiettaisan->insert($id_chitiet,$request->tents,$request->ma_loai,$request->so_hieu,
-            $request->ngia,$request->ncc,$request->nuoc_sx,$request->nsx,1,0,$request->sl,$date,$request->phongban);
+        $kq =$this->chitiettaisan->insert($id_chitiet,$request->loaits,$request->tents,$request->so_serial,$request->trangthai,$request->nhanvien);
         if($kq){
+            if($request->taisan){
+                return redirect('/taisan/'.$request->taisan);
+            }
             return redirect('/chitiettaisan');
         }
     }

@@ -14,7 +14,16 @@ $(document).ready(function(){
 
     $('.loaits-select').click(function(){
         check('#loaits');
-    })
+    });
+
+    $('.nhanvien-select').click(function(){
+        check('#nhanvien');
+    });
+
+    $('.trangthai-select').click(function(){
+        check('#trangthai');
+    });
+
     $('.select-ncc').click(function(){
         check('#ncc');
     });
@@ -139,6 +148,10 @@ function check(id) {
         case 'loaits': text ='chọn loại tài sản';
             break;
         case 'phongban': text ='chọn phòng ban';
+            break;
+        case 'nhanvien': text ='chọn nhân viên';
+            break;
+        case 'trangthai': text ='chọn trạng thái';
             break;
         case 'chucvu': text ='chọn chức vụ';
             break;
