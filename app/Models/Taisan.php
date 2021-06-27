@@ -32,18 +32,7 @@ class Taisan extends Model
     }
 
     public function select($dieukien=''){
-        // $temp_sl = DB::table($this->table)
-        //         ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'))
-        //         ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
-        //         ->groupBy('taisan.ma_ts');
-        // $data = DB::table($this->table)
-        //     ->select('taisan.*','nhacungcap.ten_ncc','phongban.ten_phong','loaitaisancodinh.ten_loai')
-        //     ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
-        //     ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
-        //     ->join('phongban','taisan.ma_phong','=','phongban.ma_phong')
-        //     ->joinSub($temp_sl,'temp_sl',function($join){
-        //         $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
-        //     });
+       
         $data =$this->table_join();
         if($dieukien !=''){
             $data =$data->where('taisan.ma_loai','=',''.$dieukien.'');
@@ -78,7 +67,7 @@ class Taisan extends Model
     }
 
     public function search_taisan( $text,$selected){
-        $kq = DB::table($this->table)->select('taisan.*','loaitaisan.ten_loai')->join('loaitaisan','taisan.ma_loai','=','loaitaisan.ma_loai');
+        $kq = $this->table_join();
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
                     $res->where('taisan.ten_ts','like','%'.$text.'%')
@@ -86,20 +75,13 @@ class Taisan extends Model
             });
         }
         if($selected !=''){
-            $kq = $kq->where('loaitaisan.ma_loai',$selected);
+            $kq = $kq->where('loaitaisancodinh.ma_loai',$selected);
         }
         $kq =$kq->paginate(8);
         return $kq;
     }
 
     public function show_ts($ma_ts){
-        // $table = DB::table($this->table)
-        // ->select('taisan.*','nhacungcap.ten_ncc','phongban.ten_phong','loaitaisancodinh.ten_loai')
-        // ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
-        // ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
-        // ->join('phongban','taisan.ma_phong','=','phongban.ma_phong')
-        // ->where('taisan.ma_ts','=',''.$ma_ts.'')
-        // ->first();
         $table = $this->table_join()
             ->where('taisan.ma_ts','=',''.$ma_ts.'')
             ->first();

@@ -635,6 +635,7 @@ button.btn-deletd {
 
 .detail_user label{
     font-weight: bold;
+    margin: 0px;
 }
 
 /* particles-js */

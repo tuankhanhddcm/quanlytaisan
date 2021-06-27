@@ -132,4 +132,16 @@ class ChitiettaisanController extends Controller
     {
         //
     }
+
+    public function search_chitiet(Request $request){
+        if($request->ajax()){
+            $text=$request->text;
+            $seleted =$request->seleted;
+            $chitiettaisan = $this->chitiettaisan->select();
+            if($text !='' || $seleted !=''){
+                $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted);
+            }
+            return view('chitiettaisan.list_chitiet',compact('chitiettaisan'));
+        }
+    }
 }

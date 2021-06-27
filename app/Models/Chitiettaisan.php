@@ -40,4 +40,18 @@ class Chitiettaisan extends Model
         ]);
         return $kq;
     }
+    public function search_chitiet( $text,$selected){
+        $kq = $this->table_join();
+        if($text !=''){
+            $kq = $kq->where(function($res) use($text){
+                    $res->where('chitiettaisan.ten_chitiet','like','%'.$text.'%')
+                        ->orwhere('chitiettaisan.ma_chitiet','like','%'.$text.'%');
+            });
+        }
+        if($selected !=''){
+            $kq = $kq->where('taisan.ma_ts',$selected);
+        }
+        $kq =$kq->paginate(8);
+        return $kq;
+    }
 }

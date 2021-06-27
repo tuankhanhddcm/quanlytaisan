@@ -8,6 +8,8 @@ $(document).ready(function(){
 
     $('.select-loaits').click(function(){
         search_loaiTSCD(1);
+        search_ts(1);
+        search_chitiet(1);
     });
 
     $('.loaits-select').click(function(){
@@ -32,6 +34,8 @@ $(document).ready(function(){
         search_baocao(page);
         search_loaiTSCD(page);
         search_loai(page)
+        search_ts(page);
+        search_chitiet(page);
     });
 
     // chỉnh calendar
@@ -65,7 +69,38 @@ function search_loaiTSCD(page){
         }
     });
 }
-
+function search_ts(page){
+    var text=$('#search').val();
+    var seleted = $('#taisan option:selected').val();
+    $.ajax({
+        
+        url:'/taisan/search?page='+page,
+        method:"post",
+        data:{
+            text:text,
+            seleted:seleted,
+        },
+        success: function(data){
+            $('#list_taisan').html(data);
+        }
+    });
+}
+function search_chitiet(page){
+    var text=$('#search').val();
+    var seleted = $('#taisan option:selected').val();
+    $.ajax({
+        
+        url:'/chitiettaisan/search?page='+page,
+        method:"post",
+        data:{
+            text:text,
+            seleted:seleted,
+        },
+        success: function(data){
+            $('#list_chitiet').html(data);
+        }
+    });
+}
 
 //check input rỗng
 function check(id) {

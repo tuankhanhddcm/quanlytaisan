@@ -37,6 +37,7 @@ Route::resource('/nhanvien','NhanvienController');
 
 // chitiettaisan
 Route::resource('/chitiettaisan','ChitiettaisanController');
+Route::post('/chitiettaisan/search','ChitiettaisanController@search_chitiet');
 
 //Nhà cung cấp
 Route::resource('/nhacungcap','NhacungcapController');
