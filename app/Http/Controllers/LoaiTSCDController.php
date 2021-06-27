@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loaitaisan;
 use App\Models\LoaiTSCD;
+use App\Models\Taisan;
 use App\Models\Tieuhao;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,13 +20,14 @@ class LoaiTSCDController extends Controller
     protected $loaiTSCD;
     protected $loaitaisan;
     protected $tieuhao;
-
+    protected $taisan;
     public function __construct()
     {
         $this->middleware('login');
         $this->loaiTSCD = new LoaiTSCD;
         $this->loaitaisan = new Loaitaisan;
         $this->tieuhao = new Tieuhao;
+        $this->taisan = new Taisan;
     }
     public function index()
     {
@@ -111,9 +113,11 @@ class LoaiTSCDController extends Controller
      * @param  \App\Models\LoaiTSCD  $loaiTSCD
      * @return \Illuminate\Http\Response
      */
-    public function show(LoaiTSCD $loaiTSCD)
+    public function show($id)
     {
-        //
+        $loaiTSCD = $this->loaiTSCD->find($id);
+        $taisan = $this->taisan->select($loaiTSCD->ma_loai);
+        return view('loaiTSCĐ.detail_loai',compact('loaiTSCD','taisan'));
     }
 
     /**
@@ -122,9 +126,11 @@ class LoaiTSCDController extends Controller
      * @param  \App\Models\LoaiTSCD  $loaiTSCD
      * @return \Illuminate\Http\Response
      */
-    public function edit(LoaiTSCD $loaiTSCD)
-    {
-        //
+    public function edit($id)
+    {   
+        $TSCD = $this->loaiTSCD->find($id);
+        $loai=$this->loaitaisan->select();
+        return view('loaiTSCĐ.modal',compact('TSCD','loai'));
     }
 
     /**
@@ -134,9 +140,12 @@ class LoaiTSCDController extends Controller
      * @param  \App\Models\LoaiTSCD  $loaiTSCD
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoaiTSCD $loaiTSCD)
+    public function update(Request $request, $id)
     {
-        //
+        $kq = $this->loaiTSCD->update_loai($id,$request->tents_up,$request->loaits_up);
+        if($kq){
+            return redirect('loaiTSCD');
+        }
     }
 
     /**
@@ -148,5 +157,16 @@ class LoaiTSCDController extends Controller
     public function destroy(LoaiTSCD $loaiTSCD)
     {
         //
+    }
+    public function search_loai(Request $request){
+        if($request->ajax()){
+            $text=$request->text;
+            $seleted =$request->seleted;
+            $loaiTSCD = $this->loaiTSCD->select();
+            if($text !='' || $seleted !=''){
+                $loaiTSCD = $this->loaiTSCD->search($text,$seleted);
+            }
+            return view('loaiTSCĐ.list_loai',compact('loaiTSCD'));
+        }
     }
 }

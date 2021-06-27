@@ -46,8 +46,8 @@ Route::resource('/loaits','LoaitaisanController');
 Route::post('/loaits/search','LoaitaisanController@search_loai');
 // Loại tài sản cố định
 Route::resource('/loaiTSCD','LoaiTSCDController');
-// Route::post('/loaiTSCD/search','LoaiTSCDController@search_loai');
-
+Route::post('/loaiTSCD/update/{id}','LoaiTSCDController@update');
+Route::post('/loaiTSCD/search','LoaiTSCDController@search_loai');
 //  user
 Route::resource('/user','UserController');
 Route::get('/login','UserController@login')->name('login');

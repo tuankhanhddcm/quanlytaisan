@@ -327,12 +327,13 @@
         @yield('phongban') 
         @yield('nhacungcap') 
         @yield('loaitaisan')
-        @yield('thongtintaisan')
         @yield('trangchu')
         @yield('chitiettaisan')
         @yield('insert_chitiet')
         @yield('tieuhao')
         @yield('loaiTSCĐ')
+        @yield('detail_loaiTSCD')
+        @yield('detail_taisan')
     </div>
     <!-- /.content-wrapper -->
     {{-- @include('modal.modal_insert') --}}

@@ -98,7 +98,7 @@ button.btn-addsp {
 }
 
 .main-text {
-    font-size: 2.4rem;
+    font-size: 30px;
     color: #1ba8ff;
     font-weight: 500;
 }
@@ -628,7 +628,7 @@ button.btn-deletd {
 /* detail khách hàng */
 
 .detail_user {
-    font-size: 1.6rem;
+    font-size: 18px;
     font-weight: 400;
     color: #333;
 }

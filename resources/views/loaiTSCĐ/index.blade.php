@@ -14,7 +14,7 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-4">
-                        <input type="text" value="" class="search_input" id='search_loai' onkeyup="search_loai(1);" placeholder="Nhập loại tài sản">
+                        <input type="text" value="" class="search_input" id='search_loai' onkeyup="search_loaiTSCD(1);" placeholder="Nhập loại tài sản">
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-loaits form-control" id="loai_taisan"  data-dropup-auto="false" title="Danh mục" data-size='5' data-live-search="true">
@@ -33,5 +33,8 @@
         </div>
     </div>
 </div>
-@include('loaiTSCĐ.modal')
+<div id="modal_tscd">
+    @include('loaiTSCĐ.modal')
+</div>
+
 @endsection

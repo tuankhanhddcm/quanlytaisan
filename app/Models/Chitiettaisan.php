@@ -9,14 +9,19 @@ class Chitiettaisan extends Model
 {
     protected $table = 'chitiettaisan';
 
-    public function select(){
-        // $data = DB::table($this->table)->select('chitiettaisan.*','nhacungcap.ten_ncc','phongban.ten_phong','tieuhaotaisan.muc_tieuhao','taisan.ten_ts')
-        //     ->join('taisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
-        //     ->join('nhacungcap','chitiettaisan.ma_ncc','=','nhacungcap.ma_ncc')
-        //     ->join('phongban','chitiettaisan.ma_phong','=','phongban.ma_phong')
-        //     ->join('tieuhaotaisan','chitiettaisan.ma_tieuhao','=','tieuhaotaisan.ma_tieuhao')
-        //     ->paginate(8);
-        $data = DB::table($this->table)->paginate(8);
+    public function table_join(){
+        $data = DB::table($this->table)
+                ->select('chitiettaisan.*','taisan.ten_ts')
+                ->join('taisan','chitiettaisan.ma_ts','=','taisan.ma_ts');
+        return $data;
+    }
+
+    public function select($dieukien=''){
+        $data = $this->table_join();
+        if($dieukien !=''){
+            $data = $data->where('chitiettaisan.ma_ts','=',''.$dieukien.'');
+        }
+        $data = $data->paginate(8);
         return $data;
     }
 

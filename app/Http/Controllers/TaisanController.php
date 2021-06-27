@@ -7,12 +7,14 @@ use App\Models\Chitiettaisan;
 use App\Models\Loaitaisan;
 use App\Models\LoaiTSCD;
 use App\Models\Nhacungcap;
+use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
 use App\Models\Tieuhao;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\This;
 
 class TaisanController extends Controller
 {
@@ -29,6 +31,7 @@ class TaisanController extends Controller
     protected $chitiettaisan;
     protected $tieuhao;
     protected $loaiTSCD;
+    protected $nhanvien;
     public function __construct()
     {
         $this->loaitaisan= new Loaitaisan;
@@ -38,6 +41,7 @@ class TaisanController extends Controller
         $this->chitiettaisan = new Chitiettaisan;
         $this->tieuhao = new Tieuhao;
         $this->loaiTSCD = new LoaiTSCD;
+        $this->nhanvien = new Nhanvien;
         $this->middleware('login');
     }
     
@@ -125,7 +129,7 @@ class TaisanController extends Controller
                     } else if ($id < 1000000) {
                         $ma_chitiet = 'CTS' . ($id);
                     }
-                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.$i);
+                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' '.$i);
                 }
                 if($kq){
                     return redirect('/taisan');
@@ -145,8 +149,13 @@ class TaisanController extends Controller
     public function show($id)
     {
         $taisan = $this->taisan->show_ts($id);
-        $loai = $this->loaitaisan->select();
-        return view('taisan.update_taisan',['taisan'=>$taisan,'loaits'=>$loai]);
+        $chitiettaisan = $this->chitiettaisan->select($id);
+        $nhanvien = $this->nhanvien->select();
+        return view('taisan.detail_taisan',[
+            'taisan'=>$taisan,
+            'chitiettaisan'=>$chitiettaisan,
+            'nhanvien' =>$nhanvien
+        ]);
     }
 
     /**

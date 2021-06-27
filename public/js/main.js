@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
 
     $('.select-loaits').click(function(){
-        search_ts(1);
+        search_loaiTSCD(1);
     });
 
     $('.loaits-select').click(function(){
@@ -30,7 +30,7 @@ $(document).ready(function(){
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         search_baocao(page);
-        search_ts(page);
+        search_loaiTSCD(page);
         search_loai(page)
     });
 
@@ -40,21 +40,28 @@ $(document).ready(function(){
         changeMonth: true, 
         changeYear: true 
     });
+
+
+    $(document).on('click','.btn_uploaiTSCD',function(){
+        var id=$(this).data('id');
+        update_loaiTSCD(id);
+    });
+
 });
 
-function search_ts(page){
-    var text=$('#search').val();
+function search_loaiTSCD(page){
+    var text=$('#search_loai').val();
     var seleted = $('#loai_taisan option:selected').val();
     $.ajax({
         
-        url:'/taisan/search?page='+page,
+        url:'/loaiTSCD/search?page='+page,
         method:"post",
         data:{
             text:text,
             seleted:seleted,
         },
         success: function(data){
-            $('#list_taisan').html(data);
+            $('#list_loaiTSCD').html(data);
         }
     });
 }
@@ -341,3 +348,15 @@ function check_insert_nv(){
         });
     };
 }(jQuery));
+
+
+function update_loaiTSCD(id){
+    $.ajax({
+        url: '/loaiTSCD/'+id+'/edit',
+        method: 'get',
+        success:function(data){
+            $('#modal_tscd').html(data);
+            $('#updateTSCD').modal('show')
+        }
+    });
+}

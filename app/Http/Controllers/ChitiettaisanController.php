@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chitiettaisan;
 use App\Models\Nhacungcap;
+use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
 use Illuminate\Http\Request;
@@ -20,21 +21,22 @@ class ChitiettaisanController extends Controller
     protected $nhacungcap;
     protected $taisan;
     protected $chitiettaisan;
+    protected $nhanvien;
+
     public function __construct()
     {
         $this->middleware('login');
-        $this->phongban = new Phongban;
-        $this->nhacungcap = new Nhacungcap;
         $this->taisan = new Taisan;
         $this->chitiettaisan = new Chitiettaisan;
+        $this->nhanvien = new Nhanvien;
     }
     
     public function index()
     {
         $taisan = $this->taisan->select();
-        $nhacungcap = $this->nhacungcap->select();
         $chitiettaisan = $this->chitiettaisan->select();
-        return view('chitiettaisan.Chitiettaisan',compact('taisan','chitiettaisan','nhacungcap'));
+        $nhanvien = $this->nhanvien->select();
+        return view('chitiettaisan.Chitiettaisan',compact('taisan','chitiettaisan','nhanvien'));
     }
 
     /**
@@ -45,9 +47,9 @@ class ChitiettaisanController extends Controller
     public function create()
     {
         $phongban = $this->phongban->select();
-        $nhacungcap = $this->nhacungcap->select();
         $taisan = $this->taisan->select();
-        return view('chitiettaisan.insert',compact('phongban','nhacungcap','taisan'));
+        $nhanvien = $this->nhanvien->select();
+        return view('chitiettaisan.insert',compact('phongban','nhanvien','taisan'));
     }
 
     /**
