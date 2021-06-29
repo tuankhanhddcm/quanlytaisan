@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::resource('/taisan','TaisanController');
 Route::post('/taisan/search','TaisanController@search_ts');
 Route::post('/taisan/in_the','TaisanController@in_theTSCD');
-
+Route::post('/taisan/update/{id}','TaisanController@update')->name('taisan.update');
 // Mẫu báo cáo
 Route::get('/maubaocao','MaubaocaoController@index');
 Route::get('/word_export/{id}','MaubaocaoController@word_export');
@@ -39,7 +39,8 @@ Route::resource('/nhanvien','NhanvienController');
 // chitiettaisan
 Route::resource('/chitiettaisan','ChitiettaisanController');
 Route::post('/chitiettaisan/search','ChitiettaisanController@search_chitiet');
-
+Route::post('/chitiettaisan/edit/{id}','ChitiettaisanController@edit')->name('chitiettaisan.edit');
+Route::post('/chitiettaisan/update/{id}','ChitiettaisanController@update')->name('chitiettaisan.update');
 //Nhà cung cấp
 Route::resource('/nhacungcap','NhacungcapController');
 

@@ -35,7 +35,7 @@ class ChitiettaisanController extends Controller
     {
         $taisan = $this->taisan->select();
         $chitiettaisan = $this->chitiettaisan->select();
-        $nhanvien = $this->nhanvien->select();
+        $nhanvien = $this->nhanvien->select('all');
         return view('chitiettaisan.Chitiettaisan',compact('taisan','chitiettaisan','nhanvien'));
     }
 
@@ -108,7 +108,10 @@ class ChitiettaisanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $taisan = $this->taisan->select('','all');
+        $chitiet_up = $this->chitiettaisan->show_id($id);
+        $nhanvien = $this->nhanvien->select();
+        return view('chitiettaisan.modal',compact('chitiet_up','taisan','nhanvien'));
     }
 
     /**
@@ -120,7 +123,10 @@ class ChitiettaisanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
+        if($kq){
+            return redirect()->route('chitiettaisan.index');
+        }
     }
 
     /**
@@ -138,11 +144,14 @@ class ChitiettaisanController extends Controller
         if($request->ajax()){
             $text=$request->text;
             $seleted =$request->seleted;
-            $chitiettaisan = $this->chitiettaisan->select();
+            
+            $nhanvien = $this->nhanvien->select('all');
             if($text !='' || $seleted !=''){
                 $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted);
+            }else{
+                $chitiettaisan = $this->chitiettaisan->select();
             }
-            return view('chitiettaisan.list_chitiet',compact('chitiettaisan'));
+            return view('chitiettaisan.list_chitiet',compact('chitiettaisan','nhanvien'));
         }
     }
 }

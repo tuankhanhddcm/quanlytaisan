@@ -9,12 +9,16 @@ class Nhanvien extends Model
 {
     public $table ="nhanvien";
     
-    public function select(){
+    public function select($all=''){
         $nv = DB::table($this->table)
         ->select('nhanvien.*','phongban.ten_phong','chucvu.ten_chucvu')
         ->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
-        ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu')
-        ->paginate(8);
+        ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu');
+        if($all !=''){
+            $nv = $nv->get();
+        }else{
+            $nv = $nv->paginate(8);
+        }
         return $nv;
     }
 

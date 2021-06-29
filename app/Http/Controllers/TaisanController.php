@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTaisan;
+
 use App\Models\Chitiettaisan;
 use App\Models\Loaitaisan;
 use App\Models\LoaiTSCD;
@@ -14,7 +14,6 @@ use App\Models\Tieuhao;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\This;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class TaisanController extends Controller
@@ -130,7 +129,7 @@ class TaisanController extends Controller
                     } else if ($id < 1000000) {
                         $ma_chitiet = 'CTS' . ($id);
                     }
-                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.$a=1+$i.')');
+                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.(1+$i).')');
                 }
                 if($kq){
                     return redirect('/taisan');
@@ -167,7 +166,14 @@ class TaisanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $taisan = $this->taisan->show_ts($id);
+        $loaits = $this->loaiTSCD->select('all');
+        $phongban = $this->phongban->select();
+        $nhacungcap = $this->nhacungcap->select();
+        $taisan->ngay_mua = date('d-m-Y', strtotime($taisan->ngay_mua));
+        $taisan->ngay_ghi_tang = date('d-m-Y', strtotime($taisan->ngay_ghi_tang));
+        $taisan->ngay_sd = date('d-m-Y', strtotime($taisan->ngay_sd));
+        return view('taisan.insert',compact('taisan','phongban','nhacungcap','loaits'));
     }
 
     /**
@@ -179,7 +185,16 @@ class TaisanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ngay_mua=Carbon::parse($request->ngay_mua);
+        $ngay_tang = Carbon::parse($request->ngay_tang);
+        $ngay_sd = Carbon::parse($request->ngaysd);
+        $kq =$this->taisan->update_ts($id,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
+        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang,$request->phongban);
+        
+        if($kq){
+            return redirect()->route('taisan.index');
+        }
+        
     }
 
     /**

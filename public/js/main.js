@@ -13,9 +13,10 @@ $(document).ready(function () {
         search_chitiet(1);
     });
 
+    hao_mon();
     $('.loaits-select').click(function () {
         check('#loaits');
-        hao_mon($('.loaits-select option:selected').val());
+        hao_mon();
     });
 
     $('.nhanvien-select').click(function () {
@@ -62,10 +63,9 @@ $(document).ready(function () {
         update_loaiTSCD(id);
     });
 
-
-    $('#btn_inthe').click(function () {
-        check_insert_taisan('cần in');
-        in_theTSCD();
+    $(document).on('click', '.btn_chitiet', function () {
+        var id = $(this).data('id_chitiet');
+        update_chitiet(id);
     });
 
 });
@@ -422,7 +422,8 @@ function update_loaiTSCD(id) {
 }
 
 // thông tin hao mòn
-function hao_mon(id) {
+function hao_mon() {
+    var id =$('.loaits-select option:selected').val()
     if (id != '') {
         $.ajax({
             url: '/tieuhao/find',
@@ -494,4 +495,21 @@ function in_theTSCD() {
         }
 
     });
+}
+
+function update_chitiet(id){
+    if(id !=''){
+        $.ajax({
+            url:'/chitiettaisan/edit/'+id,
+            method:'post',
+            success: function(data){
+                $('#modal_chitiet').html(data);
+                $(document).ready(function(){
+                    $(".select").selectpicker();
+                    $('#suachitiet').modal('show');
+                });
+            }
+        });
+
+    }
 }

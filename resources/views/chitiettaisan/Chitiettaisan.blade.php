@@ -33,5 +33,7 @@
         </div>
     </div>
 </div>
-@include('chitiettaisan.modal')
+<div id="modal_chitiet">
+    @include('chitiettaisan.modal')
+</div>
 @endsection

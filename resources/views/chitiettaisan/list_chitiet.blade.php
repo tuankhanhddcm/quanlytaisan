@@ -19,18 +19,43 @@
                     $count = 1;
                 }
             @endphp
-        @foreach ($chitiettaisan as $k=>$item)
+        @foreach ($chitiettaisan as $item)
             <tr class="body-table" >
                 <td>{{$count}}</td>
                 <td>{{$item->ma_chitiet}}</td>
                 <td>{{$item->ten_chitiet}}</td>
                 <td>{{$item->ten_ts}}</td>
                 <td>{{$item->so_serial}}</td>
-                <td>{{$item->trangthai}}</td>
-                <td>{{$item->ma_nv}}</td>
+                <td>
+                    @php
+                        switch ($item->trangthai) {
+                            case '0':
+                                echo 'Không sử dụng';
+                                break;
+                            case '1':
+                                echo 'Đang sử dụng';
+                                break;
+                            case '2':
+                                echo 'Hử hỏng';
+                                break;
+                        }
+                    @endphp
+                </td>
+                <td>
+                    @php
+                        foreach($nhanvien as $val){
+                            if($item->ma_nv == $val->ma_nv){
+                                echo $val->ten_nv; 
+                            }elseif ($item->ma_nv==null) {
+                                echo 'không có nhân viên sử dụng';
+                                break;
+                            }
+                        }
+                    @endphp
+                </td>
                 <td style="border-right: none;">
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                    <button class="btn_chitiet" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                 </td>
             </tr>
             @php

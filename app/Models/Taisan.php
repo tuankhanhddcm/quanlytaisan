@@ -63,7 +63,6 @@ class Taisan extends Model
             'ma_phong'=>$ma_phong,
             'nam_sx'=>$nam_sx,
             'nuoc_sx'=>$nuoc_sx,
-            'ma_phong'=>$ma_phong,
             'ma_loai' =>$ma_loai,
             'ngay_sd' =>$ngay_sd,
             'ngay_ghi_tang' =>$ngay_ghitang,
@@ -92,4 +91,24 @@ class Taisan extends Model
             ->first();
         return $table;
     }
+
+    public function update_ts($ma_ts,$ten_ts,$ma_loai,$nguyen_gia,$ma_ncc,$ngay_mua,$nam_sx,$nuoc_sx,$ngay_sd,$ngay_ghitang,$ma_phong){
+        $kq = DB::table($this->table)
+                ->where('ma_ts','=',''.$ma_ts.'')
+                ->update([
+                    'ten_ts' =>$ten_ts,
+                    'nguyengia'=>$nguyen_gia,
+                    'ma_ncc'=> $ma_ncc,
+                    'ngay_mua' =>$ngay_mua,
+                    'ma_phong'=>$ma_phong,
+                    'nam_sx'=>$nam_sx,
+                    'nuoc_sx'=>$nuoc_sx,
+                    'ma_loai' =>$ma_loai,
+                    'ngay_sd' =>$ngay_sd,
+                    'ngay_ghi_tang' =>$ngay_ghitang,
+                ]);
+        return $kq;
+    }
+
+    
 }

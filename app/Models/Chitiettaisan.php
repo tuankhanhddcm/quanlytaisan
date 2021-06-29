@@ -57,4 +57,27 @@ class Chitiettaisan extends Model
         $kq =$kq->paginate(8);
         return $kq;
     }
+
+    public function delete_chitiet($ma_chitet)
+    {
+        $kq =DB::table($this->table)->where('ma_chitiet','=',''.$ma_chitet.'')->delete();
+    }
+
+    public function show_id($id){
+        $data = DB::table($this->table)->where('ma_chitiet','=',''.$id.'')->first();
+        return $data;
+    }
+
+    public function update_chitiet($ma_chitet,$ma_ts,$ten_chitiet,$so_serial='',$trangthai='',$ma_nv=null){
+        $kq = DB::table($this->table)
+            ->where('ma_chitiet','=',''.$ma_chitet.'')
+            ->update([
+                'ma_ts'=>$ma_ts,
+                'ten_chitiet' =>$ten_chitiet,
+                'so_serial' =>$so_serial,
+                'trangthai'=>$trangthai,
+                'ma_nv'=>$ma_nv
+            ]);
+        return $kq;
+    }
 }

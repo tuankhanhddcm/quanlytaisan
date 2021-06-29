@@ -2,10 +2,10 @@
 @section('insert_chitiet')
 <div class="col-sm-12" style=" background-color: white; padding-left: 10px;">
     <div class="main_ward">
-        <form action="/taisan" method="post" id="demo" onsubmit="return check_insert_taisan()">
+        <form action="{{(isset($taisan))?route('taisan.update',$taisan->ma_ts):route('taisan.store')}}" method="post"  onsubmit="return check_insert_taisan()">
             @csrf
             <div class="main-name">
-                <h4 class="main-text">Thêm mới tài sản</h4>
+                <h4 class="main-text">{{(isset($taisan))?'Sửa tài sản':'Thêm mới tài sản'}}</h4>
     
                 <div class="form-btn">
                     <button  type="submit"  class="btn_cus btn-save" ><i class='bx bx-save'></i> Lưu</button>
@@ -37,7 +37,7 @@
                                         <label for="" class="form-label tents_lb">Tên tài sản:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input tents" name="tents" onkeyup="check('.tents_lb')" value="" placeholder="Nhập tên tài sản">
+                                                <input type="text" class="form-input tents" name="tents" onkeyup="check('.tents_lb')" value="{{(isset($taisan))?$taisan->ten_ts:''}}" placeholder="Nhập tên tài sản">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle tents_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -45,18 +45,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="" class="form-label sl_lb">Số lượng:</label>
-                                        <div class="form-wrap">
-                                            <div class="form_input">
-                                                <input type="text" class="form-input sl soluong" name="sl" onkeyup="check('.sl_lb');if($(this).val()=='0'){$(this).val('1')};" value="1" style="text-align: right;" placeholder="1">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_sl error"></span>
+                                    @if (!isset($taisan))
+                                        <div class="form-group">
+                                            <label for="" class="form-label sl_lb">Số lượng:</label>
+                                            <div class="form-wrap">
+                                                <div class="form_input">
+                                                    <input type="text" class="form-input sl soluong" name="sl" onkeyup="check('.sl_lb');if($(this).val()=='0'){$(this).val('1')};" value="1" style="text-align: right;" placeholder="1">
+                                                </div>
+                                                <div style="display: flex;">
+                                                    <i class='bx bxs-error-circle sl_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                                    <span class="error_sl error"></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
+                                    
                                 </div>
                                 <div class="col-sm-6">
                                   
@@ -68,10 +71,15 @@
                                                     <select class=" select loaits-select form-control" id="loaits" name="ma_loai" data-dropup-auto="false" data-size='5' data-live-search="true">
                                                         <option value="">--Chọn loại tài sản--</option>
                                                         @foreach ($loaits as $item)
-                                                            <option value="{{$item->ma_loai}}">{{$item->ten_loai}}</option>
+                                                            @if (isset($taisan) && $taisan->ma_loai ==$item->ma_loai)
+                                                                <option value="{{$item->ma_loai}}" selected>{{$item->ten_loai}}</option>
+                                                            @else
+                                                                <option value="{{$item->ma_loai}}">{{$item->ten_loai}}</option>
+                                                            @endif
+                                                            
                                                         @endforeach
                                                     </select>
-                                                    {{-- <button class=" btn_plus" onclick="phan_trang_loai(1);" type="button" data-toggle="modal" data-target="#create_danhmuc"><i class='bx bx-plus'></i></button> --}}
+                                                    
                                                 </div>
                                             </div>
                                             <div style="display: flex;">
@@ -86,9 +94,13 @@
                                             <div class="form_input">
                                                 <div class="select_wrap form_input--items" style="width: 100%;">
                                                     <select class=" select select-phongban form-control" id="phongban" name="phongban" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                                        <option value="" selected>--Chọn phòng ban--</option>
+                                                        <option value="" >--Chọn phòng ban--</option>
                                                         @foreach ($phongban as $item)
-                                                            <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                                                            @if (isset($taisan) && $taisan->ma_phong==$item->ma_phong)
+                                                                <option value="{{$item->ma_phong}}" selected>{{$item->ten_phong}}</option>
+                                                            @else
+                                                                <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                     <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
@@ -109,23 +121,11 @@
                             <span class="text_line">Thông tin khác</span>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    {{-- <div class="form-group">
-                                        <label for="" class="form-label so_hieu_lb">Số serial:</label>
-                                        <div class="form-wrap">
-                                            <div class="form_input">
-                                                <input type="text" class="form-input so_hieu" name="so_hieu" onkeyup="check('.so_hieu_lb')" value="" placeholder="Nhập số serial">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle so_hieu_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_so_hieu error"></span>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group">
                                         <label for="" class="form-label nsx_lb">Năm sản xuất:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input nsx soluong" name='nsx' onkeyup="check('.nsx_lb')" value=""  placeholder="Nhập năm sản xuất">
+                                                <input type="text" class="form-input nsx soluong" name='nsx' onkeyup="check('.nsx_lb')" value="{{(isset($taisan))?$taisan->nam_sx:''}}"  placeholder="Nhập năm sản xuất">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle nsx_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -137,7 +137,7 @@
                                         <label for="" class="form-label nuoc_sx_lb">Nước sản xuất:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input nuoc_sx" name="nuoc_sx" onkeyup="check('.nuoc_sx_lb')" value="" placeholder="Nhập nước sản xuất">
+                                                <input type="text" class="form-input nuoc_sx" name="nuoc_sx" onkeyup="check('.nuoc_sx_lb')" value="{{(isset($taisan))?$taisan->nuoc_sx:''}}" placeholder="Nhập nước sản xuất">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle nuoc_sx_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -156,7 +156,12 @@
                                                     <select class=" select select-ncc form-control" id="ncc" name="ncc" data-dropup-auto="false" data-size='5' data-live-search="true">
                                                         <option value="">--Chọn nhà cung cấp--</option>
                                                         @foreach ($nhacungcap as $item)
-                                                            <option value="{{$item->ma_ncc}}">{{$item->ten_ncc}}</option>
+                                                            @if (isset($taisan) && $taisan->ma_ncc==$item->ma_ncc)
+                                                                <option value="{{$item->ma_ncc}}" selected>{{$item->ten_ncc}}</option>
+                                                            @else
+                                                                <option value="{{$item->ma_ncc}}">{{$item->ten_ncc}}</option>
+                                                            @endif
+                                                            
                                                         @endforeach
                                                     </select>
                                                     <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
@@ -187,7 +192,7 @@
                                         <label for="" class="form-label ngaymua_lb">Ngày mua:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaymua" name="ngay_mua" onchange="check('.ngaymua_lb')" value=""  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaymua" name="ngay_mua" onchange="check('.ngaymua_lb')" value="{{(isset($taisan))?$taisan->ngay_mua:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaymua_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -199,7 +204,7 @@
                                         <label for="" class="form-label ngaytang_lb">Ngày ghi tăng:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaytang" name="ngaytang" onchange="check('.ngaytang_lb')" value=""  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaytang" name="ngaytang" onchange="check('.ngaytang_lb')" value="{{(isset($taisan))?$taisan->ngay_ghi_tang:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaytang_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -213,7 +218,7 @@
                                         <label for="" class="form-label ngaysd_lb">Ngày sử dụng:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb')" value=""  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb')" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaysd_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -225,7 +230,7 @@
                                         <label for="" class="form-label ngia_lb">Nguyên giá:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input ngia soluong" name="ngia" onkeyup="check('.ngia_lb')" value="" style="text-align: right"  placeholder="0">
+                                                <input type="text" class="form-input ngia soluong" name="ngia" onkeyup="check('.ngia_lb')" value="{{(isset($taisan))?$taisan->nguyengia:''}}" style="text-align: right"  placeholder="0">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngia_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
