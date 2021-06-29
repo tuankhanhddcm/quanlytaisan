@@ -92,7 +92,7 @@
                                 <td>{{$item->ten_ts}}</td>
                                 <td>{{$item->ten_loai}}</td>
                                 <td>{{$item->ten_phong}}</td>
-                                <td></td>
+                                <td>{{$item->soluong}}</td>
                                 <td>{{$item->ngay_mua}}</td>
                                 <td style="border-right: none;">
                                     <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>

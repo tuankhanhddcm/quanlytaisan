@@ -8,9 +8,9 @@
                 <h4 class="main-text">Thêm mới tài sản</h4>
     
                 <div class="form-btn">
-                    <button  type="submit" onclick="check_insert_taisan()" class="btn_cus btn-save" ><i class='bx bx-save'></i> Lưu</button>
+                    <button  type="submit"  class="btn_cus btn-save" ><i class='bx bx-save'></i> Lưu</button>
                     <button class="btn_cus btn-conti"  ><i class='bx bx-save'></i> Lưu & Tiếp tục</button>
-                    <button class="btn_cus btn-conti" style="background-color: #3a3a3a"  ><i class='bx bx-printer'></i> In thẻ TSCĐ</button>
+                    <button class="btn_cus btn-conti" onclick="if(check_insert_taisan('cần in')){in_theTSCD();}" type="button" style="background-color: #3a3a3a"  ><i class='bx bx-printer'></i> In thẻ TSCĐ</button>
                     <button class="btn_cus btn-back" type="button" onclick="location.href='{{url('/taisan')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
                 </div>
     
@@ -91,7 +91,7 @@
                                                             <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <button class="btn_plus"  data-toggle="modal" data-target="#create_phongban"><i class='bx bx-plus'></i></button>
+                                                    <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
                                                 </div>
                                             </div>
                                             <div style="display: flex;">
@@ -159,7 +159,7 @@
                                                             <option value="{{$item->ma_ncc}}">{{$item->ten_ncc}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <button class=" btn_plus" onclick="phan_trang_loai(1);" type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
+                                                    <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
                                                 </div>
                                             </div>
                                             <div style="display: flex;">
@@ -258,11 +258,7 @@
                                         <label for="" class="form-label tile_HM_lb">Tỉ lệ HM (% năm):</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input tile_HM soluong"  name='tile_HM' onkeyup="check('.tile_HM_lb')" value="" style="text-align: right" placeholder="0.00">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle tile_HM_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_tile_HM error"></span>
+                                                <span  class="form-input tile_HM " style="display: block;border-color:#4bac4d;text-align: right">0.00</span>
                                             </div>
                                         </div>
                                     </div>
@@ -270,11 +266,7 @@
                                         <label for="" class="form-label tgSD_conlai_lb">Thời gian SD còn lại (năm):</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input tgSD_conlai soluong" onkeyup="check('.tgSD_conlai_lb')" value="" style="text-align: right" placeholder="0">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle tgSD_conlai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_tgSD_conlai error"></span>
+                                                <span  class="form-input tgSD_conlai_HM " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -286,11 +278,7 @@
                                         <label for="" class="form-label tgSD_lb">Thời gian sử dụng (năm):</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input tgSD soluong" name="tgSD" onkeyup="check('.tgSD_lb')" value="" style="text-align: right" placeholder="0">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle tgSD_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_tgSD error"></span>
+                                                <span  class="form-input tgSD " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -298,24 +286,18 @@
                                         <label for="" class="form-label giatri_HM_lb">Giá trị HM/KH năm:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input giatri_HM soluong" onkeyup="check('.giatri_HM_lb')" value="" style="text-align: right" placeholder="0">
+                                                <span  class="form-input giatri_HM " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle giatri_HM_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_giatri_HM error"></span>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="form-label dennam_lb">Đến năm:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input dennam soluong" onkeyup="check('.dennam_lb');"  value="" style="text-align: right" placeholder="0">
+                                                <span  class="form-input dennam_HM " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle dennam_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_dennam error"></span>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

@@ -21,6 +21,7 @@ Route::get('/', function () {
 // tài sản
 Route::resource('/taisan','TaisanController');
 Route::post('/taisan/search','TaisanController@search_ts');
+Route::post('/taisan/in_the','TaisanController@in_theTSCD');
 
 // Mẫu báo cáo
 Route::get('/maubaocao','MaubaocaoController@index');
@@ -58,3 +59,4 @@ Route::post('/check','UserController@checklogin');
 
 // tiêu hao
 Route::resource('/tieuhao','TieuhaoController');
+Route::post('/tieuhao/find','TieuhaoController@find_tieuhao');

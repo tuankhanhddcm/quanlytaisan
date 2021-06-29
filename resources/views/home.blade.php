@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/base.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css" rel="stylesheet" type='text/css'>
@@ -359,6 +360,7 @@
   <!-- overlayScrollbars -->
   <script src="{{ URL::asset('js/jquery.overlayScrollbars.min.js')}}"></script>
   <!-- AdminLTE App -->
+  <script  src="{{ URL::asset('js/toastr.min.js') }}"></script>
   <script src="{{ URL::asset('js/adminlte.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
   <script src="{{ URL::asset('js/main.js')}}"></script>

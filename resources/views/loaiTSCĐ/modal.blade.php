@@ -63,7 +63,7 @@
                             <label for="" class="form-label tile_HM_lb">Tỉ lệ HM (% năm):</label>
                             <div class="form-wrap">
                                 <div class="form_input">
-                                    <input type="text" class="form-input tile_HM soluong"  name='tile_HM' onkeyup="check('.tile_HM_lb')" value="" style="text-align: right" placeholder="0.00">
+                                    <input type="text" class="form-input tile_HM  " pattern="[+-]?([0-9]*[.])?[0-9]+"  name='tile_HM' onkeyup="check('.tile_HM_lb')" value="" style="text-align: right" placeholder="0.00">
                                 </div>
                                 <div style="display: flex;">
                                     <i class='bx bxs-error-circle tile_HM_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -150,8 +150,10 @@
                                     @foreach ($loai as $val)
                                       @if (isset($TSCD) && $TSCD->id_loai==$val->id_loai)
                                       <option value="{{$val->id_loai}}" selected>{{$val->ten_loai}}</option>
+                                      @else
+                                      <option value="{{$val->id_loai}}">{{$val->ten_loai}}</option>
                                       @endif
-                                        <option value="{{$val->id_loai}}">{{$val->ten_loai}}</option>
+                                        
                                     @endforeach
                                 </select>
                                 {{-- <button class=" btn_plus" onclick="phan_trang_loai(1);" type="button" data-toggle="modal" data-target="#themlts"><i class='bx bx-plus'></i></button> --}}
@@ -167,6 +169,7 @@
                   <span class="text_line">Chi tiết sử dụng</span>
                   <div class="row">
                       <div class="col-sm-12">
+                          <input type="hidden" name="ma_tieuhao" value="{{(isset($TSCD))?$TSCD->ma_tieuhao:''}}">
                           <div class="form-group">
                               <label for="" class="form-label tgSD_up_lb">Thời gian sử dụng (năm):</label>
                               <div class="form-wrap">
@@ -183,7 +186,7 @@
                               <label for="" class="form-label tile_HM_up_lb">Tỉ lệ HM (% năm):</label>
                               <div class="form-wrap">
                                   <div class="form_input">
-                                      <input type="text" class="form-input tile_HM_up soluong"  name='tile_HM_up' onkeyup="check('.tile_HM_up_lb')" value="{{(isset($TSCD))?$TSCD->muc_tieuhao:''}}" style="text-align: right" placeholder="0.00">
+                                      <input type="text" class="form-input tile_HM_up " pattern="[+-]?([0-9]*[.])?[0-9]+"  name='tile_HM_up' onkeyup="check('.tile_HM_up_lb')" value="{{(isset($TSCD))?$TSCD->muc_tieuhao:''}}" style="text-align: right" placeholder="0.00">
                                   </div>
                                   <div style="display: flex;">
                                       <i class='bx bxs-error-circle tile_HM_up_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>

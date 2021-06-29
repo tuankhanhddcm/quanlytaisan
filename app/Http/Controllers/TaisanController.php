@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class TaisanController extends Controller
 {
@@ -48,7 +49,7 @@ class TaisanController extends Controller
     public function index()
     {
         $ts = $this->taisan->select();
-        $loai = $this->loaiTSCD->select();
+        $loai = $this->loaiTSCD->select('all');
         return view('taisan.index',[
                     'taisan'=>$ts,
                     'loaits' =>$loai
@@ -63,7 +64,7 @@ class TaisanController extends Controller
     public function create()
     {
        
-        $loai = $this->loaiTSCD->select();
+        $loai = $this->loaiTSCD->select('all');
         $phongban = $this->phongban->select();
         $nhacungcap = $this->nhacungcap->select();
         return view('taisan.insert',[
@@ -129,7 +130,7 @@ class TaisanController extends Controller
                     } else if ($id < 1000000) {
                         $ma_chitiet = 'CTS' . ($id);
                     }
-                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' '.$i);
+                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.$a=1+$i.')');
                 }
                 if($kq){
                     return redirect('/taisan');
@@ -201,6 +202,24 @@ class TaisanController extends Controller
                 $taisan = $this->taisan->search_taisan($text,$seleted);
             }
             return view('taisan.list_taisan',compact('taisan'));
+        }
+    }
+
+
+    public function in_theTSCD(Request $request){
+        if($request->ajax()){
+            $file = new TemplateProcessor('theTSCD/theTSCD.docx');
+            $file->setValue('ten_ts',$request->tents);
+            $file->setValue('ngay',Carbon::now()->day);
+            $file->setValue('thang',Carbon::now()->month);
+            $file->setValue('nam',Carbon::now()->year);
+            $file->setValue('nuoc_sx',$request->nuoc_sx);
+            $file->setValue('nam_sx',$request->nam_sx);
+            $file->setValue('phong',$request->phong);
+            $file->setValue('n',$request->nam_sd);
+            $file->setValue('ngia',number_format($request->ngia).'đ');
+            $file->saveAS('thetaisan.docx');
+            return response()->download('thetaisan.docx')->deleteFileAfterSend(true);
         }
     }
 }

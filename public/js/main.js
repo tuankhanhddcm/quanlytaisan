@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function () {
+
     $(".select").selectpicker();
     $.ajaxSetup({
         headers: {
@@ -6,28 +7,29 @@ $(document).ready(function(){
         }
     });
 
-    $('.select-loaits').click(function(){
+    $('.select-loaits').click(function () {
         search_loaiTSCD(1);
         search_ts(1);
         search_chitiet(1);
     });
 
-    $('.loaits-select').click(function(){
+    $('.loaits-select').click(function () {
         check('#loaits');
+        hao_mon($('.loaits-select option:selected').val());
     });
 
-    $('.nhanvien-select').click(function(){
+    $('.nhanvien-select').click(function () {
         check('#nhanvien');
     });
 
-    $('.trangthai-select').click(function(){
+    $('.trangthai-select').click(function () {
         check('#trangthai');
     });
 
-    $('.select-ncc').click(function(){
+    $('.select-ncc').click(function () {
         check('#ncc');
     });
-    $('.select-phongban').click(function(){
+    $('.select-phongban').click(function () {
         check('#phongban');
     });
 
@@ -37,7 +39,7 @@ $(document).ready(function(){
     });
 
     // phân trang
-    $(document).on('click','.pagination a', function(event){
+    $(document).on('click', '.pagination a', function (event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         search_baocao(page);
@@ -50,62 +52,70 @@ $(document).ready(function(){
     // chỉnh calendar
     $(".date").datepicker({
         dateFormat: 'dd-mm-yy',
-        changeMonth: true, 
-        changeYear: true 
+        changeMonth: true,
+        changeYear: true
     });
 
 
-    $(document).on('click','.btn_uploaiTSCD',function(){
-        var id=$(this).data('id');
+    $(document).on('click', '.btn_uploaiTSCD', function () {
+        var id = $(this).data('id');
         update_loaiTSCD(id);
+    });
+
+
+    $('#btn_inthe').click(function () {
+        check_insert_taisan('cần in');
+        in_theTSCD();
     });
 
 });
 
-function search_loaiTSCD(page){
-    var text=$('#search_loai').val();
+
+// -------------------------các hàm js ---------------------------------------//
+function search_loaiTSCD(page) {
+    var text = $('#search_loai').val();
     var seleted = $('#loai_taisan option:selected').val();
     $.ajax({
-        
-        url:'/loaiTSCD/search?page='+page,
-        method:"post",
-        data:{
-            text:text,
-            seleted:seleted,
+
+        url: '/loaiTSCD/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted: seleted,
         },
-        success: function(data){
+        success: function (data) {
             $('#list_loaiTSCD').html(data);
         }
     });
 }
-function search_ts(page){
-    var text=$('#search').val();
+function search_ts(page) {
+    var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     $.ajax({
-        
-        url:'/taisan/search?page='+page,
-        method:"post",
-        data:{
-            text:text,
-            seleted:seleted,
+
+        url: '/taisan/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted: seleted,
         },
-        success: function(data){
+        success: function (data) {
             $('#list_taisan').html(data);
         }
     });
 }
-function search_chitiet(page){
-    var text=$('#search').val();
+function search_chitiet(page) {
+    var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     $.ajax({
-        
-        url:'/chitiettaisan/search?page='+page,
-        method:"post",
-        data:{
-            text:text,
-            seleted:seleted,
+
+        url: '/chitiettaisan/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted: seleted,
         },
-        success: function(data){
+        success: function (data) {
             $('#list_chitiet').html(data);
         }
     });
@@ -141,24 +151,24 @@ function check(id) {
             break;
         case 'file_pdf': text = 'chọn file';
             break;
-        case 'name': text ='nhập tên đăng nhập';
+        case 'name': text = 'nhập tên đăng nhập';
             break;
-        case 'pass': text ='nhập mật khẩu';
+        case 'pass': text = 'nhập mật khẩu';
             break;
-        case 'loaits': text ='chọn loại tài sản';
+        case 'loaits': text = 'chọn loại tài sản';
             break;
-        case 'phongban': text ='chọn phòng ban';
+        case 'phongban': text = 'chọn phòng ban';
             break;
-        case 'nhanvien': text ='chọn nhân viên';
+        case 'nhanvien': text = 'chọn nhân viên';
             break;
-        case 'trangthai': text ='chọn trạng thái';
+        case 'trangthai': text = 'chọn trạng thái';
             break;
-        case 'chucvu': text ='chọn chức vụ';
+        case 'chucvu': text = 'chọn chức vụ';
             break;
-        case 'ncc': text ='chọn nhà cung cấp';
+        case 'ncc': text = 'chọn nhà cung cấp';
             break;
     }
-    if ($(lop).val() == "" ) {
+    if ($(lop).val() == "") {
         $(lop).addClass('error_input');
         $("." + dk + "_icon").css("display", "block");
         $(".error_" + dk).text("Vui lòng  " + text);
@@ -173,104 +183,104 @@ function check(id) {
 }
 
 // kiểm tra file
-function readURL(input, id_img,loaifile='') {
+function readURL(input, id_img, loaifile = '') {
     var file = input.files;
     var id = id_img.slice(1);
-    var match = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document",'application/pdf','application/msword'];  
+    var match = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", 'application/pdf', 'application/msword'];
     if (file.length > 0 && file != "") {
         var files = $(id_img).prop('files')[0];
         var type = files.type;
-        if(loaifile =='pdf'){
+        if (loaifile == 'pdf') {
             $('.text_name_pdf').text(files.name);
             if (type == match[1]) {
-                $('.'+id+"_icon").css('display','none');
+                $('.' + id + "_icon").css('display', 'none');
                 $(".error_" + id).text('');
-            } else{
+            } else {
                 $(".error_" + id).text('File không hợp lệ');
-                $('.'+id+"_icon").css('display','block');
+                $('.' + id + "_icon").css('display', 'block');
             }
-        }else{
+        } else {
             $('.text_name_file').text(files.name);
-            if (type == match[0] || type == match[2] ) {
-                $('.'+id+"_icon").css('display','none');
+            if (type == match[0] || type == match[2]) {
+                $('.' + id + "_icon").css('display', 'none');
                 $(".error_" + id).text('');
-            } else{
+            } else {
                 $(".error_" + id).text('File không hợp lệ');
-                $('.'+id+"_icon").css('display','block');
+                $('.' + id + "_icon").css('display', 'block');
             }
         }
     } else {
-        if(loaifile =='pdf'){
+        if (loaifile == 'pdf') {
             $('.text_name_pdf').text('');
-        }else{
+        } else {
             $('.text_name_file').text('');
         }
         $(".error_" + id).text('Vui lòng chọn file');
         $(".error_" + id).css("display", 'block');
-        $('.'+id+"_icon").css('display','block');
+        $('.' + id + "_icon").css('display', 'block');
     }
 
 }
 
-function check_insertFile(){
+function check_insertFile() {
     check('.mota_lb');
     check('#file_pdf')
-    if(check('.title_lb') && check('#file_temp') &&check('#file_pdf') && check('.mota_lb'))
+    if (check('.title_lb') && check('#file_temp') && check('#file_pdf') && check('.mota_lb'))
         return true;
     return false;
 }
 
 // tìm kiếm báo cáo
-function search_baocao(page){
+function search_baocao(page) {
     var text = $("#search_baocao").val();
     $.ajax({
-        url:'/maubaocao/search?page='+page,
+        url: '/maubaocao/search?page=' + page,
         method: 'post',
-        data:{text:text},
-        success: function(data){
+        data: { text: text },
+        success: function (data) {
             $('#list_baocao').html(data);
         }
     });
 }
 
-function checklogin(){
+function checklogin() {
     var name = $('#name').val();
     var pass = $('.pass').val();
     var kq = false;
-    if(check('#name') &&check('.pass')){
+    if (check('#name') && check('.pass')) {
         ;
         $.ajax({
-            url:'/check',
+            url: '/check',
             method: 'post',
-            data:{name:name,pass:pass},
+            data: { name: name, pass: pass },
             dataType: 'json',
             async: false,
-            success:function(data){
-                if(data[0]=='false'){
+            success: function (data) {
+                if (data[0] == 'false') {
                     $(".error_name").text('Tên đăng nhập không tồn tại');
                     $(".error_name").css("display", 'block');
-                    $(".name_icon").css('display','block');
-                }else{
+                    $(".name_icon").css('display', 'block');
+                } else {
                     $(".error_name").text('');
                     $(".error_name").css("display", 'none');
-                    $(".name_icon").css('display','none');
+                    $(".name_icon").css('display', 'none');
                 }
-                if(data[1]=='false'){
+                if (data[1] == 'false') {
                     $(".error_pass").text('Mật khẩu không đúng');
                     $(".error_pass").css("display", 'block');
-                    $(".pass_icon").css('display','block');
-                }else{
+                    $(".pass_icon").css('display', 'block');
+                } else {
                     $(".error_pass").text('');
                     $(".error_pass").css("display", 'none');
-                    $(".pass_icon").css('display','none');
+                    $(".pass_icon").css('display', 'none');
                 }
-                if(data[0]=='true'&& data[1]=='true'){
-                    kq= true;
+                if (data[0] == 'true' && data[1] == 'true') {
+                    kq = true;
                 }
-                
+
             }
         });
-    }else{
+    } else {
         check('#name');
         check('.pass');
     }
@@ -279,13 +289,13 @@ function checklogin(){
 
 //tìm kiếm loại
 
-function search_loai(page){
+function search_loai(page) {
     var text = $('#search_loai').val();
     $.ajax({
-        url:'/loaits/search?page='+page,
+        url: '/loaits/search?page=' + page,
         method: "post",
-        data:{text:text},
-        success: function(data){
+        data: { text: text },
+        success: function (data) {
             $('#list_loai').html(data);
         }
     });
@@ -294,47 +304,47 @@ function search_loai(page){
 
 // thêm phòng
 
-function insert_phong(){
+function insert_phong() {
     var ten_phong = $('.ten_phong').val();
     var mo_ta = $('.mo_ta').val();
-    if(check('.ten_phong_lb') ){
+    if (check('.ten_phong_lb')) {
         $.ajax({
-            url:'/phongban',
+            url: '/phongban',
             method: 'post',
-            data:{ten_phong:ten_phong,mo_ta:mo_ta},
-            success:function(data){
+            data: { ten_phong: ten_phong, mo_ta: mo_ta },
+            success: function (data) {
                 location.reload();
             }
         })
     }
 }
 
-function check_insert_ncc(){
+function check_insert_ncc() {
     check('.sdt_ncc_lb');
     check('.email_ncc_lb');
     check('.diachi_ncc_lb');
-    if(check('.ten_ncc_lb')  && check('.sdt_ncc_lb') && check('.email_ncc_lb') &&check('.diachi_ncc_lb')){
+    if (check('.ten_ncc_lb') && check('.sdt_ncc_lb') && check('.email_ncc_lb') && check('.diachi_ncc_lb')) {
         return true;
     }
     return false;
 }
 
-function insert_ncc(){
+function insert_ncc() {
     var ten_ncc = $('.ten_ncc').val();
     var sdt_ncc = $('.sdt_ncc').val();
     var email_ncc = $('.email_ncc').val();
     var diachi_ncc = $('.diachi_ncc').val();
-    if( check_insert_ncc()){
+    if (check_insert_ncc()) {
         $.ajax({
-            url:'/nhacungcap',
+            url: '/nhacungcap',
             method: 'post',
-            data:{
-                ten_ncc:ten_ncc,
-                sdt_ncc:sdt_ncc,
-                email_ncc:email_ncc,
-                diachi_ncc:diachi_ncc
+            data: {
+                ten_ncc: ten_ncc,
+                sdt_ncc: sdt_ncc,
+                email_ncc: email_ncc,
+                diachi_ncc: diachi_ncc
             },
-            success:function(data){
+            success: function (data) {
                 location.reload();
             }
         })
@@ -343,7 +353,7 @@ function insert_ncc(){
 
 
 
-function check_insert_taisan(){
+function check_insert_taisan(mess = '') {
     check('.tents_lb');
     check('#loaits');
     check('.sl_lb');
@@ -356,25 +366,24 @@ function check_insert_taisan(){
     check('.ngaytang_lb');
     check('.ngaysd_lb');
     check('.ngia_lb');
-    check('.bd_HM_lb');
-    check('.tile_HM_lb');
-    check('.tgSD_lb');
-    if(check('.tents_lb') && check('#loaits') && check('.sl_lb') &&check('#phongban') 
-        && check('.so_hieu_lb') &&check('.nsx_lb') &&check('#ncc') &&check('.nuoc_sx_lb')
+    if (check('.tents_lb') && check('#loaits') && check('.sl_lb') && check('#phongban')
+        && check('.so_hieu_lb') && check('.nsx_lb') && check('#ncc') && check('.nuoc_sx_lb')
         && check('.ngaymua_lb') && check('.ngaytang_lb') && check('.ngaysd_lb') && check('.ngia_lb')
-        && check('.bd_HM_lb') && check('.tile_HM_lb') && check('.tgSD_lb')
-        ){
-            return true;
+    ) {
+        return true;
+    } else {
+        toastr.error('Vui lòng nhập thông tin tài sản ' + mess);
     }
+
     return false;
 }
 
-function check_insert_nv(){
+function check_insert_nv() {
     check('.email_nv_lb');
     check('.diachi_nv_lb');
     check('#phongban');
     check('#chucvu');
-    if(check('.ten_nv_lb') && check('.email_nv_lb') && check('.diachi_nv_lb') && check('#phongban') && check('#chucvu')){
+    if (check('.ten_nv_lb') && check('.email_nv_lb') && check('.diachi_nv_lb') && check('#phongban') && check('#chucvu')) {
         return true;
     }
     return false;
@@ -398,13 +407,91 @@ function check_insert_nv(){
 }(jQuery));
 
 
-function update_loaiTSCD(id){
+function update_loaiTSCD(id) {
     $.ajax({
-        url: '/loaiTSCD/'+id+'/edit',
+        url: '/loaiTSCD/' + id + '/edit',
         method: 'get',
-        success:function(data){
+        success: function (data) {
             $('#modal_tscd').html(data);
-            $('#updateTSCD').modal('show')
+            $('#updateTSCD').modal('show');
+            $(document).ready(function () {
+                $(".select").selectpicker();
+            });
         }
+    });
+}
+
+// thông tin hao mòn
+function hao_mon(id) {
+    if (id != '') {
+        $.ajax({
+            url: '/tieuhao/find',
+            method: "post",
+            data: { ma_loai: id },
+            dataType: 'json',
+            success: function (data) {
+                $('.tile_HM').text(data['muc_tieuhao'] + ' %');
+                $('.tgSD').text(data['thoi_gian_sd'] + ' năm');
+            }
+        });
+    } else {
+        $('.tile_HM').text('0.00');
+        $('.tgSD').text('0');
+    }
+
+}
+
+function in_theTSCD() {
+    var tents = $('.tents').val();
+    var nuoc_sx = $('.nuoc_sx').val();
+    var phong = $('#phongban option:selected').text();
+    var nam_sx = $('.nsx').val();
+    var nam_sd = $('.ngaysd').val().slice($('.ngaysd').val().lastIndexOf('-') + 1);
+    var ngia = $('.ngia').val();
+    $.ajax({
+        url: '/taisan/in_the',
+        method: 'post',
+        data: {
+            tents: tents,
+            nuoc_sx: nuoc_sx,
+            phong: phong,
+            nam_sx: nam_sx,
+            nam_sd: nam_sd,
+            ngia: ngia
+        },
+        cache:false,
+        xhr: function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 2) {
+                    if (xhr.status == 200) {
+                        xhr.responseType = "blob";
+                    } else {
+                        xhr.responseType = "text";
+                    }
+                }
+            };
+            return xhr;
+        },
+        success: function (data) {
+            var filename = 'thetaisan.docx';
+            var blob = new Blob([data], { type: "application/octet-stream" });
+
+            //Check the Browser type and download the File.
+            var isIE = false || !!document.documentMode;
+            if (isIE) {
+                window.navigator.msSaveBlob(blob, filename);
+            } else {
+                var url = window.URL || window.webkitURL;
+                link = url.createObjectURL(blob);
+                var a = $("<a />");
+                a.attr("download", filename);
+                a.attr("href", link);
+                $("body").append(a);
+                a[0].click();
+                $("body").remove(a);
+            }
+        }
+
     });
 }

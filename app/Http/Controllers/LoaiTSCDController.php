@@ -144,7 +144,10 @@ class LoaiTSCDController extends Controller
     {
         $kq = $this->loaiTSCD->update_loai($id,$request->tents_up,$request->loaits_up);
         if($kq){
-            return redirect('loaiTSCD');
+            if($this->tieuhao->updateth($request->ma_tieuhao,$request->tile_HM_up,$request->tgSD_up)){
+                return redirect('loaiTSCD');
+            }
+            
         }
     }
 

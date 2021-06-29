@@ -23,7 +23,7 @@
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-loaits form-control" id="taisan"  data-dropup-auto="false" title="Danh mục" data-size='5' data-live-search="true">
-                            <option value="" selected>--Chọn loại tài sản--</option>
+                            <option value="" selected>--Chọn loại TSCĐ--</option>
                             @foreach ($loaits as $val)
                                 <option value="{{$val->ma_loai}}">{{$val->ten_loai}}</option>
                             @endforeach

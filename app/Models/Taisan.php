@@ -31,13 +31,18 @@ class Taisan extends Model
         return $data;
     }
 
-    public function select($dieukien=''){
+    public function select($dieukien='',$all=''){
        
         $data =$this->table_join();
         if($dieukien !=''){
             $data =$data->where('taisan.ma_loai','=',''.$dieukien.'');
         }
-         $data= $data->paginate(8);
+        if($all !=''){
+            $data = $data->get();
+        }else{
+            $data= $data->paginate(8);
+        }   
+         
         return $data;
     }
 

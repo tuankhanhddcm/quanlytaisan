@@ -14,12 +14,16 @@ class LoaiTSCD extends Model
     ];
     
 
-    public function select(){
+    public function select($all=''){
         $loaits = DB::table($this->table)
         ->select('loaitaisancodinh.*','loai.ten_loai as loai')
         ->join('tieuhaotaisan','loaitaisancodinh.ma_loai','=','tieuhaotaisan.ma_loai')
-        ->join('loai','loaitaisancodinh.id_loai','=','loai.id_loai')
-        ->paginate(8);
+        ->join('loai','loaitaisancodinh.id_loai','=','loai.id_loai');
+        if($all !=''){
+            $loaits = $loaits->get();
+        }else{
+            $loaits = $loaits->paginate(8);
+        }
         return $loaits;
     }
 
