@@ -23,6 +23,9 @@ Route::resource('/taisan','TaisanController');
 Route::post('/taisan/search','TaisanController@search_ts');
 Route::post('/taisan/in_the','TaisanController@in_theTSCD');
 Route::post('/taisan/update/{id}','TaisanController@update')->name('taisan.update');
+Route::post('/taisan/modal_chitiet/{id}','TaisanController@modal_chitiet');
+
+
 // Mẫu báo cáo
 Route::get('/maubaocao','MaubaocaoController@index');
 Route::get('/word_export/{id}','MaubaocaoController@word_export');
@@ -61,3 +64,10 @@ Route::post('/check','UserController@checklogin');
 // tiêu hao
 Route::resource('/tieuhao','TieuhaoController');
 Route::post('/tieuhao/find','TieuhaoController@find_tieuhao');
+
+// bàn giao
+Route::resource('/bangiao','BangiaoController');
+Route::post('/bangiao/loc_nv','BangiaoController@loc_nv');
+Route::post('/bangiao/loc_ts','BangiaoController@loc_ts');
+Route::post('/bangiao/loc_chitiet','BangiaoController@loc_chitiet');
+Route::post('/bangiao/more_ts','BangiaoController@more_ts');

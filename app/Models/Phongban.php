@@ -9,8 +9,14 @@ class Phongban extends Model
 {
     protected $table = 'phongban';
 
-    public function select(){
-        $data = DB::table($this->table)->paginate(8);
+    public function select($all =''){
+
+        $data = DB::table($this->table);
+        if($all !=''){
+            $data = $data->get();
+        }else{
+            $data = $data->paginate(8);
+        }
         return $data;
     }
 

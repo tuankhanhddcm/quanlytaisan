@@ -110,5 +110,8 @@ class Taisan extends Model
         return $kq;
     }
 
-    
+    public function tsOfphong($ma_phong){
+        $data = DB::table($this->table)->where('ma_phong','=',''.$ma_phong.'')->get();
+        return $data;
+    }
 }

@@ -101,7 +101,21 @@
                                 <td>{{$item->ten_chitiet}}</td>
                                 <td>{{$item->ten_ts}}</td>
                                 <td>{{$item->so_serial}}</td>
-                                <td>{{$item->trangthai}}</td>
+                                <td>
+                                    @php
+                                        switch ($item->trangthai) {
+                                            case '0':
+                                                echo 'Không sử dụng';
+                                                break;
+                                            case '1':
+                                                echo 'Đang sử dụng';
+                                                break;
+                                            case '2':
+                                                echo 'Hử hỏng';
+                                                break;
+                                        }
+                                    @endphp
+                                </td>
                                 <td>
                                     @php
                                         foreach($nhanvien as $val){
@@ -112,7 +126,7 @@
                                     @endphp
                                 </td>
                                 <td style="border-right: none;">
-                                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                                    <button class="btn_modal_chitiet" data-ma_ts="{{isset($taisan)?$taisan->ma_ts:''}}" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
                                     <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                                 </td>
                             </tr>
@@ -128,108 +142,9 @@
             </div>
         </div>
     </div>
+</div>
+<div id="modal_chitietofts">
+    @include('taisan.modal_chitiet')
 </div>  
-{{-- modal thêm chi tiết  --}}
-<div class="modal fade" id="themchitiet">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Thêm mới chi tiết tài sản</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <form action="/chitiettaisan" method="POST" onsubmit=" if(check('.tents_lb')&&check('.so_serial_lb')&&check('#trangthai') &&check('#nhanvien'))return true; return false;">
-          <div class="modal-body">
-                  {{ csrf_field() }}
-              <div class="form-group">
-                      <label for="" class="form-label tents_lb">Tên chi tiết:</label>
-                      <div class="form-wrap">
-                          <div class="form_input">
-                              <input type="text" class="form-input tents" name="tents" onkeyup="check('.tents_lb')" value=""  placeholder="Nhập vào tên chi tiết">
-                          </div>
-                          <div style="display: flex;">
-                              <i class='bx bxs-error-circle tents_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                              <span class="error_tents error"></span>
-                          </div>
-                      </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="form-label">Thuộc tài sản:</label>
-                    <div class="form-wrap">
-                        <div class="form_input ">
-                            <div class="select_wrap form_input--items" style="width: 100%;">
-                                <select class=" select loaits-select form-control"  id="loaits" name ="loaits" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                    {{-- <option value="">--Chọn loại tài sản--</option> --}}
-                                    <option value="{{$taisan->ma_ts}}" selected>{{$taisan->ten_ts}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div style="display: flex;">
-                            <i class='bx bxs-error-circle loaits_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                            <span class="error_loaits error"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="form-label so_serial_lb">Số serial:</label>
-                    <div class="form-wrap">
-                        <div class="form_input">
-                            <input type="text" class="form-input so_serial" name="so_serial" onkeyup="check('.so_serial_lb')" value=""  placeholder="Nhập vào số serial">
-                        </div>
-                        <div style="display: flex;">
-                            <i class='bx bxs-error-circle so_serial_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                            <span class="error_so_serial error"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="" class="form-label">Trạng thái:</label>
-                  <div class="form-wrap">
-                        <div class="form_input ">
-                            <div class="select_wrap form_input--items" style="width: 100%;">
-                                <select class=" select trangthai-select form-control"  id="trangthai" name ="trangthai" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                    <option value="">--Chọn loại tài sản--</option>
-                                    <option value="0">Không sử dụng</option>
-                                    <option value="1">Đang sử dụng</option>
-                                    <option value="2">Hư hỏng</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div style="display: flex;">
-                            <i class='bx bxs-error-circle trangthai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                            <span class="error_trangthai error"></span>
-                        </div>
-                    </div>
-                </div>
-              <div class="form-group">
-                <label for="" class="form-label">Nhân viên sử dụng:</label>
-                <div class="form-wrap">
-                    <div class="form_input ">
-                        <div class="select_wrap form_input--items" style="width: 100%;">
-                            <select class=" select nhanvien-select form-control"  id="nhanvien" name ="nhanvien" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                <option value="">--Chọn nhân viên--</option>
-                                @foreach ($nhanvien as $item)
-                                    <option value="{{$item->ma_nv}}">{{$item->ten_nv}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div style="display: flex;">
-                        <i class='bx bxs-error-circle nhanvien_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                        <span class="error_nhanvien error"></span>
-                    </div>
-                </div>
-            </div>
-             
-          </div>
-          <div class="modal-footer">
-              <button type="submit" class="btn_cus btn_luu" onclick="check('.so_serial_lb');check('#trangthai');check('#nhanvien');" >Lưu</button>
-              <button type="button" class="btn_cus btn-close"  style="margin-bottom: 5px; font-size: 16px;font-weight: 400" data-dismiss="modal">Đóng</button>
-          </div>
-          <input type="hidden" name="taisan" value="{{$taisan->ma_ts}}">
-    </form>
-        </div>
-      </div>
-</div>  
+
 @endsection

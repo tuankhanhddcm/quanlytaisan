@@ -125,7 +125,12 @@ class ChitiettaisanController extends Controller
     {
         $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
         if($kq){
-            return redirect()->route('chitiettaisan.index');
+            if($request->detail_ts !=''){
+                return redirect()->route('taisan.show',$request->detail_ts);
+            }else{
+                return redirect()->route('chitiettaisan.index');
+            }
+           
         }
     }
 

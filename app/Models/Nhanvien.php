@@ -43,4 +43,9 @@ class Nhanvien extends Model
         ]);
         return $table;
     }
+
+    public function nvOfphong($ma_phong){
+        $data = DB::table($this->table)->where('ma_phong','=',''.$ma_phong.'')->get();
+        return $data;
+    }
 }

@@ -206,13 +206,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="{{route('bangiao.index')}}" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Phiếu bàn giao tài sản</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Chi tiết phiếu bàn giao</p>
                   </a>
@@ -335,6 +335,8 @@
         @yield('loaiTSCĐ')
         @yield('detail_loaiTSCD')
         @yield('detail_taisan')
+        @yield('bangiao')
+        @yield('thembangiao')
     </div>
     <!-- /.content-wrapper -->
     {{-- @include('modal.modal_insert') --}}

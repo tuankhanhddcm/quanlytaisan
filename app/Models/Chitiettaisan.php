@@ -80,4 +80,8 @@ class Chitiettaisan extends Model
             ]);
         return $kq;
     }
+    public function ctOfphong($ma_ts){
+        $data = DB::table($this->table)->where('ma_ts','=',''.$ma_ts.'')->get();
+        return $data;
+    }
 }

@@ -150,7 +150,7 @@ class TaisanController extends Controller
     {
         $taisan = $this->taisan->show_ts($id);
         $chitiettaisan = $this->chitiettaisan->select($id);
-        $nhanvien = $this->nhanvien->select();
+        $nhanvien = $this->nhanvien->select('all');
         return view('taisan.detail_taisan',[
             'taisan'=>$taisan,
             'chitiettaisan'=>$chitiettaisan,
@@ -236,5 +236,15 @@ class TaisanController extends Controller
             $file->saveAS('thetaisan.docx');
             return response()->download('thetaisan.docx')->deleteFileAfterSend(true);
         }
+    }
+
+    public function modal_chitiet(Request $request, $id){
+        if($request->ajax()){
+            $chitiet_up = $this->chitiettaisan->show_id($id);
+            $nhanvien = $this->nhanvien->select('all');
+            $taisan = $this->taisan->show_ts($request->ma_ts);
+            return view('taisan.modal_chitiet',compact('chitiet_up','nhanvien','taisan'));
+        }
+        
     }
 }

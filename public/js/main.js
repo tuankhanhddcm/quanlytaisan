@@ -13,7 +13,6 @@ $(document).ready(function () {
         search_chitiet(1);
     });
 
-    hao_mon();
     $('.loaits-select').click(function () {
         check('#loaits');
         hao_mon();
@@ -66,6 +65,74 @@ $(document).ready(function () {
     $(document).on('click', '.btn_chitiet', function () {
         var id = $(this).data('id_chitiet');
         update_chitiet(id);
+        show_modal_chitiet(id);
+    });
+    $(document).on('click', '.btn_modal_chitiet', function () {
+        var id = $(this).data('id');
+        var ma_ts = $(this).data('ma_ts');
+        show_modal_chitiet(id,ma_ts);
+    });
+
+
+    $('.ngia').change(function(){
+        var ngia= $(this).val();
+        var hm = $('.tile_HM').text();
+        var giatri = Number(ngia) * (Number(hm)/100);
+        if(giatri){
+            $('.giatri_HM').text(giatri);
+        }else{
+            $('.giatri_HM').text('0');
+        }
+        
+    });
+
+    $('#so_tai_san').change(function(){
+        var sl =  Number($(this).val());
+        var ma_phong= $('.select-phonggiao option:selected').val();
+        $.ajax({
+            url:'/bangiao/more_ts',
+            method: 'post',
+            data:{sl:sl,ma_phong:ma_phong},
+            success:function(data){
+                $('.more_taisan').html(data);
+                $(".select").selectpicker();
+
+            }
+        });
+            
+    });
+
+
+    // lọc select------------------
+    $('.select-phonggiao').click(function(){
+        loc_select('loc_nv',$('.select-phonggiao option:selected').val(),'#nv_giao');
+        loc_select('loc_ts',$('.select-phonggiao option:selected').val(),'#ts');
+        var sl = Number($('#so_tai_san').val());
+        var ma_phong= $('.select-phonggiao option:selected').val();
+        $.ajax({
+            url:'/bangiao/more_ts',
+            method: 'post',
+            data:{sl:sl,ma_phong:ma_phong},
+            success:function(data){
+                $('.more_taisan').html(data);
+                $(".select").selectpicker();
+
+            }
+        });
+    });
+    
+    $('.select-phongnhan').click(function(){
+        loc_select('loc_nv',$('.select-phongnhan option:selected').val(),'#nv_nhan');
+    });
+    
+    $(document).on('click','.select-ts',function(){
+        var sl = Number($('#so_tai_san').val());
+        if(sl>1){
+            for(i=1;i<=sl;i++)
+                loc_select('loc_chitiet',$('.ts'+i+' option:selected').val(),'#chitiet'+i);
+        }else{
+            loc_select('loc_chitiet',$('.ts1 option:selected').val(),'#chitiet1');
+        }
     });
 
 });
@@ -431,8 +498,9 @@ function hao_mon() {
             data: { ma_loai: id },
             dataType: 'json',
             success: function (data) {
-                $('.tile_HM').text(data['muc_tieuhao'] + ' %');
-                $('.tgSD').text(data['thoi_gian_sd'] + ' năm');
+                
+                $('.tile_HM').text(data['muc_tieuhao']);
+                $('.tgSD').text(data['thoi_gian_sd']);
             }
         });
     } else {
@@ -511,5 +579,37 @@ function update_chitiet(id){
             }
         });
 
+    }
+}
+
+function show_modal_chitiet(id,ma_ts){
+    if(id !=''){
+        $.ajax({
+            url:'/taisan/modal_chitiet/'+id,
+            method:'post',
+            data: {ma_ts:ma_ts},
+            success: function(data){
+                $('#modal_chitietofts').html(data);
+                $(document).ready(function(){
+                    $(".select").selectpicker();
+                    $('#suachitiet').modal('show');
+                });
+            }
+        });
+
+    }
+}
+
+function loc_select(url,id,div){
+    if(url !='' && id !=''){
+        $.ajax({
+            url:'/bangiao/'+url,
+            method: 'post',
+            data:{id:id},
+            success:function(data){
+                $(div).html(data);
+                $(div).selectpicker('refresh');
+            }
+        });
     }
 }
