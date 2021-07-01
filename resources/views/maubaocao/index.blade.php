@@ -4,9 +4,6 @@
         <div class="main_ward">
             <div class="main-name">
                 <h3 class="main-text">Mẫu Báo Cáo</h3>
-                <div >
-                    
-                </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">

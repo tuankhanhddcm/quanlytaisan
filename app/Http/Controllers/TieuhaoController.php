@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Taisan;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tieuhao;
 use Illuminate\Http\Request;
@@ -11,18 +13,19 @@ class TieuhaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $th;
     public $tieuhao;
+    protected $taisan;
     public function __construct()
     {
-        $this->th = new Tieuhao;
+        $this->middleware('login');
         $this->tieuhao = new Tieuhao;
+        $this->taisan = new Taisan;
     }
 
     public function index()
     {
-        $th = $this->th->selectth();
-        return view('tieuhao.Tieuhao',['tieuhao' => $th]);
+        $tieuhao = $this->taisan->select();
+        return view('tieuhao.Tieuhao',['tieuhao' => $tieuhao]);
     }
 
     /**
@@ -65,8 +68,7 @@ class TieuhaoController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('tieuhaotaisan')->where('ma_tieuhao','=',$id)->first();
-        return view('layout.suatieuhao', ['data' => $data]);
+        
     }
 
     /**
@@ -78,11 +80,7 @@ class TieuhaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result=$this->tieuhao->updateth($id,$request->muc_tieuhao,$request->thoigian_sd);
         
-        if($result){
-            echo '<meta http-equiv="refresh" content="0; url=/tieuhao">';
-        }
        
     }
 
@@ -97,10 +95,14 @@ class TieuhaoController extends Controller
         //
     }
 
-    public function find_tieuhao(Request $request){
+    public function search_tieuhao(Request $request){
         if($request->ajax()){
-            $data = $this->tieuhao->find_by_ts($request->ma_loai);
-            echo json_encode($data) ;
+            $text=$request->text;
+            $tieuhao = $this->taisan->select();
+            if($text !=''){
+                $tieuhao = $this->taisan->search_taisan($text,'');
+            }
+            return view('tieuhao.list_tieuhao',compact('tieuhao'));
         }
     }
 }

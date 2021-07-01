@@ -12,7 +12,7 @@
             <h3 class="main-text" >Giao diện bàn giao tài sản</h3>
             <div >
                 <button class="btn_cus btn-addsp" onclick="location.href='{{url('/word_export/M_u s_ 01 Biên b_n bàn giao, ti_p nh_n tài s_n công (1).docx')}}'" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu bàn giao</button>
-                
+                <button class="btn_cus btn-back" type="button" onclick="location.href='{{route('bangiao.index')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
             </div>
         </div>
         <form action="{{route('bangiao.store')}}" onsubmit="return check_inser_bangiao();" method="POST" enctype="multipart/form-data">

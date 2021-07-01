@@ -13,6 +13,10 @@ $(document).ready(function () {
         search_chitiet(1);
     });
 
+    $('.select-loaisp').click(function(){
+        search_phieubangiao(1);
+    });
+
     $('.loaits-select').click(function () {
         check('#loaits');
         hao_mon();
@@ -47,6 +51,8 @@ $(document).ready(function () {
         search_loai(page)
         search_ts(page);
         search_chitiet(page);
+        search_phieubangiao(page);
+        search_tieuhao(page);
     });
 
     // chỉnh calendar
@@ -171,6 +177,37 @@ function search_ts(page) {
         }
     });
 }
+function search_phieubangiao(page) {
+    var text = $('#search').val();
+    var seleted = $('#nv option:selected').val();
+    $.ajax({
+
+        url: '/bangiao/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted: seleted,
+        },
+        success: function (data) {
+            $('#list_phieubangiao').html(data);
+        }
+    });
+}
+
+function search_tieuhao(page) {
+    var text = $('#search').val();
+    $.ajax({
+        url: '/tieuhao/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+        },
+        success: function (data) {
+            $('#list_tieuhao').html(data);
+        }
+    });
+}
+
 function search_chitiet(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();

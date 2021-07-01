@@ -132,7 +132,7 @@ class TaisanController extends Controller
                     $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.(1+$i).')');
                 }
                 if($kq){
-                    return redirect('/taisan');
+                    return redirect('/taisan/create');
                 }
             }
             

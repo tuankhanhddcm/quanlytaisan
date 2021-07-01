@@ -16,37 +16,21 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-5">
-                        <input type="text" value="" class="search_input" id='search' placeholder="Nhập mã bàn giao">
+                        <input type="text" value="" class="search_input" id='search' onkeyup="search_phieubangiao(1);" placeholder="Nhập mã phiếu bàn giao">
                     </div>
                     <div class="select_wrap">
-                        <select class=" select select-loaisp form-control" id="phong" data-dropup-auto="false" title="Phòng Ban" data-size='5' data-live-search="true">
-                            <option value="" selected>--Chọn Phòng Ban--</option>
-                           
+                        <select class=" select select-loaisp form-control" id="nv" data-dropup-auto="false" title="Nhân viên" data-size='5' data-live-search="true">
+                            <option value="" selected>--Chọn nhân viên--</option>
+                            @foreach ($nhanvien as $val)
+                                <option value="{{$val->ma_nv}}">{{$val->ten_nv}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                 </div>
             </div>
-            <div class="col-sm-12 ">
-                <table class="table table_sp ">
-                    <thead class="heading-table">
-                        <tr>
-                            <th style="border-left: 1px solid rgba(0,0,0,.1); width:5%;">STT</th>
-                            <th style="width: 10%;">Mã Phiếu</th>
-                            <th style="width: 12%;">Tên người giao</th>
-                            <th style="width: 10%;">Phòng giao</th>
-                            <th style="width: 12%;">Tên người nhận</th>
-                            <th style="width: 10%;">Phòng nhận</th>
-                            <th style="width: 10%;">Ngày giao</th>
-                            <th style="width: 15%;">Lý do</th>
-                            <th style="width: 5%;">In phiếu</th>
-                            <th style="width: 11%;">Hoạt động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list_product">
-                           
-                    </tbody>
-                </table>
+            <div class="col-sm-12 " id="list_phieubangiao">
+                @include('bangiao.list_phieubangiao')
             </div>
         </div>
     </div>

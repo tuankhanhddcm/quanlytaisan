@@ -9,7 +9,7 @@
     
                 <div class="form-btn">
                     <button  type="submit"  class="btn_cus btn-save" ><i class='bx bx-save'></i> Lưu</button>
-                    <button class="btn_cus btn-conti"  ><i class='bx bx-save'></i> Lưu & Tiếp tục</button>
+                    {{-- <button class="btn_cus btn-conti"  ><i class='bx bx-save'></i> Lưu & Tiếp tục</button> --}}
                     <button class="btn_cus btn-conti" onclick="if(check_insert_taisan('cần in')){in_theTSCD();}" type="button" style="background-color: #3a3a3a"  ><i class='bx bx-printer'></i> In thẻ TSCĐ</button>
                     <button class="btn_cus btn-back" type="button" onclick="location.href='{{url('/taisan')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
                 </div>

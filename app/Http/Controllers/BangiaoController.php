@@ -10,6 +10,7 @@ use App\Models\Nhacungcap;
 use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
+use Svg\Tag\Rect;
 
 class BangiaoController extends Controller
 {
@@ -39,7 +40,9 @@ class BangiaoController extends Controller
 
     public function index()
     {
-        return view('bangiao.index');
+        $nhanvien = $this->nhanvien->select('all');
+        $bangiao = $this->bangiao->select();
+        return view('bangiao.index',compact('nhanvien','bangiao'));
     }
 
     /**
@@ -204,6 +207,22 @@ class BangiaoController extends Controller
                 }
                 return $kq;
             }
+        }
+    }
+
+    public function show_phieu($id){
+        $phieu = $id;
+        return view('bangiao.viewpdf',compact('phieu'));
+    }
+
+    public function search(Request $request){
+        if($request->ajax()){
+            $bangiao = $this->bangiao->select();
+            if($request->text !='' ||$request->seleted !=''){
+                $bangiao= $this->bangiao->search($request->text,$request->seleted);
+            }
+            $nhanvien = $this->nhanvien->select('all');
+            return view('bangiao.list_phieubangiao',compact('nhanvien','bangiao'));
         }
     }
     

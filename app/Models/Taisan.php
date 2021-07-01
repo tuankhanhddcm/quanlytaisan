@@ -21,10 +21,11 @@ class Taisan extends Model
                 ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
                 ->groupBy('taisan.ma_ts');
         $data = DB::table($this->table)
-            ->select('taisan.*','soluong','nhacungcap.ten_ncc','phongban.ten_phong','loaitaisancodinh.ten_loai')
+            ->select('taisan.*','soluong','nhacungcap.ten_ncc','phongban.ten_phong','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd')
             ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
             ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
             ->join('phongban','taisan.ma_phong','=','phongban.ma_phong')
+            ->join('tieuhaotaisan','tieuhaotaisan.ma_loai','=','taisan.ma_loai')
             ->joinSub($temp_sl,'temp_sl',function($join){
                 $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
             });

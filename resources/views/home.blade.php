@@ -125,7 +125,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="/tieuhao" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Tiêu hao</p>
                   </a>
@@ -206,7 +206,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('bangiao.index')}}" class="nav-link">
+                  <a href="/bangiao" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Phiếu bàn giao tài sản</p>
                   </a>

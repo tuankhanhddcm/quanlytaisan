@@ -28,10 +28,7 @@ class Bangiao extends Model
 
     public function find($id){
         $data = DB::table($this->table)
-        ->select('loaitaisancodinh.*','loai.ten_loai as loai','tieuhaotaisan.*')
-        ->join('tieuhaotaisan','loaitaisancodinh.ma_loai','=','tieuhaotaisan.ma_loai')
-        ->join('loai','loaitaisancodinh.id_loai','=','loai.id_loai')
-        ->where('loaitaisancodinh.ma_loai','=',''.$id.'')->first();
+        ->where('ma_bangiao',$id)->first();
         return $data;
     }
     
@@ -56,15 +53,15 @@ class Bangiao extends Model
     }
 
     public function search($text,$selected){
-        $loai = DB::table($this->table)
-        ->select('loaitaisancodinh.*','loai.ten_loai as loai')
-        ->join('loai','loaitaisancodinh.id_loai','=','loai.id_loai');
+        $loai = DB::table($this->table);
         if($text !=''){
-            $loai = $loai->where('loaitaisancodinh.ten_loai','like','%'.$text.'%');
-                
+            $loai = $loai->where('ma_bangiao','like','%'.$text.'%');   
         }
         if($selected !=''){
-            $loai = $loai->where('loaitaisancodinh.id_loai',$selected);
+            $loai = $loai->where(function($res) use($selected){
+                $res->where('nguoi_giao','=',''.$selected.'')
+                    ->orwhere('nguoi_nhan','=',''.$selected.'');
+            });
         }
         $loai = $loai->paginate(8);
         return $loai;

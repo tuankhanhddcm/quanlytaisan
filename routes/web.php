@@ -63,7 +63,7 @@ Route::post('/check','UserController@checklogin');
 
 // tiêu hao
 Route::resource('/tieuhao','TieuhaoController');
-Route::post('/tieuhao/find','TieuhaoController@find_tieuhao');
+Route::post('/tieuhao/search','TieuhaoController@search_tieuhao');
 
 // bàn giao
 Route::resource('/bangiao','BangiaoController');
@@ -71,3 +71,5 @@ Route::post('/bangiao/loc_nv','BangiaoController@loc_nv');
 Route::post('/bangiao/loc_ts','BangiaoController@loc_ts');
 Route::post('/bangiao/loc_chitiet','BangiaoController@loc_chitiet');
 Route::post('/bangiao/more_ts','BangiaoController@more_ts');
+Route::get('/bangiao/phieu/{id}','BangiaoController@show_phieu');
+Route::post('/bangiao/search','BangiaoController@search');
