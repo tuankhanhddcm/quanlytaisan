@@ -218,7 +218,7 @@
                                         <label for="" class="form-label ngaysd_lb">Ngày sử dụng:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb')" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb');$('.bd_HM').text($(this).val());tinh_nam_HM($(this).val())" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaysd_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -248,14 +248,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="" class="form-label bd_HM_lb">Ngày bắt đầu tính hao mòn   :</label>
+                                        <label for="" class="form-label bd_HM_lb">Ngày bắt đầu tính hao mòn:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date bd_HM" name="bd_HM" onchange="check('.bd_HM_lb')" value="" placeholder="dd-mm-yyyy">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle bd_HM_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_bd_HM error"></span>
+                                                <span  class="form-input bd_HM " style="display: block;border-color:#4bac4d;">dd-mm-yyyy</span>
                                             </div>
                                         </div>
                                     </div>

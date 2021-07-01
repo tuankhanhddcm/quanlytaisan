@@ -11,11 +11,12 @@
         <div class="main-name">
             <h3 class="main-text" >Giao diện bàn giao tài sản</h3>
             <div >
-                <button class="btn_cus btn-addsp" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu bàn giao</button>
+                <button class="btn_cus btn-addsp" onclick="location.href='{{url('/word_export/M_u s_ 01 Biên b_n bàn giao, ti_p nh_n tài s_n công (1).docx')}}'" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu bàn giao</button>
                 
             </div>
         </div>
-        <form action="" method="POST">
+        <form action="{{route('bangiao.store')}}" onsubmit="return check_inser_bangiao();" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="col-sm-12 row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -33,7 +34,7 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle phonggiao_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle phonggiao_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_phonggiao error"></span>
                             </div>
                         </div>
@@ -53,13 +54,13 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle nv_giao_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle nv_giao_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_nv_giao error"></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="form-label ngaygiao_lb">Ngày Giao:</label>
+                        <label for="" class="form-label ngaygiao_lb">Ngày giao:</label>
                         <div class="form-wrap">
                             <div class="form_input">
                                 <input type="text" class="form-input date ngaygiao" name="ngaygiao" onchange="check('.ngaygiao_lb')" value=""  placeholder="dd-mm-yyyy">
@@ -70,17 +71,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-label" style="margin-top:4%;">Phiếu Bàn Giao: </label>
+                    <div class="form-group" style="margin-top: 50px" >
+                        <label for="" class="form-label">Phiếu bàn giao:</label>
                         <div class="form-wrap">
-                            <div class="form_input">
-                                <div class="select_wrap form_input--items" style="width: 100%;">
-                                    <input type="file" name="phieubangiao" style="margin-top:3%">
+                            <div style="display: flex;">
+                                <label class="btn_upload"><input type="file" hidden name="file_pdf" id="file_pdf" onchange="readURL(this,'#file_pdf','pdf')" accept=".pdf" style="display: none" >Chọn file</label>
+                                <div style="width: 300px">
+                                    <div class="text_name_pdf" style="overflow:hidden"></div>
                                 </div>
                             </div>
-                            <div style="display: flex;">
-                                <i class='bx bxs-error-circle phieubg_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                <span class="error_phieubg error"></span>
+                           
+                            <div style="display: flex; padding-bottom: 20px">
+                                <i class='bx bxs-error-circle file_pdf_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                <span class="error_file_pdf error"></span>
                             </div>
                         </div>
                     </div>
@@ -102,7 +105,7 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle phongnhan_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle phongnhan_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_phongnhan error"></span>
                             </div>
                         </div>
@@ -123,7 +126,7 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle nv_nhan_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle nv_nhan_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_nv_nhan error"></span>
                             </div>
                         </div>
@@ -133,7 +136,7 @@
                         <div class="form-wrap">
                             <div class="form_input">
                                 <div class="select_wrap form_input--items" style="width: 100%;">
-                                    <select class=" select select-loaisp form-control" id="loaisp" name ="nv_ck" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                    <select class=" select select-loaisp form-control"  name ="nv_ck" data-dropup-auto="false" data-size='5' data-live-search="true">
                                         <option value="">--Chọn nhân viên--</option>
                                         @foreach ($nhanvien as $item)
                                             <option value="{{$item->ma_nv}}">{{$item->ten_nv}}</option>
@@ -143,7 +146,7 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle loaisp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle loaisp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_loaisp error"></span>
                             </div>
                         </div>
@@ -173,11 +176,11 @@
               </div>
             </div>
             <div class="more_taisan">
-                <div class="col-sm-12 row">
+                <div class="col-sm-12 row" style="margin-bottom: 20px">
                     <div class="col-sm-3">
                         <label >Tài sản:</label><br>
                             <div style="width: 100%;">
-                                <select class=" select select-ts ts1 form-control"   name ="ma_ts[]" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                <select class=" select select-ts  form-control" id="ts1"  name ="ma_ts[]" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn tài sản--</option>
                                     @foreach ($taisan as $item)
                                         <option value="{{$item->ma_ts}}">{{$item->ten_ts}}</option>
@@ -185,20 +188,20 @@
                                 </select>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle ts_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                <span class="error_ts error"></span>
+                                <i class='bx bxs-error-circle ts1_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                <span class="error_ts1 error"></span>
                             </div>
                     </div>
                     <div class="col-sm-3">
                         <label>Chi tiết tài sản:</label><br>
                             <div style="width: 100%;">
-                                <select class=" select select-loaisp form-control" id="chitiet1" name ="ma_chitiet[]" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                <select class=" select select-loaisp form-control " id="chitiet1"  name ="ma_chitiet[]" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn chi tiết tài sản--</option>
                                 </select>
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle loaisp_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
-                                <span class="error_loaisp error"></span>
+                                <i class='bx bxs-error-circle chitiet1_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                                <span class="error_chitiet1 error"></span>
                             </div>
                     </div>
                     <div class="col-sm-3">
@@ -207,23 +210,15 @@
                                 <input type="text" class="form-input tt" name="tinhtrang[]">
                             </div>
                             <div style="display: flex;">
-                                <i class='bx bxs-error-circle tinhtrang_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 1.8rem;padding-right: 5px;"></i>
+                                <i class='bx bxs-error-circle tinhtrang_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_tinhtrang error"></span>
                             </div>
                     </div>
                 </div>
             </div>
-            
-           
             <div class="row">
-                <div class="col">
-
-                </div >
-                <div class="col-sm-8">
-
-                </div>
-                <div class="col">
-                    <Button type="submit" style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px; margin:auto;margin-top: 20px;">Hoàn Thành</Button>
+                <div class="col-sm-12" style="display: flex; justify-content: flex-end">
+                    <Button type="submit" onclick="console.log(check_inser_bangiao());" style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px;margin-top: 20px">Hoàn Thành</Button>
                 </div>
                 
             </div>
