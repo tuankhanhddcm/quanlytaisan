@@ -13,19 +13,19 @@ $(document).ready(function () {
         search_chitiet(1);
     });
 
-    $('.select-loaisp').click(function(){
+    $('.select-loaisp').click(function () {
         search_phieubangiao(1);
     });
 
-    $(document).on('click','.loaits-select',function(){
+    $(document).on('click', '.loaits-select', function () {
         check('#loaits');
         hao_mon();
-        loc_nvOftaisan('#loaits','#nhanvien');
+        loc_nvOftaisan('#loaits', '#nhanvien');
     });
-    $(document).on('click','.loaits_up-select',function(){
+    $(document).on('click', '.loaits_up-select', function () {
         check('#loaits_up');
         hao_mon();
-        loc_nvOftaisan('#loaits_up','#nhanvien_up');
+        loc_nvOftaisan('#loaits_up', '#nhanvien_up');
     });
 
     hao_mon();
@@ -87,6 +87,21 @@ $(document).ready(function () {
         show_modal_chitiet(id, ma_ts);
     });
 
+
+    $(document).on('click', '.btn_suaphong', function () {
+        var id = $(this).data('id');
+        update_phongban(id);
+    });
+
+    $(document).on('click', '.btn_up_nhanvien', function () {
+        var id = $(this).data('id');
+        update_nv(id);
+    });
+
+    $(document).on('click', '.btn_upNCC', function () {
+        var id = $(this).data('id');
+        update_ncc(id);
+    });
 
     $('.ngia').change(function () {
         var ngia = $(this).val();
@@ -180,7 +195,7 @@ function search_ts(page) {
         data: {
             text: text,
             seleted: seleted,
-            ma_phong:ma_phong
+            ma_phong: ma_phong
         },
         success: function (data) {
             $('#list_taisan').html(data);
@@ -356,9 +371,9 @@ function readURL(input, id_img, loaifile = '') {
 function check_insertFile() {
     check('.mota_lb');
     check('#file_pdf');
-    readURL(this,'#file_temp','word');
-    readURL(this,'#file_pdf','pdf');
-    if (check('.title_lb') && check('#file_temp') && check('#file_pdf') && check('.mota_lb') && readURL(this,'#file_temp','word')&&readURL(this,'#file_pdf','pdf'))
+    readURL(this, '#file_temp', 'word');
+    readURL(this, '#file_pdf', 'pdf');
+    if (check('.title_lb') && check('#file_temp') && check('#file_pdf') && check('.mota_lb') && readURL(this, '#file_temp', 'word') && readURL(this, '#file_pdf', 'pdf'))
         return true;
     return false;
 }
@@ -548,8 +563,8 @@ function update_loaiTSCD(id) {
         success: function (data) {
             $('#modal_tscd').html(data);
             $('#updateTSCD').modal({
-                show:true,
-                backdrop:'static'
+                show: true,
+                backdrop: 'static'
             });
             $(document).ready(function () {
                 $(".select").selectpicker();
@@ -560,23 +575,23 @@ function update_loaiTSCD(id) {
 
 // thông tin hao mòn
 function tinh_nam_HM(val) {
-    if(val !=undefined){
+    if (val != undefined) {
         var today = new Date();
         var nam = Number(today.getFullYear());
         var bd = Number(val.slice(val.lastIndexOf('-') + 1));
         var conlai = nam - bd;
         var tgsd = Number($('.tgSD').text());
-    if (tgsd > 0) {
-        if (conlai < tgsd) {
-            $('.tgSD_conlai_HM').text(tgsd - conlai);
+        if (tgsd > 0) {
+            if (conlai < tgsd) {
+                $('.tgSD_conlai_HM').text(tgsd - conlai);
 
-        } else {
-            $('.tgSD_conlai_HM').text('0');
+            } else {
+                $('.tgSD_conlai_HM').text('0');
+            }
+            $('.dennam_HM').text(bd + tgsd);
         }
-        $('.dennam_HM').text(bd + tgsd);
     }
-    }
-    
+
 
 }
 function hao_mon() {
@@ -588,7 +603,7 @@ function hao_mon() {
             data: { ma_loai: id },
             dataType: 'json',
             success: function (data) {
-                if(data !=null){
+                if (data != null) {
                     $('.tile_HM').text(data['muc_tieuhao']);
                     $('.tgSD').text(data['thoi_gian_sd']);
                     tinh_nam_HM($('.ngaysd').val());
@@ -601,7 +616,7 @@ function hao_mon() {
                         $('.giatri_HM').text('0');
                     }
                 }
-                
+
             }
         });
     } else {
@@ -618,27 +633,27 @@ function hao_mon() {
         $('.giatri_HM').text('0');
     }
     var ngay = $('.ngaysd').val();
-    if(ngay !=''){
+    if (ngay != '') {
         $('.bd_HM').text(ngay);
-    }else{
+    } else {
         $('.bd_HM').text('dd-mm-yyyy');
     }
 
 
 }
 
-function check_ngaysd(){
-    if($('.ngaymua').val() !=''){
+function check_ngaysd() {
+    if ($('.ngaymua').val() != '') {
         var ngaymua = new Date($('.ngaymua').val());
         var ngaysd = new Date($('.ngaysd').val());
-        if(ngaysd >=ngaymua){
+        if (ngaysd >= ngaymua) {
             $('.ngaysd').removeClass('error_input');
             $(".ngaysd_icon").css("display", "none");
             $(".error_ngaysd").text("");
             $(".error_ngaysd").css("display", "none");
             return true;
-        }else{
-            
+        } else {
+
             $('.ngaysd').addClass('error_input');
             $(".ngaysd_icon").css("display", "block");
             $(".error_ngaysd").text("Ngày sử dụng phải lớn hơn hoặc bằng ngày mua");
@@ -646,8 +661,8 @@ function check_ngaysd(){
             return false;
         }
     }
-    
-    
+
+
 }
 
 function in_theTSCD() {
@@ -715,8 +730,8 @@ function update_chitiet(id) {
                 $(document).ready(function () {
                     $(".select").selectpicker();
                     $('#suachitiet').modal({
-                        show:true,
-                        backdrop:'static'
+                        show: true,
+                        backdrop: 'static'
                     });
                 });
             }
@@ -736,8 +751,8 @@ function show_modal_chitiet(id, ma_ts) {
                 $(document).ready(function () {
                     $(".select").selectpicker();
                     $('#suachitiet').modal({
-                        show:true,
-                        backdrop:'static'
+                        show: true,
+                        backdrop: 'static'
                     });
                 });
             }
@@ -772,7 +787,7 @@ function check_inser_bangiao() {
     check_ts_more('ts');
     check_ts_more('chitiet');
     if (check('#phonggiao') && check('#nv_giao') && check('#nv_nhan') && check('.ngaygiao_lb') && check('#phongnhan') && readURL(this, '#file_pdf', 'pdf') && check_ts_more('ts') && check_ts_more('chitiet')) {
-       return true;
+        return true;
     }
     return false;
 }
@@ -780,30 +795,122 @@ function check_ts_more(ten) {
     var sl = Number($('#so_tai_san').val());
     var kq = false;
     for (i = 1; i <= sl; i++) {
-        if ($('#'+ten+i).val() == '') {
-            $('.'+ten + i).addClass('error_input');
-            $("."+ten + i + "_icon").css("display", "block");
-            $(".error_"+ten + i).text("Vui lòng chọn tài sản");
-            $(".error_"+ten + i).css("display", "block");
+        if ($('#' + ten + i).val() == '') {
+            $('.' + ten + i).addClass('error_input');
+            $("." + ten + i + "_icon").css("display", "block");
+            $(".error_" + ten + i).text("Vui lòng chọn tài sản");
+            $(".error_" + ten + i).css("display", "block");
             kq = false;
-        }else{
+        } else {
             kq = true;
         }
     }
     return kq;
 }
 
-function loc_nvOftaisan(id,div){
-    var ma_ts = $(''+id+' option:selected').val();
-    if(ma_ts !=""){
+function loc_nvOftaisan(id, div) {
+    var ma_ts = $('' + id + ' option:selected').val();
+    if (ma_ts != "") {
         $.ajax({
-            url:'/chitiettaisan/loc_nv',
-            method:'post',
-            data:{ma_ts:ma_ts},
-            success:function(data){
+            url: '/chitiettaisan/loc_nv',
+            method: 'post',
+            data: { ma_ts: ma_ts },
+            success: function (data) {
                 $(div).html(data);
                 $(div).selectpicker('refresh');
             }
         });
     }
+}
+
+function xuat_excel_ts() {
+    var ma_phong = $('#phong option:selected').val();
+        $.ajax({
+            url: '/taisan/excel',
+            method: 'post',
+            data: { ma_phong: ma_phong },
+            cache: false,
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 2) {
+                        if (xhr.status == 200) {
+                            xhr.responseType = "blob";
+                        } else {
+                            xhr.responseType = "text";
+                        }
+                    }
+                };
+                return xhr;
+            },
+            success: function (data) {
+                var filename = 'taisan.xlsx';
+                var blob = new Blob([data], { type: "application/octet-stream" });
+    
+                //Check the Browser type and download the File.
+                var isIE = false || !!document.documentMode;
+                if (isIE) {
+                    window.navigator.msSaveBlob(blob, filename);
+                } else {
+                    var url = window.URL || window.webkitURL;
+                    link = url.createObjectURL(blob);
+                    var a = $("<a />");
+                    a.attr("download", filename);
+                    a.attr("href", link);
+                    $("body").append(a);
+                    a[0].click();
+                    $("body").remove(a);
+                }
+            }
+        });
+}
+
+
+//js sua phong
+function update_phongban(id) {
+    $.ajax({
+        url: '/phongban/' + id + '/edit',
+        method: 'get',
+        success: function (data) {
+            $('#modal_phongban').html(data);
+            $('#update_phongban').modal('show');
+            $(document).ready(function () {
+                $(".select").selectpicker();
+            });
+        }
+    });
+}
+//sua nhan vien
+function update_nv(id) {
+    $.ajax({
+        url: '/nhanvien/' + id + '/edit',
+        method: 'get',
+        success: function (data) {
+            $('#modal_nhanvien').html(data);
+            $('#update_nhanvien').modal({
+                show:true,
+                backdrop: 'static',
+            });
+            $(document).ready(function () {
+                $(".select").selectpicker();
+            });
+        }
+    });
+}
+//update ncc
+function update_ncc(id) {
+    $.ajax({
+        url: '/nhacungcap/' + id + '/edit',
+        method: 'get',
+        success: function (data) {
+            $('#modal_ncc').html(data);
+            $('#update_ncc').modal({
+                show:true,
+                backdrop:'static',
+            });
+            $(document).ready(function () {
+                $(".select").selectpicker();
+            });
+        }
+    });
 }

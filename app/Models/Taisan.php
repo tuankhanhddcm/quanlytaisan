@@ -118,4 +118,5 @@ class Taisan extends Model
         $data = $this->table_join()->where('taisan.ma_phong','=',''.$ma_phong.'')->get();
         return $data;
     }
+    
 }

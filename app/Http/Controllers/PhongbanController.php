@@ -22,7 +22,7 @@ class PhongbanController extends Controller
     public function index()
     {
         $phongban = $this->phongban->select();
-        return view('layout.Phongban',compact('phongban'));
+        return view('phongban.index',compact('phongban'));
     }
 
     /**
@@ -90,7 +90,8 @@ class PhongbanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $phong = $this->phongban->find($id);
+        return view('phongban.modal_update_phongban',compact('phong'));
     }
 
     /**
@@ -102,7 +103,8 @@ class PhongbanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->phongban->update_phong($id,$request->ten_phong,$request->mota);
+        return redirect('/phongban');
     }
 
     /**

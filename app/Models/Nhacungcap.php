@@ -34,4 +34,20 @@ class Nhacungcap extends Model
         return $table;
     }
 
+    public function find($id){
+        $data = DB::table($this->table)
+        ->where('nhacungcap.ma_ncc','=',''.$id.'')->first();
+        return $data;
+    }
+
+    public function update_ncc($id,$ten_ncc,$sdt,$email,$diachi,$date){
+        $kq = DB::table($this->table)->where('ma_ncc','=',''.$id.'')->update([
+            'ten_ncc'=>$ten_ncc,
+            'sdt'=>$sdt,
+            'email'=>$email,
+            'diachi'=>$diachi,
+            'created'=>$date,
+        ]);
+        return $kq;
+    }
 }

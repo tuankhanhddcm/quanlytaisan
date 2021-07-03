@@ -57,4 +57,26 @@ class Nhanvien extends Model
         ->where('taisan.ma_ts',$ma_ts)->get();
         return $data;
     }
+
+    public function find($id)
+    {
+        $kq = DB::table($this->table)->where('nhanvien.ma_nv',$id)
+        ->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
+        ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu')->first();
+        return $kq;
+    }
+
+    public function update_nv($id,$ten_nv,$sdt,$email,$diachi,$ma_phong,$date,$chuc_vu)
+    {
+        $table = DB::table($this->table)->where('nhanvien.ma_nv',$id)->update([
+            'ten_nv'=>$ten_nv,
+            'sdt'=>$sdt,
+            'email'=>$email,
+            'diachi'=>$diachi,
+            'ma_phong'=>$ma_phong,
+            'created'=>$date,
+            'ma_chucvu'=>$chuc_vu,
+        ]);
+        return $table;
+    }
 }

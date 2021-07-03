@@ -23,9 +23,10 @@ class TaisanExport implements WithEvents
     /**
     * @return \Illuminate\Support\Collection
     */
+
     public function __construct($dk)
     {
-        $this->dk = $dk;
+        $this->taisan = $dk;
     }
 
     public function registerEvents(): array
@@ -34,15 +35,13 @@ class TaisanExport implements WithEvents
       return [
             
          BeforeExport::class => function(BeforeExport $event){
-            $taisan = new Taisan;
-            $taisan = $taisan->tsOfphong($this->dk);
             $event->writer->reopen(new \Maatwebsite\Excel\Files\LocalTemporaryFile('phieukiemke/kiemke.xlsx'),Excel::XLSX);
 
             $event->writer->getSheetByIndex(0);
             $event->getWriter()->getSheetByIndex(0)->setCellValue('A8',"Thời điểm kiểm kê: ".Carbon::now('Asia/Ho_Chi_Minh')->format('H:i d-m-Y'));
             $i=17;
             $n =1;
-            foreach($taisan as $val){
+            foreach($this->taisan as $val){
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('A'.$i,$n);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.$i,$val->ten_ts);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.$i,$val->ten_phong);

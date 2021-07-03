@@ -29,7 +29,7 @@ class NhanvienController extends Controller
         $phongban = $this->phongban->select();
         $chucvu = $this->chucvu->select();   
         $nhanvien = $this->nhanvien->select(); 
-        return view('layout.Nhanvien',compact('phongban','chucvu','nhanvien'));
+        return view('nhanvien.index',compact('phongban','chucvu','nhanvien'));
     }
 
     /**
@@ -96,7 +96,10 @@ class NhanvienController extends Controller
      */
     public function edit($id)
     {
-        //
+        $nv = $this->nhanvien->find($id);
+        $cv = $this->chucvu->get();
+        $pb = $this->phongban->get();
+        return view('nhanvien.modal_update_nhanvien',compact('nv','cv','pb'));
     }
 
     /**
@@ -108,7 +111,9 @@ class NhanvienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $date = date("d-m-Y");
+        $this->nhanvien->update_nv($id,$request->ten_nv,$request->sdt,$request->email,$request->diachi,$request->ma_phong,$date,$request->ma_chucvu);
+        return redirect('/nhanvien');
     }
 
     /**

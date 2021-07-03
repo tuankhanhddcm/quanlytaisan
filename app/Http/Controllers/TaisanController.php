@@ -268,11 +268,18 @@ class TaisanController extends Controller
         }
         
     }
-    public function export() 
+    public function export(Request $request) 
     {  
-        // $excel = Excel::import(new Taisan,'phieukiemke/kiemke.xlsx');
-        // dd($excel);
+        if($request->ajax()){
+            $ma_phong = $request->ma_phong;
+            if($ma_phong !=''){
+                $taisan =$this->taisan->tsOfphong($ma_phong);
+            }else{
+                $taisan = $this->taisan->select('','all');
+            }
+            return Excel::download(new TaisanExport($taisan), 'taisan.xlsx');
+        }
 
-        return Excel::download(new TaisanExport('PB000001'), 'taisan.xlsx');
+        
     }
 }

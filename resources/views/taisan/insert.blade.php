@@ -103,7 +103,7 @@
                                                             @endif
                                                         @endforeach
                                                     </select>
-                                                    <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_ncc"><i class='bx bx-plus'></i></button>
+                                                    <button class=" btn_plus"  type="button" data-toggle="modal" data-target="#create_phongban"><i class='bx bx-plus'></i></button>
                                                 </div>
                                             </div>
                                             <div style="display: flex;">

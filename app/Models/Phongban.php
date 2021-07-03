@@ -38,4 +38,17 @@ class Phongban extends Model
             );
         return $data;
     }
+
+    public function find($id)
+    {
+        $table = DB::table($this->table)->where('phongban.ma_phong','=',$id)->first();
+        return $table;
+    }
+    public function update_phong($id, $ten_phong, $mota)
+    {   
+        $table = DB::table($this->table)->where('phongban.ma_phong',$id)->update([
+            'ten_phong'=>$ten_phong,
+            'mota'=>$mota,
+        ]);
+    }
 }

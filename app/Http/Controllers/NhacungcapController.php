@@ -22,7 +22,7 @@ class NhacungcapController extends Controller
     public function index()
     {
         $ncc = $this->nhacungcap->select();        
-        return view('layout.Nhacungcap',compact('ncc'));
+        return view('nhacungcap.index',compact('ncc'));
     }
 
     /**
@@ -89,7 +89,8 @@ class NhacungcapController extends Controller
      */
     public function edit($id)
     {
-        //
+        $NCC = $this->nhacungcap->find($id);
+        return view('nhacungcap.modal_updatencc',compact('NCC'));
     }
 
     /**
@@ -101,7 +102,9 @@ class NhacungcapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $date = date("d-m-Y");
+        $this->nhacungcap->update_ncc($id,$request->ten_ncc,$request->sdt,$request->email,$request->dia_chi, $date);
+        return redirect('/nhacungcap');
     }
 
     /**
