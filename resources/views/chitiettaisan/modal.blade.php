@@ -1,5 +1,5 @@
 {{-- modal thêm chi tiết  --}}
-<div class="modal fade" id="themchitiet">
+<div class="modal fade" id="themchitiet" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -134,7 +134,7 @@
                     <div class="form-wrap">
                         <div class="form_input ">
                             <div class="select_wrap form_input--items" style="width: 100%;">
-                                <select class=" select loaits-select form-control"  id="loaits_up" name ="loaits_up" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                <select class=" select loaits_up-select form-control"  id="loaits_up" name ="loaits_up" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn tài sản--</option>
                                         @foreach ($taisan as $item)
                                             @if (isset($chitiet_up) && $chitiet_up->ma_ts==$item->ma_ts)
@@ -148,8 +148,8 @@
                             </div>
                         </div>
                         <div style="display: flex;">
-                            <i class='bx bxs-error-circle loaits_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                            <span class="error_loaits error"></span>
+                            <i class='bx bxs-error-circle loaits_up_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                            <span class="error_loaits_up error"></span>
                         </div>
                     </div>
                 </div>
@@ -172,9 +172,25 @@
                             <div class="select_wrap form_input--items" style="width: 100%;">
                                 <select class=" select trangthai-select form-control"  id="trangthai_up" name ="trangthai_up" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn loại trạng thái--</option>
-                                    <option value="0">Không sử dụng</option>
-                                    <option value="1">Đang sử dụng</option>
-                                    <option value="2">Hư hỏng</option>
+                                    @if (isset($chitiet_up))
+                                        @switch($chitiet_up->trangthai)
+                                            @case(0)
+                                            <option value="0" selected>Chưa sử dụng</option>
+                                            <option value="1" >Đang sử dụng</option>
+                                            <option value="2" >Hư hỏng</option>
+                                                @break
+                                            @case(1)
+                                            <option value="0" >Chưa sử dụng</option>
+                                            <option value="1" selected >Đang sử dụng</option>
+                                            <option value="2" >Hư hỏng</option>
+                                                @break
+                                            @case(1)
+                                            <option value="0" >Chưa sử dụng</option>
+                                            <option value="1"  >Đang sử dụng</option>
+                                            <option value="2" selected >Hư hỏng</option>
+                                                @break
+                                        @endswitch
+                                    @endif
                                 </select>
                             </div>
                         </div>

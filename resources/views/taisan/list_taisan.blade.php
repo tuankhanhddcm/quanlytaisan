@@ -8,6 +8,7 @@
             <th >Phòng/ban</th>
             <th >Số lượng</th>
             <th>Ngày mua</th>
+            <th style="width: 3%">In thẻ TSCĐ</th>
             <th style="border-right: none;"></th>
         </tr>
     </thead>
@@ -30,9 +31,10 @@
                 <td>{{$item->ten_phong}}</td>
                 <td>{{$item->soluong}}</td>
                 <td>{{date('d-m-Y', strtotime($item->ngay_mua))}}</td>
-                <td style="border-right: none; display: flex">
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa tài sản" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                <td> <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('inthe_id',$item->ma_ts)}}'" title="In thẻ" ><i class='bx bxs-memory-card' style="font-size: 30px; color:#5bc0de;"></i></button></td>
+                <td style="border-right: none; display: flex;justify-content: space-around">
+                    <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                    <button style="width:40px; height:40px;  border:none; background-color: transparent;" title="Xóa tài sản" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                 </td>
             </tr>
             @php
@@ -41,6 +43,6 @@
         @endforeach
     </tbody>
 </table>
-<div style="position: absolute; right: 0;">
+<div style="display: flex;justify-content: flex-end">
     {{$taisan->onEachSide(2)->links()}}
 </div>

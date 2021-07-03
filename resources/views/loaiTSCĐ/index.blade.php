@@ -1,6 +1,6 @@
 @extends('home')
-@section('loaiTSCĐ')
-<div class="col-sm-12" style="min-height: 665px; background-color: white;">
+@section('index')
+<div class="col-sm-12" style=" background-color: white;">
     <div class="main_ward">
         <div class="main-name">
             <h3 class="main-text">Danh mục loại tài sản cố định</h3>

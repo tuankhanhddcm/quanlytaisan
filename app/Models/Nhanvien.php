@@ -9,11 +9,14 @@ class Nhanvien extends Model
 {
     public $table ="nhanvien";
     
-    public function select($all=''){
+    public function select($all='',$dieukien =''){
         $nv = DB::table($this->table)
         ->select('nhanvien.*','phongban.ten_phong','chucvu.ten_chucvu')
         ->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
         ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu');
+        if($dieukien !=''){
+            $nv = $nv->where('phongban.ma_phong',$dieukien);
+        }
         if($all !=''){
             $nv = $nv->get();
         }else{
@@ -46,6 +49,12 @@ class Nhanvien extends Model
 
     public function nvOfphong($ma_phong){
         $data = DB::table($this->table)->where('ma_phong','=',''.$ma_phong.'')->get();
+        return $data;
+    }
+    public function nvOftaisan($ma_ts){
+        $data = DB::table($this->table)
+        ->join('taisan','taisan.ma_phong','=','nhanvien.ma_phong')
+        ->where('taisan.ma_ts',$ma_ts)->get();
         return $data;
     }
 }

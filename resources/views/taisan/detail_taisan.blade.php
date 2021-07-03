@@ -1,5 +1,5 @@
 @extends('home')
-@section('detail_taisan')
+@section('chitiet')
 <div class="col-sm-12" style=" background-color: white;">
     <div class="main_ward">
         <div class="main-name">

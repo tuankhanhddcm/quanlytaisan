@@ -71,7 +71,7 @@ class Taisan extends Model
         return $kq;
     }
 
-    public function search_taisan( $text,$selected){
+    public function search_taisan( $text,$selected,$ma_phong){
         $kq = $this->table_join();
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
@@ -81,6 +81,9 @@ class Taisan extends Model
         }
         if($selected !=''){
             $kq = $kq->where('loaitaisancodinh.ma_loai',$selected);
+        }
+        if($ma_phong !=''){
+            $kq = $kq->where('taisan.ma_phong',$ma_phong);
         }
         $kq =$kq->paginate(8);
         return $kq;
@@ -112,7 +115,7 @@ class Taisan extends Model
     }
 
     public function tsOfphong($ma_phong){
-        $data = DB::table($this->table)->where('ma_phong','=',''.$ma_phong.'')->get();
+        $data = $this->table_join()->where('taisan.ma_phong','=',''.$ma_phong.'')->get();
         return $data;
     }
 }

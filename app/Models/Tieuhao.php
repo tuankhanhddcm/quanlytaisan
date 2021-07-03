@@ -14,5 +14,8 @@ class Tieuhao extends Model
     }
    
     
-   
+    public function find_by_ts($ma_ts){
+        $data = DB::table($this->table)->where('ma_loai','=',''.$ma_ts.'')->first();
+        return $data;
+    }
 }

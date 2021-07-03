@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn_cus btn_luu " onclick="check('.title_lb');check('#file_temp');">Lưu</button>
+                        <button type="submit" class="btn_cus btn_luu " >Lưu</button>
                         <button type="button" class="btn_cus btn-close"  style="margin-bottom: 5px; font-size: 16px;font-weight: 400" data-dismiss="modal">Đóng</button>
                     </div>
                 </form>

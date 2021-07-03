@@ -105,4 +105,10 @@ class TieuhaoController extends Controller
             return view('tieuhao.list_tieuhao',compact('tieuhao'));
         }
     }
+    public function find_tieuhao(Request $request){
+        if($request->ajax()){
+            $data = $this->tieuhao->find_by_ts($request->ma_loai);
+            echo json_encode($data) ;
+        }
+    }
 }

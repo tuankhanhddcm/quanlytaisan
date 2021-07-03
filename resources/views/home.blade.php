@@ -196,29 +196,14 @@
                 </li>
 
               </ul>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class='nav-icon bx bx-move-horizontal' ></i>
-                <p>
-                  Phiếu bàn giao
-                  <i class='bx bx-chevron-down right'></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/bangiao" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Phiếu bàn giao tài sản</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Chi tiết phiếu bàn giao</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+              <li class="nav-item">
+                <a href="/bangiao" class="nav-link ">
+                  <i class='nav-icon bx bxs-file'></i>
+                  <p>
+                    Phiếu bàn giao tài sản
+                  </p>
+                </a>
+              </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class='nav-icon bx bx-sitemap' ></i>
@@ -321,22 +306,10 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @yield('taisan')
-        @yield('maubaocao')
         @yield('view_baocao')
-        @yield('nhanvien')
-        @yield('phongban') 
-        @yield('nhacungcap') 
-        @yield('loaitaisan')
-        @yield('trangchu')
-        @yield('chitiettaisan')
-        @yield('insert_chitiet')
-        @yield('tieuhao')
-        @yield('loaiTSCĐ')
-        @yield('detail_loaiTSCD')
-        @yield('detail_taisan')
-        @yield('bangiao')
-        @yield('thembangiao')
+        @yield('insert')
+        @yield('chitiet')
+        @yield('index')
     </div>
     <!-- /.content-wrapper -->
     {{-- @include('modal.modal_insert') --}}
@@ -347,7 +320,7 @@
   <!-- jQuery -->
   <script src="{{ URL::asset('js/jquery-3.6.0.min.js')}}"></script>
   
-  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script> --}}
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ URL::asset('js/jquery-ui.min.js')}}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

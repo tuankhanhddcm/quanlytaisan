@@ -64,6 +64,6 @@
         @endforeach
     </tbody>
 </table>
-<div style="position: absolute; right: 0;">
+<div style="display: flex;justify-content: flex-end">
     {{$chitiettaisan->onEachSide(2)->links()}}
 </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exports\TaisanExport;
 use App\Models\Chitiettaisan;
 use App\Models\Loaitaisan;
 use App\Models\LoaiTSCD;
@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TaisanController extends Controller
 {
@@ -49,9 +50,11 @@ class TaisanController extends Controller
     {
         $ts = $this->taisan->select();
         $loai = $this->loaiTSCD->select('all');
+        $phongban = $this->phongban->select('all');
         return view('taisan.index',[
                     'taisan'=>$ts,
-                    'loaits' =>$loai
+                    'loaits' =>$loai,
+                    'phongban' =>$phongban
         ]);
     }
 
@@ -150,7 +153,7 @@ class TaisanController extends Controller
     {
         $taisan = $this->taisan->show_ts($id);
         $chitiettaisan = $this->chitiettaisan->select($id);
-        $nhanvien = $this->nhanvien->select('all');
+        $nhanvien = $this->nhanvien->nvOftaisan($id);
         return view('taisan.detail_taisan',[
             'taisan'=>$taisan,
             'chitiettaisan'=>$chitiettaisan,
@@ -212,9 +215,10 @@ class TaisanController extends Controller
         if($request->ajax()){
             $text=$request->text;
             $seleted =$request->seleted;
+            $ma_phong =$request->ma_phong;
             $taisan = $this->taisan->select();
-            if($text !='' || $seleted !=''){
-                $taisan = $this->taisan->search_taisan($text,$seleted);
+            if($text !='' || $seleted !='' || $ma_phong !=''){
+                $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong);
             }
             return view('taisan.list_taisan',compact('taisan'));
         }
@@ -237,14 +241,38 @@ class TaisanController extends Controller
             return response()->download('thetaisan.docx')->deleteFileAfterSend(true);
         }
     }
+    public function in_theTSCD_id($id){
+        $taisan = $this->taisan->show_ts($id);
+        if(isset($taisan)){
+            $file = new TemplateProcessor('theTSCD/theTSCD.docx');
+            $file->setValue('ten_ts',$taisan->ten_ts);
+            $file->setValue('ngay',Carbon::now()->day);
+            $file->setValue('thang',Carbon::now()->month);
+            $file->setValue('nam',Carbon::now()->year);
+            $file->setValue('nuoc_sx',$taisan->nuoc_sx);
+            $file->setValue('nam_sx',$taisan->nam_sx);
+            $file->setValue('phong',$taisan->ten_phong);
+            $file->setValue('n',date('Y',strtotime($taisan->ngay_sd)));
+            $file->setValue('ngia',number_format($taisan->nguyengia).'đ');
+            $file->saveAS('thetaisan ('.$taisan->ten_ts.').docx');
+            return response()->download('thetaisan ('.$taisan->ten_ts.').docx')->deleteFileAfterSend(true);
+        }
+    }
 
     public function modal_chitiet(Request $request, $id){
         if($request->ajax()){
             $chitiet_up = $this->chitiettaisan->show_id($id);
-            $nhanvien = $this->nhanvien->select('all');
+            $nhanvien = $this->nhanvien->nvOftaisan($request->ma_ts);
             $taisan = $this->taisan->show_ts($request->ma_ts);
             return view('taisan.modal_chitiet',compact('chitiet_up','nhanvien','taisan'));
         }
         
+    }
+    public function export() 
+    {  
+        // $excel = Excel::import(new Taisan,'phieukiemke/kiemke.xlsx');
+        // dd($excel);
+
+        return Excel::download(new TaisanExport('PB000001'), 'taisan.xlsx');
     }
 }

@@ -17,11 +17,18 @@ $(document).ready(function () {
         search_phieubangiao(1);
     });
 
-    $('.loaits-select').click(function () {
+    $(document).on('click','.loaits-select',function(){
         check('#loaits');
         hao_mon();
+        loc_nvOftaisan('#loaits','#nhanvien');
+    });
+    $(document).on('click','.loaits_up-select',function(){
+        check('#loaits_up');
+        hao_mon();
+        loc_nvOftaisan('#loaits_up','#nhanvien_up');
     });
 
+    hao_mon();
     $('.nhanvien-select').click(function () {
         check('#nhanvien');
     });
@@ -35,6 +42,7 @@ $(document).ready(function () {
     });
     $('.select-phongban').click(function () {
         check('#phongban');
+        search_ts(1);
     });
 
     // check số
@@ -71,8 +79,8 @@ $(document).ready(function () {
     $(document).on('click', '.btn_chitiet', function () {
         var id = $(this).data('id_chitiet');
         update_chitiet(id);
-        show_modal_chitiet(id);
     });
+
     $(document).on('click', '.btn_modal_chitiet', function () {
         var id = $(this).data('id');
         var ma_ts = $(this).data('ma_ts');
@@ -164,6 +172,7 @@ function search_loaiTSCD(page) {
 function search_ts(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
+    var ma_phong = $('#phong option:selected').val();
     $.ajax({
 
         url: '/taisan/search?page=' + page,
@@ -171,6 +180,7 @@ function search_ts(page) {
         data: {
             text: text,
             seleted: seleted,
+            ma_phong:ma_phong
         },
         success: function (data) {
             $('#list_taisan').html(data);
@@ -261,6 +271,8 @@ function check(id) {
             break;
         case 'loaits': text = 'chọn loại tài sản';
             break;
+        case 'loaits_up': text = 'chọn loại tài sản';
+            break;
         case 'phongban': text = 'chọn phòng ban';
             break;
         case 'nhanvien': text = 'chọn nhân viên';
@@ -308,19 +320,23 @@ function readURL(input, id_img, loaifile = '') {
             if (type == match[1]) {
                 $('.' + id + "_icon").css('display', 'none');
                 $(".error_" + id).text('');
+                $(".error_" + id).css("display", 'none');
                 kq = true;
             } else {
                 $(".error_" + id).text('File không hợp lệ');
+                $(".error_" + id).css("display", 'block');
                 $('.' + id + "_icon").css('display', 'block');
             }
         } else {
             $('.text_name_file').text(files.name);
             if (type == match[0] || type == match[2]) {
                 $('.' + id + "_icon").css('display', 'none');
+                $(".error_" + id).css("display", 'none');
                 $(".error_" + id).text('');
                 kq = true;
             } else {
                 $(".error_" + id).text('File không hợp lệ');
+                $(".error_" + id).css("display", 'block');
                 $('.' + id + "_icon").css('display', 'block');
             }
         }
@@ -339,8 +355,10 @@ function readURL(input, id_img, loaifile = '') {
 
 function check_insertFile() {
     check('.mota_lb');
-    check('#file_pdf')
-    if (check('.title_lb') && check('#file_temp') && check('#file_pdf') && check('.mota_lb'))
+    check('#file_pdf');
+    readURL(this,'#file_temp','word');
+    readURL(this,'#file_pdf','pdf');
+    if (check('.title_lb') && check('#file_temp') && check('#file_pdf') && check('.mota_lb') && readURL(this,'#file_temp','word')&&readURL(this,'#file_pdf','pdf'))
         return true;
     return false;
 }
@@ -481,9 +499,10 @@ function check_insert_taisan(mess = '') {
     check('.ngaytang_lb');
     check('.ngaysd_lb');
     check('.ngia_lb');
+    check_ngaysd();
     if (check('.tents_lb') && check('#loaits') && check('.sl_lb') && check('#phongban')
         && check('.so_hieu_lb') && check('.nsx_lb') && check('#ncc') && check('.nuoc_sx_lb')
-        && check('.ngaymua_lb') && check('.ngaytang_lb') && check('.ngaysd_lb') && check('.ngia_lb')
+        && check('.ngaymua_lb') && check('.ngaytang_lb') && check('.ngaysd_lb') && check('.ngia_lb') && check_ngaysd()
     ) {
         return true;
     } else {
@@ -528,7 +547,10 @@ function update_loaiTSCD(id) {
         method: 'get',
         success: function (data) {
             $('#modal_tscd').html(data);
-            $('#updateTSCD').modal('show');
+            $('#updateTSCD').modal({
+                show:true,
+                backdrop:'static'
+            });
             $(document).ready(function () {
                 $(".select").selectpicker();
             });
@@ -537,6 +559,26 @@ function update_loaiTSCD(id) {
 }
 
 // thông tin hao mòn
+function tinh_nam_HM(val) {
+    if(val !=undefined){
+        var today = new Date();
+        var nam = Number(today.getFullYear());
+        var bd = Number(val.slice(val.lastIndexOf('-') + 1));
+        var conlai = nam - bd;
+        var tgsd = Number($('.tgSD').text());
+    if (tgsd > 0) {
+        if (conlai < tgsd) {
+            $('.tgSD_conlai_HM').text(tgsd - conlai);
+
+        } else {
+            $('.tgSD_conlai_HM').text('0');
+        }
+        $('.dennam_HM').text(bd + tgsd);
+    }
+    }
+    
+
+}
 function hao_mon() {
     var id = $('.loaits-select option:selected').val()
     if (id != '') {
@@ -546,17 +588,20 @@ function hao_mon() {
             data: { ma_loai: id },
             dataType: 'json',
             success: function (data) {
-                $('.tile_HM').text(data['muc_tieuhao']);
-                $('.tgSD').text(data['thoi_gian_sd']);
-                tinh_nam_HM($('.ngaysd').val());
-                var ngia = $('.ngia').val();
-                var hm = $('.tile_HM').text();
-                var giatri = Number(ngia) * (Number(hm) / 100);
-                if (giatri) {
-                    $('.giatri_HM').text(giatri);
-                } else {
-                    $('.giatri_HM').text('0');
+                if(data !=null){
+                    $('.tile_HM').text(data['muc_tieuhao']);
+                    $('.tgSD').text(data['thoi_gian_sd']);
+                    tinh_nam_HM($('.ngaysd').val());
+                    var ngia = $('.ngia').val();
+                    var hm = $('.tile_HM').text();
+                    var giatri = Number(ngia) * (Number(hm) / 100);
+                    if (giatri) {
+                        $('.giatri_HM').text(giatri);
+                    } else {
+                        $('.giatri_HM').text('0');
+                    }
                 }
+                
             }
         });
     } else {
@@ -572,8 +617,37 @@ function hao_mon() {
     } else {
         $('.giatri_HM').text('0');
     }
+    var ngay = $('.ngaysd').val();
+    if(ngay !=''){
+        $('.bd_HM').text(ngay);
+    }else{
+        $('.bd_HM').text('dd-mm-yyyy');
+    }
 
 
+}
+
+function check_ngaysd(){
+    if($('.ngaymua').val() !=''){
+        var ngaymua = new Date($('.ngaymua').val());
+        var ngaysd = new Date($('.ngaysd').val());
+        if(ngaysd >=ngaymua){
+            $('.ngaysd').removeClass('error_input');
+            $(".ngaysd_icon").css("display", "none");
+            $(".error_ngaysd").text("");
+            $(".error_ngaysd").css("display", "none");
+            return true;
+        }else{
+            
+            $('.ngaysd').addClass('error_input');
+            $(".ngaysd_icon").css("display", "block");
+            $(".error_ngaysd").text("Ngày sử dụng phải lớn hơn hoặc bằng ngày mua");
+            $(".error_ngaysd").css("display", "block");
+            return false;
+        }
+    }
+    
+    
 }
 
 function in_theTSCD() {
@@ -640,7 +714,10 @@ function update_chitiet(id) {
                 $('#modal_chitiet').html(data);
                 $(document).ready(function () {
                     $(".select").selectpicker();
-                    $('#suachitiet').modal('show');
+                    $('#suachitiet').modal({
+                        show:true,
+                        backdrop:'static'
+                    });
                 });
             }
         });
@@ -658,7 +735,10 @@ function show_modal_chitiet(id, ma_ts) {
                 $('#modal_chitietofts').html(data);
                 $(document).ready(function () {
                     $(".select").selectpicker();
-                    $('#suachitiet').modal('show');
+                    $('#suachitiet').modal({
+                        show:true,
+                        backdrop:'static'
+                    });
                 });
             }
         });
@@ -681,23 +761,7 @@ function loc_select(url, id, div) {
 }
 
 
-function tinh_nam_HM(val) {
-    var today = new Date();
-    var nam = Number(today.getFullYear());
-    var bd = Number(val.slice(val.lastIndexOf('-') + 1));
-    var conlai = nam - bd;
-    var tgsd = Number($('.tgSD').text());
-    if (tgsd > 0) {
-        if (conlai < tgsd) {
-            $('.tgSD_conlai_HM').text(tgsd - conlai);
 
-        } else {
-            $('.tgSD_conlai_HM').text('0');
-        }
-        $('.dennam_HM').text(bd + tgsd);
-    }
-
-}
 
 function check_inser_bangiao() {
     check('#nv_giao');
@@ -727,4 +791,19 @@ function check_ts_more(ten) {
         }
     }
     return kq;
+}
+
+function loc_nvOftaisan(id,div){
+    var ma_ts = $(''+id+' option:selected').val();
+    if(ma_ts !=""){
+        $.ajax({
+            url:'/chitiettaisan/loc_nv',
+            method:'post',
+            data:{ma_ts:ma_ts},
+            success:function(data){
+                $(div).html(data);
+                $(div).selectpicker('refresh');
+            }
+        });
+    }
 }

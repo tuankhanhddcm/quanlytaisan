@@ -11,7 +11,7 @@ class Chitiettaisan extends Model
 
     public function table_join(){
         $data = DB::table($this->table)
-                ->select('chitiettaisan.*','taisan.ten_ts')
+                ->select('chitiettaisan.*','taisan.ten_ts','taisan.ma_phong')
                 ->join('taisan','chitiettaisan.ma_ts','=','taisan.ma_ts');
         return $data;
     }
@@ -64,7 +64,7 @@ class Chitiettaisan extends Model
     }
 
     public function show_id($id){
-        $data = DB::table($this->table)->where('ma_chitiet','=',''.$id.'')->first();
+        $data = $this->table_join()->where('ma_chitiet','=',''.$id.'')->first();
         return $data;
     }
 

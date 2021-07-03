@@ -1,5 +1,5 @@
 @extends('home')
-@section('nhanvien')
+@section('index')
 <div class="col-sm-12" style="min-height: 665px; background-color: white;">
     <div class="main_ward">
         <div class="main-name">

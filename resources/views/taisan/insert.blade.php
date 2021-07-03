@@ -1,5 +1,5 @@
 @extends('home')
-@section('insert_chitiet')
+@section('insert')
 <div class="col-sm-12" style=" background-color: white; padding-left: 10px;">
     <div class="main_ward">
         <form action="{{(isset($taisan))?route('taisan.update',$taisan->ma_ts):route('taisan.store')}}" method="post"  onsubmit="return check_insert_taisan()">
@@ -218,7 +218,7 @@
                                         <label for="" class="form-label ngaysd_lb">Ngày sử dụng:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb');$('.bd_HM').text($(this).val());tinh_nam_HM($(this).val())" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb');$('.bd_HM').text($(this).val());tinh_nam_HM($(this).val());console.log(check_ngaysd());" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaysd_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>

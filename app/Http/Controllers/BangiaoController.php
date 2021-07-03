@@ -117,7 +117,10 @@ class BangiaoController extends Controller
      */
     public function show($id)
     {
-        //
+        $bangiao = $this->bangiao->find($id);
+        $nhanvien = $this->nhanvien->select('all');
+        $chitiet = $this->chitietphieu->select_bangiao('',$id);
+        return view('bangiao.chitietbangiao',compact('nhanvien','bangiao','chitiet'));
     }
 
     /**

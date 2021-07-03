@@ -1,6 +1,6 @@
 
 {{-- thêm phòng ban --}}
-<div class="modal fade" id="create_phongban" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="create_phongban" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -114,8 +114,8 @@
     </div>
 </div>
 
-{{-- modal thêm nhà cung cấp --}}
-<div class="modal fade" id="create_ncc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+{{-- modal thêm nhà cung cấp --}} 
+<div class="modal fade" id="create_ncc" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
   <div class="modal-dialog " id="modal-ad" role="document">
     <div class="modal-content">
       <div class="modal-header">

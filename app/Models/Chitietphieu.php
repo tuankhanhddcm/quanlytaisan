@@ -8,8 +8,19 @@ use Illuminate\Support\Facades\DB;
 class Chitietphieu extends Model
 {
     protected $table ='chitietphieu';
-    public function select($all=''){
-        $loaits = DB::table($this->table);
+
+
+    public function table_join(){
+        $data = DB::table($this->table)
+        ->join('chitiettaisan','chitiettaisan.ma_chitiet','=','chitietphieu.ma_chitiet')
+        ->join('taisan','taisan.ma_ts','=','chitiettaisan.ma_ts');
+        return $data;
+        
+    }
+
+    public function select_bangiao($all='',$id){
+        $loaits = $this->table_join()->select('chitietphieu.*','taisan.ten_ts','chitiettaisan.ten_chitiet','chitiettaisan.so_serial','chitiettaisan.ma_nv as nv_sd')
+        ->where('ma_bangiao',$id);
         if($all !=''){
             $loaits = $loaits->get();
         }else{
@@ -45,18 +56,7 @@ class Chitietphieu extends Model
         return $kq;
     }
 
-    public function search($text,$selected){
-        $loai = DB::table($this->table)
-        ->select('loaitaisancodinh.*','loai.ten_loai as loai')
-        ->join('loai','loaitaisancodinh.id_loai','=','loai.id_loai');
-        if($text !=''){
-            $loai = $loai->where('loaitaisancodinh.ten_loai','like','%'.$text.'%');
-                
-        }
-        if($selected !=''){
-            $loai = $loai->where('loaitaisancodinh.id_loai',$selected);
-        }
-        $loai = $loai->paginate(8);
-        return $loai;
-    }
+    
+
+
 }

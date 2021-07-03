@@ -1,5 +1,5 @@
 @extends('home')
-@section('thembangiao')
+@section('insert')
 <style>
     label{
         font-size: 14px !important;

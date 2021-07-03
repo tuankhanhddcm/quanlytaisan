@@ -1,5 +1,5 @@
 {{-- modal thêm chi tiết  --}}
-<div class="modal fade" id="themchitiet">
+<div class="modal fade" id="themchitiet" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -104,7 +104,7 @@
       </div>
 </div>
 {{-- modal sửa chi tiết  --}}
-<div class="modal fade" id="suachitiet">
+<div class="modal fade" id="suachitiet" data-backdata-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

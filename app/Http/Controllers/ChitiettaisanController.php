@@ -9,6 +9,7 @@ use App\Models\Phongban;
 use App\Models\Taisan;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
+use Svg\Tag\Rect;
 
 class ChitiettaisanController extends Controller
 {
@@ -110,7 +111,7 @@ class ChitiettaisanController extends Controller
     {
         $taisan = $this->taisan->select('','all');
         $chitiet_up = $this->chitiettaisan->show_id($id);
-        $nhanvien = $this->nhanvien->select();
+        $nhanvien = $this->nhanvien->select('all',$chitiet_up->ma_phong);
         return view('chitiettaisan.modal',compact('chitiet_up','taisan','nhanvien'));
     }
 
@@ -157,6 +158,20 @@ class ChitiettaisanController extends Controller
                 $chitiettaisan = $this->chitiettaisan->select();
             }
             return view('chitiettaisan.list_chitiet',compact('chitiettaisan','nhanvien'));
+        }
+    }
+
+    public function loc_nvofphong(Request $request){
+        if($request->ajax()){
+            $ma_ts =$request->ma_ts;
+            $nv = $this->nhanvien->nvOftaisan($ma_ts);
+            if($nv){
+                $kq='<option value="" selected>--Chọn nhân viên--</option>';
+                foreach($nv as $val){
+                    $kq .='<option value="'.$val->ma_nv.'">'.$val->ten_nv.'</option>';
+                }
+                return $kq;
+            }
         }
     }
 }

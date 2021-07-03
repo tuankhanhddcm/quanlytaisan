@@ -1,5 +1,5 @@
 @extends('home')
-@section('trangchu')
+@section('index')
 <style>
     .image{
         margin-left: 20%;
