@@ -95,6 +95,7 @@ class BangiaoController extends Controller
             foreach($request->ma_chitiet as $val){
                 $ketqua = $this->chitietphieu->insert($ma_bangiao,null,null,$val,null);
                 if($ketqua){
+                    $up_mv = $this->chitiettaisan->update_nv($val,$request->nv_nhan);
                     foreach($request->tinhtrang as $tt){
                         $result = $this->chitietphieu->update_tinhtrang_bangiao($val,$ma_bangiao,$tt);
                         
@@ -159,7 +160,7 @@ class BangiaoController extends Controller
     public function more_ts(Request $request){
         if($request->ajax()){
             $sl = $request->sl;
-            $taisan = $this->taisan->tsOfphong($request->ma_phong);
+            $taisan = $this->chitiettaisan->ctOfnv($request->ma_nv);
             $phongban = $this->phongban->select('all');
             $nhanvien = $this->nhanvien->select();
             if($sl >1){
@@ -188,21 +189,21 @@ class BangiaoController extends Controller
             }
         }
     }
-    public function loc_ts(Request $request){
-        if($request->ajax()){
-            $ts = $this->taisan->tsOfphong($request->id);
-            if($ts){
-                $kq='<option value="" selected>--Chọn tài sản--</option>';
-                foreach($ts as $val){
-                    $kq .='<option value="'.$val->ma_ts.'">'.$val->ten_ts.'</option>';
-                }
-                return $kq;
-            }
-        }
-    }
+    // public function loc_ts(Request $request){
+    //     if($request->ajax()){
+    //         $ts = $this->taisan->tsOfphong($request->id);
+    //         if($ts){
+    //             $kq='<option value="" selected>--Chọn tài sản--</option>';
+    //             foreach($ts as $val){
+    //                 $kq .='<option value="'.$val->ma_ts.'">'.$val->ten_ts.'</option>';
+    //             }
+    //             return $kq;
+    //         }
+    //     }
+    // }
     public function loc_chitiet(Request $request){
         if($request->ajax()){
-            $chitiet = $this->chitiettaisan->ctOfphong($request->id);
+            $chitiet = $this->chitiettaisan->ctOfnv($request->id);
             if($chitiet){
                 $kq='<option value="" selected>--Chọn chi tiết tài sản--</option>';
                 foreach($chitiet as $val){

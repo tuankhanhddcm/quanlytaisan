@@ -218,7 +218,7 @@
                                         <label for="" class="form-label ngaysd_lb">Ngày sử dụng:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb');$('.bd_HM').text($(this).val());tinh_nam_HM($(this).val());console.log(check_ngaysd());" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
+                                                <input type="text" class="form-input date ngaysd" name="ngaysd" onchange="check('.ngaysd_lb');$('.bd_HM').text($(this).val());tinh_nam_HM($(this).val());check_ngaysd();$('.bd_KH').text($(this).val())" value="{{(isset($taisan))?$taisan->ngay_sd:''}}"  placeholder="dd-mm-yyyy">
                                             </div>
                                             <div style="display: flex;">
                                                 <i class='bx bxs-error-circle ngaysd_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -289,7 +289,6 @@
                                             <div class="form_input">
                                                 <span  class="form-input giatri_HM " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
-                                            
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -310,11 +309,7 @@
                                                 <label for="" class="form-label bd_KH_lb">Ngày bắt đầu tính khấu hao:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input date bd_KH" disabled value="" placeholder="dd-mm-yyyy">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle bd_KH_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_bd_KH error"></span>
+                                                        <span  class="form-input bd_KH " style="display: block;border-color:#4bac4d">dd-mm-yyyy</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,14 +326,10 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="" class="form-label tyle_KH_lb">Tỷ lệ tính khấu hao (%):</label>
+                                                <label for="" class="form-label tile_KH_lb">Tỷ lệ tính khấu hao (%):</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input tyle_KH" disabled  value="" style="text-align: right" placeholder="0.00">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle tyle_KH_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_tyle_KH error"></span>
+                                                        <span  class="form-input tile_KH " style="display: block;border-color:#4bac4d;text-align: right">0.00</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,11 +337,7 @@
                                                 <label for="" class="form-label luyke_lb">Khấu hao lũy kế:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input luyke" disabled  value="" style="text-align: right" placeholder="0">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle luyke_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_luyke error"></span>
+                                                        <span  class="form-input luyke " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -362,11 +349,7 @@
                                                 <label for="" class="form-label giatri_KH_lb">Giá trị tính khấu hao:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input giatri_KH" disabled  value="" style="text-align: right" placeholder="0">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle giatri_KH_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_giatri_KH error"></span>
+                                                        <span  class="form-input giatri_KH " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -374,11 +357,7 @@
                                                 <label for="" class="form-label tg_KH_lb">Thời gian tính khấu hao:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input tg_KH" disabled value="" style="text-align: right" placeholder="0">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle tg_KH_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_tg_KH error"></span>
+                                                        <span  class="form-input tg_KH " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -386,11 +365,7 @@
                                                 <label for="" class="form-label giatri_KH_thang_lb">Giá trị khấu hao tháng:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input giatri_KH_thang" disabled value="" style="text-align: right" placeholder="0">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle giatri_KH_thang_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_giatri_KH_thang error"></span>
+                                                        <span  class="form-input giatri_KH_thang " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,11 +373,7 @@
                                                 <label for="" class="form-label tg_KH_conlai_lb">Thời gian tính KH còn lại tháng:</label>
                                                 <div class="form-wrap">
                                                     <div class="form_input">
-                                                        <input type="text" class="form-input tg_KH_conlai" disabled value="" style="text-align: right" placeholder="0">
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <i class='bx bxs-error-circle tg_KH_conlai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                        <span class="error_tg_KH_conlai error"></span>
+                                                        <span  class="form-input tg_KH_conlai " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -416,11 +387,7 @@
                                         <label for="" class="form-label HM_KH_luyke_lb">Hao mòn/khấu hao lũy kế:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input HM_KH_luyke"  value="" style="text-align: right" placeholder="0">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle HM_KH_luyke_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_HM_KH_luyke error"></span>
+                                                <span  class="form-input HM_KH_luyke " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -430,11 +397,7 @@
                                         <label for="" class="form-label conlai_lb">Giá trị còn lại:</label>
                                         <div class="form-wrap">
                                             <div class="form_input">
-                                                <input type="text" class="form-input conlai" disabled value="" style="text-align: right" placeholder="0">
-                                            </div>
-                                            <div style="display: flex;">
-                                                <i class='bx bxs-error-circle conlai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
-                                                <span class="error_conlai error"></span>
+                                                <span  class="form-input conlai " style="display: block;border-color:#4bac4d;text-align: right">0</span>
                                             </div>
                                         </div>
                                     </div>

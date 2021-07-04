@@ -1,15 +1,16 @@
 <table class="table table_sp ">
     <thead class="heading-table">
         <tr>
-            <th style="border-left: 1px solid rgba(0,0,0,.1); width:5%;">STT</th>
+            <th style="border-left: 1px solid rgba(0,0,0,.1); width:20px;">STT</th>
             <th >Mã Phiếu</th>
             <th >Tên người giao</th>
             <th >Phòng giao</th>
             <th >Tên người nhận</th>
             <th >Phòng nhận</th>
-            <th >Ngày giao</th>
-            <th style="width: 15%;">Lý do</th>
-            <th style="width: 5%;">In phiếu</th>
+            <th style="width: 8%;">Ngày giao</th>
+            <th style="width: 8%;">Lý do</th>
+            <th style="width: 2%;">In phiếu</th>
+            <th style="width: 3%;">Hoạt động</th>
         </tr>
     </thead>
     <tbody >
@@ -52,7 +53,11 @@
                 <td>{{date('m-d-Y', strtotime($item->ngay_nhan))}}</td>
                 <td>{{$item->ghichu}}</td>
                 <td>
-                    <button onclick="location.href='/bangiao/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 30px; color:#3c97ff;"></i></button>
+                    <button onclick="location.href='/bangiao/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
+                </td>
+                <td style="border-right: none; display: flex;justify-content: space-around">
+                    <button style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
                 </td>
             </tr>
             @php

@@ -107,21 +107,26 @@ $(document).ready(function () {
         var ngia = $(this).val();
         var hm = $('.tile_HM').text();
         var giatri = Number(ngia) * (Number(hm) / 100);
+        var tgsdconlai = Number($('.tg_SD_conlai_HM').text());
+        var tgsd = Number($('.tgSD').text());
         if (giatri) {
             $('.giatri_HM').text(giatri);
         } else {
             $('.giatri_HM').text('0');
         }
+        // if((tgsd-tgsdconlai)>0){
+
+        // }
 
     });
 
     $('#so_tai_san').change(function () {
-        var sl = Number($(this).val());
-        var ma_phong = $('.select-phonggiao option:selected').val();
+        var sl = Number($('#so_tai_san').val());
+        var ma_nv = $('.select-nv_giao option:selected').val();
         $.ajax({
             url: '/bangiao/more_ts',
             method: 'post',
-            data: { sl: sl, ma_phong: ma_phong },
+            data: { sl: sl, ma_nv: ma_nv },
             success: function (data) {
                 $('.more_taisan').html(data);
                 $(".select").selectpicker();
@@ -134,34 +139,33 @@ $(document).ready(function () {
 
     // lọc select------------------
     $('.select-phonggiao').click(function () {
-        loc_select('loc_nv', $('.select-phonggiao option:selected').val(), '#nv_giao');
-        loc_select('loc_ts', $('.select-phonggiao option:selected').val(), '#ts');
-        var sl = Number($('#so_tai_san').val());
-        var ma_phong = $('.select-phonggiao option:selected').val();
-        $.ajax({
-            url: '/bangiao/more_ts',
-            method: 'post',
-            data: { sl: sl, ma_phong: ma_phong },
-            success: function (data) {
-                $('.more_taisan').html(data);
-                $(".select").selectpicker();
-
-            }
-        });
+        loc_select('loc_nv', $('.select-phonggiao option:selected').val(), '#nv_giao')
     });
 
     $('.select-phongnhan').click(function () {
         loc_select('loc_nv', $('.select-phongnhan option:selected').val(), '#nv_nhan');
     });
 
-    $(document).on('click', '.select-ts', function () {
+    $(document).on('click', '.select-nv_giao', function () {
+        // var sl = Number($('#so_tai_san').val());
+        // if (sl > 1) {
+        //     for (i = 1; i <= sl; i++)
+        //         loc_select('loc_chitiet', $('#nv_giao' + i + ' option:selected').val(), '#chitiet' + i);
+        // } else {
+        //     loc_select('loc_chitiet', $('#nv_giao option:selected').val(), '#chitiet1');
+        // }
         var sl = Number($('#so_tai_san').val());
-        if (sl > 1) {
-            for (i = 1; i <= sl; i++)
-                loc_select('loc_chitiet', $('#ts' + i + ' option:selected').val(), '#chitiet' + i);
-        } else {
-            loc_select('loc_chitiet', $('#ts1 option:selected').val(), '#chitiet1');
-        }
+        var ma_nv = $('.select-nv_giao option:selected').val();
+        $.ajax({
+            url: '/bangiao/more_ts',
+            method: 'post',
+            data: { sl: sl, ma_nv: ma_nv },
+            success: function (data) {
+                $('.more_taisan').html(data);
+                $(".select").selectpicker();
+
+            }
+        });
     });
 
 });
@@ -784,9 +788,9 @@ function check_inser_bangiao() {
     check('.ngaygiao_lb');
     readURL(this, '#file_pdf', 'pdf');
     check('#phongnhan');
-    check_ts_more('ts');
     check_ts_more('chitiet');
-    if (check('#phonggiao') && check('#nv_giao') && check('#nv_nhan') && check('.ngaygiao_lb') && check('#phongnhan') && readURL(this, '#file_pdf', 'pdf') && check_ts_more('ts') && check_ts_more('chitiet')) {
+    check_trung_ts('chitiet');
+    if (check('#phonggiao') && check('#nv_giao') && check('#nv_nhan') && check('.ngaygiao_lb') && check('#phongnhan') && readURL(this, '#file_pdf', 'pdf') && check_ts_more('chitiet')&&check_trung_ts('chitiet')) {
         return true;
     }
     return false;
@@ -804,6 +808,30 @@ function check_ts_more(ten) {
         } else {
             kq = true;
         }
+    }
+    return kq;
+}
+
+function check_trung_ts(ten){
+    var sl = Number($('#so_tai_san').val());
+    var kq = false;
+    for (i = 1; i <= sl; i++) {
+        for(j=i+1;j<=sl;j++){
+            if ($('#' + ten + i).val() == $('#' + ten + j).val() ) {
+                $('.' + ten + j).addClass('error_input');
+                $("." + ten + j + "_icon").css("display", "block");
+                $(".error_" + ten + j).text("Tài sản đã được chọn");
+                $(".error_" + ten + j).css("display", "block");
+                kq = false;
+            } else {
+                // $('.' + ten + j).removeClass('error_input');
+                // $("." + ten + j + "_icon").css("display", "none");
+                // $(".error_" + ten + j).text("");
+                // $(".error_" + ten + j).css("display", "none");
+                kq = true;
+            }
+        }
+        
     }
     return kq;
 }

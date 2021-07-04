@@ -80,8 +80,22 @@ class Chitiettaisan extends Model
             ]);
         return $kq;
     }
-    public function ctOfphong($ma_ts){
-        $data = DB::table($this->table)->where('ma_ts','=',''.$ma_ts.'')->get();
+    // public function ctOfphong($ma_ts){
+    //     $data = DB::table($this->table)->where('ma_ts','=',''.$ma_ts.'')->get();
+    //     return $data;
+    // }
+    public function ctOfnv($ma_nv){
+        $data = DB::table($this->table)->where('ma_nv',$ma_nv)->get();
         return $data;
     }
+
+    public function update_nv($ma_chitet,$ma_nv){
+        $data = DB::table($this->table)
+            ->where('ma_chitiet',$ma_chitet)
+            ->update([
+                'ma_nv'=>$ma_nv
+            ]);
+        return $data;
+    }
+
 }

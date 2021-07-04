@@ -9,7 +9,7 @@
 <div class="col-sm-12" style="min-height: 665px; background-color: white;">
     <div class="main_ward">
         <div class="main-name">
-            <h3 class="main-text" >Giao diện bàn giao tài sản</h3>
+            <h3 class="main-text" >Thêm phiếu bàn giao tài sản</h3>
             <div >
                 <button class="btn_cus btn-addsp" onclick="location.href='{{url('/word_export/M_u s_ 01 Biên b_n bàn giao, ti_p nh_n tài s_n công (1).docx')}}'" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu bàn giao</button>
                 <button class="btn_cus btn-back" type="button" onclick="location.href='{{route('bangiao.index')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
@@ -177,7 +177,7 @@
             </div>
             <div class="more_taisan">
                 <div class="col-sm-12 row" style="margin-bottom: 20px">
-                    <div class="col-sm-3">
+                    {{-- <div class="col-sm-3">
                         <label >Tài sản:</label><br>
                             <div style="width: 100%;">
                                 <select class=" select select-ts  form-control" id="ts1"  name ="ma_ts[]" data-dropup-auto="false" data-size='5' data-live-search="true">
@@ -191,9 +191,9 @@
                                 <i class='bx bxs-error-circle ts1_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                                 <span class="error_ts1 error"></span>
                             </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <label>Chi tiết tài sản:</label><br>
+                    </div> --}}
+                    <div class="col-sm-4">
+                        <label>Chi tiết tài sản thuộc nhân viên giao:</label><br>
                             <div style="width: 100%;">
                                 <select class=" select select-loaisp form-control " id="chitiet1"  name ="ma_chitiet[]" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn chi tiết tài sản--</option>
@@ -204,7 +204,7 @@
                                 <span class="error_chitiet1 error"></span>
                             </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <label >Tình Trạng:</label><br>
                             <div class="form_input">
                                 <input type="text" class="form-input tt" name="tinhtrang[]">
@@ -218,7 +218,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12" style="display: flex; justify-content: flex-end">
-                    <Button type="submit" onclick="console.log(check_inser_bangiao());" style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px;margin-top: 20px">Hoàn Thành</Button>
+                    <Button type="submit"  style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px;margin-top: 20px">Hoàn Thành</Button>
                 </div>
                 
             </div>
