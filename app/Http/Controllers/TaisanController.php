@@ -198,7 +198,7 @@ class TaisanController extends Controller
         $ngay_tang = Carbon::parse($request->ngaytang);
         $ngay_sd = Carbon::parse($request->ngaysd);
         $kq =$this->taisan->update_ts($id,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
-        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang    );
+        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang);
         
         if($kq){
             return redirect()->route('taisan.index');
