@@ -5,8 +5,8 @@
         <th >Tên chi tiết</th>
         <th >Tài sản</th>
         <th >Số serial</th>
-        <th >Trạng thái</th>
         <th >Phòng ban</th>
+        <th >Trạng thái</th>    
         <th>Nhân viên sử dụng</th>
         <th style="border-right: none;"></th>
     </thead>
@@ -27,11 +27,12 @@
                 <td>{{$item->ten_chitiet}}</td>
                 <td>{{$item->ten_ts}}</td>
                 <td>{{$item->so_serial}}</td>
+                <td>{{$item->ten_phong}}</td>
                 <td>
                     @php
                         switch ($item->trangthai) {
                             case '0':
-                                echo 'Không sử dụng';
+                                echo 'Chưa sử dụng';
                                 break;
                             case '1':
                                 echo 'Đang sử dụng';
@@ -42,20 +43,17 @@
                         }
                     @endphp
                 </td>
-                <td>{{$item->ten_phong}}</td>
+                
                 <td>
                     @php
                         foreach($nhanvien as $val){
                             if($item->ma_nv == $val->ma_nv){
                                 echo $val->ten_nv; 
-                            }elseif ($item->ma_nv==null) {
-                                echo 'không có nhân viên sử dụng';
-                                break;
                             }
                         }
                     @endphp
                 </td>
-                <td style="border-right: none;">
+                <td style="border-right: none;display:flex;justify-content: space-around">
                     <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
                     <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                 </td>
