@@ -163,7 +163,7 @@
             <hr>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="" class="form-label so_ts_lb">Số tài sản:</label>
+                    <label for="" class="form-label so_ts_lb">Số tài sản bàn giao:</label>
                     <div class="form-wrap">
                         <div class="form_input">
                             <input type="text" class="form-input so_ts soluong" id="so_tai_san"  onkeyup="check('.so_ts_lb');if($(this).val()=='0'){$(this).val('1')};" value="1"  placeholder="Nhập vào số tài sản">
@@ -178,7 +178,7 @@
             <div class="more_taisan">
                 <div class="col-sm-12 row" style="margin-bottom: 20px">
                     {{-- <div class="col-sm-3">
-                        <label >Tài sản:</label><br>
+                        <label >Tài sản bàn giao:</label><br>
                             <div style="width: 100%;">
                                 <select class=" select select-ts  form-control" id="ts1"  name ="ma_ts[]" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn tài sản--</option>
@@ -218,7 +218,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12" style="display: flex; justify-content: flex-end">
-                    <Button type="submit"  style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px;margin-top: 20px">Hoàn Thành</Button>
+                    <Button type="submit" style="background-color: #1ec023; border: none;color: white; padding: 10px 25px; border-radius: 7px;margin-top: 20px">Hoàn Thành</Button>
                 </div>
                 
             </div>

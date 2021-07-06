@@ -100,7 +100,7 @@ class TieuhaoController extends Controller
             $text=$request->text;
             $tieuhao = $this->taisan->select();
             if($text !=''){
-                $tieuhao = $this->taisan->search_taisan($text,'');
+                $tieuhao = $this->taisan->search_taisan($text,'','');
             }
             return view('tieuhao.list_tieuhao',compact('tieuhao'));
         }

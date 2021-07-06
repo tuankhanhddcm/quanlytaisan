@@ -126,4 +126,16 @@ class NhanvienController extends Controller
     {
         //
     }
+    public function search(Request $request)
+    {
+        $text = $request->text;
+        
+        if($text!=''){
+            $nhanvien = $this->nhanvien->search_nv($text);
+            
+        }else{
+            $nhanvien = $this->nhanvien->select();
+        }
+        return view('nhanvien.list_nhanvien',compact('nhanvien'));
+    }
 }

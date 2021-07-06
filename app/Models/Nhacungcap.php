@@ -50,4 +50,13 @@ class Nhacungcap extends Model
         ]);
         return $kq;
     }
+    public function search_ncc($text)
+    {
+        $table = DB::table($this->table)->where(function($res) use($text){
+            $res->where('nhacungcap.ten_ncc','like','%'.$text.'%')
+                ->orwhere('nhacungcap.ma_ncc','like','%'.$text.'%');
+        });
+        $table = $table->paginate(8);
+        return $table;
+    }
 }

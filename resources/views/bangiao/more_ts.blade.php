@@ -1,6 +1,6 @@
 <div class="col-sm-12 row" style="margin-bottom: 25px">
     {{-- <div class="col-sm-3">
-        <label >Tài sản:</label><br>
+        <label >Tài sản bàn giao:</label><br>
             <div style="width: 100%;">
                 <select class=" select select-ts  form-control" id="ts{{$a}}" data-tt="{{$a}}"  name ="ma_ts[]" data-dropup-auto="false" data-size='5' data-live-search="true">
                     <option value="">--Chọn tài sản--</option>

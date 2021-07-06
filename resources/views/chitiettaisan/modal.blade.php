@@ -74,6 +74,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Phòng ban sử dụng:</label>
+                    <div class="form-wrap">
+                        <div class="form_input ">
+                            <div class="select_wrap form_input--items" style="width: 100%;">
+                                <select class=" select phongban-select form-control"  id="phongban" name ="phongban" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                    <option value="">--Chọn phòng ban--</option>
+                                    @foreach ($phongban as $item)
+                                        @if (isset($chitiet_up) && $chitiet_up->ma_phong==$item->ma_phong)
+                                            <option value="{{$item->ma_phong}}" selected>{{$item->ten_phong}}</option>
+                                        @else
+                                            <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                                        @endif
+                                        
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <i class='bx bxs-error-circle phongban_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                            <span class="error_phongban error"></span>
+                        </div>
+                    </div>
+                </div>
               <div class="form-group">
                 <label for="" class="form-label">Nhân viên sử dụng:</label>
                 <div class="form-wrap">
@@ -197,6 +221,30 @@
                         <div style="display: flex;">
                             <i class='bx bxs-error-circle trangthai_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
                             <span class="error_trangthai error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Phòng ban sử dụng:</label>
+                    <div class="form-wrap">
+                        <div class="form_input ">
+                            <div class="select_wrap form_input--items" style="width: 100%;">
+                                <select class=" select phongban-select form-control"  id="phongban_up" name ="phongban_up" data-dropup-auto="false" data-size='5' data-live-search="true">
+                                    <option value="">--Chọn phòng ban--</option>
+                                    @foreach ($phongban as $item)
+                                        @if (isset($chitiet_up) && $chitiet_up->ma_phong==$item->ma_phong)
+                                            <option value="{{$item->ma_phong}}" selected>{{$item->ten_phong}}</option>
+                                        @else
+                                            <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                                        @endif
+                                        
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <i class='bx bxs-error-circle phongban_up_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
+                            <span class="error_phongban_up error"></span>
                         </div>
                     </div>
                 </div>

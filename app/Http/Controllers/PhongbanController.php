@@ -117,4 +117,16 @@ class PhongbanController extends Controller
     {
         //
     }
+    public function search_phong(Request $request)
+    {
+        if($request->ajax()){
+            $text = $request->text;
+            $phongban = $this->phongban->select();
+            if($text != ''){
+                $phongban = $this->phongban->search_phongban($text);
+            }
+            return view('phongban.list_phong',compact('phongban'));
+
+        }
+    }
 }

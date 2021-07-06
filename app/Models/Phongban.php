@@ -51,4 +51,23 @@ class Phongban extends Model
             'mota'=>$mota,
         ]);
     }
+    public function search_phongban($text)
+    {
+            $kq = DB::table($this->table)->where(function($res) use($text){
+                $res->where('phongban.ten_phong','like','%'.$text.'%')
+                    ->orwhere('phongban.ma_phong','like','%'.$text.'%');
+            });
+        $kq =$kq->paginate(8);
+        return $kq;
+    }
+
+    public function phongOfts($ma_ts){
+        $data = DB::table($this->table)
+        ->select('phongban.ma_phong','phongban.ten_phong')
+        ->join('chitiettaisan','chitiettaisan.ma_phong','=','phongban.ma_phong')
+        ->groupBy('phongban.ma_phong','phongban.ten_phong')
+        ->where('chitiettaisan.ma_ts',$ma_ts)->get();
+        return $data;
+    }
+
 }

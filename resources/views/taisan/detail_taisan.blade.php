@@ -51,7 +51,18 @@
                     <div class="col-sm-4">
                         <div class="form-group detail_user">
                             <label for="" class="col-sm-4">Phòng ban:</label>
-                            <div class="col-sm-8">{{isset($taisan)?$taisan->ten_phong:''}}</div>
+                            <div class="col-sm-8">
+                                @php
+                                    if(isset($taisan)){
+                                        foreach ($phongts as $val) {
+                                            if($taisan->ma_ts ==$val->ma_ts){
+                                                echo $val->ten_phong.'<br/>';
+                                            }
+                                        }
+                                    }
+                                    
+                                @endphp
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -119,6 +130,7 @@
                         <th >Tài sản</th>
                         <th >Số serial</th>
                         <th >Trạng thái</th>
+                        <th >Phòng ban</th>
                         <th>Nhân viên sử dụng</th>
                         <th style="border-right: none;"></th>
                     </thead>
@@ -154,6 +166,7 @@
                                         }
                                     @endphp
                                 </td>
+                                <td>{{$item->ten_phong}}</td>
                                 <td>
                                     @php
                                         foreach($nhanvien as $val){
@@ -163,6 +176,7 @@
                                         }
                                     @endphp
                                 </td>
+                               
                                 <td style="border-right: none;">
                                     <button class="btn_modal_chitiet" data-ma_ts="{{isset($taisan)?$taisan->ma_ts:''}}" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
                                     <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>

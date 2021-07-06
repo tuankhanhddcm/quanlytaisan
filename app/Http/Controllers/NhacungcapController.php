@@ -117,4 +117,14 @@ class NhacungcapController extends Controller
     {
         //
     }
+    public function search_nhacungcap(Request $request)
+    {
+        $text = $request->text;
+        if($text!=''){
+            $ncc = $this->nhacungcap->search_ncc($text);
+        }else{
+            $ncc = $this->nhacungcap->select();
+        }
+        return view('nhacungcap.list_nhacungcap',compact('ncc'));
+    }
 }

@@ -5,9 +5,10 @@
                 <th >Tên tài sản</th>
                 <th >Nguyên giá</th>
                 <th >Tỷ lệ hao mòn</th>
-                <th >Số HM/KH năm</th>
-                <th >Số khấu hao</th>
-                <th>Số hao mòn</th>
+                <th >Giá trị HM/KH năm</th>
+                <th >Năm sử dụng</th>
+                <th >Thời gian sử dụng</th>
+                <th >Thời gian sử dụng còn lại</th>
                 <th >Giá trị còn lại</th>
             </tr>
         </thead>
@@ -28,8 +29,9 @@
                     <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia)}}đ</td>
                     <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->muc_tieuhao}}</td>
                     <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia*$item->muc_tieuhao/100)}}đ</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{($item->nguyengia*$item->muc_tieuhao/100)*(date('Y')-date('Y',strtotime($item->ngay_sd)))}}</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{($item->nguyengia*$item->muc_tieuhao/100)*(date('Y')-date('Y',strtotime($item->ngay_sd)))}}</td>
+                    <td style="border: 1px solid rgba(0,0,0,.1)">{{date('Y',strtotime($item->ngay_sd))}}</td>
+                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->thoi_gian_sd}} năm</td>
+                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->thoi_gian_sd-(date('Y')-date('Y',strtotime($item->ngay_sd)))}} năm</td>
                     <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia - (($item->nguyengia*$item->muc_tieuhao/100)*(date('Y')-date('Y',strtotime($item->ngay_sd)))))}}đ</td>
                 </tr>
                 @php

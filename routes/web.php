@@ -39,11 +39,13 @@ Route::post('/maubaocao/search','MaubaocaoController@search');
 Route::resource('/phongban','PhongbanController');
 Route::post('/phongban/{id}/edit','PhongbanController@edit');
 Route::post('/phongban/update/{id}','PhongbanController@update');
+Route::post('/phongban/search','PhongbanController@search_phong');
 
 // nhân viên
 Route::resource('/nhanvien','NhanvienController');
 Route::post('/nhanvien/{id}/edit','NhanvienController@edit');
 Route::post('/nhanvien/update/{id}','NhanvienController@update');
+Route::post('/nhanvien/search','NhanvienController@search');
 
 // chitiettaisan
 Route::resource('/chitiettaisan','ChitiettaisanController');
@@ -55,6 +57,8 @@ Route::post('/chitiettaisan/loc_nv','ChitiettaisanController@loc_nvOfphong');
 Route::resource('/nhacungcap','NhacungcapController');
 Route::post('/nhacungcap/{id}/edit','NhacungcapController@edit');
 Route::post('/nhacungcap/update/{id}','NhacungcapController@update');
+
+Route::post('/nhacungcap/search','NhacungcapController@search_nhacungcap');
 // Loại tài sản
 Route::resource('/loaits','LoaitaisanController');
 Route::post('/loaits/search','LoaitaisanController@search_loai');

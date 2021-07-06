@@ -19,7 +19,7 @@ class Chitietphieu extends Model
     }
 
     public function select_bangiao($all='',$id){
-        $loaits = $this->table_join()->select('chitietphieu.*','taisan.ten_ts','chitiettaisan.ten_chitiet','chitiettaisan.so_serial','chitiettaisan.ma_nv as nv_sd')
+        $loaits = $this->table_join()->select('chitietphieu.*')
         ->where('ma_bangiao',$id);
         if($all !=''){
             $loaits = $loaits->get();

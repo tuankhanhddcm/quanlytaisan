@@ -6,6 +6,7 @@
         <th >Tài sản</th>
         <th >Số serial</th>
         <th >Trạng thái</th>
+        <th >Phòng ban</th>
         <th>Nhân viên sử dụng</th>
         <th style="border-right: none;"></th>
     </thead>
@@ -41,6 +42,7 @@
                         }
                     @endphp
                 </td>
+                <td>{{$item->ten_phong}}</td>
                 <td>
                     @php
                         foreach($nhanvien as $val){
@@ -54,8 +56,8 @@
                     @endphp
                 </td>
                 <td style="border-right: none;">
-                    <button class="btn_chitiet" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                    <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                 </td>
             </tr>
             @php

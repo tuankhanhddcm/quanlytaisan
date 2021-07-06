@@ -28,7 +28,16 @@
                 <td><a href="/taisan/{{$item->ma_ts}}">{{$item->ma_ts}}</a></td>
                 <td>{{$item->ten_ts}}</td>
                 <td>{{$item->ten_loai}}</td>
-                <td>{{$item->ten_phong}}</td>
+                <td>
+                    @php
+                        
+                        foreach ($phongts as $val) {
+                            if($item->ma_ts ==$val->ma_ts){
+                                echo $val->ten_phong.'<br/>';
+                            }
+                        }
+                    @endphp
+                </td>
                 <td>{{$item->soluong}}</td>
                 <td>{{date('d-m-Y', strtotime($item->ngay_mua))}}</td>
                 <td> <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('inthe_id',$item->ma_ts)}}'" title="In thẻ" ><i class='bx bxs-memory-card' style="font-size: 30px; color:#5bc0de;"></i></button></td>

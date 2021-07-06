@@ -53,8 +53,11 @@ class Nhanvien extends Model
     }
     public function nvOftaisan($ma_ts){
         $data = DB::table($this->table)
-        ->join('taisan','taisan.ma_phong','=','nhanvien.ma_phong')
-        ->where('taisan.ma_ts',$ma_ts)->get();
+        ->select('nhanvien.ma_nv','nhanvien.ten_nv')
+        ->join('phongban','phongban.ma_phong','=','nhanvien.ma_phong')
+        ->join('chitiettaisan','chitiettaisan.ma_phong','=','phongban.ma_phong')
+        ->groupBy('nhanvien.ma_nv','nhanvien.ten_nv')
+        ->where('chitiettaisan.ma_ts',$ma_ts)->get();
         return $data;
     }
 
@@ -77,6 +80,17 @@ class Nhanvien extends Model
             'created'=>$date,
             'ma_chucvu'=>$chuc_vu,
         ]);
+        return $table;
+    }
+    public function search_nv($text)
+    {
+        $table = DB::table($this->table)->where(function($res) use($text){
+            $res->where('nhanvien.ma_nv','like','%'.$text.'%')
+                ->orwhere('nhanvien.ten_nv','like','%'.$text.'%');
+        })->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
+        ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu')
+        ->select('nhanvien.*','phongban.ten_phong','chucvu.ten_chucvu');
+        $table=$table->paginate(8);
         return $table;
     }
 }

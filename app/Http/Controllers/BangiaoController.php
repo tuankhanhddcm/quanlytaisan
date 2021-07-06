@@ -52,7 +52,7 @@ class BangiaoController extends Controller
      */
     public function create()
     {
-        $taisan = $this->taisan->select('','all');
+        $taisan = $this->chitiettaisan->select('','all');
         $phongban = $this->phongban->select('all');
         $nhanvien = $this->nhanvien->select();
         return view('bangiao.thembangiao',compact('phongban','nhanvien','taisan'));
@@ -95,7 +95,8 @@ class BangiaoController extends Controller
             foreach($request->ma_chitiet as $val){
                 $ketqua = $this->chitietphieu->insert($ma_bangiao,null,null,$val,null);
                 if($ketqua){
-                    $up_mv = $this->chitiettaisan->update_nv($val,$request->nv_nhan);
+                    $up_mv = $this->chitiettaisan->update_phong($val,$request->phong_nhan);
+                    $up_nv = $this->chitiettaisan->update_nv($val,null);
                     foreach($request->tinhtrang as $tt){
                         $result = $this->chitietphieu->update_tinhtrang_bangiao($val,$ma_bangiao,$tt);
                         
@@ -120,8 +121,8 @@ class BangiaoController extends Controller
     {
         $bangiao = $this->bangiao->find($id);
         $nhanvien = $this->nhanvien->select('all');
-        $chitiet = $this->chitietphieu->select_bangiao('',$id);
-        return view('bangiao.chitietbangiao',compact('nhanvien','bangiao','chitiet'));
+        $chitiettaisan = $this->chitiettaisan->table_join()->join('chitietphieu','chitietphieu.ma_chitiet','=','chitiettaisan.ma_chitiet')->where('chitietphieu.ma_bangiao',$id)->paginate(8);
+        return view('bangiao.chitietbangiao',compact('nhanvien','bangiao','chitiettaisan'));
     }
 
     /**
@@ -160,7 +161,7 @@ class BangiaoController extends Controller
     public function more_ts(Request $request){
         if($request->ajax()){
             $sl = $request->sl;
-            $taisan = $this->chitiettaisan->ctOfnv($request->ma_nv);
+            $taisan = $this->chitiettaisan->ctOfphong($request->ma_phong);
             $phongban = $this->phongban->select('all');
             $nhanvien = $this->nhanvien->select();
             if($sl >1){
@@ -203,7 +204,7 @@ class BangiaoController extends Controller
     // }
     public function loc_chitiet(Request $request){
         if($request->ajax()){
-            $chitiet = $this->chitiettaisan->ctOfnv($request->id);
+            $chitiet = $this->chitiettaisan->ctOfphong($request->id);
             if($chitiet){
                 $kq='<option value="" selected>--Chọn chi tiết tài sản--</option>';
                 foreach($chitiet as $val){

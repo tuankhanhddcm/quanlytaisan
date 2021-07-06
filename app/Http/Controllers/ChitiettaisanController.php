@@ -30,6 +30,7 @@ class ChitiettaisanController extends Controller
         $this->taisan = new Taisan;
         $this->chitiettaisan = new Chitiettaisan;
         $this->nhanvien = new Nhanvien;
+        $this->phongban = new Phongban;
     }
     
     public function index()
@@ -37,7 +38,8 @@ class ChitiettaisanController extends Controller
         $taisan = $this->taisan->select();
         $chitiettaisan = $this->chitiettaisan->select();
         $nhanvien = $this->nhanvien->select('all');
-        return view('chitiettaisan.Chitiettaisan',compact('taisan','chitiettaisan','nhanvien'));
+        $phongban = $this->phongban->select('all');
+        return view('chitiettaisan.Chitiettaisan',compact('taisan','chitiettaisan','nhanvien','phongban'));
     }
 
     /**
@@ -81,7 +83,7 @@ class ChitiettaisanController extends Controller
         } else if ($id < 1000000) {
             $id_chitiet = 'CTS' . ($id);
         }
-        $kq =$this->chitiettaisan->insert($id_chitiet,$request->loaits,$request->tents,$request->so_serial,$request->trangthai,$request->nhanvien);
+        $kq =$this->chitiettaisan->insert($id_chitiet,$request->loaits,$request->tents,$request->phongban,$request->so_serial,$request->trangthai,$request->nhanvien);
         if($kq){
             if($request->taisan){
                 return redirect('/taisan/'.$request->taisan);
@@ -112,7 +114,8 @@ class ChitiettaisanController extends Controller
         $taisan = $this->taisan->select('','all');
         $chitiet_up = $this->chitiettaisan->show_id($id);
         $nhanvien = $this->nhanvien->select('all',$chitiet_up->ma_phong);
-        return view('chitiettaisan.modal',compact('chitiet_up','taisan','nhanvien'));
+        $phongban = $this->phongban->select('all');
+        return view('chitiettaisan.modal',compact('chitiet_up','taisan','nhanvien','phongban'));
     }
 
     /**
@@ -124,7 +127,7 @@ class ChitiettaisanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
+        $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->phongban_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
         if($kq){
             if($request->detail_ts !=''){
                 return redirect()->route('taisan.show',$request->detail_ts);

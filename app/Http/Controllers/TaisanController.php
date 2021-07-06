@@ -51,10 +51,12 @@ class TaisanController extends Controller
         $ts = $this->taisan->select();
         $loai = $this->loaiTSCD->select('all');
         $phongban = $this->phongban->select('all');
+        $phongtaisan = $this->taisan->phong_taisan();
         return view('taisan.index',[
                     'taisan'=>$ts,
                     'loaits' =>$loai,
-                    'phongban' =>$phongban
+                    'phongban' =>$phongban,
+                    'phongts'=>$phongtaisan
         ]);
     }
 
@@ -108,7 +110,7 @@ class TaisanController extends Controller
         $ngay_tang = Carbon::parse($request->ngay_tang);
         $ngay_sd = Carbon::parse($request->ngaysd);
         $kq =$this->taisan->insert($ma_ts,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
-        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang,$request->phongban);
+        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang);
         if($kq){
             if($request->sl !=''){
                 for($i=0;$i<$request->sl;$i++){
@@ -132,7 +134,7 @@ class TaisanController extends Controller
                     } else if ($id < 1000000) {
                         $ma_chitiet = 'CTS' . ($id);
                     }
-                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.(1+$i).')');
+                    $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.(1+$i).')',$request->phongban);
                 }
                 if($kq){
                     return redirect('/taisan/create');
@@ -154,10 +156,14 @@ class TaisanController extends Controller
         $taisan = $this->taisan->show_ts($id);
         $chitiettaisan = $this->chitiettaisan->select($id);
         $nhanvien = $this->nhanvien->nvOftaisan($id);
+        $phongban = $this->phongban->phongOfts($id);
+        $phongts = $this->taisan->phong_taisan();
         return view('taisan.detail_taisan',[
             'taisan'=>$taisan,
             'chitiettaisan'=>$chitiettaisan,
-            'nhanvien' =>$nhanvien
+            'nhanvien' =>$nhanvien,
+            'phongban'=>$phongban,
+            'phongts'=>$phongts
         ]);
     }
 
@@ -189,10 +195,10 @@ class TaisanController extends Controller
     public function update(Request $request, $id)
     {
         $ngay_mua=Carbon::parse($request->ngay_mua);
-        $ngay_tang = Carbon::parse($request->ngay_tang);
+        $ngay_tang = Carbon::parse($request->ngaytang);
         $ngay_sd = Carbon::parse($request->ngaysd);
         $kq =$this->taisan->update_ts($id,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
-        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang,$request->phongban);
+        ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang    );
         
         if($kq){
             return redirect()->route('taisan.index');
@@ -216,11 +222,12 @@ class TaisanController extends Controller
             $text=$request->text;
             $seleted =$request->seleted;
             $ma_phong =$request->ma_phong;
+            $phongts = $this->taisan->phong_taisan();
             $taisan = $this->taisan->select();
             if($text !='' || $seleted !='' || $ma_phong !=''){
                 $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong);
             }
-            return view('taisan.list_taisan',compact('taisan'));
+            return view('taisan.list_taisan',compact('taisan','phongts'));
         }
     }
 
@@ -262,9 +269,10 @@ class TaisanController extends Controller
     public function modal_chitiet(Request $request, $id){
         if($request->ajax()){
             $chitiet_up = $this->chitiettaisan->show_id($id);
-            $nhanvien = $this->nhanvien->nvOftaisan($request->ma_ts);
+            $nhanvien = $this->nhanvien->nvOfphong($chitiet_up->ma_phong);
+            $phongban = $this->phongban->phongOfts($request->ma_ts);
             $taisan = $this->taisan->show_ts($request->ma_ts);
-            return view('taisan.modal_chitiet',compact('chitiet_up','nhanvien','taisan'));
+            return view('taisan.modal_chitiet',compact('chitiet_up','nhanvien','taisan','phongban'));
         }
         
     }
@@ -272,12 +280,14 @@ class TaisanController extends Controller
     {  
         if($request->ajax()){
             $ma_phong = $request->ma_phong;
+            $phong='';
             if($ma_phong !=''){
-                $taisan =$this->taisan->tsOfphong($ma_phong);
+                $taisan =$this->taisan->export_tsOfphong($ma_phong);
             }else{
                 $taisan = $this->taisan->select('','all');
+                $phong = $this->taisan->phong_taisan();
             }
-            return Excel::download(new TaisanExport($taisan), 'taisan.xlsx');
+            return Excel::download(new TaisanExport($taisan,$phong), 'taisan.xlsx');
         }
 
         
