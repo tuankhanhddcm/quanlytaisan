@@ -250,6 +250,13 @@ class TaisanController extends Controller
     }
     public function in_theTSCD_id($id){
         $taisan = $this->taisan->show_ts($id);
+        $phongtaisan = $this->taisan->phong_taisan();
+        $ten_phong='';
+        foreach($phongtaisan as $item){
+            if($taisan->ma_ts == $item->ma_ts){
+                $ten_phong .= $item->ten_phong .', ';
+            }
+        }
         if(isset($taisan)){
             $file = new TemplateProcessor('theTSCD/theTSCD.docx');
             $file->setValue('ten_ts',$taisan->ten_ts);
@@ -258,7 +265,7 @@ class TaisanController extends Controller
             $file->setValue('nam',Carbon::now()->year);
             $file->setValue('nuoc_sx',$taisan->nuoc_sx);
             $file->setValue('nam_sx',$taisan->nam_sx);
-            $file->setValue('phong',$taisan->ten_phong);
+            $file->setValue('phong',$ten_phong);
             $file->setValue('n',date('Y',strtotime($taisan->ngay_sd)));
             $file->setValue('ngia',number_format($taisan->nguyengia).'đ');
             $file->saveAS('thetaisan ('.$taisan->ten_ts.').docx');

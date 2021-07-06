@@ -651,9 +651,11 @@ function hao_mon() {
 
 function check_ngaysd() {
     if ($('.ngaymua').val() != '') {
-        var ngaymua = new Date($('.ngaymua').val());
-        var ngaysd = new Date($('.ngaysd').val());
-        if (ngaysd >= ngaymua) {
+        var ngaymua = $('.ngaymua').val().split('-');
+        var ngaysd = $('.ngaysd').val().split('-');
+        var mua = moment([ngaymua[2],ngaymua[1],ngaymua[0]]);
+        var sd =  moment([ngaysd[2],ngaysd[1],ngaysd[0]]);
+        if (sd >= mua) {
             $('.ngaysd').removeClass('error_input');
             $(".ngaysd_icon").css("display", "none");
             $(".error_ngaysd").text("");
