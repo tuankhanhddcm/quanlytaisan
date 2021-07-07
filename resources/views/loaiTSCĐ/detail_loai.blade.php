@@ -76,7 +76,11 @@
                         <th style="border-right: none;"></th>
                     </thead>
                     <tbody >
+                        @if ($taisan->total() <= 0)
+                            <tr class="body-table"><td colspan='8' style="text-align: center">Không có dữ liệu nào !!!</td></tr>
+                        @else
                         @php
+                            
                             $page =$taisan->currentPage();
                             $prepage = $page -1;
                                 if($page>1){
@@ -85,24 +89,35 @@
                                     $count = 1;
                                 }
                             @endphp
-                        @foreach ($taisan as $k=>$item)
-                            <tr class="body-table" >
-                                <td>{{$count}}</td>
-                                <td><a href="/taisan/{{$item->ma_ts}}">{{$item->ma_ts}}</a></td>
-                                <td>{{$item->ten_ts}}</td>
-                                <td>{{$item->ten_loai}}</td>
-                                <td>{{$item->ten_phong}}</td>
-                                <td>{{$item->soluong}}</td>
-                                <td>{{date('d-m-Y', strtotime($item->ngay_mua))}}</td>
-                                <td style="border-right: none;display: flex; justify-content: space-around">
-                                    <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
-                                </td>
-                            </tr>
-                            @php
-                                $count++;
-                            @endphp
-                        @endforeach
+                            @foreach ($taisan as $k=>$item)
+                                <tr class="body-table" >
+                                    <td>{{$count}}</td>
+                                    <td><a href="/taisan/{{$item->ma_ts}}">{{$item->ma_ts}}</a></td>
+                                    <td>{{$item->ten_ts}}</td>
+                                    <td>{{$item->ten_loai}}</td>
+                                    <td>
+                                        @php
+                                            foreach ($phongtaisan as $val) {
+                                                if($item->ma_ts ==$val->ma_ts){
+                                                    echo $val->ten_phong.'<br/>';
+                                                }
+                                            }
+                                        @endphp
+                                    </td>
+                                    <td>{{$item->soluong}}</td>
+                                    <td>{{date('d-m-Y', strtotime($item->ngay_mua))}}</td>
+                                    <td style="border-right: none;display: flex; justify-content: space-around">
+                                        <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                                        <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                                    </td>
+                                </tr>
+                                @php
+                                    $count++;
+                                @endphp
+                            @endforeach
+                            
+                        @endif
+                        
                     </tbody>
                 </table>
                 <div style="position: absolute; right: 0;">

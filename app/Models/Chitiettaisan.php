@@ -17,12 +17,17 @@ class Chitiettaisan extends Model
         return $data;
     }
 
-    public function select($dieukien=''){
+    public function select($dieukien='',$all=''){
         $data = $this->table_join();
         if($dieukien !=''){
             $data = $data->where('chitiettaisan.ma_ts','=',''.$dieukien.'');
         }
-        $data = $data->paginate(8);
+        if($all !=''){
+            $data = $data->get();
+        }else{
+            $data = $data->paginate(8);
+        }
+        
         return $data;
     }
 
@@ -45,7 +50,7 @@ class Chitiettaisan extends Model
         ]);
         return $kq;
     }
-    public function search_chitiet( $text,$selected){
+    public function search_chitiet( $text,$selected,$ma_phong){
         $kq = $this->table_join();
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
@@ -55,6 +60,9 @@ class Chitiettaisan extends Model
         }
         if($selected !=''){
             $kq = $kq->where('taisan.ma_ts',$selected);
+        }
+        if($ma_phong !=''){
+            $kq = $kq->where('chitiettaisan.ma_phong',$ma_phong);
         }
         $kq =$kq->paginate(8);
         return $kq;
@@ -70,7 +78,7 @@ class Chitiettaisan extends Model
         return $data;
     }
 
-    public function update_chitiet($ma_chitet,$ma_ts,$ten_chitiet,$ma_phong,$so_serial='',$trangthai='',$ma_nv=null){
+    public function update_chitiet($ma_chitet,$ma_ts,$ten_chitiet,$so_serial='',$trangthai='',$ma_nv=null){
         $kq = DB::table($this->table)
             ->where('ma_chitiet','=',''.$ma_chitet.'')
             ->update([
@@ -79,7 +87,6 @@ class Chitiettaisan extends Model
                 'so_serial' =>$so_serial,
                 'trangthai'=>$trangthai,
                 'ma_nv'=>$ma_nv,
-                'ma_phong'=>$ma_phong
             ]);
         return $kq;
     }

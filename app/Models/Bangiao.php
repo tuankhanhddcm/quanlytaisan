@@ -44,12 +44,17 @@ class Bangiao extends Model
         return $table;
     }
 
-    public function update_loai($id,$ten_loai,$id_loai){
-        $kq = DB::table($this->table)->where('ma_loai','=',''.$id.'')->update([
-            'ten_loai'=>$ten_loai,
-            'id_loai'=>$id_loai,
-        ]);
-        return $kq;
+    public function update_bangiao($ma_bangiao,$nguoi_giao,$nguoi_nhan,$ghichu,$phieu,$ngay_nhan){
+        $data=DB::table($this->table)
+            ->where('ma_bangiao',$ma_bangiao)
+            ->update([
+                'nguoi_giao' =>$nguoi_giao,
+                'nguoi_nhan' =>$nguoi_nhan,
+                'ghichu' =>$ghichu,
+                'phieu'=>$phieu,
+                'ngay_nhan' =>$ngay_nhan,
+            ]);
+        return $data;
     }
 
     public function search($text,$selected){

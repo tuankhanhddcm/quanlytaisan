@@ -117,7 +117,8 @@ class LoaiTSCDController extends Controller
     {
         $loaiTSCD = $this->loaiTSCD->find($id);
         $taisan = $this->taisan->select($loaiTSCD->ma_loai);
-        return view('loaiTSCĐ.detail_loai',compact('loaiTSCD','taisan'));
+        $phongtaisan = $this->taisan->phong_taisan();
+        return view('loaiTSCĐ.detail_loai',compact('loaiTSCD','taisan','phongtaisan'));
     }
 
     /**

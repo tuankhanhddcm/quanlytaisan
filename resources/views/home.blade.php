@@ -118,12 +118,12 @@
                     <p>Chi tiết tài sản</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Lịch sử</p>
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a href="/tieuhao" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
@@ -167,7 +167,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="#" class="nav-link ">
                 <i class='nav-icon bx bxs-envelope' ></i>
                 <p>
@@ -194,16 +194,16 @@
                     <p>Thanh toán</p>
                   </a>
                 </li>
-
               </ul>
-              <li class="nav-item">
-                <a href="/bangiao" class="nav-link ">
-                  <i class='nav-icon bx bxs-file'></i>
-                  <p>
-                    Phiếu bàn giao tài sản
-                  </p>
-                </a>
-              </li>
+            </li> --}}
+            <li class="nav-item">
+              <a href="/bangiao" class="nav-link ">
+                <i class='nav-icon bx bxs-file'></i>
+                <p>
+                  Phiếu bàn giao tài sản
+                </p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class='nav-icon bx bx-sitemap' ></i>
@@ -228,7 +228,7 @@
               </ul>
             </li>
             {{-- menu-is-opening menu-open --}}
-            <li class="nav-item ">
+            {{-- <li class="nav-item ">
               <a href="#" class="nav-link ">
                 <i class='nav-icon bx bx-table' ></i>
                 <p>
@@ -250,7 +250,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class='nav-icon bx bx-checkbox-checked' ></i>

@@ -129,8 +129,8 @@
                         <th >Tên chi tiết</th>
                         <th >Tài sản</th>
                         <th >Số serial</th>
-                        <th >Trạng thái</th>
                         <th >Phòng ban</th>
+                        <th >Trạng thái</th>
                         <th>Nhân viên sử dụng</th>
                         <th style="border-right: none;"></th>
                     </thead>
@@ -151,6 +151,7 @@
                                 <td>{{$item->ten_chitiet}}</td>
                                 <td>{{$item->ten_ts}}</td>
                                 <td>{{$item->so_serial}}</td>
+                                <td>{{$item->ten_phong}}</td>
                                 <td>
                                     @php
                                         switch ($item->trangthai) {
@@ -166,7 +167,7 @@
                                         }
                                     @endphp
                                 </td>
-                                <td>{{$item->ten_phong}}</td>
+                                
                                 <td>
                                     @php
                                         foreach($nhanvien as $val){

@@ -133,7 +133,11 @@ class BangiaoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bangiao = $this->bangiao->find($id);
+        $nhanvien = $this->nhanvien->select('all');
+        $phongban = $this->phongban->select('all');
+        $chitiet = $this->chitiettaisan->table_join()->join('chitietphieu','chitietphieu.ma_chitiet','=','chitiettaisan.ma_chitiet')->where('chitietphieu.ma_bangiao',$id)->select('chitiettaisan.*','taisan.ten_ts','phongban.ten_phong','chitietphieu.tinhtrang')->get();
+        return view('bangiao.thembangiao',compact('bangiao','nhanvien','phongban','chitiet'));
     }
 
     /**
@@ -145,7 +149,28 @@ class BangiaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $file = $request->file_pdf;
+        $kq = $this->bangiao->update_bangiao($id,$request->nv_giao,$request->nv_nhan,$request->lydo,$file->getClientOriginalName(),$request->ngaygiao);
+        if($kq){
+            $file->move('phieubangiao',$file->getClientOriginalName());
+            $xoa = $this->chitietphieu->delete_phieu('ma_bangiao',$id);
+            if($xoa){
+                foreach($request->ma_chitiet as $val){
+                    $ketqua = $this->chitietphieu->insert($id,null,null,$val,null);
+                    if($ketqua){
+                        $up_mv = $this->chitiettaisan->update_phong($val,$request->phong_nhan);
+                        $up_nv = $this->chitiettaisan->update_nv($val,null);
+                        foreach($request->tinhtrang as $tt){
+                            $result = $this->chitietphieu->update_tinhtrang_bangiao($val,$id,$tt);
+                            
+                        }
+                    }
+                }
+                
+                return redirect()->route('bangiao.index');
+            }
+            
+        }
     }
 
     /**

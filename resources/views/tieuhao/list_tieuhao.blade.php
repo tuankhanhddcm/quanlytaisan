@@ -1,13 +1,14 @@
     <table class="table table_sp ">
         <thead class="heading-table">
             <tr>
-                <th style="border-left: 1px solid rgba(0,0,0,.1); width:7%;">Mã tài sản</th>
+                <th style="border-left: 1px solid rgba(0,0,0,.1); width:20px;">STT</th>
+                <th>Mã tài sản</th>
                 <th >Tên tài sản</th>
                 <th >Nguyên giá</th>
-                <th >Tỷ lệ hao mòn</th>
+                <th style="width: 120px; "  >Tỷ lệ hao mòn (% năm)</th>
                 <th >Giá trị HM/KH năm</th>
                 <th >Năm sử dụng</th>
-                <th >Thời gian sử dụng</th>
+                <th >Thời hạn sử dụng</th>
                 <th >Thời gian sử dụng còn lại</th>
                 <th >Giá trị còn lại</th>
             </tr>
@@ -23,16 +24,17 @@
                 }
             @endphp
              @foreach ($tieuhao as $item)
-                <tr>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ma_ts}}</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->ten_ts}}</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia)}}đ</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->muc_tieuhao}}</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia*$item->muc_tieuhao/100)}}đ</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{date('Y',strtotime($item->ngay_sd))}}</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->thoi_gian_sd}} năm</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{$item->thoi_gian_sd-(date('Y')-date('Y',strtotime($item->ngay_sd)))}} năm</td>
-                    <td style="border: 1px solid rgba(0,0,0,.1)">{{number_format($item->nguyengia - (($item->nguyengia*$item->muc_tieuhao/100)*(date('Y')-date('Y',strtotime($item->ngay_sd)))))}}đ</td>
+                <tr class="body-table">
+                    <td style="text-align: center">{{$count}}</td>
+                    <td ><a href="/taisan/{{$item->ma_ts}}">{{$item->ma_ts}}</a></td>
+                    <td >{{$item->ten_ts}}</td>
+                    <td >{{number_format($item->nguyengia)}}đ</td>
+                    <td style="text-align: center">{{$item->muc_tieuhao}}</td>
+                    <td style="text-align: center">{{number_format($item->nguyengia*$item->muc_tieuhao/100)}}đ</td>
+                    <td style="text-align: center">{{date('Y',strtotime($item->ngay_sd))}}</td>
+                    <td style="text-align: center">{{$item->thoi_gian_sd}} năm</td>
+                    <td style="text-align: center">{{$item->thoi_gian_sd-(date('Y')-date('Y',strtotime($item->ngay_sd)))}} năm</td>
+                    <td style="text-align: center">{{number_format($item->nguyengia - (($item->nguyengia*$item->muc_tieuhao/100)*(date('Y')-date('Y',strtotime($item->ngay_sd)))))}}đ</td>
                 </tr>
                 @php
                     $count++;

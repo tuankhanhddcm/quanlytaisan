@@ -28,6 +28,12 @@ class Chitietphieu extends Model
         }
         return $loaits;
     }
+
+    public function delete_phieu($col,$id)
+    {
+        $kq = DB::table($this->table)->where($col,$id)->delete();
+        return $kq;
+    }
     
     public function find($id){
         $data = DB::table($this->table)

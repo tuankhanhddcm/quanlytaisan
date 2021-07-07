@@ -23,7 +23,14 @@
                             @endforeach
                         </select>
                     </div>
-                    
+                    <div class="select_wrap">
+                        <select class=" select select-phongban  form-control" id="phong" data-dropup-auto="false" title="Phòng ban" data-size='5' data-live-search="true">
+                            <option value="" selected >--Chọn phòng ban--</option>
+                            @foreach ($phongban as $item)
+                                <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 </div>
             </div>

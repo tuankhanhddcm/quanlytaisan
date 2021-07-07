@@ -85,3 +85,4 @@ Route::post('/bangiao/loc_chitiet','BangiaoController@loc_chitiet');
 Route::post('/bangiao/more_ts','BangiaoController@more_ts');
 Route::get('/bangiao/phieu/{id}','BangiaoController@show_phieu');
 Route::post('/bangiao/search','BangiaoController@search');
+Route::post('/bangiao/update/{id}','BangiaoController@update')->name('bangiao.update');

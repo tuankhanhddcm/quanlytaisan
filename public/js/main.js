@@ -29,6 +29,7 @@ $(document).ready(function () {
     });
 
     hao_mon();
+    
     $('.nhanvien-select').click(function () {
         check('#nhanvien');
     });
@@ -43,6 +44,7 @@ $(document).ready(function () {
     $('.select-phongban').click(function () {
         check('#phongban');
         search_ts(1);
+        search_chitiet(1);
     });
 
     // check số
@@ -243,6 +245,7 @@ function search_tieuhao(page) {
 function search_chitiet(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
+    var ma_phong = $('.select-phongban option:selected').val();
     $.ajax({
 
         url: '/chitiettaisan/search?page=' + page,
@@ -250,6 +253,7 @@ function search_chitiet(page) {
         data: {
             text: text,
             seleted: seleted,
+            ma_phong:ma_phong
         },
         success: function (data) {
             $('#list_chitiet').html(data);
@@ -622,6 +626,7 @@ function hao_mon() {
                     } else {
                         $('.giatri_HM').text('0');
                     }
+                    khau_hao();
                 }
 
             }
@@ -636,15 +641,20 @@ function hao_mon() {
     var giatri = Number(ngia) * (Number(hm) / 100);
     if (giatri) {
         $('.giatri_HM').text(giatri);
+       
     } else {
         $('.giatri_HM').text('0');
+        
     }
     var ngay = $('.ngaysd').val();
     if (ngay != '') {
         $('.bd_HM').text(ngay);
+        $('.bd_KH').text(ngay);
     } else {
         $('.bd_HM').text('dd-mm-yyyy');
+        $('.bd_KH').text('dd-mm-yyyy');
     }
+    
 
 
 }
@@ -990,4 +1000,22 @@ function search_ncc(){
             $('#list_nhacungcap').html(data);
         }
     });
+}
+function khau_hao(){
+    var tgsd =$('.tgSD').text();
+    var ngia = $('.ngia').val();
+    if(tgsd !=undefined){
+        tgkh = Number(tgsd)*12;
+        $('.tg_KH').text(tgkh);
+        if(ngia !=undefined){
+            giatri_kh=Math.round(Number(ngia)/tgkh);
+            $('.giatri_KH_thang').text(giatri_kh);
+            $('.giatri_KH').text(ngia);
+        }else{
+            $('.giatri_KH').text('0');
+        }
+    }
+    
+    
+    
 }

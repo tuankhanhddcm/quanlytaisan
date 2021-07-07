@@ -127,7 +127,7 @@ class ChitiettaisanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->phongban_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
+        $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
         if($kq){
             if($request->detail_ts !=''){
                 return redirect()->route('taisan.show',$request->detail_ts);
@@ -153,10 +153,10 @@ class ChitiettaisanController extends Controller
         if($request->ajax()){
             $text=$request->text;
             $seleted =$request->seleted;
-            
+            $ma_phong = $request->ma_phong;
             $nhanvien = $this->nhanvien->select('all');
-            if($text !='' || $seleted !=''){
-                $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted);
+            if($text !='' || $seleted !='' || $ma_phong !=''){
+                $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted,$ma_phong);
             }else{
                 $chitiettaisan = $this->chitiettaisan->select();
             }
