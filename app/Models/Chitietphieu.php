@@ -44,13 +44,15 @@ class Chitietphieu extends Model
         return $data;
     }
     
-    public function insert($ma_bangiao,$ma_thanhly,$ma_kiemke,$ma_chitiet,$tinhtrang){
+    public function insert($ma_bangiao,$ma_thanhly,$ma_kiemke,$ma_chitiet,$tinhtrang,$soluong=null,$ma_ts=null){
         $table=DB::table($this->table)->insert([
             'ma_bangiao'=>$ma_bangiao,
             'ma_thanhly'=>$ma_thanhly,
             'ma_kiemke'=>$ma_kiemke,
             'ma_chitiet'=>$ma_chitiet,
             'tinhtrang'=>$tinhtrang,
+            'soluong'=>$soluong,
+            'ma_ts'=>$ma_ts
         ]);
         return $table;
     }

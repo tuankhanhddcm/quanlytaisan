@@ -86,3 +86,8 @@ Route::post('/bangiao/more_ts','BangiaoController@more_ts');
 Route::get('/bangiao/phieu/{id}','BangiaoController@show_phieu');
 Route::post('/bangiao/search','BangiaoController@search');
 Route::post('/bangiao/update/{id}','BangiaoController@update')->name('bangiao.update');
+
+// kiểm kê
+Route::resource('/kiemke','KiemkeController');
+Route::post('/kiemke/list_taisan','KiemkeController@list_taisan');
+Route::post('/kiemke/loc_cv','KiemkeController@loc_nv');

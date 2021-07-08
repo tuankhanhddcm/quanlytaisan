@@ -205,27 +205,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class='nav-icon bx bx-sitemap' ></i>
+              <a href="/kiemke" class="nav-link ">
+                <i class='nav-icon bx bxs-file'></i>
                 <p>
-                  Phiếu kiểm kê
-                  <i class='bx bx-chevron-down right'></i>
+                  Phiếu kiểm kê tài sản
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Phiếu kiêm kê tài sản</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Chi tiết phiếu kiểm kê</p>
-                  </a>
-                </li>
-              </ul>
             </li>
             {{-- menu-is-opening menu-open --}}
             {{-- <li class="nav-item ">

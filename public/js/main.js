@@ -41,10 +41,30 @@ $(document).ready(function () {
     $('.select-ncc').click(function () {
         check('#ncc');
     });
+
     $('.select-phongban').click(function () {
         check('#phongban');
         search_ts(1);
         search_chitiet(1);
+        list_ts_kiemke();
+    });
+
+    $('.select-nv-kk').click(function(){
+        check('#nv_kk_1_lb');
+        check('#nv_kk_2_lb');
+        check('#nv_kk_3_lb');
+        var ma_nv1=$('#nv_kk_1 option:selected').val();
+        var ma_nv2=$('#nv_kk_2 option:selected').val();
+        var ma_nv3=$('#nv_kk_3 option:selected').val();
+        if(ma_nv1 !=''){
+            loc_cv_nv('/kiemke/loc_cv',ma_nv1,'.chucvu_1');
+        }
+        if(ma_nv2 !=''){
+            loc_cv_nv('/kiemke/loc_cv',ma_nv2,'.chucvu_2');
+        }
+        if(ma_nv3 !=''){
+            loc_cv_nv('/kiemke/loc_cv',ma_nv3,'.chucvu_3');
+        }
     });
 
     // check số
@@ -171,6 +191,11 @@ $(document).ready(function () {
                 $(".select").selectpicker();
             }
         });
+    });
+    
+    $(document).on('keyup','.soluongkiemke',function(){
+        var id =$(this).data('id');
+        tru_sl_kiemke($(this).val(),id);
     });
 
 });
@@ -1004,18 +1029,67 @@ function search_ncc(){
 function khau_hao(){
     var tgsd =$('.tgSD').text();
     var ngia = $('.ngia').val();
+    var tgsdconlai = $('.tgSD_conlai_HM').text();
+    var hm = $('.giatri_HM').text();
     if(tgsd !=undefined){
         tgkh = Number(tgsd)*12;
         $('.tg_KH').text(tgkh);
-        if(ngia !=undefined){
+        if(ngia !=undefined && tgsdconlai !=undefined && hm !=undefined){
+            var giatriconlai = ngia-(tgsd-tgsdconlai)*hm
             giatri_kh=Math.round(Number(ngia)/tgkh);
             $('.giatri_KH_thang').text(giatri_kh);
             $('.giatri_KH').text(ngia);
+            $('.tg_KH_conlai').text(tgsdconlai*12);
+            $('.conlai').text(giatriconlai);
         }else{
             $('.giatri_KH').text('0');
+            $('.tg_KH_conlai').text('0');
+            $('.conlai').text('0');
         }
+        
     }
     
     
     
+}
+
+function list_ts_kiemke(){
+    var ma_phong = $('#phongban option:selected').val();
+        $.ajax({
+            url: '/kiemke/list_taisan',
+            method:'post',
+            data:{ma_phong:ma_phong},
+            success:function(data){
+                $('#list_taisan_kiemke').html(data);
+            }
+        });
+}
+
+function loc_cv_nv(url,ma_nv,div){
+    $.ajax({
+        url: url,
+        method: 'post',
+        data:{ma_nv:ma_nv},
+        success:function(data){
+            $(div).val(data);
+        }
+    });
+}
+
+function check_inser_kiemke(){
+    check('#nv_kk_1_lb');
+    check('#nv_kk_2_lb');
+    check('#nv_kk_3_lb');
+    check('#phongban');
+    check('.ngaykk_lb') ;
+    check('.dot_kk_lb');
+    if(check('#nv_kk_1_lb') && check('#nv_kk_2_lb') && check('#nv_kk_3_lb') && check('#phongban') && check('.ngaykk_lb') && check('.dot_kk_lb')){
+        return true;
+    }
+    return false;
+}
+
+function tru_sl_kiemke(val,id){
+    var sl = Number(val) - Number($('#soluong_ht'+id).text());
+    $('#soluong'+id).text(sl);
 }
