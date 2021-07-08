@@ -56,7 +56,7 @@
                     <div class="col-sm-6">
                         <div class="form-group detail_user">
                             <label for="" class="col-sm-4">Ngày giao:</label>
-                            <div class="col-sm-8">{{date('m-d-Y',strtotime($bangiao->ngay_nhan))}}</div>
+                            <div class="col-sm-8">{{date('d-m-Y',strtotime($bangiao->ngay_nhan))}}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">

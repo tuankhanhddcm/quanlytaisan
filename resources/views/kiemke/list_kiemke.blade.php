@@ -6,25 +6,48 @@
             <th >Phòng kiểm kê</th>
             <th >Đợt kiểm kê</th>
             <th >Ngày kiểm kê</th>
-            <th style="width: 8%;">Ghi chú</th>
-            <th style="width: 2%;">In phiếu</th>
+            <th style="width: 20%;">Ghi chú</th>
+            <th style="width: 2%;">Xuất excel</th>
             <th style="width: 3%;">Hoạt động</th>
         </tr>
     </thead>
     <tbody >
+        @if ($kiemke->total() >0)
+            @php
+            $page =$kiemke->currentPage();
+            $prepage = $page -1;
+                if($page>1){
+                    $count = $prepage*8+1;
+                }else {
+                    $count = 1;
+                }
+            @endphp
+            @foreach ($kiemke as $k=>$item)
             <tr class="body-table" >
-                <td>1</td>
-                <td><a href="{{route('kiemke.show','1')}}">2</a></td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
+                <td>{{$count}}</td>
+                <td><a href="">{{$item->ma_kiemke}}</a></td>
+                <td>{{$item->ten_phong}}</td>
+                <td>{{$item->dot_kiemke}}</td>
+                <td>{{date('d-m-Y',strtotime($item->ngay_kiemke))}}</td>
+                <td>{{$item->ghichu}}</td>
                 <td>
-                    <button onclick="'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
+                    <button onclick="location.href='{{route('kiemke.export',$item->ma_kiemke)}}'"  style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xuất excel" ><i class='bx bxs-file-export' style="font-size: 25px; color:#278a0e;"></i></button>
                 </td>
                 <td style="border-right: none; display: flex;justify-content: space-around">
-                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                    <button style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu kiểm kê" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu kiểm kê" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
                 </td>
             </tr>
+                @php
+                    $count++;
+                @endphp
+            @endforeach
+        @else
+        <tr class="body-table"><td colspan='8' style="text-align: center">Không có dữ liệu nào !!!</td></tr>
+        @endif
+            
     </tbody>
 </table>
+<div style="display: flex;justify-content: flex-end">
+    {{$kiemke->onEachSide(2)->links()}}
+</div>

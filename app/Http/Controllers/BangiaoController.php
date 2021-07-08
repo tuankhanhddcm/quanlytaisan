@@ -10,6 +10,7 @@ use App\Models\Nhacungcap;
 use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
+use Carbon\Carbon;
 use Svg\Tag\Rect;
 
 class BangiaoController extends Controller
@@ -89,7 +90,8 @@ class BangiaoController extends Controller
             $ma_bangiao = 'PBG' . ($id+1);
         }
         $file = $request->file_pdf;
-        $kq = $this->bangiao->insert($ma_bangiao,$request->nv_giao,$request->nv_nhan,$request->lydo,$file->getClientOriginalName(),$request->ngaygiao);
+        $ngaygiao = Carbon::parse($request->ngaygiao);
+        $kq = $this->bangiao->insert($ma_bangiao,$request->nv_giao,$request->nv_nhan,$request->lydo,$file->getClientOriginalName(),$ngaygiao);
         if($kq){
             $file->move('phieubangiao',$file->getClientOriginalName());
             foreach($request->ma_chitiet as $val){

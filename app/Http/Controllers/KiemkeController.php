@@ -7,7 +7,10 @@ use App\Models\Kiemke;
 use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KiemkeExport;
 
 class KiemkeController extends Controller
 {
@@ -34,8 +37,8 @@ class KiemkeController extends Controller
 
     public function index()
     {
-        
-        return view('kiemke.index');
+        $kiemke = $this->kiemke->select();
+        return view('kiemke.index',compact('kiemke'));
     }
 
     /**
@@ -104,7 +107,8 @@ class KiemkeController extends Controller
         foreach($request->soluongkiemke as $k=> $sl){
             $mang[$k]['soluong'] =$sl;
         }
-        $kq = $this->kiemke->insert($ma_kiemke,$request->dot_kk,$request->ngaykk,$request->phongban,$request->ghichu);
+        $date = Carbon::create($request->ngaykk);
+        $kq = $this->kiemke->insert($ma_kiemke,$request->dot_kk,$date,$request->phongban,$request->ghichu);
         if($kq){
             foreach($request->nv_kk as $val){
                 $k = $this->kiemke->insert_bankiemke($ma_kiemke,$val);
@@ -161,5 +165,14 @@ class KiemkeController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function export($id) 
+    {  
+        $kk = $this->kiemke->find($id);
+        $taisan = $this->taisan->export_tsOfphong($kk->ma_phong);
+        $kiemke = $this->kiemke->nv_kiemke($id);
+        return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke), 'kiemke.xlsx');
+
+        
     }
 }

@@ -1091,5 +1091,11 @@ function check_inser_kiemke(){
 
 function tru_sl_kiemke(val,id){
     var sl = Number(val) - Number($('#soluong_ht'+id).text());
+    console.log(sl);
+    if(sl < 0){
+        $('#soluong'+id).css('color','red');
+    }else{
+        $('#soluong'+id).css('color','black');
+    }
     $('#soluong'+id).text(sl);
 }

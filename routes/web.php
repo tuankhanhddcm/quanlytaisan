@@ -91,3 +91,4 @@ Route::post('/bangiao/update/{id}','BangiaoController@update')->name('bangiao.up
 Route::resource('/kiemke','KiemkeController');
 Route::post('/kiemke/list_taisan','KiemkeController@list_taisan');
 Route::post('/kiemke/loc_cv','KiemkeController@loc_nv');
+Route::get('/kiemke/export/{id}','KiemkeController@export')->name('kiemke.export');

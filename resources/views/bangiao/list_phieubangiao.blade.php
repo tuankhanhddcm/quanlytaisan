@@ -50,7 +50,7 @@
                 <td>{{$phonggiao}}</td>
                 <td>{{$nv_nhan}}</td>
                 <td>{{$phongnhan}}</td>
-                <td>{{date('m-d-Y', strtotime($item->ngay_nhan))}}</td>
+                <td>{{date('d-m-Y', strtotime($item->ngay_nhan))}}</td>
                 <td>{{$item->ghichu}}</td>
                 <td>
                     <button onclick="location.href='/bangiao/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>

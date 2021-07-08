@@ -11,7 +11,8 @@ class Kiemke extends Model
    
 
     public function select($all=''){
-        $loaits = DB::table($this->table);
+        $loaits = DB::table($this->table)->join('phongban','phongban.ma_phong','=','phieukiemke.ma_phong')
+                                        ->select('phieukiemke.*','phongban.ten_phong');
         if($all !=''){
             $loaits = $loaits->get();
         }else{
@@ -59,6 +60,20 @@ class Kiemke extends Model
                 'phieu'=>$phieu,
                 'ngay_nhan' =>$ngay_nhan,
             ]);
+        return $data;
+    }
+
+    public function find($ma_kiemke){
+        $data = DB::table($this->table)->where('ma_kiemke',$ma_kiemke)->first();
+        return $data;
+    }
+    public function nv_kiemke($ma_kiemke){
+        $data = DB::table('bankiemke')
+            ->join('nhanvien','nhanvien.ma_nv','=','bankiemke.ma_nv')
+            ->join('chucvu','chucvu.ma_chucvu','=','nhanvien.ma_chucvu')
+            ->where('bankiemke.ma_kiemke',$ma_kiemke)
+            ->select('nhanvien.ten_nv','chucvu.ten_chucvu')
+            ->get();
         return $data;
     }
 }
