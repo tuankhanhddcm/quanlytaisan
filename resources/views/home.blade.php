@@ -206,7 +206,7 @@
             </li>
             <li class="nav-item">
               <a href="/kiemke" class="nav-link ">
-                <i class='nav-icon bx bxs-file'></i>
+                <i class='nav-icon bx bx-notepad'></i>
                 <p>
                   Phiếu kiểm kê tài sản
                 </p>

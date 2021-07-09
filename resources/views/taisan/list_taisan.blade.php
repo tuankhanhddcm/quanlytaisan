@@ -7,7 +7,7 @@
             <th >Loại TSCĐ</th>
             <th >Phòng/ban</th>
             <th >Số lượng</th>
-            <th>Ngày mua</th>
+            <th style="width: 8%">Ngày mua</th>
             <th style="width: 3%">In thẻ TSCĐ</th>
             <th style="border-right: none;"></th>
         </tr>

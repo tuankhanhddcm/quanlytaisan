@@ -38,7 +38,8 @@ class KiemkeController extends Controller
     public function index()
     {
         $kiemke = $this->kiemke->select();
-        return view('kiemke.index',compact('kiemke'));
+        $phongban = $this->phongban->select('all');
+        return view('kiemke.index',compact('kiemke','phongban'));
     }
 
     /**
@@ -130,7 +131,11 @@ class KiemkeController extends Controller
      */
     public function show($id)
     {
-        //
+        $phieukk = $this->kiemke->find($id);
+        $nv = $this->kiemke->nv_kiemke($id);
+        $taisan = $this->taisan->export_tsOfphong($phieukk->ma_phong);
+        $chitiet = $this->chitietphieu->select_kiemke($id);
+        return view('kiemke.chitietkiemke',compact('phieukk','nv','taisan','chitiet'));
     }
 
     /**
@@ -171,7 +176,8 @@ class KiemkeController extends Controller
         $kk = $this->kiemke->find($id);
         $taisan = $this->taisan->export_tsOfphong($kk->ma_phong);
         $kiemke = $this->kiemke->nv_kiemke($id);
-        return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke), 'kiemke.xlsx');
+        $chitiet = $this->chitietphieu->select_kiemke($id);
+        return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke,$chitiet), 'kiemke.xlsx');
 
         
     }

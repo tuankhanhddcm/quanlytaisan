@@ -25,7 +25,7 @@
             @foreach ($kiemke as $k=>$item)
             <tr class="body-table" >
                 <td>{{$count}}</td>
-                <td><a href="">{{$item->ma_kiemke}}</a></td>
+                <td><a href="{{route('kiemke.show',$item->ma_kiemke)}}">{{$item->ma_kiemke}}</a></td>
                 <td>{{$item->ten_phong}}</td>
                 <td>{{$item->dot_kiemke}}</td>
                 <td>{{date('d-m-Y',strtotime($item->ngay_kiemke))}}</td>

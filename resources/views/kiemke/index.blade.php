@@ -6,7 +6,7 @@
             <h3 class="main-text">Kiểm Kê Tài Sản</h3>
             <div >
                 <button class="btn_cus btn-addsp" onclick="location.href='{{route('kiemke.create')}}'" ><i class='bx bx-plus' style="font-weight: 600; "></i>Thêm Kiểm Kê</button>
-                {{-- <button class="btn_cus btn-addsp" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button> --}}
+                
                 {{-- <button class="btn_cus btn-addsp" style="background-color:#FF3300;"><i class='bx bx-import' style="font-weight: 600;"></i>Nhập dữ liệu</button>
                 <button class="btn_cus btn-addsp" style="background-color:#999999"><i class='bx bx-cog' style="font-weight: 600;"></i>Quản lý</button>
                 <button class="btn_cus btn-addsp" style="background-color:#33CCFF"><i class='bx bxs-report' style="font-weight: 600;"></i>Báo Cáo</button> --}}
@@ -21,9 +21,9 @@
                     <div class="select_wrap">
                         <select class=" select select-phongban form-control" id="phong" data-dropup-auto="false" title="Phòng Ban" data-size='5' data-live-search="true">
                             <option value="" selected>--Chọn Phòng Ban--</option>
-                            {{-- @foreach ($nhanvien as $val)
-                                <option value="{{$val->ma_nv}}">{{$val->ten_nv}}</option>
-                            @endforeach --}}
+                            @foreach ($phongban as $val)
+                                <option value="{{$val->ma_phong}}">{{$val->ten_phong}}</option>
+                            @endforeach
                         </select>
                     </div>
 

@@ -64,7 +64,10 @@ class Kiemke extends Model
     }
 
     public function find($ma_kiemke){
-        $data = DB::table($this->table)->where('ma_kiemke',$ma_kiemke)->first();
+        $data = DB::table($this->table)->join('phongban','phongban.ma_phong','=','phieukiemke.ma_phong')
+                                        ->where('ma_kiemke',$ma_kiemke)
+                                        ->select('phieukiemke.*','phongban.ten_phong')
+                                        ->first();
         return $data;
     }
     public function nv_kiemke($ma_kiemke){

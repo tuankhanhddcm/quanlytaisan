@@ -29,9 +29,31 @@
                     <td>{{$item->ten_phong}}</td>
                     <td style="text-align: center" id='soluong_ht{{$item->ma_ts}}'>{{$item->soluong}}</td>
                     <td style="text-align: center">{{number_format($item->nguyengia)}}đ</td>
-                    <td style="text-align: center"><input type="text" style="width: 100px;text-align: center;outline: none" class="soluongkiemke" name="soluongkiemke[]" data-id="{{$item->ma_ts}}" value="{{$item->soluong}}"></td>
+                    <td style="text-align: center"><input type="text" {{isset($phieukk)?'disabled':''}}  style="width: 100px;text-align: center;outline: none" class="soluongkiemke" name="soluongkiemke[]" data-id="{{$item->ma_ts}}" value="@php
+                        if(isset($chitiet)){
+                            foreach ($chitiet as  $val) {
+                                if($val->ma_ts==$item->ma_ts){
+                                    echo $val->soluong;
+                                }
+                            }
+                        }else {
+                            echo $item->soluong;
+                        }
+                    @endphp"></td>
                     <td style="text-align: center">{{number_format($item->nguyengia)}}đ</td>
-                    <td style="text-align: center;border-bottom: 1px solid rgba(0,0,0,.1)" id="soluong{{$item->ma_ts}}">{{$item->soluong-$item->soluong}}</td>
+                    <td style="text-align: center;border-bottom: 1px solid rgba(0,0,0,.1)" id="soluong{{$item->ma_ts}}">
+                        @php
+                            if(isset($chitiet)){
+                                foreach ($chitiet as  $val) {
+                                    if($val->ma_ts==$item->ma_ts){
+                                        echo $val->soluong-$item->soluong;
+                                    }
+                                }
+                            }else {
+                                echo $item->soluong-$item->soluong;
+                            }
+                        @endphp
+                        </td>
                     <td style="text-align: center">{{number_format($item->nguyengia)}}đ</td>
                 </tr>
                 @endforeach

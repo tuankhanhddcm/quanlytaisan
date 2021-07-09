@@ -28,11 +28,12 @@ class KiemkeExport implements WithEvents
     * @return \Illuminate\Support\Collection
     */
     
-    public function __construct($taisan,$kiemke,$ngay)
+    public function __construct($taisan,$kiemke,$ngay,$chitiet)
     {
         $this->taisan = $taisan;
         $this->kiemke = $kiemke;
         $this->ngay = $ngay;
+        $this->chitiet = $chitiet;
     }
     
     // public function view(): View
@@ -62,11 +63,20 @@ class KiemkeExport implements WithEvents
             $i=17;
             $n =1;
             foreach($this->taisan as $val){
+                foreach($this->chitiet as $item){
+                    if($item->ma_ts == $val->ma_ts){
+                        $soluong = $item->soluong;
+                    }
+                }
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('A'.$i,$n);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.$i,$val->ten_ts);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.$i,$val->ten_phong);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('D'.$i,$val->soluong);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.$i,$val->nguyengia);
+                $event->getWriter()->getSheetByIndex(0)->setCellValue('F'.$i,$soluong);
+                $event->getWriter()->getSheetByIndex(0)->setCellValue('G'.$i,$val->nguyengia);
+                $event->getWriter()->getSheetByIndex(0)->setCellValue('H'.$i,$soluong-$val->soluong);
+                $event->getWriter()->getSheetByIndex(0)->setCellValue('I'.$i,$val->nguyengia);
                 $i++;
                 $n++;
             }

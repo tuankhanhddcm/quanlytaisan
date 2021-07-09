@@ -3,7 +3,7 @@
             <tr>
                 <th style="border-left: 1px solid rgba(0,0,0,.1); width:20px;">STT</th>
                 <th>Mã tài sản</th>
-                <th >Tên tài sản</th>
+                <th style="width: 250px">Tên tài sản</th>
                 <th >Nguyên giá</th>
                 <th style="width: 120px; "  >Tỷ lệ hao mòn (% năm)</th>
                 <th >Giá trị HM/KH năm</th>

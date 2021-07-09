@@ -35,7 +35,7 @@ class ChitiettaisanController extends Controller
     
     public function index()
     {
-        $taisan = $this->taisan->select();
+        $taisan = $this->taisan->select('','all');
         $chitiettaisan = $this->chitiettaisan->select();
         $nhanvien = $this->nhanvien->select('all');
         $phongban = $this->phongban->select('all');

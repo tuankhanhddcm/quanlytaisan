@@ -28,6 +28,10 @@ class Chitietphieu extends Model
         }
         return $loaits;
     }
+    public function select_kiemke($ma_kiemke){
+        $data = DB::table($this->table)->where('ma_kiemke',$ma_kiemke)->get();
+        return $data;
+    }
 
     public function delete_phieu($col,$id)
     {

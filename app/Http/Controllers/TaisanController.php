@@ -107,7 +107,7 @@ class TaisanController extends Controller
             $ma_ts = 'TS' . ($id);
         }
         $ngay_mua=Carbon::parse($request->ngay_mua);
-        $ngay_tang = Carbon::parse($request->ngay_tang);
+        $ngay_tang = Carbon::parse($request->ngaytang);
         $ngay_sd = Carbon::parse($request->ngaysd);
         $kq =$this->taisan->insert($ma_ts,$request->tents,$request->ma_loai,$request->ngia,$request->ncc,$ngay_mua
         ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang);
