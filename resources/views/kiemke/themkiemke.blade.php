@@ -14,6 +14,7 @@
                 <h3 class="main-text" >Thêm phiếu kiểm kê tài sản</h3>
                 <div style="display: flex; align-items: center" >
                     <button class="btn_cus btn-save" type="submit"><i class='bx bx-save' style="font-weight: 400; "></i>Lưu</button>
+                    <button class="btn_cus btn-save" type="button" onclick="check_export_ds_kiemke()" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất danh sách tài sản</button>
                     <button class="btn_cus btn-back" type="button" onclick="location.href='{{route('kiemke.index')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
                 </div>
             </div>

@@ -11,6 +11,7 @@
         <form action="/chitiettaisan" method="POST" onsubmit=" if(check('.tents_lb')&&check('.so_serial_lb')&&check('#trangthai') &&check('#nhanvien'))return true; return false;">
           <div class="modal-body">
                   {{ csrf_field() }}
+                {{-- <input type="hidden" class="page_chitiet" name="page" value=""> --}}
               <div class="form-group">
                       <label for="" class="form-label tents_lb">Tên chi tiết:</label>
                       <div class="form-wrap">
@@ -60,8 +61,8 @@
                         <div class="form_input ">
                             <div class="select_wrap form_input--items" style="width: 100%;">
                                 <select class=" select trangthai-select form-control"  id="trangthai" name ="trangthai" data-dropup-auto="false" data-size='5' data-live-search="true">
-                                    <option value="">--Chọn loại tài sản--</option>
-                                    <option value="0">Không sử dụng</option>
+                                    <option value="">--Chọn trạng thái--</option>
+                                    <option value="0">Chưa sử dụng</option>
                                     <option value="1">Đang sử dụng</option>
                                     <option value="2">Hư hỏng</option>
                                 </select>
@@ -136,6 +137,7 @@
           <div class="modal-body">
                   {{ csrf_field() }}
             <input type="hidden" name="detail_ts" value="{{isset($taisan)?$taisan->ma_ts:''}}">
+            <input type="hidden" class="page_chitiet" name="page" value="">
               <div class="form-group">
                       <label for="" class="form-label tents_up_lb">Tên chi tiết:</label>
                       <div class="form-wrap">
@@ -187,9 +189,25 @@
                             <div class="select_wrap form_input--items" style="width: 100%;">
                                 <select class=" select trangthai-select form-control"  id="trangthai_up" name ="trangthai_up" data-dropup-auto="false" data-size='5' data-live-search="true">
                                     <option value="">--Chọn loại trạng thái--</option>
-                                    <option value="0">Không sử dụng</option>
-                                    <option value="1">Đang sử dụng</option>
-                                    <option value="2">Hư hỏng</option>
+                                    @if (isset($chitiet_up))
+                                        @switch($chitiet_up->trangthai)
+                                            @case(0)
+                                            <option value="0" selected>Chưa sử dụng</option>
+                                            <option value="1" >Đang sử dụng</option>
+                                            <option value="2" >Hư hỏng</option>
+                                                @break
+                                            @case(1)
+                                            <option value="0" >Chưa sử dụng</option>
+                                            <option value="1" selected >Đang sử dụng</option>
+                                            <option value="2" >Hư hỏng</option>
+                                                @break
+                                            @case(1)
+                                            <option value="0" >Chưa sử dụng</option>
+                                            <option value="1"  >Đang sử dụng</option>
+                                            <option value="2" selected >Hư hỏng</option>
+                                                @break
+                                        @endswitch
+                                    @endif
                                 </select>
                             </div>
                         </div>

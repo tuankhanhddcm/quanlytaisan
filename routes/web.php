@@ -53,6 +53,7 @@ Route::post('/chitiettaisan/search','ChitiettaisanController@search_chitiet');
 Route::post('/chitiettaisan/edit/{id}','ChitiettaisanController@edit')->name('chitiettaisan.edit');
 Route::post('/chitiettaisan/update/{id}','ChitiettaisanController@update')->name('chitiettaisan.update');
 Route::post('/chitiettaisan/loc_nv','ChitiettaisanController@loc_nvOfphong');
+Route::post('/chitiettaisan/delete/{id}','ChitiettaisanController@destroy');
 //Nhà cung cấp
 Route::resource('/nhacungcap','NhacungcapController');
 Route::post('/nhacungcap/{id}/edit','NhacungcapController@edit');
@@ -92,3 +93,5 @@ Route::resource('/kiemke','KiemkeController');
 Route::post('/kiemke/list_taisan','KiemkeController@list_taisan');
 Route::post('/kiemke/loc_cv','KiemkeController@loc_nv');
 Route::get('/kiemke/export/{id}','KiemkeController@export')->name('kiemke.export');
+Route::get('/kiemke/export_ds/{id}','KiemkeController@export_ds')->name('kiemke.export_ds');
+Route::post('/kiemke/search','KiemkeController@search_kiemke');

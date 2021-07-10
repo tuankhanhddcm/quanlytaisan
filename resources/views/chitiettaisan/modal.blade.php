@@ -141,6 +141,7 @@
         <form action="{{isset($chitiet_up)?route('chitiettaisan.update',$chitiet_up->ma_chitiet):''}}" method="POST" onsubmit="if(check('.tents_up_lb')&&check('.so_serial_up_lb')&&check('#trangthai_up') && check('#loaits_up'))return true; return false;">
           <div class="modal-body">
                   {{ csrf_field() }}
+                <input type="hidden" class="page_chitiet" name="page" value="">
               <div class="form-group">
                       <label for="" class="form-label tents_up_lb">Tên chi tiết:</label>
                       <div class="form-wrap">

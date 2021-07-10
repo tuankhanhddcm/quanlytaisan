@@ -71,6 +71,7 @@ class Chitiettaisan extends Model
     public function delete_chitiet($ma_chitet)
     {
         $kq =DB::table($this->table)->where('ma_chitiet','=',''.$ma_chitet.'')->delete();
+        return $kq;
     }
 
     public function show_id($id){
@@ -116,4 +117,5 @@ class Chitiettaisan extends Model
         return $data;
     }
 
+    
 }

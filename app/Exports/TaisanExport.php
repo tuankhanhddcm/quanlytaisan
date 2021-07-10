@@ -61,13 +61,14 @@ class TaisanExport implements WithEvents
                     $ten_phong='';
                     foreach ($this->phongts as $item) {
                         if($item->ma_ts == $val->ma_ts){
-                            $ten_phong .= $item->ten_phong .' ';
+                            $ten_phong .= $item->ten_phong.', ';
                             
                         }
                     }
+                    $phong = chop($ten_phong,', ');
                     $event->getWriter()->getSheetByIndex(0)->setCellValue('A'.$i,$n);
                     $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.$i,$val->ten_ts);
-                    $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.$i,$ten_phong);
+                    $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.$i,$phong);
                     $event->getWriter()->getSheetByIndex(0)->setCellValue('D'.$i,$val->soluong);
                     $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.$i,$val->nguyengia);
                     $i++;

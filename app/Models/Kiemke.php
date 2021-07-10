@@ -79,4 +79,19 @@ class Kiemke extends Model
             ->get();
         return $data;
     }
+
+    public function search($text,$selected){
+        $loai = DB::table($this->table)
+        ->join('phongban','phongban.ma_phong','=','phieukiemke.ma_phong')
+        ->select('phieukiemke.*','phongban.ten_phong');
+        if($text !=''){
+            $loai = $loai->where('phieukiemke.ma_kiemke','like','%'.$text.'%');
+                
+        }
+        if($selected !=''){
+            $loai = $loai->where('phongban.ma_phong',$selected);
+        }
+        $loai = $loai->paginate(8);
+        return $loai;
+    }
 }

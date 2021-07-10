@@ -47,6 +47,7 @@ $(document).ready(function () {
         search_ts(1);
         search_chitiet(1);
         list_ts_kiemke();
+        search_kiemke(1);
     });
 
     $('.select-nv-kk').click(function(){
@@ -84,6 +85,7 @@ $(document).ready(function () {
         search_phieubangiao(page);
         search_tieuhao(page);
         search_nhanvien(page);
+        search_kiemke(page);
     });
 
     // chỉnh calendar
@@ -198,6 +200,86 @@ $(document).ready(function () {
         tru_sl_kiemke($(this).val(),id);
     });
 
+    // xóa chi tiết tài sản
+    $(document).on("click", ".btn_delete", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa chi tiết tài sản',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/chitiettaisan/delete/" + id,
+                            method: "post",
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thông báo!!!',
+                                            content: 'Xóa chi tiết tài sản thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span').text();
+                                        search_chitiet(page);
+                                    });
+                                    
+                                }else{
+                                    $.alert({
+                                        title: 'Thông báo!!!',
+                                        content: 'Chi tiết tài sản đang được sử dụng không thể xóa',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+                                }
+                                
+
+                            }
+                        });
+                        
+                        
+                    }
+                },
+                huy: {
+                   text:'Hủy'
+                }
+
+            }
+        });
+    });
+
 });
 
 
@@ -205,6 +287,7 @@ $(document).ready(function () {
 function search_loaiTSCD(page) {
     var text = $('#search_loai').val();
     var seleted = $('#loai_taisan option:selected').val();
+    
     $.ajax({
 
         url: '/loaiTSCD/search?page=' + page,
@@ -212,6 +295,7 @@ function search_loaiTSCD(page) {
         data: {
             text: text,
             seleted: seleted,
+            
         },
         success: function (data) {
             $('#list_loaiTSCD').html(data);
@@ -222,6 +306,7 @@ function search_ts(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('#phong option:selected').val();
+    var ma_loai = $('.ma_loai').val();
     $.ajax({
 
         url: '/taisan/search?page=' + page,
@@ -229,7 +314,8 @@ function search_ts(page) {
         data: {
             text: text,
             seleted: seleted,
-            ma_phong: ma_phong
+            ma_phong: ma_phong,
+            ma_loai:ma_loai
         },
         success: function (data) {
             $('#list_taisan').html(data);
@@ -267,10 +353,27 @@ function search_tieuhao(page) {
     });
 }
 
+function search_kiemke(page) {
+    var text = $('#search').val();
+    var seleted = $('#phong option:selected').val();
+    $.ajax({
+        url: '/kiemke/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted:seleted
+        },
+        success: function (data) {
+            $('#list_kiemke').html(data);
+        }
+    });
+}
+
 function search_chitiet(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('.select-phongban option:selected').val();
+    var ma_ts =$('.ma_ts').val();
     $.ajax({
 
         url: '/chitiettaisan/search?page=' + page,
@@ -278,7 +381,8 @@ function search_chitiet(page) {
         data: {
             text: text,
             seleted: seleted,
-            ma_phong:ma_phong
+            ma_phong:ma_phong,
+            ma_ts :ma_ts
         },
         success: function (data) {
             $('#list_chitiet').html(data);
@@ -765,6 +869,7 @@ function in_theTSCD() {
 }
 
 function update_chitiet(id) {
+    
     if (id != '') {
         $.ajax({
             url: '/chitiettaisan/edit/' + id,
@@ -777,6 +882,10 @@ function update_chitiet(id) {
                         show: true,
                         backdrop: 'static'
                     });
+                    var page = $('li.active span').text();
+                    $('.page_chitiet').val(page);
+                    
+                
                 });
             }
         });
@@ -798,6 +907,8 @@ function show_modal_chitiet(id, ma_ts) {
                         show: true,
                         backdrop: 'static'
                     });
+                    var page = $('li.active span').text();
+                    $('.page_chitiet').val(page);
                 });
             }
         });
@@ -1098,4 +1209,12 @@ function tru_sl_kiemke(val,id){
         $('#soluong'+id).css('color','black');
     }
     $('#soluong'+id).text(sl);
+}
+
+function check_export_ds_kiemke(){
+    check('#phongban');
+    if(check('#phongban')){
+        var ma_phong =$('#phongban option:selected').val();
+        location.href ='/kiemke/export_ds/'+ma_phong;
+    }
 }

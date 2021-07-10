@@ -3,10 +3,10 @@
         <th style="border-left: 1px solid rgba(0,0,0,.1);width: 50px">STT</th>
         <th >Mã chi tiết</th>
         <th >Tên chi tiết</th>
-        <th  >Tài sản</th>
+        <th >Tài sản</th>
         <th >Số serial</th>
-        <th style="width: 25%">Phòng ban</th>
-        <th style="width: 10%" >Trạng thái</th>    
+        <th style="width: 25%" >Phòng ban</th>
+        <th style="width: 10%" >Trạng thái</th>
         <th style="width: 13%">Nhân viên sử dụng</th>
         <th style="border-right: none;"></th>
     </thead>
@@ -20,7 +20,7 @@
                     $count = 1;
                 }
             @endphp
-        @foreach ($chitiettaisan as $item)
+        @foreach ($chitiettaisan as $k=>$item)
             <tr class="body-table" >
                 <td>{{$count}}</td>
                 <td>{{$item->ma_chitiet}}</td>
@@ -47,14 +47,15 @@
                 <td>
                     @php
                         foreach($nhanvien as $val){
-                            if($item->ma_nv == $val->ma_nv){
-                                echo $val->ten_nv; 
+                            if($item->ma_nv==$val->ma_nv){
+                                echo $val->ten_nv;
                             }
                         }
                     @endphp
                 </td>
-                <td style="border-right: none;display:flex;justify-content: space-around">
-                    <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                
+                <td style="border-right: none;display: flex;justify-content: space-around">
+                    <button class="btn_modal_chitiet" data-ma_ts="{{isset($taisan)?$taisan->ma_ts:''}}" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
                     <button class="btn_delete" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                 </td>
             </tr>

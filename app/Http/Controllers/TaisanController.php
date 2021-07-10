@@ -223,9 +223,13 @@ class TaisanController extends Controller
             $seleted =$request->seleted;
             $ma_phong =$request->ma_phong;
             $phongts = $this->taisan->phong_taisan();
-            $taisan = $this->taisan->select();
+            $ma_loai = $request->ma_loai;
             if($text !='' || $seleted !='' || $ma_phong !=''){
                 $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong);
+            }elseif($ma_loai !=''){
+                $taisan = $this->taisan->select($ma_loai);
+            }else{
+                $taisan = $this->taisan->select();
             }
             return view('taisan.list_taisan',compact('taisan','phongts'));
         }
@@ -257,6 +261,7 @@ class TaisanController extends Controller
                 $ten_phong .= $item->ten_phong .', ';
             }
         }
+        $ten_phong = chop($ten_phong,', ');
         if(isset($taisan)){
             $file = new TemplateProcessor('theTSCD/theTSCD.docx');
             $file->setValue('ten_ts',$taisan->ten_ts);

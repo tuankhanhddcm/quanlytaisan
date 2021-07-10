@@ -16,7 +16,7 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-5">
-                        <input type="text" value="" class="search_input" id='search' onkeyup="" placeholder="Nhập mã phiếu kiểm kê">
+                        <input type="text" value="" class="search_input" id='search' onkeyup="search_kiemke(1);" placeholder="Nhập mã phiếu kiểm kê">
                     </div>
                     <div class="select_wrap">
                         <select class=" select select-phongban form-control" id="phong" data-dropup-auto="false" title="Phòng Ban" data-size='5' data-live-search="true">

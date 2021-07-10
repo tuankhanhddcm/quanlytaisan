@@ -130,9 +130,9 @@ class ChitiettaisanController extends Controller
         $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
         if($kq){
             if($request->detail_ts !=''){
-                return redirect()->route('taisan.show',$request->detail_ts);
+                return redirect('taisan/'.$request->detail_ts.'?page='.$request->page);
             }else{
-                return redirect()->route('chitiettaisan.index');
+                return redirect('chitiettaisan?page='.$request->page);
             }
            
         }
@@ -146,7 +146,15 @@ class ChitiettaisanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chitiet = $this->chitiettaisan->show_id($id);
+        if($chitiet->trangthai ==0){
+            $kq = $this->chitiettaisan->delete_chitiet($id);
+            if($kq){
+                return true;
+            }
+        }else{
+            return false;
+        }
     }
 
     public function search_chitiet(Request $request){
@@ -155,9 +163,17 @@ class ChitiettaisanController extends Controller
             $seleted =$request->seleted;
             $ma_phong = $request->ma_phong;
             $nhanvien = $this->nhanvien->select('all');
+            $ma_ts =$request->ma_ts;
             if($text !='' || $seleted !='' || $ma_phong !=''){
                 $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted,$ma_phong);
-            }else{
+            }elseif($ma_ts !=''){
+                $chitiettaisan =$this->chitiettaisan->select($ma_ts);
+                $nhanvien = $this->nhanvien->nvOftaisan($ma_ts);
+                $phongban = $this->phongban->phongOfts($ma_ts);
+                $taisan = $this->taisan->show_ts($ma_ts);
+                return view('taisan.list_chitiet',compact('chitiettaisan','nhanvien','phongban','taisan'));
+            }
+            else{
                 $chitiettaisan = $this->chitiettaisan->select();
             }
             return view('chitiettaisan.list_chitiet',compact('chitiettaisan','nhanvien'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DstaisankiemkeExport;
 use App\Models\Chitietphieu;
 use App\Models\Kiemke;
 use App\Models\Nhanvien;
@@ -178,7 +179,22 @@ class KiemkeController extends Controller
         $kiemke = $this->kiemke->nv_kiemke($id);
         $chitiet = $this->chitietphieu->select_kiemke($id);
         return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke,$chitiet), 'kiemke.xlsx');
+    }
+    public function export_ds($id){
+        $taisan = $this->taisan->export_tsOfphong($id);
+        return Excel::download(new DstaisankiemkeExport($taisan), 'dstaisan.xlsx');
+    }
 
-        
+    public function search_kiemke(Request $request){
+        if($request->ajax()){
+            $text=$request->text;
+            $seleted =$request->seleted;
+            if($text !='' || $seleted !=''){
+                $kiemke = $this->kiemke->search($text,$seleted);
+            }else{
+                $kiemke = $this->kiemke->select();
+            }
+            return view('kiemke.list_kiemke',compact('kiemke'));
+        }
     }
 }
