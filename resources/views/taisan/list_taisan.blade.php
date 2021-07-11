@@ -23,7 +23,7 @@
                     $count = 1;
                 }
             @endphp
-            @foreach ($taisan as $k=>$item)
+            @foreach ($taisan as $item)
                 <tr class="body-table" >
                     <td>{{$count}}</td>
                     <td><a href="/taisan/{{$item->ma_ts}}">{{$item->ma_ts}}</a></td>
@@ -31,12 +31,16 @@
                     <td>{{$item->ten_loai}}</td>
                     <td>
                         @php
-                            
-                            foreach ($phongts as $val) {
+                            if(isset($phongts)){
+                                foreach ($phongts as $val) {
                                 if($item->ma_ts ==$val->ma_ts){
                                     echo $val->ten_phong.'<br/>';
                                 }
+                                }
+                            }else {
+                                echo $item->ten_phong;
                             }
+                            
                         @endphp
                     </td>
                     <td>{{$item->soluong}}</td>

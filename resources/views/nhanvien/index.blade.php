@@ -14,7 +14,15 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-4">
-                        <input type="text" value="" class="search_input" id='search' onkeyup="search_nhanvien(1);" placeholder="Nhập mã phòng ban hoặc tên phòng ban">
+                        <input type="text" value="" class="search_input" id='search' onkeyup="search_nhanvien(1);" placeholder="Nhập mã nhân viên hoặc tên nhân viên">
+                    </div>
+                    <div class="select_wrap">
+                        <select class=" select select-phongban  form-control" id="phong" data-dropup-auto="false" title="Phòng ban" data-size='5' data-live-search="true">
+                            <option value="" selected >--Chọn phòng ban--</option>
+                            @foreach ($phongban as $item)
+                                <option value="{{$item->ma_phong}}">{{$item->ten_phong}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chitiettaisan;
 use App\Models\Phongban;
+use App\Models\Taisan;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\This;
 
 class PhongbanController extends Controller
 {
@@ -13,15 +16,28 @@ class PhongbanController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $phongban;
+    protected $chitiettaisan;
+    protected $taisan;
 
     public function __construct()
     {
         $this->middleware('login');
         $this->phongban = new Phongban;
+        $this->chitiettaisan = new Chitiettaisan;
+        $this->taisan = new Taisan;
     }
     public function index()
     {
         $phongban = $this->phongban->select();
+        $sl_ts = $this->chitiettaisan->sl_ts_phong();
+        foreach($phongban as $val){
+            $val->soluong = 0;
+            foreach($sl_ts as $item){
+                if($val->ma_phong == $item->ma_phong){
+                    $val->soluong =$item->soluong;
+                }
+            }
+        }
         return view('phongban.index',compact('phongban'));
     }
 
@@ -79,7 +95,16 @@ class PhongbanController extends Controller
      */
     public function show($id)
     {
-        //
+        $phongban = $this->phongban->find($id);
+        $sl_ts = $this->chitiettaisan->sl_ts_phong();
+        $phongban->soluong = 0;
+        foreach($sl_ts as $item){
+            if($phongban->ma_phong == $item->ma_phong){
+                $phongban->soluong =$item->soluong;
+            }
+        }
+        $taisan = $this->taisan->sl_taisan_phong($id);
+        return view('phongban.detail_phong',compact('phongban','taisan'));
     }
 
     /**

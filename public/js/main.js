@@ -48,6 +48,7 @@ $(document).ready(function () {
         search_chitiet(1);
         list_ts_kiemke();
         search_kiemke(1);
+        search_nhanvien(1)
     });
 
     $('.select-nv-kk').click(function(){
@@ -229,7 +230,7 @@ $(document).ready(function () {
                                 if(data == true){
                                     $(document).ready(function(){
                                         $.alert({
-                                            title: 'Thông báo!!!',
+                                            title: 'Thành công!!!',
                                             content: 'Xóa chi tiết tài sản thành công',
                                             draggable: true,
                                             dragWindowBorder: false,
@@ -243,13 +244,13 @@ $(document).ready(function () {
                                             offsetTop: 0,
                                             offsetBottom: 500,
                                         });
-                                        var page = $('li.active span').text();
+                                        var page = $('li.active span.page-link').text();
                                         search_chitiet(page);
                                     });
                                     
                                 }else{
                                     $.alert({
-                                        title: 'Thông báo!!!',
+                                        title: 'Thất bại!!!',
                                         content: 'Chi tiết tài sản đang được sử dụng không thể xóa',
                                         draggable: true,
                                         dragWindowBorder: false,
@@ -307,6 +308,7 @@ function search_ts(page) {
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('#phong option:selected').val();
     var ma_loai = $('.ma_loai').val();
+    var phongban = $('.phongban').val();
     $.ajax({
 
         url: '/taisan/search?page=' + page,
@@ -315,7 +317,8 @@ function search_ts(page) {
             text: text,
             seleted: seleted,
             ma_phong: ma_phong,
-            ma_loai:ma_loai
+            ma_loai:ma_loai,
+            phongban:phongban
         },
         success: function (data) {
             $('#list_taisan').html(data);
@@ -374,6 +377,7 @@ function search_chitiet(page) {
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('.select-phongban option:selected').val();
     var ma_ts =$('.ma_ts').val();
+    var ma_nv =$('.nhanvien').val();
     $.ajax({
 
         url: '/chitiettaisan/search?page=' + page,
@@ -382,7 +386,8 @@ function search_chitiet(page) {
             text: text,
             seleted: seleted,
             ma_phong:ma_phong,
-            ma_ts :ma_ts
+            ma_ts :ma_ts,
+            ma_nv:ma_nv
         },
         success: function (data) {
             $('#list_chitiet').html(data);
@@ -1113,11 +1118,13 @@ function search_phong(){
 }
 function search_nhanvien(page){
     var text = $('#search').val();
+    var seleted = $('#phong option:selected').val();
     $.ajax({
         url:'/nhanvien/search?page='+page,
         method :'post',
         data:{
             text:text,
+            seleted:seleted
         },
         success:function(data){
             $('#list_nhanvien').html(data);

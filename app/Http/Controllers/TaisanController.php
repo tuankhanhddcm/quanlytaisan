@@ -228,6 +228,9 @@ class TaisanController extends Controller
                 $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong);
             }elseif($ma_loai !=''){
                 $taisan = $this->taisan->select($ma_loai);
+            }elseif($request->phongban !=''){
+                $taisan = $this->taisan->sl_taisan_phong($request->phongban);
+                return view('taisan.list_taisan',compact('taisan'));
             }else{
                 $taisan = $this->taisan->select();
             }

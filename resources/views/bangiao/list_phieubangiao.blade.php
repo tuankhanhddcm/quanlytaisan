@@ -3,9 +3,9 @@
         <tr>
             <th style="border-left: 1px solid rgba(0,0,0,.1); width:20px;">STT</th>
             <th >Mã Phiếu</th>
-            <th >Tên người giao</th>
+            <th style="width: 13%;">Tên người giao</th>
             <th >Phòng giao</th>
-            <th >Tên người nhận</th>
+            <th style="width: 13%;">Tên người nhận</th>
             <th >Phòng nhận</th>
             <th style="width: 8%;">Ngày giao</th>
             <th style="width: 8%;">Lý do</th>
@@ -44,7 +44,7 @@
                 
             @endphp
             <tr class="body-table" >
-                <td>{{$count}}</td>
+                <td style="text-align: center">{{$count}}</td>
                 <td><a href="{{route('bangiao.show',$item->ma_bangiao)}}">{{$item->ma_bangiao}}</a></td>
                 <td>{{$nv_giao}}</td>
                 <td>{{$phonggiao}}</td>

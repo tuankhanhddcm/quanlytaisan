@@ -113,10 +113,10 @@ class Taisan extends Model
         return $kq;
     }
 
-    public function tsOfphong($ma_phong){
-        $data = $this->table_join()->where('taisan.ma_phong','=',''.$ma_phong.'')->get();
-        return $data;
-    }
+    // public function tsOfphong($ma_phong){
+    //     $data = $this->table_join()->where('taisan.ma_phong','=',''.$ma_phong.'')->get();
+    //     return $data;
+    // }
     
     
 
@@ -130,6 +130,28 @@ class Taisan extends Model
         return $data;
     }
 
+    public function sl_taisan_phong($ma_phong){
+        $temp_sl = DB::table($this->table)
+        ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'))
+        ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
+        ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+        ->where('phongban.ma_phong',$ma_phong)
+        ->groupBy('taisan.ma_ts');
+        $data = DB::table($this->table)
+            ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
+            ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
+            ->join('tieuhaotaisan','tieuhaotaisan.ma_loai','=','taisan.ma_loai')
+            ->join('chitiettaisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
+            ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+            ->joinSub($temp_sl,'temp_sl',function($join){
+                $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
+            })->where('phongban.ma_phong',$ma_phong)
+            ->select('taisan.ma_ts','taisan.ten_ts','taisan.ngay_mua','soluong','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd','phongban.ten_phong')
+            ->groupBy('taisan.ma_ts','taisan.ten_ts','taisan.ngay_mua','soluong','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd','phongban.ten_phong')
+            ->paginate(8);
+        return $data;
+    }
+
     public function export_tsOfphong($ma_phong){
         $temp_sl = DB::table($this->table)
         ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'))
@@ -138,7 +160,6 @@ class Taisan extends Model
         ->where('phongban.ma_phong',$ma_phong)
         ->groupBy('taisan.ma_ts');
         $data = DB::table($this->table)
-            ->select('taisan.*','soluong','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd','phongban.ten_phong')
             ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
             ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
             ->join('tieuhaotaisan','tieuhaotaisan.ma_loai','=','taisan.ma_loai')
@@ -146,7 +167,10 @@ class Taisan extends Model
             ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
             ->joinSub($temp_sl,'temp_sl',function($join){
                 $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
-            })->where('phongban.ma_phong',$ma_phong)->distinct()->get();
+            })->where('phongban.ma_phong',$ma_phong)
+            ->select('taisan.*','soluong','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd','phongban.ten_phong')
+            ->distinct()
+            ->get();
         return $data;
     }
 }

@@ -164,6 +164,7 @@ class ChitiettaisanController extends Controller
             $ma_phong = $request->ma_phong;
             $nhanvien = $this->nhanvien->select('all');
             $ma_ts =$request->ma_ts;
+            $ma_nv =$request->ma_nv;
             if($text !='' || $seleted !='' || $ma_phong !=''){
                 $chitiettaisan = $this->chitiettaisan->search_chitiet($text,$seleted,$ma_phong);
             }elseif($ma_ts !=''){
@@ -172,6 +173,10 @@ class ChitiettaisanController extends Controller
                 $phongban = $this->phongban->phongOfts($ma_ts);
                 $taisan = $this->taisan->show_ts($ma_ts);
                 return view('taisan.list_chitiet',compact('chitiettaisan','nhanvien','phongban','taisan'));
+            }elseif($ma_nv !=''){
+                $chitiettaisan = $this->chitiettaisan->ctOfnv($ma_nv);
+                $nhanvien = $this->nhanvien->find($ma_nv);
+                return view('chitiettaisan.list_chitiet',compact('chitiettaisan','nhanvien'));
             }
             else{
                 $chitiettaisan = $this->chitiettaisan->select();

@@ -82,15 +82,22 @@ class Nhanvien extends Model
         ]);
         return $table;
     }
-    public function search_nv($text)
+    public function search_nv($text,$selected)
     {
-        $table = DB::table($this->table)->where(function($res) use($text){
-            $res->where('nhanvien.ma_nv','like','%'.$text.'%')
-                ->orwhere('nhanvien.ten_nv','like','%'.$text.'%');
-        })->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
+        $table = DB::table($this->table);
+        if($selected !=''){
+            $table = $table->where('nhanvien.ma_phong',$selected);
+        }
+        if($text !=''){
+            $table = $table->where(function($res) use($text){
+                $res->where('nhanvien.ma_nv','like','%'.$text.'%')
+                    ->orwhere('nhanvien.ten_nv','like','%'.$text.'%');
+            });
+        }
+        $table =$table->join('phongban','nhanvien.ma_phong','=','phongban.ma_phong')
         ->join('chucvu','nhanvien.ma_chucvu','=','chucvu.ma_chucvu')
-        ->select('nhanvien.*','phongban.ten_phong','chucvu.ten_chucvu');
-        $table=$table->paginate(8);
+        ->select('nhanvien.*','phongban.ten_phong','chucvu.ten_chucvu')
+        ->paginate(8);
         return $table;
     }
 }

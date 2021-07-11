@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chitiettaisan;
 use App\Models\Chucvu;
 use App\Models\Nhanvien;
 use App\Models\Phongban;
+use App\Models\Taisan;
 use Illuminate\Http\Request;
 
 class NhanvienController extends Controller
@@ -17,19 +19,24 @@ class NhanvienController extends Controller
     protected $phongban;
     protected $chucvu;
     protected $nhanvien;
+    protected $chitiettaisan;
+    protected $taisan;
     public function __construct()
     {
         $this->middleware('login');
         $this->phongban = new Phongban;
         $this->chucvu = new Chucvu;
         $this->nhanvien = new Nhanvien;
+        $this->chitiettaisan = new Chitiettaisan;
+        $this->taisan = new Taisan;
     }
     public function index()
     {
         $phongban = $this->phongban->select();
         $chucvu = $this->chucvu->select();   
         $nhanvien = $this->nhanvien->select(); 
-        return view('nhanvien.index',compact('phongban','chucvu','nhanvien'));
+        $sl = $this->chitiettaisan->sl_ts_nv();
+        return view('nhanvien.index',compact('phongban','chucvu','nhanvien','sl'));
     }
 
     /**
@@ -85,7 +92,16 @@ class NhanvienController extends Controller
      */
     public function show($id)
     {
-        //
+        $nv = $this->nhanvien->find($id);
+        $sl = $this->chitiettaisan->sl_ts_nv();
+        $nv->soluong =0;
+        foreach($sl as $val){
+            if($nv->ma_nv ==$val->ma_nv){
+                $nv->soluong =$val->soluong;
+            }
+        }
+        $chitiettaisan = $this->chitiettaisan->ctOfnv($nv->ma_nv);
+        return view('nhanvien.detail_nhanvien',compact('nv','chitiettaisan'));
     }
 
     /**
@@ -129,13 +145,14 @@ class NhanvienController extends Controller
     public function search(Request $request)
     {
         $text = $request->text;
-        
-        if($text!=''){
-            $nhanvien = $this->nhanvien->search_nv($text);
+        $seleted =$request->seleted;
+        if($text!=''|| $seleted !=''){
+            $nhanvien = $this->nhanvien->search_nv($text,$seleted);
             
         }else{
             $nhanvien = $this->nhanvien->select();
         }
-        return view('nhanvien.list_nhanvien',compact('nhanvien'));
+        $sl = $this->chitiettaisan->sl_ts_nv();
+        return view('nhanvien.list_nhanvien',compact('nhanvien','sl'));
     }
 }
