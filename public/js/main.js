@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     $('.select-loaisp').click(function () {
         search_phieubangiao(1);
+        search_hopdong(1);
     });
 
     $(document).on('click', '.loaits-select', function () {
@@ -1224,4 +1225,21 @@ function check_export_ds_kiemke(){
         var ma_phong =$('#phongban option:selected').val();
         location.href ='/kiemke/export_ds/'+ma_phong;
     }
+}
+
+function search_hopdong(page) {
+    var text = $('#search').val();
+    var seleted = $('#ncc option:selected').val();
+    $.ajax({
+
+        url: '/hopdong/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            seleted: seleted,
+        },
+        success: function (data) {
+            $('#list_hopdong').html(data);
+        }
+    });
 }

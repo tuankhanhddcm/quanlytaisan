@@ -95,3 +95,7 @@ Route::post('/kiemke/loc_cv','KiemkeController@loc_nv');
 Route::get('/kiemke/export/{id}','KiemkeController@export')->name('kiemke.export');
 Route::get('/kiemke/export_ds/{id}','KiemkeController@export_ds')->name('kiemke.export_ds');
 Route::post('/kiemke/search','KiemkeController@search_kiemke');
+
+// hợp đồng
+Route::resource('/hopdong','HopdongController');
+Route::post('/hopdong/search','HopdongController@search_hopdong');

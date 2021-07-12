@@ -55,7 +55,7 @@
         </div>
         <div class="col-sm-12 ">
             <div style=" display: flex;align-items: center;">
-                <div style="font-size: 28px;color:#333;">Dach sách tài sản hiện có</div>
+                <div style="font-size: 28px;color:#333;">Dach sách tài sản đang sử dụng</div>
             </div>
             <input type="hidden"  class="nhanvien" name="nhanvien" value="{{$nv->ma_nv}}">
             <div id="list_chitiet">

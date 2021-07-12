@@ -169,35 +169,14 @@
                 </li>
               </ul>
             </li>
-            {{-- <li class="nav-item">
-              <a href="#" class="nav-link ">
-                <i class='nav-icon bx bxs-envelope' ></i>
+            <li class="nav-item">
+              <a href="/hopdong" class="nav-link ">
+                <i class='nav-icon bx bxs-book-content'></i>
                 <p>
                   Hợp đồng
-                  <i class='bx bx-chevron-down right'></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="" class="nav-link ">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Hợp đồng</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Chi tiết họp đồng</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Thanh toán</p>
-                  </a>
-                </li>
-              </ul>
-            </li> --}}
+            </li>
             <li class="nav-item">
               <a href="/bangiao" class="nav-link ">
                 <i class='nav-icon bx bxs-file'></i>
