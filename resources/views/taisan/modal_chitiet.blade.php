@@ -8,7 +8,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        <form action="/chitiettaisan" method="POST" onsubmit=" if(check('.tents_lb')&&check('.so_serial_lb')&&check('#trangthai') &&check('#nhanvien'))return true; return false;">
+        <form action="/chitiettaisan" method="POST" onsubmit=" if(check('.tents_lb')&&check('.so_serial_lb')&&check('#trangthai'))return true; return false;">
           <div class="modal-body">
                   {{ csrf_field() }}
                 {{-- <input type="hidden" class="page_chitiet" name="page" value=""> --}}

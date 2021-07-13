@@ -33,9 +33,12 @@
                 <td>
                     <button onclick="location.href='{{route('kiemke.export',$item->ma_kiemke)}}'"  style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xuất excel" ><i class='bx bxs-file-export' style="font-size: 25px; color:#278a0e;"></i></button>
                 </td>
-                <td style="border-right: none; display: flex;justify-content: space-around">
-                    <button style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu kiểm kê" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu kiểm kê" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                <td style="border-right: none; ">
+                    <div style="display: flex;justify-content: space-around">
+                        <button style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu kiểm kê" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                        <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu kiểm kê" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                    </div>
+                    
                 </td>
             </tr>
                 @php

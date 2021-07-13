@@ -13,7 +13,8 @@ class Chitiettaisan extends Model
         $data = DB::table($this->table)
                 ->select('chitiettaisan.*','taisan.ten_ts','phongban.ten_phong')
                 ->join('taisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
-                ->join('phongban','chitiettaisan.ma_phong','=','phongban.ma_phong');
+                ->join('phongban','chitiettaisan.ma_phong','=','phongban.ma_phong')
+                ->where('taisan.deleted',0);
         return $data;
     }
 
@@ -118,15 +119,21 @@ class Chitiettaisan extends Model
     }
 
     public function sl_ts_phong(){
-        $data =DB::table($this->table)->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+        $data =DB::table($this->table)
+        ->join('taisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
+        ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
         ->select('phongban.ma_phong',DB::raw('count(chitiettaisan.ma_chitiet) as soluong'))
+        ->where('taisan.deleted',0)
         ->groupBy('phongban.ma_phong')
         ->get();
         return $data;
     }
     public function sl_ts_nv(){
-        $data =DB::table($this->table)->join('nhanvien','nhanvien.ma_nv','=','chitiettaisan.ma_nv')
+        $data =DB::table($this->table)
+        ->join('taisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
+        ->join('nhanvien','nhanvien.ma_nv','=','chitiettaisan.ma_nv')
         ->select('nhanvien.ma_nv',DB::raw('count(chitiettaisan.ma_chitiet) as soluong'))
+        ->where('taisan.deleted',0)
         ->groupBy('nhanvien.ma_nv')
         ->get();
         return $data;
@@ -136,4 +143,9 @@ class Chitiettaisan extends Model
         return $data;
     }
     
+    public function delete_chitiet_of_taisan($ma_ts)
+    {
+        $kq =DB::table($this->table)->where('ma_ts','=',''.$ma_ts.'')->delete();
+        return $kq;
+    }
 }

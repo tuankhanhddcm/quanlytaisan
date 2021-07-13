@@ -37,7 +37,13 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="select_wrap">
+                        <select class=" select select-trangthai  form-control" id="trangthai" data-dropup-auto="false" title="Trạng thái" data-size='5' data-live-search="true">
+                            <option value=""  >--Trạng thái--</option>
+                            <option value="0" selected>Tài sản còn sử dụng</option>
+                            <option value="1">Tài sản đã bị xóa</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12 " id='list_taisan'>

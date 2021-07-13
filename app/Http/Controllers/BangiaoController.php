@@ -183,7 +183,13 @@ class BangiaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kq = $this->bangiao->xoaphieubangiao($id);
+        if($kq){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     public function more_ts(Request $request){
         if($request->ajax()){

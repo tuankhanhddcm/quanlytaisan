@@ -55,9 +55,12 @@
                 <td>
                     <button onclick="location.href='/bangiao/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
                 </td>
-                <td style="border-right: none; display: flex;justify-content: space-around">
-                    <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('bangiao.edit',$item->ma_bangiao)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                <td style="border-right: none; ">
+                    <div style="display: flex;justify-content: space-around;">
+                        <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('bangiao.edit',$item->ma_bangiao)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                        <button class="btn_delete_bg" data-id="{{$item->ma_bangiao}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                    </div>
+                    
                 </td>
             </tr>
             @php

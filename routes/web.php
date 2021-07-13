@@ -26,7 +26,8 @@ Route::get('/taisan/in_the/{id}','TaisanController@in_theTSCD_id')->name('inthe_
 Route::post('/taisan/update/{id}','TaisanController@update')->name('taisan.update');
 Route::post('/taisan/modal_chitiet/{id}','TaisanController@modal_chitiet');
 Route::post('taisan/excel', 'TaisanController@export');
-
+Route::post('taisan/delete', 'TaisanController@destroy');
+Route::post('taisan/update_delete', 'TaisanController@update_delete');
 
 // Mẫu báo cáo
 Route::get('/maubaocao','MaubaocaoController@index');
@@ -87,6 +88,8 @@ Route::post('/bangiao/more_ts','BangiaoController@more_ts');
 Route::get('/bangiao/phieu/{id}','BangiaoController@show_phieu');
 Route::post('/bangiao/search','BangiaoController@search');
 Route::post('/bangiao/update/{id}','BangiaoController@update')->name('bangiao.update');
+Route::post('/bangiao/destroy/{id}','BangiaoController@destroy');
+
 
 // kiểm kê
 Route::resource('/kiemke','KiemkeController');

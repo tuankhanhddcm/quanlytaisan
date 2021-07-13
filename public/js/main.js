@@ -18,6 +18,10 @@ $(document).ready(function () {
         search_hopdong(1);
     });
 
+    $('.select-trangthai').click(function () {
+        search_ts(1);
+    });
+
     $(document).on('click', '.loaits-select', function () {
         check('#loaits');
         hao_mon();
@@ -281,6 +285,272 @@ $(document).ready(function () {
             }
         });
     });
+    // xóa tài sản tạm thời
+    $(document).on("click", ".btn_delete_ts", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa tài sản',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/taisan/update_delete",
+                            method: "post",
+                            data:{
+                                ma_ts:id,
+                                delete:1
+                            },
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa tài sản thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_ts(page);
+                                    });
+                                    
+                                }
+                                
+
+                            }
+                        });
+                        
+                        
+                    }
+                },
+                huy: {
+                   text:'Hủy'
+                }
+
+            }
+        });
+    });
+
+    // xóa tài sản khỏi hệ thống
+    $(document).on("click", ".btn_delete_ts_vv", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa tài sản vĩnh viễn',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/taisan/delete",
+                            method: "post",
+                            data:{
+                                ma_ts:id,
+                            },
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa tài sản thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_ts(page);
+                                    });
+                                    
+                                }
+                                
+
+                            }
+                        });
+                        
+                        
+                    }
+                },
+                huy: {
+                   text:'Hủy'
+                }
+
+            }
+        });
+    });
+
+    // Khôi phục tài sản
+    $(document).on("click", ".btn_update_delete", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có muốn khôi phục lại tài sản',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'orange',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-orange",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/taisan/update_delete",
+                            method: "post",
+                            data:{
+                                ma_ts:id,
+                                delete:0
+                            },
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Khôi phục tài sản thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_ts(page);
+                                    });
+                                    
+                                }
+                                
+
+                            }
+                        });
+                        
+                        
+                    }
+                },
+                huy: {
+                   text:'Hủy'
+                }
+
+            }
+        });
+    });
+
+    // xóa tài sản khỏi hệ thống
+    $(document).on("click", ".btn_delete_bg", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa phiếu bàn giao',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/bangiao/destroy/"+id,
+                            method: "post",
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa phiếu bàn giao thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_phieubangiao(page);
+                                    });
+                                    
+                                }
+                                
+
+                            }
+                        });
+                        
+                        
+                    }
+                },
+                huy: {
+                   text:'Hủy'
+                }
+
+            }
+        });
+    });
 
 });
 
@@ -310,6 +580,7 @@ function search_ts(page) {
     var ma_phong = $('#phong option:selected').val();
     var ma_loai = $('.ma_loai').val();
     var phongban = $('.phongban').val();
+    var deleted = $('.select-trangthai option:selected').val();
     $.ajax({
 
         url: '/taisan/search?page=' + page,
@@ -319,10 +590,12 @@ function search_ts(page) {
             seleted: seleted,
             ma_phong: ma_phong,
             ma_loai:ma_loai,
-            phongban:phongban
+            phongban:phongban,
+            deleted:deleted
         },
         success: function (data) {
             $('#list_taisan').html(data);
+            
         }
     });
 }

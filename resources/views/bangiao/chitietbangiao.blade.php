@@ -83,9 +83,8 @@
                         <th >Tài sản</th>
                         <th >Số serial</th>
                         <th >Trạng thái</th>
-                        <th >Phòng ban</th>
-                        <th>Nhân viên sử dụng</th>
-                        <th style="border-right: none;"></th>
+                        <th style="width: 23%">Phòng ban</th>
+                        <th style="width: 13%">Nhân viên sử dụng</th>
                     </thead>
                     <tbody >
                         @php
@@ -131,10 +130,6 @@
                                             }
                                         }
                                     @endphp
-                                </td>
-                                <td style="border-right: none;display: flex;justify-content: space-around">
-                                    <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                                    <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                                 </td>
                             </tr>
                             @php

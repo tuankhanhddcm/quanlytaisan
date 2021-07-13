@@ -156,7 +156,11 @@ class TaisanController extends Controller
         $taisan = $this->taisan->show_ts($id);
         $chitiettaisan = $this->chitiettaisan->select($id);
         $nhanvien = $this->nhanvien->nvOftaisan($id);
-        $phongban = $this->phongban->phongOfts($id);
+        if($taisan->deleted ==0){
+            $phongban = $this->phongban->select('all');
+        }else{
+            $phongban = $this->phongban->phongOfts($id);
+        }
         $phongts = $this->taisan->phong_taisan();
         return view('taisan.detail_taisan',[
             'taisan'=>$taisan,
@@ -212,9 +216,27 @@ class TaisanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function update_delete(Request $request){
+        if($request->ajax()){
+            $xoats = $this->taisan->update_deleted($request->ma_ts,$request->delete);
+            if($xoats){
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+    public function destroy(Request $request)
     {
-        //
+        if($request->ajax()){
+            $xoa_chitiet = $this->chitiettaisan->delete_chitiet_of_taisan($request->ma_ts);
+            if($xoa_chitiet){
+                $xoats = $this->taisan->delete_ts($request->ma_ts);
+                return true;
+            }
+            return false;
+        }
     }
 
     public function search_ts(Request $request){
@@ -224,8 +246,9 @@ class TaisanController extends Controller
             $ma_phong =$request->ma_phong;
             $phongts = $this->taisan->phong_taisan();
             $ma_loai = $request->ma_loai;
-            if($text !='' || $seleted !='' || $ma_phong !=''){
-                $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong);
+            $deleted = $request->deleted;
+            if($text !='' || $seleted !='' || $ma_phong !='' || $deleted !=null){
+                $taisan = $this->taisan->search_taisan($text,$seleted,$ma_phong,$deleted);
             }elseif($ma_loai !=''){
                 $taisan = $this->taisan->select($ma_loai);
             }elseif($request->phongban !=''){

@@ -46,9 +46,19 @@
                     <td style="text-align: center">{{$item->soluong}}</td>
                     <td>{{date('d-m-Y', strtotime($item->ngay_mua))}}</td>
                     <td> <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('inthe_id',$item->ma_ts)}}'" title="In thẻ" ><i class='bx bxs-memory-card' style="font-size: 30px; color:#5bc0de;"></i></button></td>
-                    <td style="border-right: none; display: flex;justify-content: space-around;align-items: center;">
-                        <button style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                        <button style="width:40px; height:40px;  border:none; background-color: transparent;" title="Xóa tài sản" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                    
+                    
+                    <td style="border-right: none; ">
+                        <div style="display: flex;justify-content: space-around;align-items: center;">
+                            @if ($item->deleted ==0)
+
+                                <button  style="width:40px; height:40px;  border:none; background-color: transparent;" onclick="location.href='{{route('taisan.edit',$item->ma_ts)}}'" title="Sửa tài sản" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                                <button class="btn_delete_ts" data-id="{{$item->ma_ts}}" style="width:40px; height:40px;  border:none; background-color: transparent;" title="Xóa tài sản" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                            @else
+                                <button class="btn_update_delete" data-id="{{$item->ma_ts}}" style="width:40px; height:40px;  border:none; background-color: transparent;"  title="Khôi phục tài sản" ><i class='bx bx-rotate-left' style="font-size: 30px; color:#5bc0de;"></i></button>
+                                <button class="btn_delete_ts_vv" data-id="{{$item->ma_ts}}" style="width:40px; height:40px;  border:none; background-color: transparent;" title="Xóa tài sản" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                            @endif
+                        </div>
                     </td>
                 </tr>
                 @php

@@ -68,9 +68,12 @@
                 @endphp
             </td>
             @if (isset($nhanvien) )
-                <td style="border-right: none;display:flex;justify-content: space-around">
-                    <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                    <button class="btn_delete" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                <td style="border-right: none;">
+                    <div style="display:flex;justify-content: space-around">
+                        <button class="btn_chitiet" style="width:40px; height:40px; border:none; background-color: transparent;" data-id_chitiet="{{$item->ma_chitiet}}"  title="Sửa chi tiết" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                        <button class="btn_delete" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                    </div>
+                    
                 </td>
             @endif
             

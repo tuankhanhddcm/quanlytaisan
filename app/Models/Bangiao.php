@@ -71,4 +71,11 @@ class Bangiao extends Model
         $loai = $loai->paginate(8);
         return $loai;
     }
+    public function xoaphieubangiao($id)
+    {
+        $kq =DB::delete('delete from chitietphieu where ma_bangiao = ?',[$id]);
+        $kq =DB::delete('delete from phieubangiao where ma_bangiao = ?',[$id]);
+        return $kq;
+    }
+
 }

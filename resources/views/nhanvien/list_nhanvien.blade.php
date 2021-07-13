@@ -9,7 +9,7 @@
             <th style="width: 25%">Phòng ban</th>
             <th style="width: 10%">Chức vụ</th>
             <th style="width: 10%">Số tài sản đang sử dụng</th>
-            <th style="width: 12%">Hoạt động</th>
+            <th style="width: 5%">Hoạt động</th>
         </tr>
     </thead>
     <tbody id="list_product">
@@ -43,8 +43,11 @@
                     @endphp
                 </td>
                 <td >
-                    <button class="btn_up_nhanvien" data-id="{{$item->ma_nv}}"   style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                    <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
+                    <div style="display: flex;justify-content: space-around">
+                        <button class="btn_up_nhanvien" data-id="{{$item->ma_nv}}"   style="width:40px; height:40px;  border:none; background-color: transparent;" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
+                        <button style="width:40px; height:40px;  border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
+                    </div>
+                   
                 </td>
             </tr>
             @php
