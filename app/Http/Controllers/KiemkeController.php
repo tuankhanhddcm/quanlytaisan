@@ -134,7 +134,15 @@ class KiemkeController extends Controller
     {
         $phieukk = $this->kiemke->find($id);
         $nv = $this->kiemke->nv_kiemke($id);
+        $ngaykk = Carbon::parse($phieukk->ngay_kiemke)->year;
         $taisan = $this->taisan->export_tsOfphong($phieukk->ma_phong);
+            foreach($taisan as $val){
+                $ngaymua = Carbon::parse($val->ngay_mua)->year;
+                $nam = $ngaykk-$ngaymua;
+                if( $nam <= $val->thoi_gian_sd){
+                    $val->giatri = ($val->muc_tieuhao/100)*$val->nguyengia*($val->thoi_gian_sd-$nam);
+                }
+            }
         $chitiet = $this->chitietphieu->select_kiemke($id);
         return view('kiemke.chitietkiemke',compact('phieukk','nv','taisan','chitiet'));
     }
@@ -195,6 +203,21 @@ class KiemkeController extends Controller
                 $kiemke = $this->kiemke->select();
             }
             return view('kiemke.list_kiemke',compact('kiemke'));
+        }
+    }
+
+    public function tinh_haomon(Request $request){
+        if($request->ajax()){
+            $ngaykk = Carbon::parse($request->ngaykk)->year;
+            $taisan = $this->taisan->export_tsOfphong($request->phong);
+            foreach($taisan as $val){
+                $ngaymua = Carbon::parse($val->ngay_mua)->year;
+                $nam = $ngaykk-$ngaymua;
+                if( $nam <= $val->thoi_gian_sd){
+                    $val->giatri = ($val->muc_tieuhao/100)*$val->nguyengia*($val->thoi_gian_sd-$nam);
+                }
+            }
+            return view('kiemke.list_taisan',compact('taisan'));
         }
     }
 }

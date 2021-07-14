@@ -218,11 +218,22 @@ class TaisanController extends Controller
      */
     public function update_delete(Request $request){
         if($request->ajax()){
-            $xoats = $this->taisan->update_deleted($request->ma_ts,$request->delete);
-            if($xoats){
-                return true;
+            $chitiet = $this->chitiettaisan->select($request->ma_ts,'all');
+            $out = true;
+            foreach($chitiet as $val){
+                if($val->trangthai ==1){
+                    $out=false;
+                }
             }
-            return false;
+            if($out ==true){
+                $xoats = $this->taisan->update_deleted($request->ma_ts,$request->delete);
+                if($xoats){
+                    return true;
+                }
+                return false;
+            }
+            
+            
         }
     }
 

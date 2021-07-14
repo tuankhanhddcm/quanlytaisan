@@ -75,8 +75,6 @@ class KiemkeExport implements WithEvents
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.$i,$val->nguyengia);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('F'.$i,$soluong);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('G'.$i,$val->nguyengia);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('H'.$i,$soluong-$val->soluong);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('I'.$i,$val->nguyengia);
                 $i++;
                 $n++;
             }

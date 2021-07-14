@@ -60,7 +60,7 @@
                         <label for="" class="form-label ngaykk_lb">Ngày kiểm kê:</label>
                         <div class="form-wrap">
                             <div class="form_input">
-                                <input type="text" class="form-input date ngaykk" name="ngaykk" onchange="check('.ngaykk_lb')" value=""  placeholder="dd-mm-yyyy">
+                                <input type="text" class="form-input date ngaykk" name="ngaykk" onchange="check('.ngaykk_lb');tinh_haomon_kiemke();" value=""  placeholder="dd-mm-yyyy">
                             </div>
                             <div style="display: flex;">
                                 <i class='bx bxs-error-circle ngaykk_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>

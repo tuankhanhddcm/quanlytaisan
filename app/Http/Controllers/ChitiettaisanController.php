@@ -144,17 +144,29 @@ class ChitiettaisanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
         $chitiet = $this->chitiettaisan->show_id($id);
+        $sl_ts = $this->taisan->sl_taisan();
+        $out = false;
         if($chitiet->trangthai ==0){
-            $kq = $this->chitiettaisan->delete_chitiet($id);
-            if($kq){
-                return true;
+            foreach($sl_ts as $val){
+                if($val->ma_ts == $chitiet->ma_ts){
+                    if($val->soluong <=1){
+                        $ts = $this->taisan->update_deleted($val->ma_ts,1);
+                        $out =true;
+                    }else{
+                        $kq = $this->chitiettaisan->delete_chitiet($id);
+                        $out=true;
+                    }
+                    
+                    break;
+                }
+    
             }
-        }else{
-            return false;
         }
+        return $out;
+        
     }
 
     public function search_chitiet(Request $request){

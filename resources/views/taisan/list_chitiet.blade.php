@@ -57,7 +57,7 @@
                 <td style="border-right: none;">
                     <div style="display: flex;justify-content: space-around;align-items: center;">
                         <button class="btn_modal_chitiet" data-ma_ts="{{isset($taisan)?$taisan->ma_ts:''}}" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                        <button class="btn_delete" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
+                        {{-- <button class="btn_delete" data-id="{{$item->ma_chitiet}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa chi tiết" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button> --}}
                     </div>
                 </td>
             </tr>

@@ -51,7 +51,8 @@ $(document).ready(function () {
         check('#phongban');
         search_ts(1);
         search_chitiet(1);
-        list_ts_kiemke();
+        //list_ts_kiemke();
+        tinh_haomon_kiemke();
         search_kiemke(1);
         search_nhanvien(1)
     });
@@ -78,6 +79,7 @@ $(document).ready(function () {
     $('.soluong').inputFilter(function (value) {
         return /^\d*$/.test(value);
     });
+    
 
     // phân trang
     $(document).on('click', '.pagination a', function (event) {
@@ -203,7 +205,13 @@ $(document).ready(function () {
     
     $(document).on('keyup','.soluongkiemke',function(){
         var id =$(this).data('id');
-        tru_sl_kiemke($(this).val(),id);
+        if(tru_sl_kiemke($(this).val(),id)){
+            $(this).css('border-color','red');
+            $(this).css('color','red');
+        }else{
+            $(this).css('border-color','#cccc');
+            $(this).css('color','-internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))');
+        }
     });
 
     // xóa chi tiết tài sản
@@ -336,6 +344,22 @@ $(document).ready(function () {
                                         search_ts(page);
                                     });
                                     
+                                }else{
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa tài sản thất bại do chi tiết tài sản đang được sử dụng',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
                                 }
                                 
 
@@ -1445,17 +1469,46 @@ function khau_hao(){
     
 }
 
-function list_ts_kiemke(){
-    var ma_phong = $('#phongban option:selected').val();
+function tinh_haomon_kiemke(){
+    var ngaykk = $('.ngaykk').val();
+    var phong = $('#phongban option:selected').val();
+    if(ngaykk !=undefined && phong !=''){
         $.ajax({
-            url: '/kiemke/list_taisan',
+            url:'/kiemke/tinh_haomon',
             method:'post',
-            data:{ma_phong:ma_phong},
+            data:{ngaykk:ngaykk,phong:phong},
             success:function(data){
-                $('#list_taisan_kiemke').html(data);
+                $(document).ready(function(){
+                    $('#list_taisan_kiemke').html(data);
+                    $('.soluong').inputFilter(function (value) {
+                        return /^\d*$/.test(value);
+                    });
+                });
             }
         });
+    }
+
 }
+
+// function list_ts_kiemke(){
+//     var ma_phong = $('#phongban option:selected').val();
+//         $.ajax({
+//             url: '/kiemke/list_taisan',
+//             method:'post',
+//             data:{ma_phong:ma_phong},
+//             success:function(data){
+//                 $(document).ready(function(){
+//                     $('#list_taisan_kiemke').html(data);
+//                     $('.soluong').inputFilter(function (value) {
+//                         return /^\d*$/.test(value);
+//                     });
+                    
+                    
+//                 });
+                
+//             }
+//         });
+// }
 
 function loc_cv_nv(url,ma_nv,div){
     $.ajax({
@@ -1482,14 +1535,15 @@ function check_inser_kiemke(){
 }
 
 function tru_sl_kiemke(val,id){
-    var sl = Number(val) - Number($('#soluong_ht'+id).text());
-    console.log(sl);
-    if(sl < 0){
-        $('#soluong'+id).css('color','red');
+    var sl_kk = Number(val);
+    var sl_ht= Number($('#soluong_ht'+id).text());
+    if(sl_kk != sl_ht){
+        return true;
+        // $('#soluong'+id).css('color','red');
     }else{
-        $('#soluong'+id).css('color','black');
+        return false;
+        // $('#soluong'+id).css('color','black');
     }
-    $('#soluong'+id).text(sl);
 }
 
 function check_export_ds_kiemke(){

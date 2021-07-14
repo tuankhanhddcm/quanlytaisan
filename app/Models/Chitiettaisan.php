@@ -13,8 +13,7 @@ class Chitiettaisan extends Model
         $data = DB::table($this->table)
                 ->select('chitiettaisan.*','taisan.ten_ts','phongban.ten_phong')
                 ->join('taisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
-                ->join('phongban','chitiettaisan.ma_phong','=','phongban.ma_phong')
-                ->where('taisan.deleted',0);
+                ->join('phongban','chitiettaisan.ma_phong','=','phongban.ma_phong');
         return $data;
     }
 
@@ -22,6 +21,8 @@ class Chitiettaisan extends Model
         $data = $this->table_join();
         if($dieukien !=''){
             $data = $data->where('chitiettaisan.ma_ts','=',''.$dieukien.'');
+        }else{
+            $data = $data->where('taisan.deleted',0);
         }
         if($all !=''){
             $data = $data->get();
@@ -52,7 +53,7 @@ class Chitiettaisan extends Model
         return $kq;
     }
     public function search_chitiet( $text,$selected,$ma_phong){
-        $kq = $this->table_join();
+        $kq = $this->table_join()->where('taisan.deleted',0);
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
                     $res->where('chitiettaisan.ten_chitiet','like','%'.$text.'%')
@@ -76,7 +77,7 @@ class Chitiettaisan extends Model
     }
 
     public function show_id($id){
-        $data = $this->table_join()->where('ma_chitiet','=',''.$id.'')->first();
+        $data = $this->table_join()->where('taisan.deleted',0)->where('ma_chitiet','=',''.$id.'')->first();
         return $data;
     }
 
@@ -97,7 +98,7 @@ class Chitiettaisan extends Model
     //     return $data;
     // }
     public function ctOfphong($ma_phong){
-        $data =$this->table_join()->where('phongban.ma_phong',$ma_phong)->get();
+        $data =$this->table_join()->where('taisan.deleted',0)->where('phongban.ma_phong',$ma_phong)->get();
         return $data;
     }
 
@@ -139,7 +140,7 @@ class Chitiettaisan extends Model
         return $data;
     }
     public function ctOfnv($ma_nv){
-        $data = $this->table_join()->where('chitiettaisan.ma_nv',$ma_nv)->paginate(8);
+        $data = $this->table_join()->where('taisan.deleted',0)->where('chitiettaisan.ma_nv',$ma_nv)->paginate(8);
         return $data;
     }
     
