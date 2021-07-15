@@ -172,7 +172,32 @@ $(document).ready(function () {
     $(document).on('click','.phongban-select',function(){
         loc_select('loc_nv',$('.phongban-select option:selected').val(),'#nhanvien');
         loc_select('loc_nv',$('#phongban_up option:selected').val(),'#nhanvien_up');
+        var sl = Number($('#so_tai_san').val());
+        var ma_phong = $('.phongban-select option:selected').val();
+        $.ajax({
+            url: '/thanhly/more_ts',
+            method: 'post',
+            data: { sl: sl, ma_phong: ma_phong },
+            success: function (data) {
+                $('.more_taisan_tl').html(data);
+                $(".select").selectpicker();
+            }
+        });
     });
+    $('.so_ts').change(function () {
+        var sl = Number($('#so_tai_san').val());
+        var ma_phong = $('.phongban-select option:selected').val();
+        $.ajax({
+            url: '/thanhly/more_ts',
+            method: 'post',
+            data: { sl: sl, ma_phong: ma_phong},
+            success: function (data) {
+                $('.more_taisan_tl').html(data);
+                $(".select").selectpicker();
+            }
+        });
+    });
+    
     // lọc select------------------
     $('.select-phonggiao').click(function () {
         loc_select('loc_nv', $('.select-phonggiao option:selected').val(), '#nv_giao')
@@ -1281,10 +1306,10 @@ function check_trung_ts(ten){
                     $(".error_" + ten + j).css("display", "block");
                     kq = false;
                 } else {
-                    // $('.' + ten + j).removeClass('error_input');
-                    // $("." + ten + j + "_icon").css("display", "none");
-                    // $(".error_" + ten + j).text("");
-                    // $(".error_" + ten + j).css("display", "none");
+                    $('.' + ten + j).removeClass('error_input');
+                    $("." + ten + j + "_icon").css("display", "none");
+                    $(".error_" + ten + j).text("");
+                    $(".error_" + ten + j).css("display", "none");
                     kq = true;
                 }
                 
@@ -1529,6 +1554,18 @@ function check_inser_kiemke(){
     check('.ngaykk_lb') ;
     check('.dot_kk_lb');
     if(check('#nv_kk_1_lb') && check('#nv_kk_2_lb') && check('#nv_kk_3_lb') && check('#phongban') && check('.ngaykk_lb') && check('.dot_kk_lb')){
+        return true;
+    }
+    return false;
+}
+function check_inser_thanhly(){
+    check('.ngaylap_lb');
+    check('#phongban');
+    check('#nhanvien');
+    check_trung_ts('chitiet');
+    check_ts_more('chitiet');
+    readURL(this,'#file_pdf','pdf');
+    if(check('.ngaylap_lb')&&check('#phongban')&&check('#nhanvien')&&check_trung_ts('chitiet')&&check_ts_more('chitiet') && readURL(this,'#file_pdf','pdf')){
         return true;
     }
     return false;

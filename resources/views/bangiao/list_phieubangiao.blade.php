@@ -9,6 +9,7 @@
             <th >Phòng nhận</th>
             <th style="width: 8%;">Ngày giao</th>
             <th style="width: 8%;">Lý do</th>
+            <th style="width: 2%;">Xem phiếu</th>
             <th style="width: 2%;">In phiếu</th>
             <th style="width: 3%;">Hoạt động</th>
         </tr>
@@ -54,6 +55,9 @@
                 <td>{{$item->ghichu}}</td>
                 <td>
                     <button onclick="location.href='/bangiao/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
+                </td>
+                <td>
+                    <button onclick="location.href='/bangiao/in_phieu/{{$item->ma_bangiao}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-printer' style="font-size: 25px; color:black;"></i></button>
                 </td>
                 <td style="border-right: none; ">
                     <div style="display: flex;justify-content: space-around;">

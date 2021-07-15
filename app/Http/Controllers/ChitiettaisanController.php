@@ -149,7 +149,7 @@ class ChitiettaisanController extends Controller
         $chitiet = $this->chitiettaisan->show_id($id);
         $sl_ts = $this->taisan->sl_taisan();
         $out = false;
-        if($chitiet->trangthai ==0){
+        if($chitiet->trangthai == 2){
             foreach($sl_ts as $val){
                 if($val->ma_ts == $chitiet->ma_ts){
                     if($val->soluong <=1){

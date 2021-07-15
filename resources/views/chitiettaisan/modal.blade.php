@@ -64,7 +64,6 @@
                                     <option value="">--Chọn loại trạng thái--</option>
                                     <option value="0">Không sử dụng</option>
                                     <option value="1">Đang sử dụng</option>
-                                    <option value="2">Hư hỏng</option>
                                 </select>
                             </div>
                         </div>
@@ -202,17 +201,12 @@
                                             @case(0)
                                             <option value="0" selected>Chưa sử dụng</option>
                                             <option value="1" >Đang sử dụng</option>
-                                            <option value="2" >Hư hỏng</option>
+                                            
                                                 @break
                                             @case(1)
                                             <option value="0" >Chưa sử dụng</option>
                                             <option value="1" selected >Đang sử dụng</option>
-                                            <option value="2" >Hư hỏng</option>
-                                                @break
-                                            @case(1)
-                                            <option value="0" >Chưa sử dụng</option>
-                                            <option value="1"  >Đang sử dụng</option>
-                                            <option value="2" selected >Hư hỏng</option>
+                                            
                                                 @break
                                         @endswitch
                                     @endif

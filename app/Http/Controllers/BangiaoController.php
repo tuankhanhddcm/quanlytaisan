@@ -252,6 +252,11 @@ class BangiaoController extends Controller
         $phieu = $id;
         return view('bangiao.viewpdf',compact('phieu'));
     }
+    public function in_phieu($id){
+        $bangiao = $this->bangiao->find($id);
+        $file = public_path('phieubangiao/'.$bangiao->phieu);
+        return response()->download($file);
+    }
 
     public function search(Request $request){
         if($request->ajax()){

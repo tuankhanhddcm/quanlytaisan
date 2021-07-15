@@ -89,7 +89,7 @@ Route::get('/bangiao/phieu/{id}','BangiaoController@show_phieu');
 Route::post('/bangiao/search','BangiaoController@search');
 Route::post('/bangiao/update/{id}','BangiaoController@update')->name('bangiao.update');
 Route::post('/bangiao/destroy/{id}','BangiaoController@destroy');
-
+Route::get('/bangiao/in_phieu/{id}','BangiaoController@in_phieu');
 
 // kiểm kê
 Route::resource('/kiemke','KiemkeController');
@@ -103,3 +103,9 @@ Route::post('/kiemke/tinh_haomon','KiemkeController@tinh_haomon');
 // hợp đồng
 Route::resource('/hopdong','HopdongController');
 Route::post('/hopdong/search','HopdongController@search_hopdong');
+
+// thanh lý
+Route::resource('/thanhly','ThanhlyController');
+Route::post('/thanhly/more_ts','ThanhlyController@more_ts');
+Route::get('/thanhly/in_phieu/{id}','ThanhlyController@in_phieu');
+Route::get('/thanhly/phieu/{id}','ThanhlyController@show_phieu');

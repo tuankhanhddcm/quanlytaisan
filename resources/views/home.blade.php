@@ -178,6 +178,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="/thanhly" class="nav-link ">
+                <i class='nav-icon bx bxs-file'></i>
+                <p>
+                  Thanh lý tài sản
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="/bangiao" class="nav-link ">
                 <i class='nav-icon bx bxs-file'></i>
                 <p>

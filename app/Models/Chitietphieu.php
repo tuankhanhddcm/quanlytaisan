@@ -67,6 +67,13 @@ class Chitietphieu extends Model
         ]);
         return $kq;
     }
+    public function update_tinhtrang_thanhly($ma_chitiet,$ma_thanhly,$tinhtrang){
+        $kq = DB::table($this->table)->where('ma_chitiet','=',''.$ma_chitiet.'')->where('ma_thanhly','=',''.$ma_thanhly.'')->update([
+            'tinhtrang'=>$tinhtrang,
+        ]);
+        return $kq;
+    }
+
 
     
 

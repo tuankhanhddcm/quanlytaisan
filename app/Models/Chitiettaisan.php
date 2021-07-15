@@ -98,7 +98,7 @@ class Chitiettaisan extends Model
     //     return $data;
     // }
     public function ctOfphong($ma_phong){
-        $data =$this->table_join()->where('taisan.deleted',0)->where('phongban.ma_phong',$ma_phong)->get();
+        $data =$this->table_join()->where('taisan.deleted',0)->where('phongban.ma_phong',$ma_phong)->where('trangthai','!=',2)->get();
         return $data;
     }
 
@@ -118,6 +118,13 @@ class Chitiettaisan extends Model
         ]);
         return $data;
     }
+    public function update_tt($ma_chitiet,$tt){
+        $data = DB::table($this->table)->where('chitiettaisan.ma_chitiet',$ma_chitiet)
+        ->update([
+            'trangthai'=>$tt
+        ]);
+        return $data;
+    }
 
     public function sl_ts_phong(){
         $data =DB::table($this->table)
@@ -125,6 +132,7 @@ class Chitiettaisan extends Model
         ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
         ->select('phongban.ma_phong',DB::raw('count(chitiettaisan.ma_chitiet) as soluong'))
         ->where('taisan.deleted',0)
+        ->where('trangthai','!=',2)
         ->groupBy('phongban.ma_phong')
         ->get();
         return $data;
@@ -135,12 +143,13 @@ class Chitiettaisan extends Model
         ->join('nhanvien','nhanvien.ma_nv','=','chitiettaisan.ma_nv')
         ->select('nhanvien.ma_nv',DB::raw('count(chitiettaisan.ma_chitiet) as soluong'))
         ->where('taisan.deleted',0)
+        ->where('trangthai','!=',2)
         ->groupBy('nhanvien.ma_nv')
         ->get();
         return $data;
     }
     public function ctOfnv($ma_nv){
-        $data = $this->table_join()->where('taisan.deleted',0)->where('chitiettaisan.ma_nv',$ma_nv)->paginate(8);
+        $data = $this->table_join()->where('taisan.deleted',0)->where('chitiettaisan.ma_nv',$ma_nv)->where('trangthai','!=',2)->paginate(8);
         return $data;
     }
     
