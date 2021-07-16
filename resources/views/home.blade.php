@@ -285,6 +285,7 @@
         @yield('chitiet')
         @yield('index')
     </div>
+    @include('sweetalert::alert')
     <!-- /.content-wrapper -->
     {{-- @include('modal.modal_insert') --}}
     
@@ -294,6 +295,7 @@
   <!-- jQuery -->
   <script src="{{ URL::asset('js/jquery-3.6.0.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
   {{-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script> --}}
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ URL::asset('js/jquery-ui.min.js')}}"></script>

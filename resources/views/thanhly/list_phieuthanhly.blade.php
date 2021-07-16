@@ -3,9 +3,9 @@
         <tr>
             <th style="border-left: 1px solid rgba(0,0,0,.1); width:20px;">STT</th>
             <th >Mã Phiếu</th>
-            <th >Tên người lập</th>
+            <th style="width: 13%;">Tên người lập</th>
             <th >Phòng thanh lý</th>
-            <th >Ngày thanh lý</th>
+            <th style="width: 8%;">Ngày thanh lý</th>
             <th style="width: 25%;">Ghi chú</th>
             <th style="width: 5%;">Xem phiếu</th>
             <th style="width: 5%;">In phiếu</th>
@@ -40,7 +40,7 @@
                 </td>
                 <td style="border-right: none; ">
                     <div style="display: flex;justify-content: space-around;">
-                        <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href=''"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                        <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('thanhly.edit',$item->ma_thanhly)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
                         <button class="btn_delete_bg" data-id="{{$item->ma_thanhly}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
                     </div>
                     

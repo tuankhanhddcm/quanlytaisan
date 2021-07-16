@@ -28,6 +28,16 @@ class Chitietphieu extends Model
         }
         return $loaits;
     }
+    public function select_thanhlys($all='',$id){
+        $loaits = $this->table_join()->select('chitietphieu.*')
+        ->where('ma_thanhly',$id);
+        if($all !=''){
+            $loaits = $loaits->get();
+        }else{
+            $loaits = $loaits->paginate(8);
+        }
+        return $loaits;
+    }
     public function select_kiemke($ma_kiemke){
         $data = DB::table($this->table)->where('ma_kiemke',$ma_kiemke)->get();
         return $data;

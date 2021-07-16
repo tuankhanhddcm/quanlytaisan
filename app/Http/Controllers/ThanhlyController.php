@@ -9,6 +9,8 @@ use App\Models\Thanhly;
 use App\Models\Phongban;
 use App\Models\Chitiettaisan;
 use Carbon\Carbon;
+use Alert;
+use Illuminate\Support\Facades\File;
 
 class ThanhlyController extends Controller
 {
@@ -96,6 +98,7 @@ class ThanhlyController extends Controller
                 }
             }
             if($result){
+                Alert::alert()->success('Thêm phiếu thanh lý thành công')->autoClose(5000);
                 return redirect()->route('thanhly.create');
             }
            
@@ -124,7 +127,11 @@ class ThanhlyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $thanhly = $this->thanhly->find($id);
+        $nhanvien = $this->nhanvien->select('all');
+        $phongban = $this->phongban->select('all');
+        $chitiet = $this->chitiettaisan->table_join()->join('chitietphieu','chitietphieu.ma_chitiet','=','chitiettaisan.ma_chitiet')->where('chitietphieu.ma_thanhly',$id)->select('chitiettaisan.*','taisan.ten_ts','phongban.ten_phong','chitietphieu.tinhtrang')->get();
+        return view('thanhly.themthanhly',compact('thanhly','phongban','nhanvien','chitiet'));
     }
 
     /**
@@ -136,7 +143,44 @@ class ThanhlyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $ngay_thanhly = Carbon::parse($request->ngaylap);
+        $thanhly = $this->thanhly->find($id);
+        $path = public_path().'/phieuthanhly/'.$thanhly->phieu;
+        if(File::exists($path)){
+            unlink($path);
+        }
+        $file = $request->file_pdf;
+        
+        $kq = $this->thanhly->updat_thanhly($id,$request->nhanvien,$request->phongban,$request->lydo,$file->getClientOriginalName(),$ngay_thanhly);
+        if($kq){
+            $file->move('phieuthanhly',$file->getClientOriginalName());
+            $chitiet = $this->chitiettaisan->table_join()->join('chitietphieu','chitietphieu.ma_chitiet','=','chitiettaisan.ma_chitiet')->where('chitietphieu.ma_thanhly',$id)->select('chitiettaisan.*','taisan.ten_ts','phongban.ten_phong','chitietphieu.tinhtrang')->get();
+            foreach($chitiet as $val){
+                $up_ct = $this->chitiettaisan->update_tt($val->ma_chitiet,0);
+                
+            }
+            $delete_ct_phieu = $this->chitietphieu->delete_phieu('ma_thanhly',$id);
+            if($delete_ct_phieu){
+                foreach($request->ma_chitiet as $v){
+                    $insert_ct_phieu = $this->chitietphieu->insert(null,$id,null,$v,null,null,null);
+                    if($insert_ct_phieu){
+                        $up_ct = $this->chitiettaisan->update_tt($v,2);
+                        foreach($request->tinhtrang as $tt){
+                            $up_tt = $this->chitietphieu->update_tinhtrang_thanhly($v,$id,$tt);
+                        }
+                        
+                    }
+                }
+                if($up_tt){
+                    Alert::alert()->success('Sửa phiếu thanh lý thành công!!!');
+                    return redirect()->route('thanhly.index');
+                }
+            }
+            
+        }
+        
+        
     }
 
     /**

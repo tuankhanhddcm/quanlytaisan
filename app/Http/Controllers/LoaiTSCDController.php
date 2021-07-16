@@ -8,7 +8,7 @@ use App\Models\Taisan;
 use App\Models\Tieuhao;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Alert;
 class LoaiTSCDController extends Controller
 {
     /**
@@ -101,6 +101,7 @@ class LoaiTSCDController extends Controller
                 $ma_tieuhao = 'TH'.($id+1);
             }
             if($this->tieuhao->insert($ma_tieuhao,$request->tile_HM,$request->tgSD,$ma_loai,'')){
+                Alert::alert()->success('Thêm loại TSCĐ thành công!!!')->autoClose(5000);
                 return redirect('/loaiTSCD');
             }
         }
@@ -146,6 +147,7 @@ class LoaiTSCDController extends Controller
         $kq = $this->loaiTSCD->update_loai($id,$request->tents_up,$request->loaits_up);
         if($kq){
             if($this->tieuhao->updateth($request->ma_tieuhao,$request->tile_HM_up,$request->tgSD_up)){
+                Alert::alert()->success('Sửa loại TSCĐ thành công!!!')->autoClose(5000);
                 return redirect('loaiTSCD');
             }
             

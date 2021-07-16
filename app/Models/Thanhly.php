@@ -57,4 +57,14 @@ class Thanhly extends Model
         ]);
         return $table;
     }
+    public function updat_thanhly($ma_thanhly,$ma_nv,$ma_phong,$ghichu,$phieu,$ngay_thanhly){
+        $table=DB::table($this->table)->where('ma_thanhly',$ma_thanhly)->update([
+            'ma_nv' =>$ma_nv,
+            'ma_phong' =>$ma_phong,
+            'ghichu' =>$ghichu,
+            'phieu'=>$phieu,
+            'ngay_thanhly' =>$ngay_thanhly,
+        ]);
+        return $table;
+    }
 }

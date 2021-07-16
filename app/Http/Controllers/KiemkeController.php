@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\KiemkeExport;
+use Alert;
 
 class KiemkeController extends Controller
 {
@@ -119,6 +120,7 @@ class KiemkeController extends Controller
                 $r = $this->chitietphieu->insert(null,null,$ma_kiemke,null,null,$val['soluong'],$val['taisan']);
             }
             if($k && $r){
+                Alert::alert()->success('Thêm phiếu kiểm kê thành công!!!')->autoClose(5000);
                 return redirect()->route('kiemke.index');
             }
         }

@@ -8,7 +8,7 @@ use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
 use Illuminate\Http\Request;
-
+use Alert;
 class NhanvienController extends Controller
 {
     /**
@@ -80,8 +80,11 @@ class NhanvienController extends Controller
         $date = date("Y-m-d H:i:s", time());
         $kq =$this->nhanvien->insert($ma_nv,$request->ten_nv,$request->sdt,$request->email,$request->diachi,$date,$request->ma_phong,$request->ma_chucvu);
         if($kq){
-            return redirect('/nhanvien');
+            Alert::alert()->success('Thêm nhân viên thành công!!!')->autoClose(5000);
+        }else{
+            Alert::alert()->error('Thêm nhân viên thất bại!!!')->autoClose(5000);
         }
+        return redirect('/nhanvien');
     }
 
     /**
@@ -127,8 +130,13 @@ class NhanvienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $date = date("d-m-Y");
-        $this->nhanvien->update_nv($id,$request->ten_nv,$request->sdt,$request->email,$request->diachi,$request->ma_phong,$date,$request->ma_chucvu);
+        $date = date('Y-m-d H:m:s',time());
+        $kq =$this->nhanvien->update_nv($id,$request->ten_nv,$request->sdt,$request->email,$request->diachi,$request->ma_phong,$date,$request->ma_chucvu);
+        if($kq){
+            Alert::alert()->success('Sửa nhân viên thành công!!!')->autoClose(5000);
+        }else{
+            Alert::alert()->error('Sửa nhân viên thất bại!!!')->autoClose(5000);
+        }
         return redirect('/nhanvien');
     }
 

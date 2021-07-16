@@ -11,7 +11,9 @@ use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 use Svg\Tag\Rect;
+Use Alert;
 
 class BangiaoController extends Controller
 {
@@ -106,8 +108,12 @@ class BangiaoController extends Controller
                 }
             }
             if($result){
-                return redirect()->route('bangiao.create');
+                Alert::alert()->success('Thêm phiếu bàn giao thành công')->autoClose(5000);
+               
+            }else{
+                Alert::alert()->error('Thêm phiếu bàn giao Thất bại')->autoClose(5000);
             }
+            return redirect()->route('bangiao.create');
            
         }
         
@@ -152,6 +158,11 @@ class BangiaoController extends Controller
     public function update(Request $request, $id)
     {
         $file = $request->file_pdf;
+        $bangiao = $this->bangiao->find($id);
+        $path = public_path().'/phieubangiao/'.$bangiao->phieu;
+        if(File::exists($path)){
+            unlink($path);
+        }
         $kq = $this->bangiao->update_bangiao($id,$request->nv_giao,$request->nv_nhan,$request->lydo,$file->getClientOriginalName(),$request->ngaygiao);
         if($kq){
             $file->move('phieubangiao',$file->getClientOriginalName());
@@ -168,7 +179,7 @@ class BangiaoController extends Controller
                         }
                     }
                 }
-                
+                Alert::alert()->success('Sửa phiếu bàn giao thành công')->autoClose(5000);
                 return redirect()->route('bangiao.index');
             }
             

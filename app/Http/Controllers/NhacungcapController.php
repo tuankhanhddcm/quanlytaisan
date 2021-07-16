@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nhacungcap;
 use Illuminate\Http\Request;
+use Alert;
 
 class NhacungcapController extends Controller
 {
@@ -66,6 +67,7 @@ class NhacungcapController extends Controller
         $date = date("Y-m-d H:i:s", time());
         $this->nhacungcap->insert($ma_ncc,$request->ten_ncc,$request->sdt_ncc,$request->email_ncc,$request->diachi_ncc,$date);
         if(!$request->ajax()){
+            Alert::alert()->success('Thêm nhà cung cấp thành công!!!')->autoClose(5000);
             return redirect('/nhacungcap');
         }
     }
@@ -102,8 +104,10 @@ class NhacungcapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $date = date("d-m-Y");
-        $this->nhacungcap->update_ncc($id,$request->ten_ncc,$request->sdt,$request->email,$request->dia_chi, $date);
+        $kq =$this->nhacungcap->update_ncc($id,$request->ten_ncc,$request->sdt,$request->email,$request->dia_chi);
+        if($kq){
+            Alert::alert()->success('Sửa nhà cung cấp thành công!!!')->autoClose(5000);
+        }
         return redirect('/nhacungcap');
     }
 

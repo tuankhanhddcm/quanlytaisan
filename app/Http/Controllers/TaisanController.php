@@ -16,7 +16,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Alert;
 class TaisanController extends Controller
 {
     /**
@@ -137,8 +137,12 @@ class TaisanController extends Controller
                     $kq=$this->chitiettaisan->insert($ma_chitiet,$ma_ts,$request->tents.' ('.(1+$i).')',$request->phongban);
                 }
                 if($kq){
-                    return redirect('/taisan/create');
+                    Alert::alert()->success('Thêm tài sản thành công!!!')->autoClose(5000);
+                    
+                }else{
+                    Alert::alert()->error('Thêm tài sản Thất bại!!!')->autoClose(5000);
                 }
+                return redirect('/taisan/create');
             }
             
         }
@@ -205,6 +209,7 @@ class TaisanController extends Controller
         ,$request->nsx,$request->nuoc_sx,$ngay_sd,$ngay_tang);
         
         if($kq){
+            Alert::alert()->success('Sửa tài sản thành công!!!')->autoClose(5000);
             return redirect()->route('taisan.index');
         }
         

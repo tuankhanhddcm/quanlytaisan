@@ -10,7 +10,7 @@ use App\Models\Taisan;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
 use Svg\Tag\Rect;
-
+use Alert;
 class ChitiettaisanController extends Controller
 {
     /**
@@ -86,8 +86,10 @@ class ChitiettaisanController extends Controller
         $kq =$this->chitiettaisan->insert($id_chitiet,$request->loaits,$request->tents,$request->phongban,$request->so_serial,$request->trangthai,$request->nhanvien);
         if($kq){
             if($request->taisan){
+                Alert::alert()->success('Thêm chi tiết tài sản thành công!!!')->autoClose(5000);
                 return redirect('/taisan/'.$request->taisan);
             }
+            Alert::alert()->success('Thêm chi tiết tài sản thành công!!!')->autoClose(5000);
             return redirect('/chitiettaisan');
         }
     }
@@ -130,8 +132,10 @@ class ChitiettaisanController extends Controller
         $kq = $this->chitiettaisan->update_chitiet($id,$request->loaits_up,$request->tents_up,$request->so_serial_up,$request->trangthai_up,$request->nhanvien_up);
         if($kq){
             if($request->detail_ts !=''){
+                Alert::alert()->success('Sửa chi tiết tài sản thành công!!!')->autoClose(5000);
                 return redirect('taisan/'.$request->detail_ts.'?page='.$request->page);
             }else{
+                Alert::alert()->success('Sửa chi tiết tài sản thành công!!!')->autoClose(5000);
                 return redirect('chitiettaisan?page='.$request->page);
             }
            

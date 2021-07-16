@@ -109,3 +109,4 @@ Route::resource('/thanhly','ThanhlyController');
 Route::post('/thanhly/more_ts','ThanhlyController@more_ts');
 Route::get('/thanhly/in_phieu/{id}','ThanhlyController@in_phieu');
 Route::get('/thanhly/phieu/{id}','ThanhlyController@show_phieu');
+Route::post('/thanhly/update/{id}','ThanhlyController@update')->name('thanhly.update');

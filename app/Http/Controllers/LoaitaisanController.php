@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loaitaisan;
 use Illuminate\Http\Request;
-
+use Alert;
 use function Ramsey\Uuid\v1;
 
 class LoaitaisanController extends Controller
@@ -45,7 +45,10 @@ class LoaitaisanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->loaitaisan->insert($request->ten_loai);
+        $kq=$this->loaitaisan->insert($request->ten_loai);
+        if($kq){
+            Alert::alert()->success('Thêm loại tài sản thành công!!!')->autoClose(5000);
+        }
         return redirect('loaits');
     }
 

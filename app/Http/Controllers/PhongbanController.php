@@ -6,7 +6,7 @@ use App\Models\Chitiettaisan;
 use App\Models\Phongban;
 use App\Models\Taisan;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\This;
+use Alert;
 
 class PhongbanController extends Controller
 {
@@ -82,6 +82,7 @@ class PhongbanController extends Controller
         $date = date("Y-m-d H:i:s", time());
         $data=$this->phongban->insert($ma_phong,$request->ten_phong,$request->mo_ta,$date);
         if(!$request->ajax()){
+            Alert::alert()->success('Thêm phòng ban thành công!!!')->autoClose(5000);
             return redirect('/phongban');
         }
         
@@ -128,7 +129,9 @@ class PhongbanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->phongban->update_phong($id,$request->ten_phong,$request->mota);
+        $kq = $this->phongban->update_phong($id,$request->ten_phong,$request->mota);
+
+        Alert::alert()->success('Sửa phòng ban thành công!!!')->autoClose(5000);
         return redirect('/phongban');
     }
 
