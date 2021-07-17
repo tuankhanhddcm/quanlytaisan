@@ -46,7 +46,7 @@
                             echo 'Đang sử dụng';
                             break;
                         case '2':
-                            echo 'Đã thanh lý';
+                            echo '<span style="color: #FF3300; font-weight: bold" >Đã thanh lý</span>';
                             break;
                     }
                 @endphp

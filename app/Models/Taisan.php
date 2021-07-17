@@ -89,6 +89,7 @@ class Taisan extends Model
         $kq = $this->table_join()
         ->join('chitiettaisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
         ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+        ->where('chitiettaisan.trangthai','!=',2)
         ->select('taisan.ma_ts','taisan.ten_ts','loaitaisancodinh.ten_loai','taisan.ngay_mua','taisan.deleted');
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
@@ -214,6 +215,7 @@ class Taisan extends Model
         ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
         ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
         ->where('taisan.deleted',0)
+        ->where('chitiettaisan.trangthai','!=',2)
         ->where('phongban.ma_phong',$ma_phong)
         ->groupBy('taisan.ma_ts');
         $data = DB::table($this->table)
@@ -237,6 +239,7 @@ class Taisan extends Model
         ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
         ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
         ->where('taisan.deleted',0)
+        ->where('chitiettaisan.trangthai','!=',2)
         ->where('phongban.ma_phong',$ma_phong)
         ->groupBy('taisan.ma_ts');
         $data = DB::table($this->table)
