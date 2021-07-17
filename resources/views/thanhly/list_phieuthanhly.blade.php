@@ -41,7 +41,7 @@
                 <td style="border-right: none; ">
                     <div style="display: flex;justify-content: space-around;">
                         <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('thanhly.edit',$item->ma_thanhly)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
-                        <button class="btn_delete_bg" data-id="{{$item->ma_thanhly}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                        <button class="btn_delete_tl" data-id="{{$item->ma_thanhly}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
                     </div>
                     
                 </td>

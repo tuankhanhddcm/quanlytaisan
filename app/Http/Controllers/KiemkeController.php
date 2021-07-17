@@ -222,6 +222,7 @@ class KiemkeController extends Controller
      */
     public function destroy($id)
     {
+        $this->chitietphieu->delete_phieu('ma_kiemke',$id);
         $kq=$this->kiemke->delete_kiemke($id);
         if($kq){
             return true;

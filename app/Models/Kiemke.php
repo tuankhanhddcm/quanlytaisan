@@ -108,7 +108,6 @@ class Kiemke extends Model
     }
     public function delete_kiemke($id)
     {
-        $this->chitietphieu->delete_phieu('ma_kiemke',$id);
         $this->delete_bankk($id);
         $data = DB::table('phieukiemke')->where('phieukiemke.ma_kiemke',$id)->delete();
         return $data;

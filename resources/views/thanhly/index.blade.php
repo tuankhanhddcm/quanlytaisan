@@ -6,7 +6,7 @@
             <h3 class="main-text">Thanh Lý Tài Sản</h3>
             <div >
                 <button class="btn_cus btn-addsp" onclick="location.href='{{route('thanhly.create')}}'" ><i class='bx bx-plus' style="font-weight: 600; "></i>Thêm thanh lý</button>
-                <button class="btn_cus btn-addsp" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button>
+                {{-- <button class="btn_cus btn-addsp" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button> --}}
             </div>
         </div>
         <div class="row">
