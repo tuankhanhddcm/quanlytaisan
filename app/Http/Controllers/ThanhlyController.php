@@ -88,13 +88,13 @@ class ThanhlyController extends Controller
         $kq = $this->thanhly->insert($ma_thanhly,$request->nhanvien,$request->phongban,$request->lydo,$file->getClientOriginalName(),$ngay_thanhly);
         if($kq){
             $file->move('phieuthanhly',$file->getClientOriginalName());
+            $i=0;
             foreach($request->ma_chitiet as $val){
                 $ketqua = $this->chitietphieu->insert(null,$ma_thanhly,null,$val,null);
                 if($ketqua){
                     $up_tt = $this->chitiettaisan->update_tt($val,2);
-                    foreach($request->tinhtrang as $tt){
-                        $result = $this->chitietphieu->update_tinhtrang_thanhly($val,$ma_thanhly,$tt); 
-                    }
+                    $result = $this->chitietphieu->update_tinhtrang_thanhly($val,$ma_thanhly,$request->tinhtrang[$i]); 
+                    $i++;
                 }
             }
             if($result){
@@ -162,13 +162,14 @@ class ThanhlyController extends Controller
             }
             $delete_ct_phieu = $this->chitietphieu->delete_phieu('ma_thanhly',$id);
             if($delete_ct_phieu){
+                $i=0;
                 foreach($request->ma_chitiet as $v){
                     $insert_ct_phieu = $this->chitietphieu->insert(null,$id,null,$v,null,null,null);
                     if($insert_ct_phieu){
                         $up_ct = $this->chitiettaisan->update_tt($v,2);
-                        foreach($request->tinhtrang as $tt){
-                            $up_tt = $this->chitietphieu->update_tinhtrang_thanhly($v,$id,$tt);
-                        }
+                        $up_tt = $this->chitietphieu->update_tinhtrang_thanhly($v,$id,$request->tinhtrang[$i]);
+                        $i++;
+                        
                         
                     }
                 }

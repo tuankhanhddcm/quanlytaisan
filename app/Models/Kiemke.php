@@ -94,4 +94,33 @@ class Kiemke extends Model
         $loai = $loai->paginate(8);
         return $loai;
     }
+    public function delete_bankk($id)
+    {
+        return DB::table('bankiemke')->where('bankiemke.ma_kiemke',$id)->delete();
+    }
+    public function update_bankk($id,$nv_kk)
+    {
+        $table = DB::table('bankiemke')->insert([
+            'ma_kiemke' => $id,
+            'ma_nv' => $nv_kk
+        ]);
+        return $table;
+    }
+    public function delete_kiemke($id)
+    {
+        $this->chitietphieu->delete_phieu('ma_kiemke',$id);
+        $this->delete_bankk($id);
+        $data = DB::table('phieukiemke')->where('phieukiemke.ma_kiemke',$id)->delete();
+        return $data;
+    }
+    public function update_kiemke($id,$dot_kiemke,$ngay_kiemke,$ma_phong,$ghichu)
+    {
+        $table = DB::table('phieukiemke')->where('phieukiemke.ma_kiemke',$id)->update([
+            'dot_kiemke' => $dot_kiemke,
+            'ngay_kiemke' => $ngay_kiemke,
+            'ma_phong' => $ma_phong,
+            'ghichu' => $ghichu,
+        ]);
+        return $table;
+    }
 }

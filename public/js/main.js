@@ -601,6 +601,62 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("click", ".btn_delete_kk", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa phiếu kiểm kê',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/kiemke/destroy/"+id,
+                            method: "post",
+                            success: function (data) {
+                                if(data == true){
+                                    $(document).ready(function(){
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa phiếu kiểm kê thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_kiemke(page);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                text:'Hủy'
+                }
+            }
+        });
+    });
 });
 
 

@@ -99,6 +99,8 @@ Route::get('/kiemke/export/{id}','KiemkeController@export')->name('kiemke.export
 Route::get('/kiemke/export_ds/{id}','KiemkeController@export_ds')->name('kiemke.export_ds');
 Route::post('/kiemke/search','KiemkeController@search_kiemke');
 Route::post('/kiemke/tinh_haomon','KiemkeController@tinh_haomon');
+Route::post('kiemke/update/{id}','KiemkeController@update')->name('kiemke.update');
+Route::post('kiemke/destroy/{id}','KiemkeController@destroy')->name('kiemke.destroy');
 
 // hợp đồng
 Route::resource('/hopdong','HopdongController');

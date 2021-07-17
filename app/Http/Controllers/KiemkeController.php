@@ -157,7 +157,21 @@ class KiemkeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $phongban = $this->phongban->select();
+        $nhanvien = $this->nhanvien->select();
+        $kiemke = $this->kiemke->find($id);
+        $nv_kiemke = $this->kiemke->nv_kiemke($id);
+        $taisan = $this->taisan->export_tsOfphong($kiemke->ma_phong);
+        $chitiet= $this->chitietphieu->select_kiemke($id);
+        $ngaykk = Carbon::parse($kiemke->ngay_kiemke)->year;
+        foreach($taisan as $val){
+            $ngaymua = Carbon::parse($val->ngay_mua)->year;
+            $nam = $ngaykk-$ngaymua;
+            if( $nam <= $val->thoi_gian_sd){
+                $val->giatri = ($val->muc_tieuhao/100)*$val->nguyengia*($val->thoi_gian_sd-$nam);
+            }
+        }
+        return view('kiemke.themkiemke',compact('kiemke','phongban','nhanvien','nv_kiemke','taisan','chitiet'));
     }
 
     /**
@@ -169,7 +183,35 @@ class KiemkeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mang =[];
+        foreach($request->taisan as $k=> $ma_ts){
+            $mang[$k]['taisan'] =$ma_ts;
+            
+        }
+        foreach($request->soluongkiemke as $k=> $sl){
+            $mang[$k]['soluong'] =$sl;
+        }
+        $date = Carbon::create($request->ngaykk);
+        $kq = $this->kiemke->update_kiemke($id,$request->dot_kk,$date,$request->phongban,$request->ghichu);
+        if($kq){
+            $del = $this->kiemke->delete_bankk($id);
+            if($del){
+                foreach($request->nv_kk as $val){
+                    $k = $this->kiemke->insert_bankiemke($id,$val);
+                }
+            }
+            $xoa = $this->chitietphieu->delete_phieu('ma_kiemke',$id);
+            if($xoa){
+                foreach($mang as $val){
+                    $r = $this->chitietphieu->insert(null,null,$id,null,null,$val['soluong'],$val['taisan']);
+                }
+            }
+            
+            if($k && $r){
+                Alert::alert()->success('Sửa phiếu kiểm kê thành công!!!')->autoClose(5000);
+                return redirect()->route('kiemke.index');
+            }
+        }
     }
 
     /**
@@ -180,7 +222,12 @@ class KiemkeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kq=$this->kiemke->delete_kiemke($id);
+        if($kq){
+            return true;
+        }else{
+            return false;
+        }
     }
     public function export($id) 
     {  

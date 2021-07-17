@@ -18,4 +18,23 @@ class Tieuhao extends Model
         $data = DB::table($this->table)->where('ma_loai','=',''.$ma_ts.'')->first();
         return $data;
     }
+    public function updateth($ma_tieuhao,$tile_HM_up,$tgSD_up){
+        $data =DB::table($this->table)->where('ma_tieuhao',$ma_tieuhao)
+            ->update([
+                'muc_tieuhao'=>$tile_HM_up,
+                'thoi_gian_sd' =>$tgSD_up
+            ]);
+        return $data;
+    }
+    public function insert($ma_tieuhao,$tile_HM_up,$tgSD_up,$ma_loai){
+        $data =DB::table($this->table)
+            ->insert([
+                'ma_tieuhao'=>$ma_tieuhao,
+                'muc_tieuhao'=>$tile_HM_up,
+                'thoi_gian_sd' =>$tgSD_up,
+                'ma_loai'=>$ma_loai
+            ]);
+        return $data;
+    }
+    
 }

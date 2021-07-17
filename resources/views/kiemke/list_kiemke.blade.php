@@ -35,8 +35,8 @@
                 </td>
                 <td style="border-right: none; ">
                     <div style="display: flex;justify-content: space-around">
-                        <button style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu kiểm kê" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
-                        <button style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu kiểm kê" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                        <button onclick="location.href='{{route('kiemke.edit',$item->ma_kiemke)}}'" style="width:40px; height:40px;border:none; background-color: transparent;"  title="Sửa phiếu kiểm kê" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                        <button class="btn_delete_kk" data-id="{{$item->ma_kiemke}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu kiểm kê" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
                     </div>
                     
                 </td>
