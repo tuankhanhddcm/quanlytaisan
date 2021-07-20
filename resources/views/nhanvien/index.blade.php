@@ -74,7 +74,7 @@
                                     <label for="" class="form-label sdt_nv_lb">Số điện thoại:</label>
                                     <div class="form-wrap">
                                         <div class="form_input">
-                                            <input type="text" class="form-input sdt_nv" name="sdt" onkeyup="check('.sdt_nv_lb')" value=""  placeholder="Nhập vào số điện thoại">
+                                            <input type="text" class="form-input sdt_nv soluong" name="sdt" onkeyup="check('.sdt_nv_lb')" value=""  placeholder="Nhập vào số điện thoại">
                                         </div>
                                         <div style="display: flex;">
                                             <i class='bx bxs-error-circle sdt_nv_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>

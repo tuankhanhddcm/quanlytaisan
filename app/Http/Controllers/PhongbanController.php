@@ -7,6 +7,7 @@ use App\Models\Phongban;
 use App\Models\Taisan;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Nhanvien;
 
 class PhongbanController extends Controller
 {
@@ -18,6 +19,7 @@ class PhongbanController extends Controller
     protected $phongban;
     protected $chitiettaisan;
     protected $taisan;
+    protected $nhanvien;
 
     public function __construct()
     {
@@ -25,6 +27,7 @@ class PhongbanController extends Controller
         $this->phongban = new Phongban;
         $this->chitiettaisan = new Chitiettaisan;
         $this->taisan = new Taisan;
+        $this->nhanvien = new Nhanvien;
     }
     public function index()
     {
@@ -129,7 +132,7 @@ class PhongbanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kq = $this->phongban->update_phong($id,$request->ten_phong,$request->mota);
+        $kq = $this->phongban->update_phong($id,$request->ten_phong,$request->mo_ta);
 
         Alert::alert()->success('Sửa phòng ban thành công!!!')->autoClose(5000);
         return redirect('/phongban');
@@ -141,17 +144,35 @@ class PhongbanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ma_phong = $request->ma_phong;
+        $tsofphong = $this->chitiettaisan->ctOfphong($ma_phong);
+        $nvofphong = $this->nhanvien->nvOfphong($ma_phong);
+            if( count($tsofphong)==0 && count($nvofphong)==0){
+                $this->phongban->delete_phong($ma_phong);
+                return true;
+            }else{
+                return false;
+            }
     }
     public function search_phong(Request $request)
     {
         if($request->ajax()){
             $text = $request->text;
             $phongban = $this->phongban->select();
+            $sl_ts = $this->chitiettaisan->sl_ts_phong();
+        
             if($text != ''){
                 $phongban = $this->phongban->search_phongban($text);
+            }
+            foreach($phongban as $val){
+                $val->soluong = 0;
+                foreach($sl_ts as $item){
+                    if($val->ma_phong == $item->ma_phong){
+                        $val->soluong =$item->soluong;
+                    }
+                }
             }
             return view('phongban.list_phong',compact('phongban'));
 

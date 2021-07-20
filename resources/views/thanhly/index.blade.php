@@ -13,19 +13,27 @@
             <div class="col-sm-12">
                 <div class="admin_search">
                     <div class="admin_search--input  col-md-4">
-                        <input type="text" value="" class="search_input" id='search' onkeyup="" placeholder="Nhập mã phiếu thanh lý">
+                        <input type="text" value="" class="search_input" id='search' onkeyup="search_thanhly(1)" placeholder="Nhập mã phiếu thanh lý">
                     </div>
                     <div class="select_wrap">
-                        <select class=" select select-loaisp form-control" id="nv" data-dropup-auto="false" title="Nhân viên" data-size='5' data-live-search="true">
+                        <select class=" select select-loaisp form-control" id="nhanvien" data-dropup-auto="false" title="Nhân viên" data-size='5' data-live-search="true">
                             <option value="" selected>--Chọn nhân viên--</option>
                             @foreach ($nhanvien as $val)
                                 <option value="{{$val->ma_nv}}">{{$val->ten_nv}}</option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="select_wrap">
+                        <select class=" select select-phongban form-control" id="phongban" data-dropup-auto="false" title="Phòng ban" data-size='5' data-live-search="true">
+                            <option value="" selected>--Chọn phòng ban--</option>
+                            @foreach ($phongban as $val)
+                                <option value="{{$val->ma_phong}}">{{$val->ten_phong}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12 " id="list_phieuthanhly">
+            <div class="col-sm-12 " id="list_thanhly">
                 @include('thanhly.list_phieuthanhly')
             </div>
         </div>

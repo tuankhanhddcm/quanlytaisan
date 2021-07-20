@@ -70,4 +70,8 @@ class Phongban extends Model
         return $data;
     }
 
+    public function delete_phong($ma_phong)
+    {
+        DB::table($this->table)->where('phongban.ma_phong',$ma_phong)->delete();
+    }
 }

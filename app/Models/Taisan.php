@@ -269,4 +269,11 @@ class Taisan extends Model
         $kq = DB::table($this->table)->where('ma_ts',$ma_ts)->delete();
         return $kq;
     }
+
+    public function so_ts_ncc($ma_ncc)
+    {
+        $data = DB::table('taisan')->where('taisan.ma_ncc',$ma_ncc)->get();
+        return $data;
+    }
+
 }

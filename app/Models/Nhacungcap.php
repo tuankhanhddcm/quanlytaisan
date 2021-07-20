@@ -58,4 +58,8 @@ class Nhacungcap extends Model
         $table = $table->paginate(8);
         return $table;
     }
+    public function delete_ncc($id)
+    {
+        DB::table('nhacungcap')->where('nhacungcap.ma_ncc',$id)->delete();
+    }
 }

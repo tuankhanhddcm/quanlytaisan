@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loaitaisan;
 use Illuminate\Http\Request;
+use App\Models\LoaiTSCD;
 use Alert;
 use function Ramsey\Uuid\v1;
 
@@ -15,11 +16,13 @@ class LoaitaisanController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $loaitaisan;
+    protected $loaitscd;
 
     public function __construct()
     {
         $this->middleware('login');
         $this->loaitaisan = new Loaitaisan;
+        $this->loaitscd = new LoaiTSCD;
     }
     public function index()
     {
@@ -71,7 +74,8 @@ class LoaitaisanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $loai_up=$this->loaitaisan->find($id);
+        return view('loaitaisan.modal',compact('loai_up'));
     }
 
     /**
@@ -83,7 +87,11 @@ class LoaitaisanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kq = $this->loaitaisan->update_loai($id,$request->ten_loai);
+        if($kq){
+            Alert::alert()->success('Sửa loại tài sản thành công!!!')->autoClose(5000);
+        }
+        return redirect()->route('loaits.index');
     }
 
     /**
@@ -92,9 +100,18 @@ class LoaitaisanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if($request->ajax()){
+            $id_loai = $request->id_loai;
+            $slts = $this->loaitscd->so_lts($id_loai);
+            if(count($slts)==0){
+                $this->loaitaisan->delete_loai($id_loai);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     public function search_loai(Request $request){

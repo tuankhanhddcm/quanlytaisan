@@ -2,9 +2,9 @@
     <thead class="heading-table">
         <tr>
             <th style="border-left: 1px solid rgba(197, 197, 197, 0.1); width:2%;">STT</th>
-            <th style="width: 25%;">Mã loại TSCĐ</th>
-            <th style="width: 25%;">Tên Loại TSCĐ</th>
-            <th style="width: 25%;">Thuộc loại</th>
+            <th style="width: 10%;">Mã loại TSCĐ</th>
+            <th style="width: 30%;">Tên Loại TSCĐ</th>
+            <th >Thuộc loại</th>
             <th style="width: 5%">Hoạt động</th>
         </tr>
     </thead>
@@ -25,9 +25,9 @@
                         <td><a href="{{url('/loaiTSCD/'.$item->ma_loai)}}">{{$item->ma_loai}}</a></td>
                         <td >{{$item->ten_loai}}</td>
                         <td >{{$item->loai}}</td>
-                        <td >
+                        <td style="display: flex;justify-content: space-around;align-items: center;" >
                             <button class="btn_uploaiTSCD"  data-id="{{$item->ma_loai}}" style="width:40px; height:40px;border:none; background-color: transparent;" title="Sửa loại" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                            {{-- <button style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button> --}}
+                            <button class="btn_delete_tscd" data-id="{{$item->ma_loai}}" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="Xóa loại" ><i class='bx bxs-trash' style="font-size: 30px; color:#FF3300;"></i></button>
                         </td>
                     </tr>
                     @php

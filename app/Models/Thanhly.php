@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 class Thanhly extends Model
 {
     protected $table = 'phieuthanhly';
+
     public function select($all ='')
     {
         $table = DB::table('phieuthanhly')
@@ -66,5 +67,30 @@ class Thanhly extends Model
             'ngay_thanhly' =>$ngay_thanhly,
         ]);
         return $table;
+    }
+
+    public function search($text,$ma_phong,$ma_nv){
+
+        $table = DB::table('phieuthanhly')
+        ->join('nhanvien','phieuthanhly.ma_nv','=','nhanvien.ma_nv')
+        ->join('phongban','phieuthanhly.ma_phong','=','phongban.ma_phong');
+        if($text !=''){
+            $table = $table->where('phieuthanhly.ma_thanhly','like','%'.$text.'%');
+                
+        }
+        if($ma_phong !=''){
+            $table = $table->where('phongban.ma_phong',$ma_phong);
+        }
+        if($ma_nv !=''){
+            $table = $table->where('nhanvien.ma_nv',$ma_nv);
+        }
+        $table = $table->paginate(8);
+        return $table;
+    }
+
+    public function delete_thanhly($ma_thanhly)
+    {
+        $kq = DB::table($this->table)->where('ma_thanhly',$ma_thanhly)->delete();
+        return $kq;
     }
 }

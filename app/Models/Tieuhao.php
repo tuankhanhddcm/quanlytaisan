@@ -13,7 +13,12 @@ class Tieuhao extends Model
         return $th;
     }
    
-    
+    public function max_id($col,$str){
+        $kq = DB::table($this->table)->selectRaw("max($col) as ma_tieuhao")
+                                    ->where("ma_tieuhao","like",'%' . $str . '%')
+                                    ->first();
+        return $kq;
+    }
     public function find_by_ts($ma_ts){
         $data = DB::table($this->table)->where('ma_loai','=',''.$ma_ts.'')->first();
         return $data;
@@ -35,6 +40,10 @@ class Tieuhao extends Model
                 'ma_loai'=>$ma_loai
             ]);
         return $data;
+    }
+    public function delete_th($ma_loai)
+    {
+        return DB::table($this->table)->where('ma_loai',$ma_loai)->delete();
     }
     
 }

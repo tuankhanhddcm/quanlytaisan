@@ -36,9 +36,10 @@ class ThanhlyController extends Controller
 
     public function index()
     {
-        $nhanvien = $this->nhanvien->select();
+        $nhanvien = $this->nhanvien->select('all');
         $thanhly = $this->thanhly->select();
-        return view('thanhly.index',compact('nhanvien','thanhly'));
+        $phongban = $this->phongban->select('all');
+        return view('thanhly.index',compact('nhanvien','thanhly','phongban'));
     }
 
     /**
@@ -190,9 +191,20 @@ class ThanhlyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if($request->ajax()){
+            $ma_thanhly = $request->id;
+            $kq = $this->chitietphieu->delete_phieu('ma_thanhly',$ma_thanhly);
+            if($kq){
+                $xoa = $this->thanhly->delete_thanhly($ma_thanhly);
+                if($xoa){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
     }
     public function more_ts(Request $request){
         if($request->ajax()){
@@ -221,4 +233,19 @@ class ThanhlyController extends Controller
         // var_dump($bangiao);
         return response()->download($file);
     }
+
+    public function search_thanhly(Request $request){
+        if($request->ajax()){
+            $text=$request->text;
+            $ma_phong =$request->ma_phong;
+            $ma_nv =$request->ma_nv;
+            if($text !='' || $ma_phong !='' || $ma_nv !=''){
+                $thanhly = $this->thanhly->search($text,$ma_phong,$ma_nv);
+            }else{
+                $thanhly = $this->thanhly->select();
+            }
+            return view('thanhly.list_phieuthanhly',compact('thanhly'));
+        }
+    }
+
 }

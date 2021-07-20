@@ -33,7 +33,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Sửa Phòng Ban</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Thêm Phòng Ban</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -68,7 +68,7 @@
                             </div>       
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn_cus btn_luu" >Sửa</button>
+                            <button type="submit" class="btn_cus btn_luu" >Lưu</button>
                             <button type="button" class="btn_cus btn-close"  style="margin-bottom: 5px; font-size: 16px;font-weight: 400" data-dismiss="modal">Đóng</button>
                         </div>
                 </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Nhacungcap;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Taisan;
+use App\Models\Taisans;
 
 class NhacungcapController extends Controller
 {
@@ -14,11 +16,13 @@ class NhacungcapController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $nhacungcap;
+    protected $taisan;
 
     public function __construct()
     {
         $this->middleware('login');
         $this->nhacungcap = new Nhacungcap;
+        $this->taisan = new Taisan;
     }
     public function index()
     {
@@ -117,9 +121,16 @@ class NhacungcapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ma_ncc = $request->ma_ncc;
+        $so_ts_cc = $this->taisan->so_ts_ncc($ma_ncc);
+        if(count($so_ts_cc) == 0){
+            $this->nhacungcap->delete_ncc($ma_ncc);
+            return true;
+        }else{
+            return false;
+        }
     }
     public function search_nhacungcap(Request $request)
     {

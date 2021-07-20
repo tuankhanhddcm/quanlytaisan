@@ -74,4 +74,19 @@ class LoaiTSCD extends Model
         $loai = $loai->paginate(8);
         return $loai;
     }
+    public function so_lts($id_loai)
+    {
+        $data = DB::table($this->table)->where('loaitaisancodinh.id_loai',$id_loai)->get();
+        return $data;
+    }
+    public function delete_TSCD($ma_loai)
+    {
+        return DB::table($this->table)->where('loaitaisancodinh.ma_loai',$ma_loai)->delete();
+    }
+    
+    public function so_ts_tscd($ma_loai)
+    {
+        $data = DB::table('taisan')->where('taisan.ma_loai',$ma_loai)->get();
+        return $data;
+    }
 }

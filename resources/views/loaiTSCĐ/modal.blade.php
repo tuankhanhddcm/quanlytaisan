@@ -63,7 +63,7 @@
                             <label for="" class="form-label tile_HM_lb">Tỉ lệ HM (% năm):</label>
                             <div class="form-wrap">
                                 <div class="form_input">
-                                    <input type="text" class="form-input tile_HM  " pattern="[+-]?([0-9]*[.])?[0-9]+"  name='tile_HM' onkeyup="check('.tile_HM_lb')" value="" style="text-align: right" placeholder="0.00">
+                                    <input type="text" class="form-input tile_HM  " pattern="[+-]?([0-9]*[.])?[0-9]+" title="Vui lòng nhập số"  name='tile_HM' onkeyup="check('.tile_HM_lb')" value="" style="text-align: right" placeholder="0.00">
                                 </div>
                                 <div style="display: flex;">
                                     <i class='bx bxs-error-circle tile_HM_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>
@@ -186,7 +186,7 @@
                               <label for="" class="form-label tile_HM_up_lb">Tỉ lệ HM (% năm):</label>
                               <div class="form-wrap">
                                   <div class="form_input">
-                                      <input type="text" class="form-input tile_HM_up " pattern="[+-]?([0-9]*[.])?[0-9]+"  name='tile_HM_up' onkeyup="check('.tile_HM_up_lb')" value="{{(isset($TSCD))?$TSCD->muc_tieuhao:''}}" style="text-align: right" placeholder="0.00">
+                                      <input type="text" class="form-input tile_HM_up " pattern="[+-]?([0-9]*[.])?[0-9]+" title="Vui lòng nhập số" name='tile_HM_up' onkeyup="check('.tile_HM_up_lb')" value="{{(isset($TSCD))?$TSCD->muc_tieuhao:''}}" style="text-align: right" placeholder="0.00">
                                   </div>
                                   <div style="display: flex;">
                                       <i class='bx bxs-error-circle tile_HM_up_icon' style="display: none;position: relative;top: 6px;left: 10px;color: red;font-size: 18px;padding-right: 5px;"></i>

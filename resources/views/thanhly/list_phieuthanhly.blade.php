@@ -13,7 +13,8 @@
         </tr>
     </thead>
     <tbody >
-        @php
+        @if ($thanhly->total() >0)
+            @php
             $page =$thanhly->currentPage();
             $prepage = $page -1;
                 if($page>1){
@@ -24,32 +25,36 @@
             
 
             @endphp
-        @foreach ($thanhly as $item)
-            <tr class="body-table" >
-                <td style="text-align: center">{{$count}}</td>
-                <td><a href="{{route('thanhly.show',$item->ma_thanhly)}}">{{$item->ma_thanhly}}</a></td>
-                <td>{{$item->ten_nv}}</td>
-                <td>{{$item->ten_phong}}</td>
-                <td>{{date('d-m-Y',strtotime($item->ngay_thanhly))}}</td>
-                <td>{{$item->ghichu}}</td>
-                <td>
-                    <button onclick="location.href='/thanhly/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
-                </td>
-                <td>
-                    <button onclick="location.href='/thanhly/in_phieu/{{$item->ma_thanhly}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-printer' style="font-size: 25px; color:black;"></i></button>
-                </td>
-                <td style="border-right: none; ">
-                    <div style="display: flex;justify-content: space-around;">
-                        <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('thanhly.edit',$item->ma_thanhly)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
-                        <button class="btn_delete_tl" data-id="{{$item->ma_thanhly}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
-                    </div>
-                    
-                </td>
-            </tr>
-            @php
-                $count++;
-            @endphp
-        @endforeach
+            @foreach ($thanhly as $item)
+                <tr class="body-table" >
+                    <td style="text-align: center">{{$count}}</td>
+                    <td><a href="{{route('thanhly.show',$item->ma_thanhly)}}">{{$item->ma_thanhly}}</a></td>
+                    <td>{{$item->ten_nv}}</td>
+                    <td>{{$item->ten_phong}}</td>
+                    <td>{{date('d-m-Y',strtotime($item->ngay_thanhly))}}</td>
+                    <td>{{$item->ghichu}}</td>
+                    <td>
+                        <button onclick="location.href='/thanhly/phieu/{{$item->phieu}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-file-blank' style="font-size: 25px; color:#3c97ff;"></i></button>
+                    </td>
+                    <td>
+                        <button onclick="location.href='/thanhly/in_phieu/{{$item->ma_thanhly}}'" style="width:40px; height:40px; margin-left: 10%; border:none; background-color: transparent;" title="In phiếu" ><i class='bx bx-printer' style="font-size: 25px; color:black;"></i></button>
+                    </td>
+                    <td style="border-right: none; ">
+                        <div style="display: flex;justify-content: space-around;">
+                            <button style="width:40px; height:40px;border:none; background-color: transparent;" onclick="location.href='{{route('thanhly.edit',$item->ma_thanhly)}}'"  title="Sửa phiếu bàn giao" ><i class='bx bx-edit' style="font-size: 25px; color:#5bc0de;"></i></button>
+                            <button class="btn_delete_tl" data-id="{{$item->ma_thanhly}}" style="width:40px; height:40px; border:none; background-color: transparent;" title="Xóa phiếu bàn giao" ><i class='bx bxs-trash' style="font-size: 25px; color:#FF3300;"></i></button>
+                        </div>
+                        
+                    </td>
+                </tr>
+                @php
+                    $count++;
+                @endphp
+            @endforeach
+        @else
+            <tr class="body-table"><td colspan='9' style="text-align: center">Không có dữ liệu nào !!!</td></tr>
+        @endif
+        
     </tbody>
 </table>
 <div style="display: flex;justify-content: flex-end">

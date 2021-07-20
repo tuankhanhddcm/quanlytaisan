@@ -160,9 +160,21 @@ class LoaiTSCDController extends Controller
      * @param  \App\Models\LoaiTSCD  $loaiTSCD
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoaiTSCD $loaiTSCD)
+    public function destroy(Request $request)
     {
-        //
+        if($request->ajax()){
+            $ma_loai = $request->ma_loai;
+            $slts = $this->loaiTSCD->so_ts_tscd($ma_loai);
+            if(count($slts)==0){
+                if($this->tieuhao->delete_th($ma_loai)){
+                    if($this->loaiTSCD->delete_TSCD($ma_loai)){
+                        return true;
+                    }
+                }
+            }else{
+                return false;
+            }
+        }
     }
     public function search_loai(Request $request){
         if($request->ajax()){

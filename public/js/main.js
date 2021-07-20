@@ -16,6 +16,7 @@ $(document).ready(function () {
     $('.select-loaisp').click(function () {
         search_phieubangiao(1);
         search_hopdong(1);
+        search_thanhly(1);
     });
 
     $('.select-trangthai').click(function () {
@@ -34,7 +35,7 @@ $(document).ready(function () {
     });
 
     hao_mon();
-    
+
     $('.nhanvien-select').click(function () {
         check('#nhanvien');
     });
@@ -55,23 +56,24 @@ $(document).ready(function () {
         tinh_haomon_kiemke();
         search_kiemke(1);
         search_nhanvien(1)
+        search_thanhly(1);
     });
 
-    $('.select-nv-kk').click(function(){
+    $('.select-nv-kk').click(function () {
         check('#nv_kk_1_lb');
         check('#nv_kk_2_lb');
         check('#nv_kk_3_lb');
-        var ma_nv1=$('#nv_kk_1 option:selected').val();
-        var ma_nv2=$('#nv_kk_2 option:selected').val();
-        var ma_nv3=$('#nv_kk_3 option:selected').val();
-        if(ma_nv1 !=''){
-            loc_cv_nv('/kiemke/loc_cv',ma_nv1,'.chucvu_1');
+        var ma_nv1 = $('#nv_kk_1 option:selected').val();
+        var ma_nv2 = $('#nv_kk_2 option:selected').val();
+        var ma_nv3 = $('#nv_kk_3 option:selected').val();
+        if (ma_nv1 != '') {
+            loc_cv_nv('/kiemke/loc_cv', ma_nv1, '.chucvu_1');
         }
-        if(ma_nv2 !=''){
-            loc_cv_nv('/kiemke/loc_cv',ma_nv2,'.chucvu_2');
+        if (ma_nv2 != '') {
+            loc_cv_nv('/kiemke/loc_cv', ma_nv2, '.chucvu_2');
         }
-        if(ma_nv3 !=''){
-            loc_cv_nv('/kiemke/loc_cv',ma_nv3,'.chucvu_3');
+        if (ma_nv3 != '') {
+            loc_cv_nv('/kiemke/loc_cv', ma_nv3, '.chucvu_3');
         }
     });
 
@@ -79,7 +81,7 @@ $(document).ready(function () {
     $('.soluong').inputFilter(function (value) {
         return /^\d*$/.test(value);
     });
-    
+
 
     // phân trang
     $(document).on('click', '.pagination a', function (event) {
@@ -103,6 +105,10 @@ $(document).ready(function () {
         changeYear: true
     });
 
+    $(document).on('click', '.btn_update_loai', function () {
+        var id = $(this).data('id');
+        update_loaits(id);
+    });
 
     $(document).on('click', '.btn_uploaiTSCD', function () {
         var id = $(this).data('id');
@@ -169,9 +175,9 @@ $(document).ready(function () {
 
     });
 
-    $(document).on('click','.phongban-select',function(){
-        loc_select('loc_nv',$('.phongban-select option:selected').val(),'#nhanvien');
-        loc_select('loc_nv',$('#phongban_up option:selected').val(),'#nhanvien_up');
+    $(document).on('click', '.phongban-select', function () {
+        loc_select('loc_nv', $('.phongban-select option:selected').val(), '#nhanvien');
+        loc_select('loc_nv', $('#phongban_up option:selected').val(), '#nhanvien_up');
         var sl = Number($('#so_tai_san').val());
         var ma_phong = $('.phongban-select option:selected').val();
         $.ajax({
@@ -190,14 +196,14 @@ $(document).ready(function () {
         $.ajax({
             url: '/thanhly/more_ts',
             method: 'post',
-            data: { sl: sl, ma_phong: ma_phong},
+            data: { sl: sl, ma_phong: ma_phong },
             success: function (data) {
                 $('.more_taisan_tl').html(data);
                 $(".select").selectpicker();
             }
         });
     });
-    
+
     // lọc select------------------
     $('.select-phonggiao').click(function () {
         loc_select('loc_nv', $('.select-phonggiao option:selected').val(), '#nv_giao')
@@ -227,15 +233,15 @@ $(document).ready(function () {
             }
         });
     });
-    
-    $(document).on('keyup','.soluongkiemke',function(){
-        var id =$(this).data('id');
-        if(tru_sl_kiemke($(this).val(),id)){
-            $(this).css('border-color','red');
-            $(this).css('color','red');
-        }else{
-            $(this).css('border-color','#cccc');
-            $(this).css('color','-internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))');
+
+    $(document).on('keyup', '.soluongkiemke', function () {
+        var id = $(this).data('id');
+        if (tru_sl_kiemke($(this).val(), id)) {
+            $(this).css('border-color', 'red');
+            $(this).css('color', 'red');
+        } else {
+            $(this).css('border-color', '#cccc');
+            $(this).css('color', '-internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))');
         }
     });
 
@@ -265,8 +271,8 @@ $(document).ready(function () {
                             url: "/chitiettaisan/delete/" + id,
                             method: "post",
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Xóa chi tiết tài sản thành công',
@@ -285,8 +291,8 @@ $(document).ready(function () {
                                         var page = $('li.active span.page-link').text();
                                         search_chitiet(page);
                                     });
-                                    
-                                }else{
+
+                                } else {
                                     $.alert({
                                         title: 'Thất bại!!!',
                                         content: 'Chi tiết tài sản đang được sử dụng không thể xóa',
@@ -303,16 +309,16 @@ $(document).ready(function () {
                                         offsetBottom: 500,
                                     });
                                 }
-                                
+
 
                             }
                         });
-                        
-                        
+
+
                     }
                 },
                 huy: {
-                   text:'Hủy'
+                    text: 'Hủy'
                 }
 
             }
@@ -343,13 +349,13 @@ $(document).ready(function () {
                         $.ajax({
                             url: "/taisan/update_delete",
                             method: "post",
-                            data:{
-                                ma_ts:id,
-                                delete:1
+                            data: {
+                                ma_ts: id,
+                                delete: 1
                             },
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Xóa tài sản thành công',
@@ -368,8 +374,8 @@ $(document).ready(function () {
                                         var page = $('li.active span.page-link').text();
                                         search_ts(page);
                                     });
-                                    
-                                }else{
+
+                                } else {
                                     $.alert({
                                         title: 'Thất bại!!!',
                                         content: 'Xóa tài sản thất bại do chi tiết tài sản đang được sử dụng',
@@ -386,16 +392,16 @@ $(document).ready(function () {
                                         offsetBottom: 500,
                                     });
                                 }
-                                
+
 
                             }
                         });
-                        
-                        
+
+
                     }
                 },
                 huy: {
-                   text:'Hủy'
+                    text: 'Hủy'
                 }
 
             }
@@ -427,12 +433,12 @@ $(document).ready(function () {
                         $.ajax({
                             url: "/taisan/delete",
                             method: "post",
-                            data:{
-                                ma_ts:id,
+                            data: {
+                                ma_ts: id,
                             },
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Xóa tài sản thành công',
@@ -451,18 +457,18 @@ $(document).ready(function () {
                                         var page = $('li.active span.page-link').text();
                                         search_ts(page);
                                     });
-                                    
+
                                 }
-                                
+
 
                             }
                         });
-                        
-                        
+
+
                     }
                 },
                 huy: {
-                   text:'Hủy'
+                    text: 'Hủy'
                 }
 
             }
@@ -494,13 +500,13 @@ $(document).ready(function () {
                         $.ajax({
                             url: "/taisan/update_delete",
                             method: "post",
-                            data:{
-                                ma_ts:id,
-                                delete:0
+                            data: {
+                                ma_ts: id,
+                                delete: 0
                             },
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Khôi phục tài sản thành công',
@@ -519,18 +525,18 @@ $(document).ready(function () {
                                         var page = $('li.active span.page-link').text();
                                         search_ts(page);
                                     });
-                                    
+
                                 }
-                                
+
 
                             }
                         });
-                        
-                        
+
+
                     }
                 },
                 huy: {
-                   text:'Hủy'
+                    text: 'Hủy'
                 }
 
             }
@@ -560,11 +566,11 @@ $(document).ready(function () {
                     text: 'Xóa',
                     action: function (xoa) {
                         $.ajax({
-                            url: "/bangiao/destroy/"+id,
+                            url: "/bangiao/destroy/" + id,
                             method: "post",
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Xóa phiếu bàn giao thành công',
@@ -583,24 +589,24 @@ $(document).ready(function () {
                                         var page = $('li.active span.page-link').text();
                                         search_phieubangiao(page);
                                     });
-                                    
+
                                 }
-                                
+
 
                             }
                         });
-                        
-                        
+
+
                     }
                 },
                 huy: {
-                   text:'Hủy'
+                    text: 'Hủy'
                 }
 
             }
         });
     });
-
+    // xóa kiểm kê
     $(document).on("click", ".btn_delete_kk", function () {
         var id = $(this).data("id");
         $.confirm({
@@ -623,11 +629,11 @@ $(document).ready(function () {
                     text: 'Xóa',
                     action: function (xoa) {
                         $.ajax({
-                            url: "/kiemke/destroy/"+id,
+                            url: "/kiemke/destroy/" + id,
                             method: "post",
                             success: function (data) {
-                                if(data == true){
-                                    $(document).ready(function(){
+                                if (data == true) {
+                                    $(document).ready(function () {
                                         $.alert({
                                             title: 'Thành công!!!',
                                             content: 'Xóa phiếu kiểm kê thành công',
@@ -652,7 +658,449 @@ $(document).ready(function () {
                     }
                 },
                 huy: {
-                text:'Hủy'
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+    // xóa thanh lý
+    $(document).on("click", ".btn_delete_tl", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa phiếu thanh lý',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/thanhly/destroy/",
+                            method: "post",
+                            data: { id: id },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa phiếu thanh lý thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_thanhly(page);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+    $(document).on("click", ".btn_delete_phong", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa phòng ban???',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/phongban/destroy",
+                            method: "post",
+                            data: {
+                                ma_phong: id,
+                            },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa phòng ban thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                    });
+                                    var page = $('li.active span.page-link').text();
+                                    search_phong(page);
+                                } else {
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa phòng thất bại do phòng còn nhân viên hoặc tài sản',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+
+                                }
+
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+
+    //xóa nhân viên:
+    $(document).on("click", ".btn_delete_nhanvien", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa nhân viên???',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/nhanvien/destroy",
+                            method: "post",
+                            data: {
+                                ma_nv: id,
+                            },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa nhân viên thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_nhanvien(page);
+                                    });
+
+                                } else {
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa nhân viên thất bại do nhân viên còn sử dụng tài sản',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+
+    //xóa nhà cung cấp
+    $(document).on("click", ".btn_delete_ncc", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa nhà cung cấp???',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/nhacungcap/destroy",
+                            method: "post",
+                            data: {
+                                ma_ncc: id,
+                            },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa nhà cung cấp thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                    });
+                                    search_ncc();
+                                } else {
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa nhà cung cấp thất bại do nhà cung cấp còn hợp đồng',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+
+    $(document).on("click", ".btn_delete_loai", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa loại tài sản???',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/loaits/destroy",
+                            method: "post",
+                            data: {
+                                id_loai: id,
+                            },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa loại tài sản thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_loai(page);
+                                    });
+                                } else {
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa loại tài sản thất bại do loại tài sản tồn tại tài sản',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
+                }
+            }
+        });
+    });
+
+    //xóa tscđ
+    $(document).on("click", ".btn_delete_tscd", function () {
+        var id = $(this).data("id");
+        $.confirm({
+            title: 'Thông báo!!!',
+            content: 'Bạn có chắc muốn xóa loại tài sản cố định???',
+            draggable: true,
+            dragWindowBorder: false,
+            boxWidth: "30%",
+            useBootstrap: false,
+            type: 'red',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            dragWindowGap: 50,
+            alignMiddle: true,
+            offsetTop: 0,
+            offsetBottom: 500,
+            buttons: {
+                xoa: {
+                    btnClass: "btn-red",
+                    text: 'Xóa',
+                    action: function (xoa) {
+                        $.ajax({
+                            url: "/loaiTSCD/destroy",
+                            method: "post",
+                            data: {
+                                ma_loai: id,
+                            },
+                            success: function (data) {
+                                if (data == true) {
+                                    $(document).ready(function () {
+                                        $.alert({
+                                            title: 'Thành công!!!',
+                                            content: 'Xóa loại tài sản cố định thành công',
+                                            draggable: true,
+                                            dragWindowBorder: false,
+                                            boxWidth: "30%",
+                                            useBootstrap: false,
+                                            type: 'green',
+                                            icon: 'fa fa-check',
+                                            typeAnimated: true,
+                                            dragWindowGap: 50,
+                                            alignMiddle: true,
+                                            offsetTop: 0,
+                                            offsetBottom: 500,
+                                        });
+                                        var page = $('li.active span.page-link').text();
+                                        search_loaiTSCD(page);
+                                    });
+                                } else {
+                                    $.alert({
+                                        title: 'Thất bại!!!',
+                                        content: 'Xóa loại tài sản cố định thất bại do loại tài sản cố định tồn tại tài sản',
+                                        draggable: true,
+                                        dragWindowBorder: false,
+                                        boxWidth: "30%",
+                                        useBootstrap: false,
+                                        type: 'red',
+                                        icon: 'fa fa-warning',
+                                        typeAnimated: true,
+                                        dragWindowGap: 50,
+                                        alignMiddle: true,
+                                        offsetTop: 0,
+                                        offsetBottom: 500,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                huy: {
+                    text: 'Hủy'
                 }
             }
         });
@@ -664,7 +1112,7 @@ $(document).ready(function () {
 function search_loaiTSCD(page) {
     var text = $('#search_loai').val();
     var seleted = $('#loai_taisan option:selected').val();
-    
+
     $.ajax({
 
         url: '/loaiTSCD/search?page=' + page,
@@ -672,13 +1120,14 @@ function search_loaiTSCD(page) {
         data: {
             text: text,
             seleted: seleted,
-            
+
         },
         success: function (data) {
             $('#list_loaiTSCD').html(data);
         }
     });
 }
+
 function search_ts(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
@@ -694,13 +1143,31 @@ function search_ts(page) {
             text: text,
             seleted: seleted,
             ma_phong: ma_phong,
-            ma_loai:ma_loai,
-            phongban:phongban,
-            deleted:deleted
+            ma_loai: ma_loai,
+            phongban: phongban,
+            deleted: deleted
         },
         success: function (data) {
             $('#list_taisan').html(data);
-            
+
+        }
+    });
+}
+function search_thanhly(page) {
+    var text = $('#search').val();
+    var ma_phong = $('#phongban option:selected').val();
+    var ma_nv = $('#nhanvien option:selected').val();
+    $.ajax({
+        url: '/thanhly/search?page=' + page,
+        method: "post",
+        data: {
+            text: text,
+            ma_phong: ma_phong,
+            ma_nv: ma_nv
+        },
+        success: function (data) {
+            $('#list_thanhly').html(data);
+
         }
     });
 }
@@ -743,7 +1210,7 @@ function search_kiemke(page) {
         method: "post",
         data: {
             text: text,
-            seleted:seleted
+            seleted: seleted
         },
         success: function (data) {
             $('#list_kiemke').html(data);
@@ -755,8 +1222,8 @@ function search_chitiet(page) {
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('.select-phongban option:selected').val();
-    var ma_ts =$('.ma_ts').val();
-    var ma_nv =$('.nhanvien').val();
+    var ma_ts = $('.ma_ts').val();
+    var ma_nv = $('.nhanvien').val();
     $.ajax({
 
         url: '/chitiettaisan/search?page=' + page,
@@ -764,9 +1231,9 @@ function search_chitiet(page) {
         data: {
             text: text,
             seleted: seleted,
-            ma_phong:ma_phong,
-            ma_ts :ma_ts,
-            ma_nv:ma_nv
+            ma_phong: ma_phong,
+            ma_ts: ma_ts,
+            ma_nv: ma_nv
         },
         success: function (data) {
             $('#list_chitiet').html(data);
@@ -1092,11 +1559,29 @@ function update_loaiTSCD(id) {
             });
             $(document).ready(function () {
                 $(".select").selectpicker();
+                $('.soluong').inputFilter(function (value) {
+                    return /^\d*$/.test(value);
+                });
             });
         }
     });
 }
-
+function update_loaits(id) {
+    $.ajax({
+        url: '/loaits/' + id + '/edit',
+        method: 'get',
+        success: function (data) {
+            $('#modal_loaits').html(data);
+            $('#update_loaits').modal({
+                show: true,
+                backdrop: 'static'
+            });
+            $(document).ready(function () {
+                $(".select").selectpicker();
+            });
+        }
+    });
+}
 // thông tin hao mòn
 function tinh_nam_HM(val) {
     if (val != undefined) {
@@ -1154,10 +1639,10 @@ function hao_mon() {
     var giatri = Number(ngia) * (Number(hm) / 100);
     if (giatri) {
         $('.giatri_HM').text(giatri);
-       
+
     } else {
         $('.giatri_HM').text('0');
-        
+
     }
     var ngay = $('.ngaysd').val();
     if (ngay != '') {
@@ -1167,7 +1652,7 @@ function hao_mon() {
         $('.bd_HM').text('dd-mm-yyyy');
         $('.bd_KH').text('dd-mm-yyyy');
     }
-    
+
 
 
 }
@@ -1176,8 +1661,8 @@ function check_ngaysd() {
     if ($('.ngaymua').val() != '') {
         var ngaymua = $('.ngaymua').val().split('-');
         var ngaysd = $('.ngaysd').val().split('-');
-        var mua = moment([ngaymua[2],ngaymua[1],ngaymua[0]]);
-        var sd =  moment([ngaysd[2],ngaysd[1],ngaysd[0]]);
+        var mua = moment([ngaymua[2], ngaymua[1], ngaymua[0]]);
+        var sd = moment([ngaysd[2], ngaysd[1], ngaysd[0]]);
         if (sd >= mua) {
             $('.ngaysd').removeClass('error_input');
             $(".ngaysd_icon").css("display", "none");
@@ -1253,7 +1738,7 @@ function in_theTSCD() {
 }
 
 function update_chitiet(id) {
-    
+
     if (id != '') {
         $.ajax({
             url: '/chitiettaisan/edit/' + id,
@@ -1268,8 +1753,8 @@ function update_chitiet(id) {
                     });
                     var page = $('li.active span').text();
                     $('.page_chitiet').val(page);
-                    
-                
+
+
                 });
             }
         });
@@ -1347,15 +1832,15 @@ function check_ts_more(ten) {
     return kq;
 }
 
-function check_trung_ts(ten){
+function check_trung_ts(ten) {
     var sl = Number($('#so_tai_san').val());
     var kq = false;
-    if(sl ==1){
+    if (sl == 1) {
         kq = true;
-    }else{
+    } else {
         for (i = 1; i <= sl; i++) {
-            for(j=i+1;j<=sl;j++){
-                if ($('#' + ten + i).val() == $('#' + ten + j).val() ) {
+            for (j = i + 1; j <= sl; j++) {
+                if ($('#' + ten + i).val() == $('#' + ten + j).val()) {
                     $('.' + ten + j).addClass('error_input');
                     $("." + ten + j + "_icon").css("display", "block");
                     $(".error_" + ten + j).text("Tài sản đã được chọn");
@@ -1368,7 +1853,7 @@ function check_trung_ts(ten){
                     $(".error_" + ten + j).css("display", "none");
                     kq = true;
                 }
-                
+
             }
         }
     }
@@ -1392,44 +1877,44 @@ function loc_nvOftaisan(id, div) {
 
 function xuat_excel_ts() {
     var ma_phong = $('#phong option:selected').val();
-        $.ajax({
-            url: '/taisan/excel',
-            method: 'post',
-            data: { ma_phong: ma_phong },
-            cache: false,
-            xhr: function () {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 2) {
-                        if (xhr.status == 200) {
-                            xhr.responseType = "blob";
-                        } else {
-                            xhr.responseType = "text";
-                        }
+    $.ajax({
+        url: '/taisan/excel',
+        method: 'post',
+        data: { ma_phong: ma_phong },
+        cache: false,
+        xhr: function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 2) {
+                    if (xhr.status == 200) {
+                        xhr.responseType = "blob";
+                    } else {
+                        xhr.responseType = "text";
                     }
-                };
-                return xhr;
-            },
-            success: function (data) {
-                var filename = 'taisan.xlsx';
-                var blob = new Blob([data], { type: "application/octet-stream" });
-    
-                //Check the Browser type and download the File.
-                var isIE = false || !!document.documentMode;
-                if (isIE) {
-                    window.navigator.msSaveBlob(blob, filename);
-                } else {
-                    var url = window.URL || window.webkitURL;
-                    link = url.createObjectURL(blob);
-                    var a = $("<a />");
-                    a.attr("download", filename);
-                    a.attr("href", link);
-                    $("body").append(a);
-                    a[0].click();
-                    $("body").remove(a);
                 }
+            };
+            return xhr;
+        },
+        success: function (data) {
+            var filename = 'taisan.xlsx';
+            var blob = new Blob([data], { type: "application/octet-stream" });
+
+            //Check the Browser type and download the File.
+            var isIE = false || !!document.documentMode;
+            if (isIE) {
+                window.navigator.msSaveBlob(blob, filename);
+            } else {
+                var url = window.URL || window.webkitURL;
+                link = url.createObjectURL(blob);
+                var a = $("<a />");
+                a.attr("download", filename);
+                a.attr("href", link);
+                $("body").append(a);
+                a[0].click();
+                $("body").remove(a);
             }
-        });
+        }
+    });
 }
 
 
@@ -1455,11 +1940,14 @@ function update_nv(id) {
         success: function (data) {
             $('#modal_nhanvien').html(data);
             $('#update_nhanvien').modal({
-                show:true,
+                show: true,
                 backdrop: 'static',
             });
             $(document).ready(function () {
                 $(".select").selectpicker();
+                $('.soluong').inputFilter(function (value) {
+                    return /^\d*$/.test(value);
+                });
             });
         }
     });
@@ -1472,94 +1960,97 @@ function update_ncc(id) {
         success: function (data) {
             $('#modal_ncc').html(data);
             $('#update_ncc').modal({
-                show:true,
-                backdrop:'static',
+                show: true,
+                backdrop: 'static',
             });
             $(document).ready(function () {
                 $(".select").selectpicker();
+                $('.soluong').inputFilter(function (value) {
+                    return /^\d*$/.test(value);
+                });
             });
         }
     });
 }
 
-function search_phong(){
+function search_phong() {
     var text = $('#search').val();
     $.ajax({
         url: '/phongban/search',
         method: 'post',
-        data:{
-            text :text,
+        data: {
+            text: text,
         },
-        success: function(data){
+        success: function (data) {
             $('#list_phong').html(data);
         }
     });
 }
-function search_nhanvien(page){
+function search_nhanvien(page) {
     var text = $('#search').val();
     var seleted = $('#phong option:selected').val();
     $.ajax({
-        url:'/nhanvien/search?page='+page,
-        method :'post',
-        data:{
-            text:text,
-            seleted:seleted
+        url: '/nhanvien/search?page=' + page,
+        method: 'post',
+        data: {
+            text: text,
+            seleted: seleted
         },
-        success:function(data){
+        success: function (data) {
             $('#list_nhanvien').html(data);
         }
     });
 }
-function search_ncc(){
+function search_ncc() {
     var text = $('#search').val();
     $.ajax({
-        url:'/nhacungcap/search',
-        method :'post',
-        data:{
-            text:text,
+        url: '/nhacungcap/search',
+        method: 'post',
+        data: {
+            text: text,
         },
-        success:function(data){
+        success: function (data) {
             $('#list_nhacungcap').html(data);
         }
     });
 }
-function khau_hao(){
-    var tgsd =$('.tgSD').text();
+function khau_hao() {
+    var tgsd = $('.tgSD').text();
     var ngia = $('.ngia').val();
     var tgsdconlai = $('.tgSD_conlai_HM').text();
     var hm = $('.giatri_HM').text();
-    if(tgsd !=undefined){
-        tgkh = Number(tgsd)*12;
+    if (tgsd != undefined) {
+        tgkh = Number(tgsd) * 12;
         $('.tg_KH').text(tgkh);
-        if(ngia !=undefined && tgsdconlai !=undefined && hm !=undefined){
-            var giatriconlai = ngia-(tgsd-tgsdconlai)*hm
-            giatri_kh=Math.round(Number(ngia)/tgkh);
+        if (ngia != undefined && tgsdconlai != undefined && hm != undefined) {
+            var giatriconlai = ngia - (tgsd - tgsdconlai) * hm
+            giatri_kh = Math.round(Number(ngia) / tgkh);
             $('.giatri_KH_thang').text(giatri_kh);
             $('.giatri_KH').text(ngia);
-            $('.tg_KH_conlai').text(tgsdconlai*12);
+            $('.tg_KH_conlai').text(tgsdconlai * 12);
             $('.conlai').text(giatriconlai);
-        }else{
+        } else {
             $('.giatri_KH').text('0');
             $('.tg_KH_conlai').text('0');
             $('.conlai').text('0');
         }
-        
+
     }
-    
-    
-    
+
+
+
 }
 
-function tinh_haomon_kiemke(){
+function tinh_haomon_kiemke() {
     var ngaykk = $('.ngaykk').val();
     var phong = $('#phongban option:selected').val();
-    if(ngaykk !=undefined && phong !=''){
+    if (ngaykk != undefined && phong != '') {
         $.ajax({
-            url:'/kiemke/tinh_haomon',
-            method:'post',
-            data:{ngaykk:ngaykk,phong:phong},
-            success:function(data){
-                $(document).ready(function(){
+            url: '/kiemke/tinh_haomon',
+            method: 'post',
+            data: { ngaykk: ngaykk, phong: phong },
+            success: function (data) {
+                $(document).ready(function () {
                     $('#list_taisan_kiemke').html(data);
                     $('.soluong').inputFilter(function (value) {
                         return /^\d*$/.test(value);
@@ -1583,67 +2074,67 @@ function tinh_haomon_kiemke(){
 //                     $('.soluong').inputFilter(function (value) {
 //                         return /^\d*$/.test(value);
 //                     });
-                    
-                    
+
+
 //                 });
-                
+
 //             }
 //         });
 // }
 
-function loc_cv_nv(url,ma_nv,div){
+function loc_cv_nv(url, ma_nv, div) {
     $.ajax({
         url: url,
         method: 'post',
-        data:{ma_nv:ma_nv},
-        success:function(data){
+        data: { ma_nv: ma_nv },
+        success: function (data) {
             $(div).val(data);
         }
     });
 }
 
-function check_inser_kiemke(){
+function check_inser_kiemke() {
     check('#nv_kk_1_lb');
     check('#nv_kk_2_lb');
     check('#nv_kk_3_lb');
     check('#phongban');
-    check('.ngaykk_lb') ;
+    check('.ngaykk_lb');
     check('.dot_kk_lb');
-    if(check('#nv_kk_1_lb') && check('#nv_kk_2_lb') && check('#nv_kk_3_lb') && check('#phongban') && check('.ngaykk_lb') && check('.dot_kk_lb')){
+    if (check('#nv_kk_1_lb') && check('#nv_kk_2_lb') && check('#nv_kk_3_lb') && check('#phongban') && check('.ngaykk_lb') && check('.dot_kk_lb')) {
         return true;
     }
     return false;
 }
-function check_inser_thanhly(){
+function check_inser_thanhly() {
     check('.ngaylap_lb');
     check('#phongban');
     check('#nhanvien');
     check_trung_ts('chitiet');
     check_ts_more('chitiet');
-    readURL(this,'#file_pdf','pdf');
-    if(check('.ngaylap_lb')&&check('#phongban')&&check('#nhanvien')&&check_trung_ts('chitiet')&&check_ts_more('chitiet') && readURL(this,'#file_pdf','pdf')){
+    readURL(this, '#file_pdf', 'pdf');
+    if (check('.ngaylap_lb') && check('#phongban') && check('#nhanvien') && check_trung_ts('chitiet') && check_ts_more('chitiet') && readURL(this, '#file_pdf', 'pdf')) {
         return true;
     }
     return false;
 }
 
-function tru_sl_kiemke(val,id){
+function tru_sl_kiemke(val, id) {
     var sl_kk = Number(val);
-    var sl_ht= Number($('#soluong_ht'+id).text());
-    if(sl_kk != sl_ht){
+    var sl_ht = Number($('#soluong_ht' + id).text());
+    if (sl_kk != sl_ht) {
         return true;
         // $('#soluong'+id).css('color','red');
-    }else{
+    } else {
         return false;
         // $('#soluong'+id).css('color','black');
     }
 }
 
-function check_export_ds_kiemke(){
+function check_export_ds_kiemke() {
     check('#phongban');
-    if(check('#phongban')){
-        var ma_phong =$('#phongban option:selected').val();
-        location.href ='/kiemke/export_ds/'+ma_phong;
+    if (check('#phongban')) {
+        var ma_phong = $('#phongban option:selected').val();
+        location.href = '/kiemke/export_ds/' + ma_phong;
     }
 }
 

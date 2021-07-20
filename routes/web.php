@@ -41,12 +41,14 @@ Route::resource('/phongban','PhongbanController');
 Route::post('/phongban/{id}/edit','PhongbanController@edit');
 Route::post('/phongban/update/{id}','PhongbanController@update');
 Route::post('/phongban/search','PhongbanController@search_phong');
+Route::post('/phongban/destroy','PhongbanController@destroy');
 
 // nhân viên
 Route::resource('/nhanvien','NhanvienController');
 Route::post('/nhanvien/{id}/edit','NhanvienController@edit');
 Route::post('/nhanvien/update/{id}','NhanvienController@update');
 Route::post('/nhanvien/search','NhanvienController@search');
+Route::post('/nhanvien/destroy','NhanvienController@destroy');
 
 // chitiettaisan
 Route::resource('/chitiettaisan','ChitiettaisanController');
@@ -55,19 +57,26 @@ Route::post('/chitiettaisan/edit/{id}','ChitiettaisanController@edit')->name('ch
 Route::post('/chitiettaisan/update/{id}','ChitiettaisanController@update')->name('chitiettaisan.update');
 Route::post('/chitiettaisan/loc_nv','ChitiettaisanController@loc_nvOfphong');
 Route::post('/chitiettaisan/delete/{id}','ChitiettaisanController@destroy');
+
 //Nhà cung cấp
 Route::resource('/nhacungcap','NhacungcapController');
 Route::post('/nhacungcap/{id}/edit','NhacungcapController@edit');
 Route::post('/nhacungcap/update/{id}','NhacungcapController@update');
-
+Route::post('/nhacungcap/destroy','NhacungcapController@destroy');
 Route::post('/nhacungcap/search','NhacungcapController@search_nhacungcap');
+
 // Loại tài sản
 Route::resource('/loaits','LoaitaisanController');
 Route::post('/loaits/search','LoaitaisanController@search_loai');
+Route::post('/loaits/destroy','LoaitaisanController@destroy');
+Route::post('/loaits/update/{id}','LoaitaisanController@update')->name('loaits.update');
+
 // Loại tài sản cố định
 Route::resource('/loaiTSCD','LoaiTSCDController');
 Route::post('/loaiTSCD/update/{id}','LoaiTSCDController@update');
 Route::post('/loaiTSCD/search','LoaiTSCDController@search_loai');
+Route::post('/loaiTSCD/destroy','LoaiTSCDController@destroy');
+
 //  user
 Route::resource('/user','UserController');
 Route::get('/login','UserController@login')->name('login');
@@ -112,3 +121,5 @@ Route::post('/thanhly/more_ts','ThanhlyController@more_ts');
 Route::get('/thanhly/in_phieu/{id}','ThanhlyController@in_phieu');
 Route::get('/thanhly/phieu/{id}','ThanhlyController@show_phieu');
 Route::post('/thanhly/update/{id}','ThanhlyController@update')->name('thanhly.update');
+Route::post('/thanhly/search','ThanhlyController@search_thanhly');
+Route::post('thanhly/destroy','ThanhlyController@destroy')->name('thanhly.destroy');

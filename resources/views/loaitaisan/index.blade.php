@@ -24,5 +24,8 @@
         </div>
     </div>
 </div>
-@include('loaitaisan.modal')
+<div id='modal_loaits'>
+    @include('loaitaisan.modal')
+</div>
+
 @endsection

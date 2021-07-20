@@ -146,9 +146,17 @@ class NhanvienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $ma_nv = $request->ma_nv;
+        $ctofnv = $this->chitiettaisan->table_join()->where('taisan.deleted',0)->where('chitiettaisan.ma_nv',$ma_nv)->where('trangthai','!=',2)->get();
+        if( count($ctofnv) == 0){
+            
+            $this->nhanvien->delete_nhanvien($ma_nv);
+            return true;
+        }else{
+            return false;
+        }
     }
     public function search(Request $request)
     {

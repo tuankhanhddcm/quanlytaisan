@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\BeforeSheet;
 use Maatwebsite\Excel\Events\BeforeWriting;
@@ -51,7 +52,14 @@ class KiemkeExport implements WithEvents
         
          BeforeExport::class => function(BeforeExport $event){
             $event->writer->reopen(new \Maatwebsite\Excel\Files\LocalTemporaryFile('phieukiemke/kiemke.xlsx'),Excel::XLSX);
-
+            $styleArray = array(
+                'borders' => array(
+                    'outline' => array(
+                        'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        'color' => array('argb' => 'FFFF0000'),
+                    ),
+                ),
+            );
             $event->writer->getSheetByIndex(0);
             $event->getWriter()->getSheetByIndex(0)->setCellValue('A8',"Thời điểm kiểm kê: ".Carbon::create($this->ngay)->format('d-m-Y'));
             $b =10;
@@ -75,14 +83,17 @@ class KiemkeExport implements WithEvents
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.$i,$val->nguyengia);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('F'.$i,$soluong);
                 $event->getWriter()->getSheetByIndex(0)->setCellValue('G'.$i,$val->nguyengia);
+                
+                $event->writer->getActiveSheet(0)->getStyle('A'.$i.':H'.$i)->applyFromArray($styleArray);
                 $i++;
                 $n++;
             }
-           
+            
             $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.($i+2),'Thủ trưởng đơn vị (Ký, họ tên, đóng dấu)');
             $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.($i+2),'Các tổ  viên (Ký, họ tên)');
             $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.($i+2),'Tổ trưởng (Ký, họ tên)');
          },
+        
          
       ];
     }

@@ -54,7 +54,7 @@
                                     <label for="" class="form-label sdt_ncc_lb">Số điện thoại:</label>
                                     <div class="form-wrap">
                                         <div class="form_input">
-                                            <input type="text" class="form-input sdt_ncc" name="sdt_ncc" onkeyup="check('.sdt_ncc_lb')" value="" placeholder="Nhập số điện thoại">
+                                            <input type="text" class="form-input sdt_ncc soluong" name="sdt_ncc" onkeyup="check('.sdt_ncc_lb')" value="" placeholder="Nhập số điện thoại">
                                         </div>
                                         
                                         <div style="display: flex;">

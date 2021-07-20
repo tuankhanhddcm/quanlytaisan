@@ -45,7 +45,7 @@
                 <td >
                     <div style="display: flex;justify-content: space-around">
                         <button class="btn_up_nhanvien" data-id="{{$item->ma_nv}}"   style="width:40px; height:40px;  border:none; background-color: transparent;" ><i class='bx bx-edit' style="font-size: 30px; color:#5bc0de;"></i></button>
-                        <button style="width:40px; height:40px;  border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
+                        <button  class="btn_delete_nhanvien" data-id="{{$item->ma_nv}}" style="width:40px; height:40px;  border:none; background-color: transparent;" ><i class='bx bxs-x-square' style="font-size: 30px; color:#FF3300;"></i></button>
                     </div>
                    
                 </td>

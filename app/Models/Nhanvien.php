@@ -100,4 +100,8 @@ class Nhanvien extends Model
         ->paginate(8);
         return $table;
     }
+    public function delete_nhanvien($ma_nv)
+    {
+        DB::table($this->table)->where('nhanvien.ma_nv',$ma_nv)->delete();
+    }
 }
