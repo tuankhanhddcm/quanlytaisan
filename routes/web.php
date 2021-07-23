@@ -123,3 +123,8 @@ Route::get('/thanhly/phieu/{id}','ThanhlyController@show_phieu');
 Route::post('/thanhly/update/{id}','ThanhlyController@update')->name('thanhly.update');
 Route::post('/thanhly/search','ThanhlyController@search_thanhly');
 Route::post('thanhly/destroy','ThanhlyController@destroy')->name('thanhly.destroy');
+
+//baocao
+Route::get('/baocao_ts','BaocaoController@taisan')->name('baocao.taisan');
+Route::post('/baocao_ts/search','BaocaoController@search_ts');
+Route::post('/baocao_ts/export','BaocaoController@export');

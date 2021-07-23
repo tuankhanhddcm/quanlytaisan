@@ -235,23 +235,18 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class='bx bx-circle nav-icon'></i>
-                    <p>Báo cáo kiểm kê</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
+                  <a href="/baocao_ts" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Báo cáo tất cả tài sản</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
+                  <a href="/baocao_tl" class="nav-link">
                     <i class='bx bx-circle nav-icon'></i>
                     <p>Bản kê tài sản thanh lý</p>
                   </a>
                 </li>
+               
               </ul>
             </li>
             <li class="nav-item">

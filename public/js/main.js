@@ -13,6 +13,10 @@ $(document).ready(function () {
         search_chitiet(1);
     });
 
+    $(document).on('click','.select-baocao',function(){
+        search_ts(1,'baocao_ts');
+    });
+
     $('.select-loaisp').click(function () {
         search_phieubangiao(1);
         search_hopdong(1);
@@ -96,6 +100,7 @@ $(document).ready(function () {
         search_tieuhao(page);
         search_nhanvien(page);
         search_kiemke(page);
+        search_ts(page,'baocao_ts');
     });
 
     // chỉnh calendar
@@ -1128,16 +1133,21 @@ function search_loaiTSCD(page) {
     });
 }
 
-function search_ts(page) {
+function search_ts(page,url='') {
+    var id = '#list_baocao_ts';
+    if(url ==''){
+        url='taisan';
+        id = '#list_taisan';
+    }
     var text = $('#search').val();
     var seleted = $('#taisan option:selected').val();
     var ma_phong = $('#phong option:selected').val();
     var ma_loai = $('.ma_loai').val();
     var phongban = $('.phongban').val();
-    var deleted = $('.select-trangthai option:selected').val();
+    var deleted = $('#trangthai option:selected').val();
     $.ajax({
 
-        url: '/taisan/search?page=' + page,
+        url: '/'+url+'/search?page=' + page,
         method: "post",
         data: {
             text: text,
@@ -1148,7 +1158,7 @@ function search_ts(page) {
             deleted: deleted
         },
         success: function (data) {
-            $('#list_taisan').html(data);
+            $(id).html(data);
 
         }
     });
@@ -2151,6 +2161,54 @@ function search_hopdong(page) {
         },
         success: function (data) {
             $('#list_hopdong').html(data);
+        }
+    });
+}
+
+function xuat_excel_baocao_ts() {
+    var ma_phong = $('#phong option:selected').val();
+    var trangthai = $('#trangthai option:selected').val();
+    var ma_loai = $('#taisan option:selected').val();
+    $.ajax({
+        url: '/baocao_ts/export',
+        method: 'post',
+        data: { 
+            ma_phong: ma_phong,
+            trangthai:trangthai,
+            ma_loai:ma_loai
+        },
+        cache: false,
+        xhr: function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 2) {
+                    if (xhr.status == 200) {
+                        xhr.responseType = "blob";
+                    } else {
+                        xhr.responseType = "text";
+                    }
+                }
+            };
+            return xhr;
+        },
+        success: function (data) {
+            var filename = 'danhsachtaisan.xlsx';
+            var blob = new Blob([data], { type: "application/octet-stream" });
+
+            //Check the Browser type and download the File.
+            var isIE = false || !!document.documentMode;
+            if (isIE) {
+                window.navigator.msSaveBlob(blob, filename);
+            } else {
+                var url = window.URL || window.webkitURL;
+                link = url.createObjectURL(blob);
+                var a = $("<a />");
+                a.attr("download", filename);
+                a.attr("href", link);
+                $("body").append(a);
+                a[0].click();
+                $("body").remove(a);
+            }
         }
     });
 }

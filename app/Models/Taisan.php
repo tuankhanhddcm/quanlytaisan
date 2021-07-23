@@ -90,7 +90,7 @@ class Taisan extends Model
         ->join('chitiettaisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
         ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
         ->where('chitiettaisan.trangthai','!=',2)
-        ->select('taisan.ma_ts','taisan.ten_ts','loaitaisancodinh.ten_loai','taisan.ngay_mua','taisan.deleted');
+        ->select('taisan.ma_ts','taisan.ten_ts','loaitaisancodinh.ten_loai','taisan.ngay_mua','taisan.deleted','taisan.nguyengia');
         if($text !=''){
             $kq = $kq->where(function($res) use($text){
                     $res->where('taisan.ten_ts','like','%'.$text.'%')
@@ -126,7 +126,7 @@ class Taisan extends Model
 
             $kq = $kq->where('phongban.ma_phong',$ma_phong);
         }
-        $kq =$kq->groupBy('taisan.ma_ts','taisan.ten_ts','loaitaisancodinh.ten_loai','taisan.ngay_mua','taisan.deleted')->orderBy('taisan.ma_ts')->paginate(8);
+        $kq =$kq->groupBy('taisan.ma_ts','taisan.ten_ts','loaitaisancodinh.ten_loai','taisan.ngay_mua','taisan.deleted','taisan.nguyengia')->orderBy('taisan.ma_ts')->paginate(8);
         $temp =$this->sl_taisan();
         // if($mang){
         //     foreach($mang as $val){
@@ -275,5 +275,43 @@ class Taisan extends Model
         $data = DB::table('taisan')->where('taisan.ma_ncc',$ma_ncc)->get();
         return $data;
     }
+    public function export_baocao_ts($ma_phong,$ma_loai,$trangthai){
+        $temp_sl = DB::table($this->table)
+        ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'))
+        ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
+        ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')->where('chitiettaisan.trangthai','!=',2);
+        if($ma_phong !=''){
+            $temp_sl = $temp_sl->where('phongban.ma_phong',$ma_phong);
+        }
+        if($trangthai ==1){
+            $temp_sl = $temp_sl->where('taisan.deleted',1);
+        }else{
+            $temp_sl = $temp_sl->where('taisan.deleted',0);
+        }
+        $temp_sl = $temp_sl->groupBy('taisan.ma_ts');
+        $data = DB::table($this->table)
+            ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
+            ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
+            ->join('tieuhaotaisan','tieuhaotaisan.ma_loai','=','taisan.ma_loai')
+            ->join('chitiettaisan','chitiettaisan.ma_ts','=','taisan.ma_ts')
+            ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+            ->joinSub($temp_sl,'temp_sl',function($join){
+                $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
+            })
+            ->select('taisan.*','soluong','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd','phongban.ten_phong');
+            if($ma_phong !=''){
+                $data = $data->where('phongban.ma_phong',$ma_phong);
+            }
+            if($ma_loai !=''){
+                $data = $data->where('taisan.ma_loai',$ma_loai);
+            }
 
+            if($trangthai ==1){
+                $data = $data->where('taisan.deleted',1);
+            }else{
+                $data = $data->where('taisan.deleted',0);
+            }
+            $data = $data->distinct()->get();
+        return $data;
+    }
 }
