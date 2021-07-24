@@ -34,7 +34,7 @@ class BaocaoTSExport implements FromView,ShouldAutoSize,WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:N1')->getFont()->setBold(true);
+        // $sheet->getStyle('A1:N1')->getFont()->setBold(true);
         // $sheet->getStyle('A1:N1')->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM);
     }
     

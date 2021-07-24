@@ -22,47 +22,23 @@ use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Excel;
 Use \Maatwebsite\Excel\Sheet;
 
-class DstaisankiemkeExport implements WithEvents
+class DstaisankiemkeExport implements FromView
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function __construct($taisan)
+    public function __construct($taisan,$tenphong)
     {
         $this->taisan = $taisan;
+        $this->tenphong = $tenphong;
     }
     
- 
-    public function registerEvents(): array
+    public function view(): View
     {
-        Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
-            $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($style);
-        });
-      return [
-        
-         BeforeExport::class => function(BeforeExport $event){
-            $event->writer->reopen(new \Maatwebsite\Excel\Files\LocalTemporaryFile('phieukiemke/kiemke.xlsx'),Excel::XLSX);
-
-            $event->writer->getSheetByIndex(0);
-            $event->getWriter()->getSheetByIndex(0)->setCellValue('A8',"Thời điểm kiểm kê: ".Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y'));
-            
-            $i=17;
-            $n =1;
-            foreach($this->taisan as $val){
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('A'.$i,$n);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.$i,$val->ten_ts);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.$i,$val->ten_phong);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('D'.$i,$val->soluong);
-                $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.$i,$val->nguyengia);
-                $i++;
-                $n++;
-            }
-           
-            // $event->getWriter()->getSheetByIndex(0)->setCellValue('B'.($i+2),'Thủ trưởng đơn vị (Ký, họ tên, đóng dấu)');
-            // $event->getWriter()->getSheetByIndex(0)->setCellValue('C'.($i+2),'Các tổ  viên (Ký, họ tên)');
-            // $event->getWriter()->getSheetByIndex(0)->setCellValue('E'.($i+2),'Tổ trưởng (Ký, họ tên)');
-         },
-         
-      ];
+        return view('kiemke.mau_kiemke', [
+            'taisan' => $this->taisan,
+            'tenphong'=>$this->tenphong
+        ]);
     }
+    
 }

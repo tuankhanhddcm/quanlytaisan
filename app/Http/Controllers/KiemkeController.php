@@ -236,11 +236,19 @@ class KiemkeController extends Controller
         $taisan = $this->taisan->export_tsOfphong($kk->ma_phong);
         $kiemke = $this->kiemke->nv_kiemke($id);
         $chitiet = $this->chitietphieu->select_kiemke($id);
-        return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke,$chitiet), 'kiemke.xlsx');
+        // return view('kiemke.baocao_kiemke', [
+        //     'taisan' => $taisan,
+        //     'kiemke' =>$kiemke,
+        //     'ngay' =>$kk->ngay_kiemke,
+        //     'chitiet'=>$chitiet,
+        //     'phong' =>$kk->ten_phong
+        // ]);
+        return Excel::download(new KiemkeExport($taisan,$kiemke,$kk->ngay_kiemke,$chitiet,$kk->ten_phong), 'kiemke.xlsx');
     }
     public function export_ds($id){
+        $tenphong = $this->phongban->find($id);
         $taisan = $this->taisan->export_tsOfphong($id);
-        return Excel::download(new DstaisankiemkeExport($taisan), 'dstaisan.xlsx');
+        return Excel::download(new DstaisankiemkeExport($taisan,$tenphong->ten_phong), 'dstaisan.xlsx');
     }
 
     public function search_kiemke(Request $request){

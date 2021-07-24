@@ -1,0 +1,1843 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="generator" content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet">
+      <meta name="author" content="Administrator" />
+      <meta name="company" content="Microsoft Corporation" />
+    <style type="text/css">
+      html { font-family:Calibri, Arial, Helvetica, sans-serif; font-size:11pt; background-color:white }
+      a.comment-indicator:hover + div.comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em }
+      a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em }
+      div.comment { display:none }
+      table { border-collapse:collapse; page-break-after:always }
+      .gridlines td { border:1px dotted black }
+      .gridlines th { border:1px dotted black }
+      .b { text-align:center }
+      .e { text-align:center }
+      .f { text-align:right }
+      .inlineStr { text-align:left }
+      .n { text-align:right }
+      .s { text-align:left }
+      td.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style1 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style1 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style2 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style2 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style3 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style3 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style4 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style4 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style5 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style5 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style6 { vertical-align:middle; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:14pt; background-color:white }
+      th.style6 { vertical-align:middle; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:14pt; background-color:white }
+      td.style7 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style7 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style8 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style8 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style9 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style9 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style10 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style10 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style11 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style11 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style12 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style12 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style13 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style13 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style14 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style14 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style15 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      th.style15 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:white }
+      td.style16 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style16 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style17 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style17 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style18 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:none #000000; border-left:1px solid #000000 !important; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style18 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:none #000000; border-left:1px solid #000000 !important; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style19 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style19 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style20 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style20 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style21 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style21 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style22 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style22 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style23 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style23 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style24 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      th.style24 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      td.style25 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      th.style25 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      td.style26 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      th.style26 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      td.style27 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      th.style27 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      td.style28 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      th.style28 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      td.style29 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      th.style29 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      td.style30 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      th.style30 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:#FFFFFF }
+      td.style31 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      th.style31 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      td.style32 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      th.style32 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:11pt; background-color:#FFFFFF }
+      td.style33 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style33 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style34 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style34 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style35 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style35 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style36 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style36 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style37 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style37 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style38 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style38 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style39 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style39 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style40 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style40 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style41 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style41 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style42 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style42 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style43 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style43 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style44 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style44 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style45 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style45 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style46 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style46 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      td.style47 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      th.style47 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:12pt; background-color:white }
+      table.sheet0 col.col0 { width:38.63333289pt }
+      table.sheet0 col.col1 { width:190.45555337pt }
+      table.sheet0 col.col2 { width:128.09999853pt }
+      table.sheet0 col.col3 { width:69.13333254pt }
+      table.sheet0 col.col4 { width:58.96666599pt }
+      table.sheet0 col.col5 { width:39.31111066pt }
+      table.sheet0 col.col6 { width:58.96666599pt }
+      table.sheet0 col.col7 { width:43.37777728pt }
+      table.sheet0 col.col8 { width:48.12222167pt }
+      table.sheet0 col.col9 { width:48.12222167pt }
+      table.sheet0 col.col10 { width:48.12222167pt }
+      table.sheet0 col.col11 { width:43.37777728pt }
+      table.sheet0 col.col12 { width:43.37777728pt }
+      table.sheet0 col.col13 { width:43.37777728pt }
+      table.sheet0 col.col14 { width:48.12222167pt }
+      table.sheet0 col.col15 { width:48.12222167pt }
+      table.sheet0 col.col16 { width:48.12222167pt }
+      table.sheet0 col.col17 { width:52.86666606pt }
+      table.sheet0 col.col18 { width:43.37777728pt }
+      table.sheet0 col.col19 { width:42pt }
+      table.sheet0 tr { height:15pt }
+      table.sheet0 tr.row0 { height:15.6pt }
+      table.sheet0 tr.row1 { height:15.6pt }
+      table.sheet0 tr.row2 { height:15.6pt }
+      table.sheet0 tr.row3 { height:15.6pt }
+      table.sheet0 tr.row4 { height:17.4pt }
+      table.sheet0 tr.row5 { height:17.4pt }
+      table.sheet0 tr.row6 { height:17.4pt }
+      table.sheet0 tr.row7 { height:15.6pt }
+      table.sheet0 tr.row8 { height:15.6pt }
+      table.sheet0 tr.row9 { height:15.6pt }
+      table.sheet0 tr.row10 { height:15.6pt }
+      table.sheet0 tr.row11 { height:15.6pt }
+      table.sheet0 tr.row12 { height:15.6pt }
+      table.sheet0 tr.row13 { height:15.6pt }
+      table.sheet0 tr.row14 { height:15.6pt }
+      table.sheet0 tr.row15 { height:31.2pt }
+      table.sheet0 tr.row16 { height:15.6pt }
+      table.sheet0 tr.row17 { height:15.6pt }
+      table.sheet0 tr.row18 { height:15.6pt }
+      table.sheet0 tr.row19 { height:15.6pt }
+      table.sheet0 tr.row20 { height:15.6pt }
+      table.sheet0 tr.row21 { height:15.6pt }
+      table.sheet0 tr.row22 { height:15.6pt }
+      table.sheet0 tr.row23 { height:15.6pt }
+      table.sheet0 tr.row24 { height:15.6pt }
+      table.sheet0 tr.row25 { height:15.6pt }
+      table.sheet0 tr.row26 { height:15.6pt }
+      table.sheet0 tr.row27 { height:15.6pt }
+      table.sheet0 tr.row28 { height:15.6pt }
+      table.sheet0 tr.row29 { height:15.6pt }
+      table.sheet0 tr.row30 { height:15.6pt }
+      table.sheet0 tr.row31 { height:15.6pt }
+      table.sheet0 tr.row32 { height:15.6pt }
+      table.sheet0 tr.row33 { height:15.6pt }
+      table.sheet0 tr.row34 { height:15.6pt }
+      table.sheet0 tr.row35 { height:15.6pt }
+      table.sheet0 tr.row36 { height:15.6pt }
+      table.sheet0 tr.row37 { height:15.6pt }
+      table.sheet0 tr.row38 { height:15.6pt }
+      table.sheet0 tr.row39 { height:15.6pt }
+      table.sheet0 tr.row40 { height:15.6pt }
+      table.sheet0 tr.row41 { height:15.6pt }
+      table.sheet0 tr.row42 { height:15.6pt }
+      table.sheet0 tr.row43 { height:15.6pt }
+      table.sheet0 tr.row44 { height:15.6pt }
+      table.sheet0 tr.row45 { height:15.6pt }
+      table.sheet0 tr.row46 { height:15.6pt }
+      table.sheet0 tr.row47 { height:15.6pt }
+      table.sheet0 tr.row48 { height:15.6pt }
+      table.sheet0 tr.row49 { height:15.6pt }
+      table.sheet0 tr.row50 { height:15.6pt }
+      table.sheet0 tr.row51 { height:15.6pt }
+      table.sheet0 tr.row52 { height:15.6pt }
+      table.sheet0 tr.row53 { height:15.6pt }
+      table.sheet0 tr.row54 { height:15.6pt }
+      table.sheet0 tr.row55 { height:15.6pt }
+      table.sheet0 tr.row56 { height:15.6pt }
+      table.sheet0 tr.row57 { height:15.6pt }
+      table.sheet0 tr.row58 { height:15.6pt }
+      table.sheet0 tr.row59 { height:15.6pt }
+      table.sheet0 tr.row60 { height:15.6pt }
+      table.sheet0 tr.row61 { height:15.6pt }
+      table.sheet0 tr.row62 { height:15.6pt }
+      table.sheet0 tr.row63 { height:15.6pt }
+      table.sheet0 tr.row64 { height:15.6pt }
+      table.sheet0 tr.row65 { height:15.6pt }
+      table.sheet0 tr.row66 { height:15.6pt }
+      table.sheet0 tr.row67 { height:15.6pt }
+      table.sheet0 tr.row69 { height:31.2pt }
+      table.sheet0 tr.row70 { height:15.6pt }
+      table.sheet0 tr.row71 { height:15.6pt }
+      table.sheet0 tr.row72 { height:15.6pt }
+    </style>
+  </head>
+
+  <body>
+<style>
+@page { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
+body { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
+</style>
+    <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+        <col class="col0">
+        <col class="col1">
+        <col class="col2">
+        <col class="col3">
+        <col class="col4">
+        <col class="col5">
+        <col class="col6">
+        <col class="col7">
+        <col class="col8">
+        <col class="col9">
+        <col class="col10">
+        <col class="col11">
+        <col class="col12">
+        <col class="col13">
+        <col class="col14">
+        <col class="col15">
+        <col class="col16">
+        <col class="col17">
+        <col class="col18">
+        <col class="col19">
+        <tbody>
+          <tr class="row0">
+            <td class="column0 style4 s">Đơn vị:Trung tâm Công nghệ thông tin và Truyền thông</td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row1">
+            <td class="column0 style4 s">Bộ phận: QT - UD</td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row2">
+            <td class="column0 style4 s">Mã đơn vị SDNS:1109565</td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row3">
+            <td class="column0 style4 null"></td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row4">
+            <td class="column0 style6 s">BIÊN BẢN KIỂM KÊ THIẾT BỊ, CÔNG CỤ DỤNG CỤ, TÀI SẢN CỐ ĐỊNH</td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row5">
+            <td class="column0 style6 null"></td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row6">
+            <td class="column0 style6 null"></td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row7">
+            <td class="column0 style33 s">Thời điểm kiểm kê: 08 giờ 00 ngày 08  tháng  02 năm 2021</td>
+            <td class="column1 style33 null"></td>
+            <td class="column2 style34 null"></td>
+            <td class="column3 style34 null"></td>
+            <td class="column4 style35 null"></td>
+            <td class="column5 style34 null"></td>
+            <td class="column6 style35 null"></td>
+            <td class="column7 style35 null"></td>
+            <td class="column8 style35 null"></td>
+            <td class="column9 style34 null"></td>
+            <td class="column10 style34 null"></td>
+            <td class="column11 style34 null"></td>
+            <td class="column12 style34 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row8">
+            <td class="column0 style33 s">Tổ kiểm kê gồm:</td>
+            <td class="column1 style33 null"></td>
+            <td class="column2 style34 null"></td>
+            <td class="column3 style34 null"></td>
+            <td class="column4 style35 null"></td>
+            <td class="column5 style34 null"></td>
+            <td class="column6 style35 null"></td>
+            <td class="column7 style35 null"></td>
+            <td class="column8 style35 null"></td>
+            <td class="column9 style34 null"></td>
+            <td class="column10 style34 null"></td>
+            <td class="column11 style34 null"></td>
+            <td class="column12 style34 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row9">
+            <td class="column0 style39 s">Ông: Nguyễn Tấn Nhơn</td>
+            <td class="column1 style39 null"></td>
+            <td class="column2 style39 s">&nbsp;Chức vụ: Kỹ sư P.QTUD. Tổ Trưởng.</td>
+            <td class="column3 style39 null"></td>
+            <td class="column4 style39 null"></td>
+            <td class="column5 style39 null"></td>
+            <td class="column6 style39 null"></td>
+            <td class="column7 style39 null"></td>
+            <td class="column8 style39 null"></td>
+            <td class="column9 style39 null"></td>
+            <td class="column10 style39 null"></td>
+            <td class="column11 style39 null"></td>
+            <td class="column12 style39 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row10">
+            <td class="column0 style39 s">Ông: Lê Minh Nguyên</td>
+            <td class="column1 style39 null"></td>
+            <td class="column2 style39 s">&nbsp;Chức vụ: Kỹ sư P.QTUD. Tổ viên</td>
+            <td class="column3 style39 null"></td>
+            <td class="column4 style39 null"></td>
+            <td class="column5 style39 null"></td>
+            <td class="column6 style39 null"></td>
+            <td class="column7 style39 null"></td>
+            <td class="column8 style39 null"></td>
+            <td class="column9 style39 null"></td>
+            <td class="column10 style39 null"></td>
+            <td class="column11 style39 null"></td>
+            <td class="column12 style39 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row11">
+            <td class="column0 style39 s">Bà: Vũ Quỳnh Như</td>
+            <td class="column1 style39 null"></td>
+            <td class="column2 style39 s">&nbsp;Chức vụ: Kỹ sư P.QTUD. Tổ viên</td>
+            <td class="column3 style39 null"></td>
+            <td class="column4 style39 null"></td>
+            <td class="column5 style39 null"></td>
+            <td class="column6 style39 null"></td>
+            <td class="column7 style39 null"></td>
+            <td class="column8 style39 null"></td>
+            <td class="column9 style39 null"></td>
+            <td class="column10 style39 null"></td>
+            <td class="column11 style39 null"></td>
+            <td class="column12 style39 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row12">
+            <td class="column0 style36 null"></td>
+            <td class="column1 style33 null"></td>
+            <td class="column2 style33 null"></td>
+            <td class="column3 style37 s">Đơn vị tính:  đồng/cái/mét (chiếc)</td>
+            <td class="column4 style37 null"></td>
+            <td class="column5 style37 null"></td>
+            <td class="column6 style38 null"></td>
+            <td class="column7 style38 null"></td>
+            <td class="column8 style38 null"></td>
+            <td class="column9 style33 null"></td>
+            <td class="column10 style33 null"></td>
+            <td class="column11 style33 null"></td>
+            <td class="column12 style33 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row13">
+            <td class="column0 style41 s style41" colspan="9">Đã kiểm kê tài sản cố định, kết quả như sau:</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12 style39 null"></td>
+            <td class="column13 style34 null"></td>
+            <td class="column14 style34 null"></td>
+            <td class="column15 style34 null"></td>
+            <td class="column16 style34 null"></td>
+            <td class="column17 style34 null"></td>
+            <td class="column18 style34 null"></td>
+            <td class="column19 style34 null"></td>
+          </tr>
+          <tr class="row14">
+            <td class="column0 style42 s style43" rowspan="2">Số TT</td>
+            <td class="column1 style44 s style43" rowspan="2">Tên tài <br />
+sản cố định</td>
+            <td class="column2 style44 s style43" rowspan="2">Nơi sử <br />
+dụng</td>
+            <td class="column3 style45 s style46" colspan="2">Theo kiểm kê</td>
+            <td class="column5 style45 s style47" rowspan="2">Ghi chú</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row15">
+            <td class="column3 style7 s">Số <br />
+lượng</td>
+            <td class="column4 style8 s">Nguyên <br />
+giá</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row16">
+            <td class="column0 style9 n">1</td>
+            <td class="column1 style10 s">Máy vi tính (2011) </td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">10,900,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row17">
+            <td class="column0 style9 n">2</td>
+            <td class="column1 style10 s">Máy vi tính</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">11,510,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row18">
+            <td class="column0 style9 n">3</td>
+            <td class="column1 style10 s">Máy vi tính</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">9,500,000</td>
+            <td class="column5 style2 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row19">
+            <td class="column0 style9 n">4</td>
+            <td class="column1 style10 s">Máy vi tính (2016)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">11,800,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row20">
+            <td class="column0 style9 n">5</td>
+            <td class="column1 style10 s">Máy vi tính(2017)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">11,900,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row21">
+            <td class="column0 style9 n">6</td>
+            <td class="column1 style10 s">Máy vi tính </td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">11,800,000</td>
+            <td class="column5 style3 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row22">
+            <td class="column0 style9 n">7</td>
+            <td class="column1 style10 s">Máy chủ IBM</td>
+            <td class="column2 style10 s">P.QT-UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">66,541,090</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row23">
+            <td class="column0 style9 n">8</td>
+            <td class="column1 style10 s">UPS Santak</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">4</td>
+            <td class="column4 style11 n">4,650,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row24">
+            <td class="column0 style9 n">9</td>
+            <td class="column1 style10 s">Bàn làm việc 612 </td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">3,400,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row25">
+            <td class="column0 style9 n">10</td>
+            <td class="column1 style10 s">Bàn làm việc(2017)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">2,000,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row26">
+            <td class="column0 style9 n">11</td>
+            <td class="column1 style10 s">Bàn làm việc 714</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">3,168,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row27">
+            <td class="column0 style9 n">12</td>
+            <td class="column1 style10 s">Bàn làm việc 612 (2016)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">3,600,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row28">
+            <td class="column0 style9 n">13</td>
+            <td class="column1 style10 s">Bàn làm việc 6x12<span style="color:#000000; font-family:'Times New Roman'; font-size:10pt"></span></td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">3,500,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row29">
+            <td class="column0 style9 n">14</td>
+            <td class="column1 style10 s">Bàn họp</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">4,800,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row30">
+            <td class="column0 style9 n">15</td>
+            <td class="column1 style10 s">Ghế xoay nhân viên (2017)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">650,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row31">
+            <td class="column0 style9 n">16</td>
+            <td class="column1 style10 s">Ghế xoay nhân viên (2011)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">3</td>
+            <td class="column4 style11 n">2,398,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row32">
+            <td class="column0 style9 n">17</td>
+            <td class="column1 style10 s">Ghế xoay nhân viên </td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">580,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row33">
+            <td class="column0 style9 n">18</td>
+            <td class="column1 style10 s">Ghế nệm xếp</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">6</td>
+            <td class="column4 style11 n">2,160,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row34">
+            <td class="column0 style9 n">19</td>
+            <td class="column1 style10 s">Điện thoại để bàn Panasonic</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">199,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row35">
+            <td class="column0 style9 n">20</td>
+            <td class="column1 style10 s">Ổ cứng di động + USD Box (Samsung)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">2,750,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row36">
+            <td class="column0 style9 n">21</td>
+            <td class="column1 style10 s">Ổ DVDRW + USB Box (Samsung/Asus)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">1,460,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row37">
+            <td class="column0 style9 n">22</td>
+            <td class="column1 style10 s">Bộ Tool (loại lớn sửa máy vi tính)</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">890,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row38">
+            <td class="column0 style9 n">23</td>
+            <td class="column1 style10 s">Máy khoan tường</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">1,550,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row39">
+            <td class="column0 style9 n">24</td>
+            <td class="column1 style10 s">Bảng lịch công tác</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">650,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row40">
+            <td class="column0 style9 n">25</td>
+            <td class="column1 style10 s">Tủ đựng HS</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">3,696,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row41">
+            <td class="column0 style9 n">26</td>
+            <td class="column1 style10 s">Switch Cico SG</td>
+            <td class="column2 style10 s">P. QT-UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">9,743,800</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row42">
+            <td class="column0 style9 n">27</td>
+            <td class="column1 style10 s">Thiết bị ghi hình (4camera + đầu ghi hình)</td>
+            <td class="column2 style10 s">P. QT-UD</td>
+            <td class="column3 style12 n">4</td>
+            <td class="column4 style11 n">5,125,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row43">
+            <td class="column0 style9 n">28</td>
+            <td class="column1 style10 s">Nguồn (12/10A) (camera)</td>
+            <td class="column2 style10 s">P. QT-UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">550,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row44">
+            <td class="column0 style9 n">29</td>
+            <td class="column1 style10 s">Kệ lửng </td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">1,100,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row45">
+            <td class="column0 style9 n">30</td>
+            <td class="column1 style10 s">Máy inA3</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style13 n">1</td>
+            <td class="column4 style11 n">17,800,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row46">
+            <td class="column0 style9 n">31</td>
+            <td class="column1 style10 s">Máy in A4</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">8,650,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row47">
+            <td class="column0 style9 n">32</td>
+            <td class="column1 style10 s">Máy lạnh Panasonic 1.5N</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">11,515,800</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row48">
+            <td class="column0 style9 n">33</td>
+            <td class="column1 style10 s">Server Ecomas</td>
+            <td class="column2 style10 s">P.QT- UD</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">34,000,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row49">
+            <td class="column0 style24 n">34</td>
+            <td class="column1 style25 s">Bàn vi tính (giáo viên)</td>
+            <td class="column2 style25 s">P. Đào tạo</td>
+            <td class="column3 style26 n">1</td>
+            <td class="column4 style27 n">950,000</td>
+            <td class="column5 style26 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row50">
+            <td class="column0 style9 n">35</td>
+            <td class="column1 style10 s">Bàn vi tính vernia</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">25</td>
+            <td class="column4 style11 n">27,000,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row51">
+            <td class="column0 style9 n">36</td>
+            <td class="column1 style10 s">Ghế Inoc nệm xếp</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">25</td>
+            <td class="column4 style11 n">8,750,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row52">
+            <td class="column0 style9 n">37</td>
+            <td class="column1 style10 s">Máy vi tính VP</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">25</td>
+            <td class="column4 style11 n">221,250,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row53">
+            <td class="column0 style9 n">38</td>
+            <td class="column1 style10 s">Máy vi tính( 2018)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">2</td>
+            <td class="column4 style11 n">23,800,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row54">
+            <td class="column0 style9 n">39</td>
+            <td class="column1 style10 s">Máy lạnh Panasonic</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">2</td>
+            <td class="column4 style11 n">21,900,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row55">
+            <td class="column0 style9 n">40</td>
+            <td class="column1 style10 s">Ổn ápHansinc</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">9,300,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row56">
+            <td class="column0 style9 n">41</td>
+            <td class="column1 style10 s">Bộ chuyển mạch Cisco</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">10,100,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row57">
+            <td class="column0 style9 n">42</td>
+            <td class="column1 style10 s">Máy chiếu Panasonic</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">25,945,700</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row58">
+            <td class="column0 style9 n">43</td>
+            <td class="column1 style10 s">Màn chiếu Trippod Dalite</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">1</td>
+            <td class="column4 style11 n">2,096,050</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row59">
+            <td class="column0 style9 n">44</td>
+            <td class="column1 style10 s">Bảng Maica </td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">2</td>
+            <td class="column4 style11 f">4,486,400</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row60">
+            <td class="column0 style9 n">45</td>
+            <td class="column1 style10 s">Kệ để CPU</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style12 n">26</td>
+            <td class="column4 style11 n">3,900,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6 style16 null"></td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row61">
+            <td class="column0 style24 n">46</td>
+            <td class="column1 style28 s">Máy tính ( 2021)</td>
+            <td class="column2 style25 s">P. Đào tạo</td>
+            <td class="column3 style29 n">20</td>
+            <td class="column4 style27 n">228,000,000</td>
+            <td class="column5 style26 null"></td>
+            <td class="column6 style30 null"></td>
+            <td class="column7 style30 null"></td>
+            <td class="column8 style30 null"></td>
+            <td class="column9 style30 null"></td>
+            <td class="column10 style30 null"></td>
+            <td class="column11 style30 null"></td>
+            <td class="column12 style30 null"></td>
+            <td class="column13 style30 null"></td>
+            <td class="column14 style30 null"></td>
+            <td class="column15 style30 null"></td>
+            <td class="column16 style30 null"></td>
+            <td class="column17 style31 null"></td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row62">
+            <td class="column0 style9 n">47</td>
+            <td class="column1 style15 s">Ghế nệm xếp ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">20</td>
+            <td class="column4 style11 n">11,900,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row63">
+            <td class="column0 style9 n">48</td>
+            <td class="column1 style15 s">Bàn máy vi tính ( 2021) + kệ để CPU ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">20</td>
+            <td class="column4 style11 n">33,220,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row64">
+            <td class="column0 style9 n">49</td>
+            <td class="column1 style15 s">Máy tính chủ ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">1</td>
+            <td class="column4 style16 n">14,872,000</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row65">
+            <td class="column0 style9 n">50</td>
+            <td class="column1 style15 s">Máy lạnh Panasonic 1N ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">1</td>
+            <td class="column4 style17 n">9,415,800</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row66">
+            <td class="column0 style9 n">51</td>
+            <td class="column1 style15 s">Máy lạnh Panasonic 1N ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">1</td>
+            <td class="column4 style18 n">9,415,800</td>
+            <td class="column5 style12 null"></td>
+            <td class="column6 style16 null"></td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row67">
+            <td class="column0 style9 n">52</td>
+            <td class="column1 style15 s">Switch 48 port ( 2021)</td>
+            <td class="column2 style10 s">P. Đào tạo</td>
+            <td class="column3 style1 n">1</td>
+            <td class="column4 style11 n">6,960,000</td>
+            <td class="column5 style1 null"></td>
+            <td class="column6 style16 null"></td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row68">
+            <td class="column0">&nbsp;</td>
+            <td class="column1">&nbsp;</td>
+            <td class="column2">&nbsp;</td>
+            <td class="column3">&nbsp;</td>
+            <td class="column4">&nbsp;</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row69">
+            <td class="column0 style40 s style40" colspan="2">Thủ trưởng đơn vị<br />
+(Ký, họ tên, đóng dấu)</td>
+            <td class="column2 style19 s">Các tổ  viên <br />
+(Ký, họ tên)</td>
+            <td class="column3 style20 null"></td>
+            <td class="column4 style19 s">Tổ trưởng<br />
+(Ký, họ tên)</td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row70">
+            <td class="column0 style21 null"></td>
+            <td class="column1 style22 null"></td>
+            <td class="column2 style22 null"></td>
+            <td class="column3 style22 null"></td>
+            <td class="column4 style23 null"></td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row71">
+            <td class="column0 style21 null"></td>
+            <td class="column1 style22 null"></td>
+            <td class="column2 style22 null"></td>
+            <td class="column3 style22 null"></td>
+            <td class="column4 style23 null"></td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+          <tr class="row72">
+            <td class="column0 style21 null"></td>
+            <td class="column1 style22 null"></td>
+            <td class="column2 style22 null"></td>
+            <td class="column3 style22 null"></td>
+            <td class="column4 style23 null"></td>
+            <td class="column5">&nbsp;</td>
+            <td class="column6">&nbsp;</td>
+            <td class="column7">&nbsp;</td>
+            <td class="column8">&nbsp;</td>
+            <td class="column9">&nbsp;</td>
+            <td class="column10">&nbsp;</td>
+            <td class="column11">&nbsp;</td>
+            <td class="column12">&nbsp;</td>
+            <td class="column13">&nbsp;</td>
+            <td class="column14">&nbsp;</td>
+            <td class="column15">&nbsp;</td>
+            <td class="column16">&nbsp;</td>
+            <td class="column17">&nbsp;</td>
+            <td class="column18">&nbsp;</td>
+            <td class="column19">&nbsp;</td>
+          </tr>
+        </tbody>
+    </table>
+  </body>
+</html>
