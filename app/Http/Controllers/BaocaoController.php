@@ -12,6 +12,7 @@ use App\Models\Nhacungcap;
 use App\Models\Nhanvien;
 use App\Models\Phongban;
 use App\Models\Taisan;
+use App\Models\Thanhly;
 use App\Models\Tieuhao;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
@@ -26,6 +27,7 @@ class BaocaoController extends Controller
     protected $tieuhao;
     protected $loaiTSCD;
     protected $nhanvien;
+    protected $thanhly;
 
     public function __construct()
     {
@@ -36,6 +38,7 @@ class BaocaoController extends Controller
         $this->chitiettaisan = new Chitiettaisan;
         $this->tieuhao = new Tieuhao;
         $this->loaiTSCD = new LoaiTSCD;
+        $this->thanhly = new Thanhly;
         $this->nhanvien = new Nhanvien;
         $this->middleware('login');
     }
@@ -85,6 +88,38 @@ class BaocaoController extends Controller
             $data = $this->taisan->select('','all');
         }else{
             $data = $this->taisan->export_baocao_ts($ma_phong,$ma_loai,$trangthai);
+        }
+        
+        $phongtaisan = $this->taisan->phong_taisan();
+        return Excel::download(new BaocaoTSExport($data,$phongtaisan), 'danhsachtaisan.xlsx');
+    }
+
+    public function thanhly(){
+        $phongban = $this->phongban->select();
+        $taisan = $this->taisan->ts_thanhly();
+        $phongts = $this->taisan->phong_taisan();
+        $phieuthanhly = $this->thanhly->select('all');
+        return view('baocao.baocao_thanhly',compact('taisan','phongts','phongban','phieuthanhly'));
+    }
+    public function search_thanhly(Request $request){
+        if($request->ajax()){
+            $ma_phong = $request->ma_phong;
+            if($ma_phong !=''){
+                $taisan = $this->taisan->ts_thanhly($ma_phong);
+            }else{
+                $taisan = $this->taisan->ts_thanhly();
+            }
+            $phieuthanhly = $this->thanhly->select('all');
+            $phongts = $this->taisan->phong_taisan();
+            return view('baocao.list_taisan_tl',compact('taisan','phongts','phieuthanhly'));
+        }
+    }
+    public function export_tl(Request $request){
+        $ma_phong =$request->ma_phong;
+        if($ma_phong !=''){
+            $data = $this->taisan->ts_thanhly($ma_phong);
+        }else{
+            $data = $this->taisan->ts_thanhly();
         }
         
         $phongtaisan = $this->taisan->phong_taisan();

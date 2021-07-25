@@ -33,28 +33,28 @@
             <td colspan="8" style="font-family: 'Times New Roman', Times, serif; ">Đã kiểm kê tài sản cố định, kết quả như sau:</td>
         </tr>
         <tr>
-            <th rowspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; width: 10% font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;font-weight: bold;">Số TT</th>
-            <th rowspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 35% " >Tên tài<br>sản cố định</th>
-            <th rowspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 35%">Nơi sử<br> dụng</th>
-            <th colspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;">Theo sổ kế toán</th>
-            <th colspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;">Theo sổ kiểm kê</th> 
-            <th rowspan="2" style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 15%">Ghi chú</th>
+            <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; width: 10% font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;font-weight: bold;">Số TT</th>
+            <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 35% " >Tên tài <br>sản cố định</th>
+            <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 35%">Nơi sử<br> dụng</th>
+            <th colspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;">Theo sổ kế toán</th>
+            <th colspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;">Theo sổ kiểm kê</th> 
+            <th rowspan="2" style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 15%">Ghi chú</th>
         </tr>
         <tr>
-            <th style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Số<br>lượng</th>
-            <th style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Nguyên <br> giá</th>
-            <th style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Số<br>lượng</th>
-            <th style="text-align: center; vertical-align: auto; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Nguyên <br> giá</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Số<br>lượng</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Nguyên <br> giá</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Số<br>lượng</th>
+            <th style="text-align: center; vertical-align: middle; border: 1px solid black; font-weight: bold;font-family: 'Times New Roman', Times, serif;font-size: 12px;width: 20%">Nguyên <br> giá</th>
         </tr>
     </thead>
     <tbody >           
         @foreach ($taisan as $k=> $item)
         <tr class="body-table">
-            <td  style="text-align: center; vertical-align: auto; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$k+1}}</td>
+            <td  style="text-align: center; vertical-align: middle; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$k+1}}</td>
             <td style=" border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$item->ten_ts}}</td>
             <td style=" border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$item->ten_phong}}</td>
-            <td style="text-align: center; vertical-align: auto; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$item->soluong}}</td>
-            <td style="text-align: center; vertical-align: auto; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{number_format($item->nguyengia)}}đ</td>
+            <td style="text-align: center; vertical-align: middle; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{$item->soluong}}</td>
+            <td style="text-align: center; vertical-align: middle; border: 1px solid black;font-family: 'Times New Roman', Times, serif;">{{number_format($item->nguyengia)}}đ</td>
             @php
             $sl=0;
             if(isset($chitiet)){

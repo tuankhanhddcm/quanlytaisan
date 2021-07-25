@@ -30,17 +30,17 @@ class Taisan extends Model
             // });
         return $data;
     }
-    public function sl_taisan(){
+    public function sl_taisan(  ){
         $temp_sl = DB::table($this->table)
                 ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'))
-                ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
-                ->groupBy('taisan.ma_ts')
-                ->get();
+                ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')->groupBy('taisan.ma_ts')->get();
         return $temp_sl;
     }
 
     public function select($dieukien='',$all=''){
+     
         $temp =$this->sl_taisan();
+        
         $data =$this->table_join()->where('taisan.deleted',0);
         if($dieukien !=''){
             $data =$data->where('taisan.ma_loai','=',''.$dieukien.'');
@@ -312,6 +312,28 @@ class Taisan extends Model
                 $data = $data->where('taisan.deleted',0);
             }
             $data = $data->distinct()->get();
+        return $data;
+    }
+
+    public function ts_thanhly($ma_phong=''){
+        $temp_sl = DB::table($this->table)
+            ->select('taisan.ma_ts',DB::raw('count(chitiettaisan.ma_ts) as soluong'),'chitietphieu.ma_thanhly as ma_thanhly')
+            ->join('chitiettaisan','taisan.ma_ts','=','chitiettaisan.ma_ts')
+            ->join('phongban','phongban.ma_phong','=','chitiettaisan.ma_phong')
+            ->join('chitietphieu','chitietphieu.ma_chitiet','=','chitiettaisan.ma_chitiet')
+            ->where('chitiettaisan.trangthai',2);
+            if($ma_phong !=''){
+                $temp_sl = $temp_sl->where('phongban.ma_phong',$ma_phong);
+            }
+            $temp_sl=$temp_sl->groupBy('taisan.ma_ts','chitietphieu.ma_thanhly');
+        $data = DB::table($this->table)
+            ->select('taisan.*','soluong','ma_thanhly','nhacungcap.ten_ncc','loaitaisancodinh.ten_loai','tieuhaotaisan.muc_tieuhao','tieuhaotaisan.thoi_gian_sd')
+            ->join('loaitaisancodinh','taisan.ma_loai','=','loaitaisancodinh.ma_loai')
+            ->join('nhacungcap','taisan.ma_ncc','=','nhacungcap.ma_ncc')
+            ->join('tieuhaotaisan','tieuhaotaisan.ma_loai','=','taisan.ma_loai')
+            ->joinSub($temp_sl,'temp_sl',function($join){
+                $join->on('taisan.ma_ts','=','temp_sl.ma_ts');
+            })->paginate(8);
         return $data;
     }
 }

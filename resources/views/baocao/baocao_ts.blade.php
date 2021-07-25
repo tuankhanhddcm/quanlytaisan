@@ -5,7 +5,7 @@
         <div class="main-name">
             <h3 class="main-text">Báo cáo  tài sản</h3>
             <div>
-                <button class="btn_cus btn-addsp" onclick="xuat_excel_baocao_ts();" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button>
+                <button class="btn_cus btn-addsp" onclick="xuat_excel_baocao_ts('baocao_ts');" style="background-color:#009900;"><i class='bx bx-export' style="font-weight: 600;"></i>Xuất excel</button>
             </div>
                
         </div>

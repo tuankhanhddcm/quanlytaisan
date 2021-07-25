@@ -128,3 +128,6 @@ Route::post('thanhly/destroy','ThanhlyController@destroy')->name('thanhly.destro
 Route::get('/baocao_ts','BaocaoController@taisan')->name('baocao.taisan');
 Route::post('/baocao_ts/search','BaocaoController@search_ts');
 Route::post('/baocao_ts/export','BaocaoController@export');
+Route::get('/baocao_tl','BaocaoController@thanhly')->name('baocao.thanhly');
+Route::post('/baocao_tl/search','BaocaoController@search_thanhly');
+Route::post('/baocao_tl/export','BaocaoController@export_tl');

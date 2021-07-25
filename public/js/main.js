@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     $(document).on('click','.select-baocao',function(){
         search_ts(1,'baocao_ts');
+        search_baocao_tl(1);
     });
 
     $('.select-loaisp').click(function () {
@@ -101,6 +102,7 @@ $(document).ready(function () {
         search_nhanvien(page);
         search_kiemke(page);
         search_ts(page,'baocao_ts');
+        search_baocao_tl(page);
     });
 
     // chỉnh calendar
@@ -2011,6 +2013,19 @@ function search_nhanvien(page) {
         }
     });
 }
+function search_baocao_tl(page) {
+    var seleted = $('#phong option:selected').val();
+    $.ajax({
+        url: '/baocao_tl/search?page=' + page,
+        method: 'post',
+        data: {
+            ma_phong: seleted
+        },
+        success: function (data) {
+            $('#list_baocao_tl').html(data);
+        }
+    });
+}
 function search_ncc() {
     var text = $('#search').val();
     $.ajax({
@@ -2165,12 +2180,12 @@ function search_hopdong(page) {
     });
 }
 
-function xuat_excel_baocao_ts() {
+function xuat_excel_baocao_ts(url) {
     var ma_phong = $('#phong option:selected').val();
     var trangthai = $('#trangthai option:selected').val();
     var ma_loai = $('#taisan option:selected').val();
     $.ajax({
-        url: '/baocao_ts/export',
+        url: '/'+url+'/export',
         method: 'post',
         data: { 
             ma_phong: ma_phong,
