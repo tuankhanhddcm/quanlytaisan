@@ -5,7 +5,7 @@
         <div class="main-name">
             <h3 class="main-text">Thông tin tài sản</h3>
             <div class="form-btn">
-                <button class="btn_cus btn-back" onclick="location.href='{{route('taisan.index')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
+                <button class="btn_cus btn-back" onclick="location.href='{{url()->previous()}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
             </div>
         </div>
         <div class="row">

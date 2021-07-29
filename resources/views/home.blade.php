@@ -169,17 +169,17 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="/hopdong" class="nav-link ">
                 <i class='nav-icon bx bxs-book-content'></i>
                 <p>
                   Hợp đồng
                 </p>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a href="/thanhly" class="nav-link ">
-                <i class='nav-icon bx bxs-file'></i>
+                <i class='nav-icon bx bxs-book-content'></i>
                 <p>
                   Thanh lý tài sản
                 </p>

@@ -22,23 +22,23 @@
         </div>
         
         <div class="col-sm-4">
-            <a href="/hopdong" class="nav-link ">
+            <a href="/thanhly" class="nav-link ">
                 <p>
                     <div class="image">
                         <img src="{{ URL::asset('img/hopdong.jpg') }}" class="img-circle elevation-2" alt="Hợp Đồng" style="width:200px !important; height:200px !important">
                     </div>
                     <br>
-                    <span class="tenmenu">Hợp Đồng</span>
+                    <span class="tenmenu">Thanh lý</span>
                 </p>
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="/baocao" class="nav-link ">
+            <a href="/bangiao" class="nav-link ">
                     <div class="image">
                         <img src="{{ URL::asset('img/baocao.png') }}" class="img-circle elevation-2" alt="Báo Cáo" style="width:200px !important; height:200px !important; margin-top:20px;">
                     </div>
                     <br>
-                    <span class="tenmenu">Báo Cáo</span>
+                    <span class="tenmenu">Bàn giao</span>
             </a>
         </div>
     </div>
@@ -56,13 +56,13 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="nav-link ">
+            <a href="/kiemke" class="nav-link ">
                 <p>
                     <div class="image" style="background-color: #fffff">
                         <img src="{{ URL::asset('img/download.png') }}" style="background-image: #fffff" class="img-circle elevation-2" alt="Thống kê" style="width:200px !important; height:200px !important">
                     </div>
                     <br>
-                    <span class="tenmenu">Thống kê</span>
+                    <span class="tenmenu">Kiểm kê</span>
                 </p>
             </a>
         </div>
