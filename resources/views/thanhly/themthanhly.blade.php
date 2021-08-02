@@ -10,7 +10,7 @@
         <div class="main-name">
             <h3 class="main-text" >Thêm Phiếu Thanh Lý</h3>
             <div >
-                <button class="btn_cus btn-addsp" onclick="" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu thanh lý</button>
+                <button class="btn_cus btn-addsp" onclick="location.href='{{url('/word_export/M_u s_ 08Hóa __n bán tài s_n công.docx')}}'" title="Tải mẫu phiếu bàn giao" ><i class='bx bx-download' style="font-weight: 600; "></i>Mẫu phiếu thanh lý</button>
                 <button class="btn_cus btn-back" type="button" onclick="location.href='{{route('thanhly.index')}}'"><i class='bx bx-left-arrow-alt'></i> Trở về</button>
             </div>
         </div>
