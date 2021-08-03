@@ -283,7 +283,7 @@ class Taisan extends Model
         if($ma_phong !=''){
             $temp_sl = $temp_sl->where('phongban.ma_phong',$ma_phong);
         }
-        if($trangthai ==1){
+        if($trangthai == 1){
             $temp_sl = $temp_sl->where('taisan.deleted',1);
         }else{
             $temp_sl = $temp_sl->where('taisan.deleted',0);

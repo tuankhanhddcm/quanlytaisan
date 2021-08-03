@@ -84,10 +84,11 @@ class BaocaoController extends Controller
         $ma_phong =$request->ma_phong;
         $ma_loai = $request->ma_loai;
         $trangthai = $request->trangthai;
-        if($ma_phong ==''){
-            $data = $this->taisan->select('','all');
-        }else{
+        if($ma_phong !='' || $trangthai !='' ||$ma_loai !=''){
             $data = $this->taisan->export_baocao_ts($ma_phong,$ma_loai,$trangthai);
+            
+        }else{
+            $data = $this->taisan->select('','all');
         }
         
         $phongtaisan = $this->taisan->phong_taisan();
